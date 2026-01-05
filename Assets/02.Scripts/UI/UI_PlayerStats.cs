@@ -25,16 +25,16 @@ public class UI_PlayerStats : MonoBehaviour
 
     private void UpdateHealthText(float currentValue, float maxValue)
     {
-        _healthTextUI.text = $"Health: {currentValue} / {maxValue}";
+        _healthTextUI.text = $"Health: {currentValue:0} / {maxValue:0}";
     }
 
-    private void UpdateSpeedText(float value)
+    private void UpdateSpeedText(float currentValue, float maxValue)
     {
-        _speedTextUI.text = $"Speed: {value}";
+        _speedTextUI.text = $"Speed: {currentValue:0} / {maxValue:0}";
     }
 
     private void UpdateJumpForceText(float value)
     {
-        _jumpForceTextUI.text = $"JumpForce: {value}";
+        _jumpForceTextUI.text = $"JumpForce: {value:0}";
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 [Serializable]
@@ -30,6 +30,7 @@ public class ValueStat
     public void Decrease(float amount)
     {
         _value -= amount;
+        _value = Mathf.Max(0, _value);
         OnValueChanged?.Invoke(_value);
     }
 }

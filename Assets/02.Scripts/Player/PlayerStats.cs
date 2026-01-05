@@ -3,11 +3,11 @@
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private ConsumableStat _health;
-    [SerializeField] private ValueStat _speed;
+    [SerializeField] private ConsumableStat _speed;
     [SerializeField] private ValueStat _jumpForce;
 
     public ConsumableStat Health => _health;
-    public ValueStat Speed => _speed;
+    public ConsumableStat Speed => _speed;
     public ValueStat JumpForce => _jumpForce;
 
     private void Start()
@@ -20,6 +20,11 @@ public class PlayerStats : MonoBehaviour
         _health.Initialize();
         _speed.Initialize();
         _jumpForce.Initialize();
+    }
+
+    private void Update()
+    {
+        _speed.Regen();
     }
 
     public bool IsDead => _health.IsEmpty;
