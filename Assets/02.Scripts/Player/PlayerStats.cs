@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -18,6 +18,8 @@ public class PlayerStats : MonoBehaviour
     private void InitializeStats()
     {
         _health.Initialize();
+        _speed.Initialize();
+        _jumpForce.Initialize();
     }
 
     public bool IsDead => _health.IsEmpty;

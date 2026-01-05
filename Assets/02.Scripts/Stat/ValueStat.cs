@@ -10,6 +10,11 @@ public class ValueStat
 
     public event Action<float> OnValueChanged;
 
+    public void Initialize()
+    {
+        OnValueChanged?.Invoke(_value);
+    }
+
     public void SetValue(float amount)
     {
         _value = amount;

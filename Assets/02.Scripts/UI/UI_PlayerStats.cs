@@ -8,11 +8,33 @@ public class UI_PlayerStats : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _healthTextUI;
     [SerializeField] private TextMeshProUGUI _speedTextUI;
     [SerializeField] private TextMeshProUGUI _jumpForceTextUI;
-    
-    private void Update()
+
+    private void OnEnable()
     {
-        _healthTextUI.text = $"Health: {_playerStats.Health.CurrentValue} / {_playerStats.Health.MaxValue}";
-        _speedTextUI.text = $"Speed: {_playerStats.Speed.Value}";
-        _jumpForceTextUI.text = $"JumpForce: {_playerStats.JumpForce.Value}";
+        _playerStats.Health.OnValueChanged += UpdateHealthText;
+        _playerStats.Speed.OnValueChanged += UpdateSpeedText;
+        _playerStats.JumpForce.OnValueChanged += UpdateJumpForceText;
+    }
+
+    private void OnDisable()
+    {
+        _playerStats.Health.OnValueChanged -= UpdateHealthText;
+        _playerStats.Speed.OnValueChanged -= UpdateSpeedText;
+        _playerStats.JumpForce.OnValueChanged -= UpdateJumpForceText;
+    }
+
+    private void UpdateHealthText(float currentValue, float maxValue)
+    {
+        _healthTextUI.text = $"Health: {currentValue} / {maxValue}";
+    }
+
+    private void UpdateSpeedText(float value)
+    {
+        _speedTextUI.text = $"Speed: {value}";
+    }
+
+    private void UpdateJumpForceText(float value)
+    {
+        _jumpForceTextUI.text = $"JumpForce: {value}";
     }
 }

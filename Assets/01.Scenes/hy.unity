@@ -870,7 +870,7 @@ MonoBehaviour:
   _playerStats: {fileID: 235692222}
   _healthTextUI: {fileID: 1566150094}
   _speedTextUI: {fileID: 1225603303}
-  _jumpForceTextUI: {fileID: 0}
+  _jumpForceTextUI: {fileID: 1549876610}
 --- !u!1 &1549876608
 GameObject:
   m_ObjectHideFlags: 0
