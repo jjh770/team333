@@ -4,14 +4,14 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private ConsumableStat _health;
-    [SerializeField] private ConsumableStat _speed;
+    [SerializeField] private ConsumableStat _moveSpeed;
     [SerializeField] private ValueStat _jumpForce;
 
     public float CurrentHealth => _health.CurrentValue;
     public float MaxHealth => _health.MaxValue;
 
-    public float CurrentSpeed => _speed.CurrentValue;
-    public float MaxSpeed => _speed.MaxValue;
+    public float CurrentSpeed => _moveSpeed.CurrentValue;
+    public float MaxSpeed => _moveSpeed.MaxValue;
 
     public float JumpForce => _jumpForce.Value;
 
@@ -29,21 +29,21 @@ public class PlayerStats : MonoBehaviour
     private void InitializeStats()
     {
         _health.Initialize();
-        _speed.Initialize();
+        _moveSpeed.Initialize();
         _jumpForce.Initialize();
     }
 
     private void OnEnable()
     {
         _health.OnValueChanged += OnHealthChanged;
-        _speed.OnValueChanged += OnSpeedChanged;
+        _moveSpeed.OnValueChanged += OnSpeedChanged;
         _jumpForce.OnValueChanged += OnJumpForceChanged;
     }
 
     private void OnDisable()
     {
         _health.OnValueChanged -= OnHealthChanged;
-        _speed.OnValueChanged -= OnSpeedChanged;
+        _moveSpeed.OnValueChanged -= OnSpeedChanged;
         _jumpForce.OnValueChanged -= OnJumpForceChanged;
     }
 
@@ -53,6 +53,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        _speed.Regen();
+        _moveSpeed.Regen();
     }
 }
