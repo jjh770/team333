@@ -11,16 +11,16 @@ public class UI_PlayerStats : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerStats.Health.OnValueChanged += UpdateHealthText;
-        _playerStats.Speed.OnValueChanged += UpdateSpeedText;
-        _playerStats.JumpForce.OnValueChanged += UpdateJumpForceText;
+        _playerStats.HealthChanged += UpdateHealthText;
+        _playerStats.SpeedChanged += UpdateSpeedText;
+        _playerStats.JumpForceChanged += UpdateJumpForceText;
     }
 
     private void OnDisable()
     {
-        _playerStats.Health.OnValueChanged -= UpdateHealthText;
-        _playerStats.Speed.OnValueChanged -= UpdateSpeedText;
-        _playerStats.JumpForce.OnValueChanged -= UpdateJumpForceText;
+        _playerStats.HealthChanged -= UpdateHealthText;
+        _playerStats.SpeedChanged -= UpdateSpeedText;
+        _playerStats.JumpForceChanged -= UpdateJumpForceText;
     }
 
     private void UpdateHealthText(float currentValue, float maxValue)

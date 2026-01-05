@@ -5,14 +5,14 @@ using UnityEngine;
 public class ConsumableStat
 {
     [SerializeField] private float _maxValue;
-    [SerializeField] private float _regenValue;
+    [SerializeField] private float _reganValue;
     [SerializeField] private float _reganSpeed;
 
     private float _currentValue;
 
     public float MaxValue => _maxValue;
     public float CurrentValue => _currentValue;
-    public float RegenValue => _regenValue;
+    public float RegenValue => _reganValue;
     public bool IsEmpty => _currentValue <= 0;
     public bool IsFull => _currentValue >= _maxValue;
 
@@ -69,9 +69,9 @@ public class ConsumableStat
 
     public void Regen()
     {
-        if (_regenValue > 0 && !IsFull)
+        if (_reganValue > 0 && !IsFull)
         {
-            Increase(_regenValue * Time.deltaTime * _reganSpeed);
+            Increase(_reganValue * Time.deltaTime * _reganSpeed);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -6,9 +7,19 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private ConsumableStat _speed;
     [SerializeField] private ValueStat _jumpForce;
 
-    public ConsumableStat Health => _health;
-    public ConsumableStat Speed => _speed;
-    public ValueStat JumpForce => _jumpForce;
+    public float CurrentHealth => _health.CurrentValue;
+    public float MaxHealth => _health.MaxValue;
+
+    public float CurrentSpeed => _speed.CurrentValue;
+    public float MaxSpeed => _speed.MaxValue;
+
+    public float JumpForce => _jumpForce.Value;
+
+    public bool IsDead => _health.IsEmpty;
+
+    public event Action<float, float> HealthChanged;
+    public event Action<float, float> SpeedChanged;
+    public event Action<float> JumpForceChanged;
 
     private void Start()
     {
@@ -26,6 +37,4 @@ public class PlayerStats : MonoBehaviour
     {
         _speed.Regen();
     }
-
-    public bool IsDead => _health.IsEmpty;
 }
