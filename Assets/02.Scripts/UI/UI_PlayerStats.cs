@@ -23,14 +23,14 @@ public class UI_PlayerStats : MonoBehaviour
         _playerStats.JumpForceChanged -= UpdateJumpForceText;
     }
 
-    private void UpdateHealthText(float currentValue, float maxValue)
+    private void UpdateHealthText(float current, float max)
     {
-        _healthTextUI.text = $"Health: {currentValue:0} / {maxValue:0}";
+        _healthTextUI.text = $"Health: {current:0} / {max:0}";
     }
 
-    private void UpdateSpeedText(float currentValue, float maxValue)
+    private void UpdateSpeedText(float current, float max)
     {
-        _speedTextUI.text = $"Speed: {currentValue:0} / {maxValue:0}";
+        _speedTextUI.text = $"Speed: {current:0} / {max:0}";
     }
 
     private void UpdateJumpForceText(float value)

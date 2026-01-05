@@ -350,11 +350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   _health:
     _maxValue: 100
-    _regenValue: 0
+    _reganValue: 0
     _reganSpeed: 0
   _speed:
     _maxValue: 200
-    _regenValue: 1
+    _reganValue: 0
     _reganSpeed: 10
   _jumpForce:
     _value: 300

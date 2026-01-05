@@ -33,6 +33,24 @@ public class PlayerStats : MonoBehaviour
         _jumpForce.Initialize();
     }
 
+    private void OnEnable()
+    {
+        _health.OnValueChanged += OnHealthChanged;
+        _speed.OnValueChanged += OnSpeedChanged;
+        _jumpForce.OnValueChanged += OnJumpForceChanged;
+    }
+
+    private void OnDisable()
+    {
+        _health.OnValueChanged -= OnHealthChanged;
+        _speed.OnValueChanged -= OnSpeedChanged;
+        _jumpForce.OnValueChanged -= OnJumpForceChanged;
+    }
+
+    private void OnHealthChanged(float current, float max) => HealthChanged?.Invoke(current, max);
+    private void OnSpeedChanged(float current, float max) => SpeedChanged?.Invoke(current, max);
+    private void OnJumpForceChanged(float value) => JumpForceChanged?.Invoke(value);
+
     private void Update()
     {
         _speed.Regen();
