@@ -12,18 +12,18 @@ public class TraceMoveComponent : MoveComponent
     protected override void Start()
     {
         base.Start();
-        agent.speed = _moveSpeed;
-        agent.stoppingDistance = _offset;
+        _agent.speed = _moveSpeed;
+        _agent.stoppingDistance = _offset;
     }
 
-    void Update()
+    private void Update()
     {
         TryTrace();
     }
 
     private void TryTrace()
     {
-        if (player == null) return;
+        if (_player == null) return;
 
         _updateTimer -= Time.deltaTime;
         if (_updateTimer <= 0f)
@@ -35,6 +35,6 @@ public class TraceMoveComponent : MoveComponent
 
     private void Trace()
     {
-        agent.SetDestination(player.position);
+        _agent.SetDestination(_player.position);
     }
 }

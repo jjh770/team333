@@ -13,21 +13,21 @@ public class PlacedMoveComponent : MoveComponent
     protected override void Start()
     {
         base.Start();
-        agent.isStopped = true;
+        _agent.isStopped = true;
     }
 
-    void Update()
+    private void Update()
     {
         TryLookAtPlayer();
     }
 
     private void TryLookAtPlayer()
     {
-        if (player == null) return;
+        if (_player == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float sqrDistanceToPlayer = (_player.position - transform.position).sqrMagnitude;
 
-        if (distanceToPlayer <= _detectionRange)
+        if (sqrDistanceToPlayer <= _detectionRange * _detectionRange)
         {
             LookAtPlayer();
         }
@@ -35,7 +35,7 @@ public class PlacedMoveComponent : MoveComponent
 
     private void LookAtPlayer()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = _player.position - transform.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
@@ -45,7 +45,7 @@ public class PlacedMoveComponent : MoveComponent
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _detectionRange);
