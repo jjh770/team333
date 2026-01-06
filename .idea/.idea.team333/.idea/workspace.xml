@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d83fa83b-2006-411d-8097-148782f8530f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.team333/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.team333/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02.Scripts/Flora/Flora.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02.Scripts/Flora/Flora.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02.Scripts/Flora/FloraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02.Scripts/Flora/FloraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02.Scripts/Flora/FloraStats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02.Scripts/Flora/FloraStats.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +114,7 @@
       <workItem from="1767602829240" duration="703000" />
       <workItem from="1767603873427" duration="4809000" />
       <workItem from="1767659805907" duration="3843000" />
-      <workItem from="1767686929742" duration="5375000" />
+      <workItem from="1767686929742" duration="7549000" />
     </task>
     <servers />
   </component>

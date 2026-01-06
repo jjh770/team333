@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class FloraStats : MonoBehaviour
 {
-    [SerializeField] private ConsumableStat _moveSpeed;
+    [SerializeField] private DerivedStat _moveSpeed;
 
     public float CurrentSpeed => _moveSpeed.CurrentValue;
     public float MaxSpeed => _moveSpeed.MaxValue;
     
-    public event Action<float, float> SpeedChanged;
+    public event Action<float> SpeedChanged;
     
     private void Awake()
     {
@@ -25,5 +25,10 @@ public class FloraStats : MonoBehaviour
         _moveSpeed.OnValueChanged += OnSpeedChanged;
     }
     
-    private void OnSpeedChanged(float current, float max) => SpeedChanged?.Invoke(current, max);
+    private void OnDisable()
+    {
+        _moveSpeed.OnValueChanged -= OnSpeedChanged;
+    }
+    
+    private void OnSpeedChanged(float current) => SpeedChanged?.Invoke(current);
 }

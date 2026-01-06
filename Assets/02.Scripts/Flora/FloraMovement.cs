@@ -12,17 +12,15 @@ public class FloraMovement : MonoBehaviour
     {
         _stats = stats;
         _path = path;
-
         _agent = GetComponent<NavMeshAgent>();
-        _agent.speed = _stats.CurrentSpeed; 
+
+        if (_stats != null)
+        {
+            _stats.SpeedChanged += OnSpeedChanged;
+            _agent.speed = _stats.CurrentSpeed;
+        }
         
         SetNextDestination();
-    }
-
-    private void OnEnable()
-    {
-        if (_stats != null)
-            _stats.SpeedChanged += OnSpeedChanged;
     }
 
     private void OnDisable()
@@ -52,7 +50,7 @@ public class FloraMovement : MonoBehaviour
         _path.MoveNext();
     }
 
-    private void OnSpeedChanged(float current, float max)
+    private void OnSpeedChanged(float current)
     {
         _agent.speed = current;
     }

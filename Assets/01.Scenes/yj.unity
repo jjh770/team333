@@ -61504,6 +61504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f3d964a5a2af4da28d31504100e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flora
+  _stats: {fileID: 1854270316}
+  _movement: {fileID: 1854270309}
+  _pathProvider: {fileID: 1854270308}
 --- !u!195 &1854270311
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -61514,7 +61517,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.49999997
-  m_Speed: 1
+  m_Speed: 0
   m_Acceleration: 100
   avoidancePriority: 0
   m_AngularSpeed: 120
@@ -61634,9 +61637,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraStats
   _moveSpeed:
-    _maxValue: 3
-    _reganValue: 0
-    _reganSpeed: 0
+    _minValue: 0
+    _maxValue: 1.5
+    _baseValue: 1
+    _additive: 0
+    _multiplier: 1
 --- !u!1001 &1854678993
 PrefabInstance:
   m_ObjectHideFlags: 0
