@@ -205,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235990903}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.32554847, y: -0, z: -0, w: 0.9455254}
+  m_LocalPosition: {x: 0, y: 4.31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 757.998, y: 0, z: 0}
 --- !u!114 &235990907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 511045637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.95829, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: 4.1817102, y: 0.41956002, z: -1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e6660231ff4e141989769d40e7532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacedMoveComponent
-  _detectionRange: 10
+  _detectionRange: 5
   _rotationSpeed: 5
 --- !u!195 &511045640
 NavMeshAgent:
@@ -651,7 +651,7 @@ Transform:
   m_GameObject: {fileID: 641309606}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.27171, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: -1.6800001, y: 0.41956002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -693,6 +693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _moveSpeed: 4
   _updateInterval: 0.2
+  _offset: 2
 --- !u!1 &668206419
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +802,7 @@ Transform:
   m_GameObject: {fileID: 668206419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45829, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: 0.05, y: 0.41956002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -951,7 +952,7 @@ Transform:
   m_GameObject: {fileID: 938112656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.04171, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: -3.4499998, y: 0.41956002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -993,6 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _moveSpeed: 4
   _updateInterval: 0.2
+  _offset: 2
 --- !u!1 &1018863826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1025,7 @@ Transform:
   m_GameObject: {fileID: 1018863826}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.02771, y: 0.41956002, z: -1.9279997}
+  m_LocalPosition: {x: -4.30829, y: 0.41956002, z: -1.9279997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1041,7 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e6660231ff4e141989769d40e7532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacedMoveComponent
-  _detectionRange: 10
+  _detectionRange: 5
   _rotationSpeed: 5
 --- !u!195 &1018863829
 NavMeshAgent:
@@ -1378,7 +1380,7 @@ Transform:
   m_GameObject: {fileID: 1473959620}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.95829, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: 3.5500002, y: 0.41956002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1418,7 +1420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e6660231ff4e141989769d40e7532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacedMoveComponent
-  _detectionRange: 10
+  _detectionRange: 5
   _rotationSpeed: 5
 --- !u!1 &1509678975
 GameObject:
@@ -1528,7 +1530,7 @@ Transform:
   m_GameObject: {fileID: 1509678975}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1282902, y: 0.41956002, z: 0.5}
+  m_LocalPosition: {x: 1.7200001, y: 0.41956002, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1570,6 +1572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _moveSpeed: 4
   _updateInterval: 0.2
+  _offset: 2
 --- !u!1 &1570225319
 GameObject:
   m_ObjectHideFlags: 0

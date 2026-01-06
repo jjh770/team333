@@ -1,16 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
-public class MoveComponent : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent))]
+public abstract class MoveComponent : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected NavMeshAgent agent;
+    protected Transform player;
+
+    protected virtual void Awake()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Start()
     {
-        
+        FindTarget();
+    }
+
+    protected void FindTarget()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            this.player = player.transform;
+        }
     }
 }

@@ -1,38 +1,40 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class TraceMoveComponent : MonoBehaviour
+public class TraceMoveComponent : MoveComponent
 {
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 4f;
     [SerializeField] private float _updateInterval = 0.2f;
+    [SerializeField] private float _offset = 0.5f;
 
-    private NavMeshAgent agent;
-    private Transform player;
-    private float updateTimer;
+    private float _updateTimer;
 
-    void Start()
+    protected override void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        base.Start();
         agent.speed = _moveSpeed;
-
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-        {
-            player = playerObj.transform;
-        }
+        agent.stoppingDistance = _offset;
     }
 
     void Update()
     {
+        TryTrace();
+    }
+
+    private void TryTrace()
+    {
         if (player == null) return;
 
-        updateTimer -= Time.deltaTime;
-        if (updateTimer <= 0f)
+        _updateTimer -= Time.deltaTime;
+        if (_updateTimer <= 0f)
         {
-            agent.SetDestination(player.position);
-            updateTimer = _updateInterval;
+            Trace();
+            _updateTimer = _updateInterval;
         }
+    }
+
+    private void Trace()
+    {
+        agent.SetDestination(player.position);
     }
 }

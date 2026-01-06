@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class PlacedMoveComponent : MonoBehaviour
+public class PlacedMoveComponent : MoveComponent
 {
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
@@ -10,22 +8,20 @@ public class PlacedMoveComponent : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] private float _rotationSpeed = 5f;
 
-    private NavMeshAgent agent;
-    private Transform player;
+    private const float MinLookDirectionSqrMagnitude = 1e-6f;
 
-    void Start()
+    protected override void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        base.Start();
         agent.isStopped = true;
-
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-        {
-            player = playerObj.transform;
-        }
     }
 
     void Update()
+    {
+        TryLookAtPlayer();
+    }
+
+    private void TryLookAtPlayer()
     {
         if (player == null) return;
 
@@ -42,7 +38,7 @@ public class PlacedMoveComponent : MonoBehaviour
         Vector3 direction = player.position - transform.position;
         direction.y = 0f;
 
-        if (direction.sqrMagnitude > 0.001f)
+        if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
