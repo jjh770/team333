@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a064921fef096dd41957d6f629a5678c, type: 3}
-  m_Name: BadWildGinseng
+  m_Name: TurnipaBitter
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
-  MonsterName: BadWildGinseng
+  MonsterName: TurnipaBitter
