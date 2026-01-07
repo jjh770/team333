@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
 public class WaypointPath : MonoBehaviour, IFloraPath
 {
     [SerializeField] private Transform[] _points;
+    [SerializeField] private int[] _waitPoint;
 
     private int _currentIndex;
 
     public bool IsFinished => _currentIndex >= _points.Length;
+    public bool ShouldWait => Array.IndexOf(_waitPoint, _currentIndex) >= 0;
 
     public Vector3 GetCurrentPoint()
     {
@@ -15,11 +18,8 @@ public class WaypointPath : MonoBehaviour, IFloraPath
 
     public bool MoveNext()
     {
-        if (_currentIndex + 1 >= _points.Length)
-            return false;
-
         _currentIndex++;
-        return true;
+        return _currentIndex < _points.Length;
     }
     
     

@@ -13,10 +13,12 @@ public class FloraMovement : MonoBehaviour
 
     public FloraIdleState IdleState { get; private set; }
     public FloraMoveState MoveState { get; private set; }
+    public FloraWaitState WaitState { get; private set; }
 
     public FloraAnimationController AnimationController => _animationController;
     public IFloraPath Path => _path;
     public float CurrentSpeed => _agent.speed;
+    public bool ShouldWait => _path.ShouldWait;
 
     public void Initialize(FloraStats stats, IFloraPath path, FloraAnimationController animationController)
     {
@@ -34,8 +36,17 @@ public class FloraMovement : MonoBehaviour
 
         IdleState = new FloraIdleState(this);
         MoveState = new FloraMoveState(this);
+        WaitState = new FloraWaitState(this);
 
         ChangeState(MoveState);
+    }
+
+    public void Resume()
+    {
+        if (_currentState == WaitState)
+        {
+            ChangeState(MoveState);
+        }
     }
 
     private void OnDisable()

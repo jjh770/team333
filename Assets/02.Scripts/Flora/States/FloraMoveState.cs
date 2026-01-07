@@ -25,6 +25,12 @@ public class FloraMoveState : IFloraState
                 return;
             }
 
+            if (_movement.ShouldWait)
+            {
+                _movement.ChangeState(_movement.WaitState);
+                return;
+            }
+
             _movement.SetNextDestination();
         }
     }

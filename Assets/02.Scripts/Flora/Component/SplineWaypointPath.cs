@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,11 +6,14 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 {
     [SerializeField] private Transform[] _waypoints;
     [SerializeField, Range(1, 20)] private int _resolution = 10;
+    [SerializeField] private int[] _waitPoints;
 
     private List<Vector3> _splinePoints;
+    private HashSet<int> _waitWayPoint;
     private int _currentIndex;
 
     public bool IsFinished => _currentIndex >= _splinePoints.Count;
+    public bool ShouldWait => _waitWayPoint != null && _waitWayPoint.Contains(_currentIndex);
 
     private void Awake()
     {
@@ -30,6 +34,7 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     private void GenerateSplinePoints()
     {
         _splinePoints = new List<Vector3>();
+        _waitWayPoint = new HashSet<int>();
 
         if (_waypoints == null || _waypoints.Length < 2)
         {
@@ -38,6 +43,11 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
         for (int i = 0; i < _waypoints.Length - 1; i++)
         {
+            if (Array.IndexOf(_waitPoints, i) >= 0)
+            {
+                _waitWayPoint.Add(_splinePoints.Count);
+            }
+
             Vector3 p0 = GetWaypointPosition(i - 1);
             Vector3 p1 = GetWaypointPosition(i);
             Vector3 p2 = GetWaypointPosition(i + 1);
@@ -49,6 +59,11 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
                 Vector3 point = CatmullRom(p0, p1, p2, p3, t);
                 _splinePoints.Add(point);
             }
+        }
+
+        if (Array.IndexOf(_waitPoints, _waypoints.Length - 1) >= 0)
+        {
+            _waitWayPoint.Add(_splinePoints.Count);
         }
 
         _splinePoints.Add(_waypoints[^1].position);
