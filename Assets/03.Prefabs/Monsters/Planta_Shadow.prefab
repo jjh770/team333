@@ -499,13 +499,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa53e6f9d3889cd49800e7ff87fe8bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
-  Heatlh:
+  <Health>k__BackingField:
     _maxValue: 100
     _reganValue: 0
     _reganSpeed: 0
-  Damage:
+  <AttackDamage>k__BackingField:
     _value: 10
-  MoveSpeed:
+  <MoveSpeed>k__BackingField:
     _value: 3.5
 --- !u!114 &2504741413279115568
 MonoBehaviour:
@@ -531,8 +531,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78e74d047ed87e4b983dc9d1545651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
-  _healthBarTransform: {fileID: 2308448401703693656}
-  _gaugeImage: {fileID: 5748665044027784627}
+  _healthBarTransform: {fileID: 8814075623975241850}
+  _gaugeImage: {fileID: 4610090846043402856}
+  _duration: 0.3
+  _ease: 6
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,19 +710,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174e184974e83994c80b94880513c04b, type: 3}
---- !u!224 &2308448401703693656 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6061924841606509636, guid: 174e184974e83994c80b94880513c04b, type: 3}
-  m_PrefabInstance: {fileID: 8370231353526950172}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &4814165958554168059 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
-  m_PrefabInstance: {fileID: 8370231353526950172}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5748665044027784627 stripped
+--- !u!114 &4610090846043402856 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4318483065693578415, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 8370231353526950172}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -729,3 +721,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!224 &4814165958554168059 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 8370231353526950172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8814075623975241850 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 8370231353526950172}
+  m_PrefabAsset: {fileID: 0}

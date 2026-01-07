@@ -23,12 +23,12 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void OnEnable()
     {
-        _stat.Health.OnValueChanged += OnHealthChanged;
+        _stat.OnHealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        _stat.Health.OnValueChanged -= OnHealthChanged;
+        _stat.OnHealthChanged -= OnHealthChanged;
         _tween?.Kill();
     }
 

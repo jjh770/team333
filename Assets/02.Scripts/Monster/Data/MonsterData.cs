@@ -4,5 +4,5 @@
 public class MonsterData : ScriptableObject
 {
     [Header("Identity")]
-    [SerializeField] private string _monsterName;
+    [field: SerializeField] public string MonsterName { get; private set; }
 }

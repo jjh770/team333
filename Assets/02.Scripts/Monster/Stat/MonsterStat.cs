@@ -3,20 +3,20 @@ using System;
 
 public class MonsterStat : MonoBehaviour
 {
-    public ConsumableStat Health;
-    public ValueStat AttackDamage;
-    public ValueStat MoveSpeed;
+    [field: SerializeField] public ConsumableStat Health { get; private set; }
+    [field: SerializeField] public ValueStat AttackDamage { get; private set; }
+    [field: SerializeField] public ValueStat MoveSpeed { get; private set; }
+
+    public event Action<float, float> OnHealthChanged
+    {
+        add => Health.OnValueChanged += value;
+        remove => Health.OnValueChanged -= value;
+    }
 
     private void Start()
     {
-        Health.Initialize();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Health.Decrease(10);
-        }
+        Health?.Initialize();
+        AttackDamage?.Initialize();
+        MoveSpeed?.Initialize();
     }
 }
