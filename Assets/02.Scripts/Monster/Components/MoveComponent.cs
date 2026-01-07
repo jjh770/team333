@@ -8,15 +8,16 @@ public abstract class MoveComponent : MonoBehaviour
     [SerializeField] protected float _velocityThreshold = 0.1f;
 
     protected NavMeshAgent _agent;
-    protected MonsterController _monsterController;
     protected Transform _player;
+
+    protected IAnimationStateChanger _monsterController;
 
     public bool IsMoving { get; private set; }
 
     protected virtual void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _monsterController = GetComponent<MonsterController>();
+        _monsterController = GetComponent<IAnimationStateChanger>();
     }
 
     protected virtual void Start()

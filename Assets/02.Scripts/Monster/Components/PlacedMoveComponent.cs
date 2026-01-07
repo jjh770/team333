@@ -18,6 +18,7 @@ public class PlacedMoveComponent : MoveComponent
 
     protected override void Update()
     {
+        base.Update();
         TryLookAtPlayer();
     }
 
