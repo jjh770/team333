@@ -20,8 +20,7 @@ public class FloraFollowCamera : MonoBehaviour
 
     private void Start()
     {
-        if (_target != null)
-            _lastTargetPosition = _target.position;
+        ResetLastTargetPosition();
     }
 
     private void LateUpdate()
@@ -29,29 +28,89 @@ public class FloraFollowCamera : MonoBehaviour
         if (_target == null)
             return;
 
-        Vector3 worldOffset = _target.TransformDirection(_localOffset);
+        UpdateCamera();
+    }
+    
+    private void UpdateCamera()
+    {
+        Vector3 worldOffset = CalculateWorldOffset();
+        Vector3 velocity    = CalculateTargetVelocity();
 
-        Vector3 velocity = (_target.position - _lastTargetPosition) / Time.deltaTime;
-        _lastTargetPosition = _target.position;
-
-        Vector3 targetLookAhead = velocity.normalized * _lookAheadDistance;
-        _currentLookAhead = Vector3.Lerp(_currentLookAhead, targetLookAhead, _lookAheadSmoothSpeed * Time.deltaTime);
-
-        Vector3 desiredPosition = _target.position + worldOffset + _currentLookAhead;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, _positionSmoothSpeed * Time.deltaTime);
-
-        Vector3 lookAtPoint = _target.position + _currentLookAhead;
-        Quaternion targetRotation = Quaternion.LookRotation(lookAtPoint - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSmoothSpeed * Time.deltaTime);
+        UpdateLookAhead(velocity);
+        UpdatePosition(worldOffset);
+        UpdateRotation();
+    }
+    
+    
+    private Vector3 CalculateWorldOffset()
+    {
+        return _target.TransformDirection(_localOffset);
     }
 
+    private Vector3 CalculateTargetVelocity()
+    {
+        Vector3 velocity = Vector3.zero;
+
+        if (Time.deltaTime > Mathf.Epsilon)
+        {
+            velocity = (_target.position - _lastTargetPosition) / Time.deltaTime;
+        }
+
+        _lastTargetPosition = _target.position;
+        return velocity;
+    }
+    
+    private void UpdateLookAhead(Vector3 velocity)
+    {
+        Vector3 targetLookAhead = velocity.normalized * _lookAheadDistance;
+
+        _currentLookAhead = Vector3.Lerp(
+            _currentLookAhead,
+            targetLookAhead,
+            _lookAheadSmoothSpeed * Time.deltaTime
+        );
+    }
+    
+    private void UpdatePosition(Vector3 worldOffset)
+    {
+        Vector3 desiredPosition =
+            _target.position + worldOffset + _currentLookAhead;
+
+        transform.position = Vector3.Lerp(
+            transform.position,
+            desiredPosition,
+            _positionSmoothSpeed * Time.deltaTime
+        );
+    }
+    
+    private void UpdateRotation()
+    {
+        Vector3 lookAtPoint = _target.position + _currentLookAhead;
+
+        Quaternion targetRotation =
+            Quaternion.LookRotation(lookAtPoint - transform.position);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            _rotationSmoothSpeed * Time.deltaTime
+        );
+    }
+    
     public void SetTarget(Transform target)
     {
         _target = target;
-        if (_target != null)
-            _lastTargetPosition = _target.position;
+        ResetLastTargetPosition();
     }
-
+    
+    private void ResetLastTargetPosition()
+    {
+        if (_target != null)
+        {
+            _lastTargetPosition = _target.position;
+        }
+    }
+    
 #if UNITY_EDITOR
     private void OnValidate()
     {

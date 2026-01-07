@@ -23,11 +23,8 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
     public bool MoveNext()
     {
-        if (_currentIndex + 1 >= _splinePoints.Count)
-            return false;
-
         _currentIndex++;
-        return true;
+        return _currentIndex < _splinePoints.Count;
     }
 
     private void GenerateSplinePoints()
@@ -35,7 +32,9 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
         _splinePoints = new List<Vector3>();
 
         if (_waypoints == null || _waypoints.Length < 2)
+        {
             return;
+        }
 
         for (int i = 0; i < _waypoints.Length - 1; i++)
         {
@@ -125,10 +124,16 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
     private Vector3 GetWaypointPositionEditor(int index)
     {
-        if (index < 0 || _waypoints[0] == null)
-            return _waypoints[0] != null ? _waypoints[0].position : Vector3.zero;
-        if (index >= _waypoints.Length || _waypoints[^1] == null)
-            return _waypoints[^1] != null ? _waypoints[^1].position : Vector3.zero;
+        if (index < 0)
+        {
+            return (_waypoints.Length > 0 && _waypoints[0] != null) ? _waypoints[0].position : Vector3.zero;
+        }
+
+        if (index >= _waypoints.Length)
+        {
+            return (_waypoints.Length > 0 && _waypoints[^1] != null) ? _waypoints[^1].position : Vector3.zero;
+        }
+
         return _waypoints[index] != null ? _waypoints[index].position : Vector3.zero;
     }
 #endif

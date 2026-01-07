@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class FloraMoveState : IFloraState
 {
     private readonly FloraMovement _movement;
@@ -17,7 +19,7 @@ public class FloraMoveState : IFloraState
     {
         if (_movement.HasReachedDestination())
         {
-            if (_movement.Path.IsFinished)
+            if (!_movement.HasNextDestination())
             {
                 _movement.ChangeState(_movement.IdleState);
                 return;

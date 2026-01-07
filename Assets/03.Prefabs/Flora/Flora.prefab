@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4369479193300429194}
   - component: {fileID: 3795222413711934994}
   - component: {fileID: 4932798704078032628}
-  - component: {fileID: 2874465643625903037}
+  - component: {fileID: 8368052510557095813}
   m_Layer: 0
   m_Name: Flora
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2488718046737351127}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.84235543, z: -0, w: 0.53892237}
+  m_LocalRotation: {x: 0, y: 0.84235364, z: 0, w: 0.53892523}
   m_LocalPosition: {x: 146.59, y: 0.922, z: 10.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Flora
   _stats: {fileID: 3795222413711934994}
   _movement: {fileID: 4932798704078032628}
-  _pathProvider: {fileID: 2874465643625903037}
+  _pathProvider: {fileID: 8368052510557095813}
   _animationController: {fileID: 4069937130189001944}
 --- !u!114 &3795222413711934994
 MonoBehaviour:
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraStats
   _moveSpeed:
     _minValue: 0
-    _maxValue: 1.5
-    _baseValue: 1
+    _maxValue: 4
+    _baseValue: 4
     _additive: 0
     _multiplier: 1
 --- !u!114 &4932798704078032628
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17924b54300ddca4993ac35058ffaf56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraMovement
---- !u!114 &2874465643625903037
+--- !u!114 &8368052510557095813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,14 +197,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2488718046737351127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93149953e1d887488835f2fcc8bb6f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c50f6ccf855d644fad78441e5ef9d75, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaypointPath
-  _points:
+  m_EditorClassIdentifier: Assembly-CSharp::SplineWaypointPath
+  _waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _resolution: 10
 --- !u!1001 &7789057980649354464
 PrefabInstance:
   m_ObjectHideFlags: 0
