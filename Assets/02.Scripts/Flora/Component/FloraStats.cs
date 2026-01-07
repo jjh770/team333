@@ -29,6 +29,10 @@ public class FloraStats : MonoBehaviour
     {
         _moveSpeed.OnValueChanged -= OnSpeedChanged;
     }
-    
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        _moveSpeed.SetMultiplier(multiplier);
+    }
     private void OnSpeedChanged(float current) => SpeedChanged?.Invoke(current);
 }

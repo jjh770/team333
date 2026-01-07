@@ -3,22 +3,36 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class FloraAnimationController : MonoBehaviour
 {
+    [SerializeField] private float _smoothTime = 0.2f;
+
     private Animator _animator;
     private float _maxSpeed;
-    
+    private float _currentSpeed;
+    private float _targetSpeed;
+    private float _velocity;
+
     private static readonly int MoveSpeedHash = Animator.StringToHash("MoveSpeed");
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
-    
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (!Mathf.Approximately(_currentSpeed, _targetSpeed))
+        {
+            _currentSpeed = Mathf.SmoothDamp(_currentSpeed, _targetSpeed, ref _velocity, _smoothTime);
+            _animator.SetFloat(MoveSpeedHash, _currentSpeed);
+        }
+    }
+
     public void Initialize(float maxSpeed)
     {
-        _maxSpeed = maxSpeed;    
+        _maxSpeed = maxSpeed;
     }
-    
+
     public void PlayMove(float speed)
     {
         _animator.SetBool(IsMovingHash, true);
@@ -28,13 +42,12 @@ public class FloraAnimationController : MonoBehaviour
     public void PlayIdle()
     {
         _animator.SetBool(IsMovingHash, false);
-        _animator.SetFloat(MoveSpeedHash, 0f);
+        _targetSpeed = 0f;
     }
 
     public void SetMovementSpeed(float speed)
     {
-        float normalizedSpeed = NormalizeSpeed(speed);
-        _animator.SetFloat(MoveSpeedHash, normalizedSpeed);
+        _targetSpeed = NormalizeSpeed(speed);
     }
 
     private float NormalizeSpeed(float speed)
