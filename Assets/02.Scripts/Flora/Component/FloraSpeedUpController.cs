@@ -75,14 +75,16 @@ public class FloraSpeedUpController : MonoBehaviour
 
     private void EvaluateMultiplier(float gauge)
     {
+        float multiplier = 1f;
         for (int i = _speedTiers.Length - 1; i >= 0; i--)
         {
             if (gauge >= _speedTiers[i].TierLevel)
             {
-                float multiplier = _speedTiers[i].Multiplier;
-                _stats.SetSpeedMultiplier(multiplier);
+                multiplier = _speedTiers[i].Multiplier;
                 break;
             }
         }
+        
+        _stats.SetSpeedMultiplier(multiplier);
     }
 }
