@@ -3547,7 +3547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4792a1bae8b25bd4c9064e65892ed492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestInput
-  _movement: {fileID: 0}
+  _movement: {fileID: 1305913081}
 --- !u!4 &92653461
 Transform:
   m_ObjectHideFlags: 0
@@ -43831,6 +43831,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1521881436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305913081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4932798704078032628, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+  m_PrefabInstance: {fileID: 6667338798674275833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17924b54300ddca4993ac35058ffaf56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraMovement
 --- !u!1001 &1308815126
 PrefabInstance:
   m_ObjectHideFlags: 0

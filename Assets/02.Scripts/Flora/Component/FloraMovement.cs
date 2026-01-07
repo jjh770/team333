@@ -20,12 +20,17 @@ public class FloraMovement : MonoBehaviour
     public float CurrentSpeed => _agent.speed;
     public bool ShouldWait => _path.ShouldWait;
 
-    public void Initialize(FloraStats stats, IFloraPath path, FloraAnimationController animationController)
+    public void Awake()
     {
-        _stats = stats;
-        _path = path;
+        Initialize();
+    }
+    
+    public void Initialize()
+    {
+        _stats = GetComponent<FloraStats>();
+        _path = GetComponent<IFloraPath>();
         _agent = GetComponent<NavMeshAgent>();
-        _animationController = animationController;
+        _animationController = GetComponentInChildren<FloraAnimationController>();
 
         if (_stats != null)
         {
@@ -45,6 +50,7 @@ public class FloraMovement : MonoBehaviour
     {
         if (_currentState == WaitState)
         {
+            _path.MoveNext();
             ChangeState(MoveState);
         }
     }
@@ -84,6 +90,13 @@ public class FloraMovement : MonoBehaviour
 
         Vector3 target = _path.GetCurrentPoint();
         _agent.SetDestination(target);
+    }
+
+    public void AdvancePath()
+    {
+        if (_path.IsFinished)
+            return;
+
         _path.MoveNext();
     }
 
