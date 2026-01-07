@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(FloraStats))]
 public class FloraSpeedUpController : MonoBehaviour
 {
     [Serializable]
@@ -48,7 +49,7 @@ public class FloraSpeedUpController : MonoBehaviour
 
     private void Update()
     {
-        _gauge.Drain();
+        _gauge.Drain(Time.deltaTime);
     }
 
     public void AddGauge(float amount)

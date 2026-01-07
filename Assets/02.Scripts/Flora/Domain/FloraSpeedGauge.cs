@@ -5,7 +5,7 @@ using UnityEngine;
 public class FloraSpeedGauge
 {
     [SerializeField] private float _maxValue = 1f;
-    [SerializeField] private float _drainRate;  // 초당 감소량
+    [SerializeField] private float _drainRate;
     private float _currentValue;
     
     public float CurrentValue => _currentValue;
@@ -38,14 +38,16 @@ public class FloraSpeedGauge
         _currentValue = Mathf.Clamp(value, 0f, _maxValue);
 
         if (!Mathf.Approximately(prev, _currentValue))
+        {
             OnValueChanged?.Invoke(_currentValue, _maxValue);
+        }
     }
 
-    public void Drain()
+    public void Drain(float deltaTime)
     {
         if (_drainRate > 0 && !IsEmpty)
         {
-            DrainGauge(_drainRate * Time.deltaTime);
+            DrainGauge(_drainRate * deltaTime);
         }
     }
 }
