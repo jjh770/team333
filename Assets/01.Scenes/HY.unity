@@ -778,10 +778,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133915229}
     m_Modifications:
-    - target: {fileID: 4762377517291527843, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: f5676dfef2331d54ba35a23dc406a93d, type: 2}
     - target: {fileID: 5095352625020930891, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.28
@@ -967,10 +963,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turnipa_Bitter
       objectReference: {fileID: 0}
-    - target: {fileID: 4456880592749316536, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: 24c3ad6073aac6e49b75eac86757394c, type: 2}
     - target: {fileID: 7295405998790954751, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.55
@@ -1029,10 +1021,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133915229}
     m_Modifications:
-    - target: {fileID: 1780633793686190866, guid: f29645466055aac4d911e5a12516983d, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: e39fef1fed728b14eaa1173a0177f54c, type: 2}
     - target: {fileID: 2747576698439034365, guid: f29645466055aac4d911e5a12516983d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.34
@@ -1094,10 +1082,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Devil_Tree_Wither
       objectReference: {fileID: 0}
-    - target: {fileID: 8237467816518253206, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
-      propertyPath: _data
-      value: 
-      objectReference: {fileID: 11400000, guid: cdba3980e585d7741a36090f1045cf21, type: 2}
     - target: {fileID: 8821786179341327282, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.03

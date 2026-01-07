@@ -15,6 +15,12 @@ public class MonsterStat : MonoBehaviour
         remove => Health.OnValueChanged -= value;
     }
 
+    public event Action<float> OnMoveSpeedChanged
+    {
+        add => MoveSpeed.OnValueChanged += value;
+        remove => MoveSpeed.OnValueChanged -= value;
+    }
+
     private void Start()
     {
         if (_data == null)

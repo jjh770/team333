@@ -16,3 +16,4 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <AttackDamage>k__BackingField: 10
   <MoveSpeed>k__BackingField: 4
+  <Type>k__BackingField: 1
