@@ -13,17 +13,24 @@ public class FloraMovement : MonoBehaviour
 
     public FloraIdleState IdleState { get; private set; }
     public FloraMoveState MoveState { get; private set; }
+    public FloraWaitState WaitState { get; private set; }
 
     public FloraAnimationController AnimationController => _animationController;
     public IFloraPath Path => _path;
     public float CurrentSpeed => _agent.speed;
+    public bool ShouldWait => _path.ShouldWait;
 
-    public void Initialize(FloraStats stats, IFloraPath path, FloraAnimationController animationController)
+    public void Awake()
     {
-        _stats = stats;
-        _path = path;
+        Initialize();
+    }
+    
+    private void Initialize()
+    {
+        _stats = GetComponent<FloraStats>();
+        _path = GetComponent<IFloraPath>();
         _agent = GetComponent<NavMeshAgent>();
-        _animationController = animationController;
+        _animationController = GetComponentInChildren<FloraAnimationController>();
 
         if (_stats != null)
         {
@@ -34,8 +41,18 @@ public class FloraMovement : MonoBehaviour
 
         IdleState = new FloraIdleState(this);
         MoveState = new FloraMoveState(this);
+        WaitState = new FloraWaitState(this);
 
         ChangeState(MoveState);
+    }
+
+    public void Resume()
+    {
+        if (_currentState == WaitState)
+        {
+            _path.MoveNext();
+            ChangeState(MoveState);
+        }
     }
 
     private void OnDisable()
@@ -73,6 +90,13 @@ public class FloraMovement : MonoBehaviour
 
         Vector3 target = _path.GetCurrentPoint();
         _agent.SetDestination(target);
+    }
+
+    public void AdvancePath()
+    {
+        if (_path.IsFinished)
+            return;
+
         _path.MoveNext();
     }
 
