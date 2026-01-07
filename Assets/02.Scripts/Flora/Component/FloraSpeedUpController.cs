@@ -29,6 +29,10 @@ public class FloraSpeedUpController : MonoBehaviour
     private void Awake()
     {
         _stats = GetComponent<FloraStats>();
+        if (_speedTiers != null)
+        {
+            Array.Sort(_speedTiers, (a, b) => a.TierLevel.CompareTo(b.TierLevel));
+        }
     }
 
     private void OnEnable()
@@ -59,7 +63,9 @@ public class FloraSpeedUpController : MonoBehaviour
 
     private void OnGaugeValueChanged(float current, float max)
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         Debug.Log($"[Flora] Gauge: {current:F2} / {max:F2}");
+#endif
 
         GaugeChanged?.Invoke(current, max);
 

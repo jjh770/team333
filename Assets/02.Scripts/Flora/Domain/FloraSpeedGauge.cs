@@ -4,41 +4,41 @@ using UnityEngine;
 [Serializable]
 public class FloraSpeedGauge
 {
-    [SerializeField] private float _maxValueGauge = 1f;
+    [SerializeField] private float _maxValue = 1f;
     [SerializeField] private float _drainRate;  // 초당 감소량
-    private float _currentValueGauge;
+    private float _currentValue;
     
-    public float CurrentValue => _currentValueGauge;
-    public float MaxValue => _maxValueGauge;
+    public float CurrentValue => _currentValue;
+    public float MaxValue => _maxValue;
     public float DrainRate => _drainRate;
-    public bool IsEmpty => _currentValueGauge <= Mathf.Epsilon;
-    public bool IsFull => _currentValueGauge >= _maxValueGauge - Mathf.Epsilon;
+    public bool IsEmpty => _currentValue <= Mathf.Epsilon;
+    public bool IsFull => _currentValue >= _maxValue - Mathf.Epsilon;
     
     public event Action<float, float> OnValueChanged;
     
     public void Initialize()
     {
-        _currentValueGauge = 0f;
-        OnValueChanged?.Invoke(_currentValueGauge, _maxValueGauge);
+        _currentValue = 0f;
+        OnValueChanged?.Invoke(_currentValue, _maxValue);
     }
 
     public void AddGauge(float amount)
     {
-        Set(_currentValueGauge + amount);
+        Set(_currentValue + amount);
     }
 
     public void DrainGauge(float amount)
     {
-        Set(_currentValueGauge - amount);
+        Set(_currentValue - amount);
     }
     
     public void Set(float value)
     {
-        float prev = _currentValueGauge;
-        _currentValueGauge = Mathf.Clamp(value, 0f, _maxValueGauge);
+        float prev = _currentValue;
+        _currentValue = Mathf.Clamp(value, 0f, _maxValue);
 
-        if (!Mathf.Approximately(prev, _currentValueGauge))
-            OnValueChanged?.Invoke(_currentValueGauge, _maxValueGauge);
+        if (!Mathf.Approximately(prev, _currentValue))
+            OnValueChanged?.Invoke(_currentValue, _maxValue);
     }
 
     public void Drain()
