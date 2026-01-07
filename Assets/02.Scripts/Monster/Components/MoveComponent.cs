@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(MonsterController))]
+[RequireComponent(typeof(MonsterStateController))]
 public abstract class MoveComponent : MonoBehaviour
 {
     [SerializeField] protected float _velocityThreshold = 0.1f;

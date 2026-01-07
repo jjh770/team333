@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a064921fef096dd41957d6f629a5678c, type: 3}
-  m_Name: BadRedTree
+  m_Name: DevilTreeWither
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
-  MonsterName: BadRedTree
+  <MonsterName>k__BackingField: DevilTreeWither
+  <MaxHealth>k__BackingField: 100
+  <AttackDamage>k__BackingField: 10
+  <MoveSpeed>k__BackingField: 4

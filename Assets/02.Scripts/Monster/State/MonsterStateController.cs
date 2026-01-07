@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class MonsterController : MonoBehaviour, IAnimationStateChanger
+public class MonsterStateController : MonoBehaviour, IAnimationStateChanger
 {
     private Animator _animator;
     private MonsterState _currentState = MonsterState.Idle;
