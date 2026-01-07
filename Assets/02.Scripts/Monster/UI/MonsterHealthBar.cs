@@ -12,13 +12,13 @@ public class MonsterHealthBar : MonoBehaviour
     [SerializeField] private Ease _ease = Ease.OutQuad;
 
     private MonsterStat _stat;
-    private Camera _camera;
+    private Transform _cameraTransform;
     private Tweener _tween;
 
     private void Awake()
     {
         _stat = GetComponent<MonsterStat>();
-        _camera = Camera.main;
+        _cameraTransform = Camera.main.transform;
     }
 
     private void OnEnable()
@@ -34,7 +34,7 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        _healthBarTransform.forward = _camera.transform.forward;
+        _healthBarTransform.forward = _cameraTransform.forward;
     }
 
     private void OnHealthChanged(float current, float max)

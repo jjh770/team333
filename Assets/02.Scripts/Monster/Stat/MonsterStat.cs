@@ -17,7 +17,11 @@ public class MonsterStat : MonoBehaviour
 
     private void Start()
     {
-        if (_data == null) return;
+        if (_data == null)
+        {
+            Debug.LogError($"MonsterData가 {gameObject.name}에 할당되지 않았습니다.", gameObject);
+            return;
+        }
 
         Health.Initialize(_data.MaxHealth);
         AttackDamage.Initialize(_data.AttackDamage);
