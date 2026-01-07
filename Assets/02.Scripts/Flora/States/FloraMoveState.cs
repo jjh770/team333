@@ -17,12 +17,12 @@ public class FloraMoveState : IFloraState
     {
         if (_movement.HasReachedDestination())
         {
-            _movement.ChangeState(_movement.IdleState);
-            return;
-        }
+            if (_movement.Path.IsFinished)
+            {
+                _movement.ChangeState(_movement.IdleState);
+                return;
+            }
 
-        if (_movement.HasReachedDestination())
-        {
             _movement.SetNextDestination();
         }
     }
