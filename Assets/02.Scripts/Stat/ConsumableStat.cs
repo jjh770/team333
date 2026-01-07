@@ -24,6 +24,13 @@ public class ConsumableStat
         OnValueChanged?.Invoke(_currentValue, _maxValue);
     }
 
+    public void Initialize(float maxValue)
+    {
+        _maxValue = maxValue;
+        _currentValue = _maxValue;
+        OnValueChanged?.Invoke(_currentValue, _maxValue);
+    }
+
     public void SetMaxValue(float amount)
     {
         _maxValue = Mathf.Max(0, amount);

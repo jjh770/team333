@@ -15,6 +15,12 @@ public class ValueStat
         OnValueChanged?.Invoke(_value);
     }
 
+    public void Initialize(float value)
+    {
+        _value = value;
+        OnValueChanged?.Invoke(_value);
+    }
+
     public void SetValue(float amount)
     {
         _value = amount;
