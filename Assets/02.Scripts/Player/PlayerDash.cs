@@ -3,13 +3,15 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     [Header("Dash Settings")]
-    [SerializeField] private float _dashSpeed = 20f;
-    [SerializeField] private float _dashDuration = 0.2f;
-    [SerializeField] private float _dashCooldown = 0.5f;
+    [SerializeField] private float _dashSpeed = 10f;
+    [SerializeField] private float _dashDuration = 0.5f;
+    [SerializeField] private float _dashCooldown = 1f;
 
+    private PlayerAnimatorController _animatorController;
     private CharacterController _controller;
     private PlayerMove _playerMove;
-    private bool _isDashing;
+    private PlayerStateManager _stateManager;
+    private PlayerAttack _playerAttack;
     private float _dashTimer;
     private float _dashCooldownTimer;
     private Vector3 _dashDirection;
@@ -18,6 +20,9 @@ public class PlayerDash : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _playerMove = GetComponent<PlayerMove>();
+        _animatorController = GetComponent<PlayerAnimatorController>();
+        _stateManager = GetComponent<PlayerStateManager>();
+        _playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
@@ -25,7 +30,7 @@ public class PlayerDash : MonoBehaviour
         UpdateDashCooldown();
         HandleDashInput();
 
-        if (_isDashing)
+        if (_stateManager.IsState(PlayerState.Dashing))
         {
             PerformDash();
         }
@@ -41,11 +46,9 @@ public class PlayerDash : MonoBehaviour
 
     private void HandleDashInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0 && !_isDashing)
+        if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0 && _stateManager.CanDash)
         {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+            Vector3 direction = _playerMove.GetMovementDirection();
 
             if (direction.magnitude >= 0.1f)
             {
@@ -56,15 +59,21 @@ public class PlayerDash : MonoBehaviour
 
     private void StartDash(Vector3 direction)
     {
-        _isDashing = true;
+        // 공격 중이면 공격 캔슬
+        if (_stateManager.IsState(PlayerState.Attacking))
+        {
+            _playerAttack.CancelAttack();
+        }
+
+        // 상태 변경: Dashing으로 전환
+        _stateManager.ChangeState(PlayerState.Dashing);
+
         _dashTimer = _dashDuration;
         _dashDirection = direction;
         _dashCooldownTimer = _dashCooldown;
+        _animatorController.DashAnimation();
 
-        if (_playerMove != null)
-        {
-            _playerMove.CanMove = false;
-        }
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     private void PerformDash()
@@ -83,14 +92,10 @@ public class PlayerDash : MonoBehaviour
 
     private void EndDash()
     {
-        _isDashing = false;
-
-        if (_playerMove != null)
-        {
-            _playerMove.CanMove = true;
-        }
+        // 상태 변경: Idle로 전환 (자동으로 이동 가능)
+        _stateManager.ChangeState(PlayerState.Idle);
     }
 
-    public bool IsDashing => _isDashing;
+    public bool IsDashing => _stateManager.IsState(PlayerState.Dashing);
     public float CooldownRemaining => _dashCooldownTimer;
 }

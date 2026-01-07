@@ -13,8 +13,15 @@ public class PlayerAnimatorController : MonoBehaviour
         _animator.SetBool("IsMoving", isMoving);
     }
 
-    public void DashAnimation(bool isDashing)
+    public void DashAnimation()
     {
-        //_animator.SetBool("")
+        _animator.SetTrigger("Dash");
+    }
+
+    public void AttackAnimation(int comboAttackNum)
+    {
+        _animator.SetTrigger("Attack");
+        _animator.SetInteger("AttackCombo", comboAttackNum);
+        Debug.Log($"AttackCombo set to: {comboAttackNum}");
     }
 }

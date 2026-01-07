@@ -4,19 +4,33 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private float _attackRange = 2f;
-    [SerializeField] private float _attackDamage = 10f;
-    [SerializeField] private float _attackCooldown = 0.5f;
+    [SerializeField] private float _attackCooldown = 0.1f;
+    [SerializeField] private float _attackDuration = 0.5f;
     [SerializeField] private LayerMask _enemyLayer;
 
-    [Header("Attack Point")]
-    [SerializeField] private Transform _attackPoint;
+    [Header("Combo Settings")]
+    [SerializeField] private float _comboResetTime = 0.6f;
+    [SerializeField] private int _maxComboCount = 3;
 
+    private PlayerAnimatorController _animatorController;
+    private PlayerStateManager _stateManager;
     private float _attackCooldownTimer;
+    private float _attackDurationTimer;
     private bool _canAttack = true;
+    private int _comboIndex = 0;
+    private float _comboResetTimer;
+
+    private void Awake()
+    {
+        _animatorController = GetComponent<PlayerAnimatorController>();
+        _stateManager = GetComponent<PlayerStateManager>();
+    }
 
     private void Update()
     {
         UpdateCooldown();
+        UpdateAttackDuration();
+        UpdateComboReset();
         HandleAttackInput();
     }
 
@@ -28,45 +42,91 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    private void UpdateAttackDuration()
+    {
+        if (_attackDurationTimer > 0)
+        {
+            _attackDurationTimer -= Time.deltaTime;
+        }
+    }
+
+    private void UpdateComboReset()
+    {
+        if (_comboResetTimer > 0)
+        {
+            _comboResetTimer -= Time.deltaTime;
+
+            if (_comboResetTimer <= 0)
+            {
+                ResetCombo();
+            }
+        }
+    }
+
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && _canAttack && _attackCooldownTimer <= 0)
+        if (Input.GetMouseButtonDown(0) && _canAttack && _attackCooldownTimer <= 0 && _stateManager.CanAttack)
         {
-            PerformAttack();
+            StartAttack();
         }
+    }
+
+    private void StartAttack()
+    {
+        _stateManager.ChangeState(PlayerState.Attacking);
+
+        _attackDurationTimer = _attackDuration;
+
+        AttackAnimation();
+        PerformAttack();
     }
 
     private void PerformAttack()
     {
         _attackCooldownTimer = _attackCooldown;
+        _comboResetTimer = _comboResetTime;
 
-        Vector3 attackPosition = _attackPoint != null ? _attackPoint.position : transform.position + transform.forward;
-
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPosition, _attackRange, _enemyLayer);
-
-        foreach (Collider enemy in hitEnemies)
+        _comboIndex++;
+        if (_comboIndex >= _maxComboCount)
         {
-            Debug.Log($"Hit: {enemy.name}");
-
-            // TODO: 적에게 데미지를 주는 로직 추가
-            // 예: enemy.GetComponent<EnemyHealth>()?.TakeDamage(_attackDamage);
+            _comboIndex = 0;
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void ResetCombo()
     {
-        if (_attackPoint == null)
-            return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
+        _comboIndex = 0;
     }
 
-    public bool CanAttack
+    private void FinishAttack()
     {
-        get => _canAttack;
-        set => _canAttack = value;
+        _stateManager.ChangeState(PlayerState.Idle);
     }
 
-    public float CooldownRemaining => _attackCooldownTimer;
+    private void AttackAnimation()
+    {
+        _animatorController.AttackAnimation(_comboIndex);
+    }
+
+    // 애니메이션 이벤트에서 호출될 함수
+    public void OnAttackAnimationEnd()
+    {
+        _attackDurationTimer = 0;
+        FinishAttack();
+    }
+
+    public void OnFinishAttackAnimationEnd()
+    {
+        _attackDurationTimer = 0;
+        ResetCombo();
+        FinishAttack();
+    }
+
+    // 공격 캔슬 (대시로 인한 캔슬)
+    public void CancelAttack()
+    {
+        _attackDurationTimer = 0;
+        _comboResetTimer = 0;
+        ResetCombo();
+    }
 }

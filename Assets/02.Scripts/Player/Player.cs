@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerDash))]
 [RequireComponent(typeof(PlayerAttack))]
+[RequireComponent(typeof(PlayerStateManager))]
 
 public class Player : MonoBehaviour
 {
