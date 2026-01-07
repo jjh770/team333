@@ -5,9 +5,10 @@ public class Flora : MonoBehaviour
     [SerializeField] private FloraStats _stats;
     [SerializeField] private FloraMovement _movement;
     [SerializeField] private WaypointPath _pathProvider;
+    [SerializeField] private FloraAnimationController _animationController;
 
     private void Awake()
     {
-        _movement.Initialize(_stats, (IFloraPath)_pathProvider);
+        _movement.Initialize(_stats, (IFloraPath)_pathProvider, _animationController);
     }
 }
