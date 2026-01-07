@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class FloraIdleState : IFloraState
 {
     private readonly FloraMovement _movement;
