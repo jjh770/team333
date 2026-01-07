@@ -15,7 +15,7 @@ public class FloraMoveState : IFloraState
 
     public void Update()
     {
-        if (_movement.Path.IsFinished)
+        if (_movement.HasReachedDestination())
         {
             _movement.ChangeState(_movement.IdleState);
             return;

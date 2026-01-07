@@ -22,9 +22,7 @@ public class FloraAnimationController : MonoBehaviour
     public void PlayMove(float speed)
     {
         _animator.SetBool(IsMovingHash, true);
-        
-        float normalizedSpeed = NormalizeSpeed(speed);
-        _animator.SetFloat(MoveSpeedHash, normalizedSpeed);
+        SetMovementSpeed(speed);
     }
 
     public void PlayIdle()
