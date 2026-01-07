@@ -19,14 +19,13 @@ public class TraceMoveComponent : MoveComponent
     protected override void Update()
     {
         base.Update();
-
-        if (_player == null) return;
-
         UpdateTraceTarget();
     }
 
     private void UpdateTraceTarget()
     {
+        if (_player == null) return;
+
         _updateTimer -= Time.deltaTime;
         if (_updateTimer <= 0f)
         {
