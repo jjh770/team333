@@ -12,11 +12,17 @@ public class MonsterStat : MonoBehaviour
         add => Health.OnValueChanged += value;
         remove => Health.OnValueChanged -= value;
     }
+    private void Awake()
+    {
+        Health ??= new ConsumableStat();
+        AttackDamage ??= new ValueStat();
+        MoveSpeed ??= new ValueStat();
+    }
 
     private void Start()
     {
-        Health?.Initialize();
-        AttackDamage?.Initialize();
-        MoveSpeed?.Initialize();
+        Health.Initialize();
+        AttackDamage.Initialize();
+        MoveSpeed.Initialize();
     }
 }

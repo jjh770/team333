@@ -4,7 +4,6 @@
 public class TraceMoveComponent : MoveComponent
 {
     [Header("Movement")]
-    [SerializeField] private float _defaultMoveSpeed = 4f;
     [SerializeField] private float _updateInterval = 0.2f;
     [SerializeField] private float _stoppingDistance = 2f;
 
@@ -27,17 +26,6 @@ public class TraceMoveComponent : MoveComponent
     private void InitializeMoveSpeed()
     {
         _agent.speed = _stat.MoveSpeed.Value;
-        _stat.MoveSpeed.OnValueChanged += OnMoveSpeedChanged;
-    }
-
-    private void OnDisable()
-    {
-        _stat.MoveSpeed.OnValueChanged -= OnMoveSpeedChanged;
-    }
-
-    private void OnMoveSpeedChanged(float value)
-    {
-        _agent.speed = value;
     }
 
     protected override void Update()
