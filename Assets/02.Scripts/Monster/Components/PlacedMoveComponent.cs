@@ -14,6 +14,7 @@ public class PlacedMoveComponent : MoveComponent
     {
         base.Start();
         _agent.isStopped = true;
+        _agent.updatePosition = false;
     }
 
     protected override void Update()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5872455756231860532}
   - component: {fileID: 4947238043925822339}
   - component: {fileID: 3462958000010951509}
+  - component: {fileID: 2308833774874783059}
   m_Layer: 0
   m_Name: Rabby_White
   m_TagString: Untagged
@@ -95,6 +96,18 @@ MonoBehaviour:
   _velocityThreshold: 0.1
   _detectionRange: 10
   _rotationSpeed: 5
+--- !u!114 &2308833774874783059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548748439804291700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981473d42fc121a4d8763b2966863395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterStateController
 --- !u!1 &1007023304530408935
 GameObject:
   m_ObjectHideFlags: 0

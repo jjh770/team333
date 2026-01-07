@@ -1,4 +1,10 @@
 ﻿using UnityEngine;
+public enum MonsterType
+{
+    BadPlacedAttack,
+    BadTraceAttack,
+    GoodPlaced
+}
 
 [CreateAssetMenu(menuName = "Game/Monster/MonsterData")]
 public class MonsterData : ScriptableObject
@@ -10,4 +16,7 @@ public class MonsterData : ScriptableObject
     [field: SerializeField] public float MaxHealth { get; private set; } = 100f;
     [field: SerializeField] public float AttackDamage { get; private set; } = 10f;
     [field: SerializeField] public float MoveSpeed { get; private set; } = 4f;
+
+    [Header("Type")]
+    [field: SerializeField] public MonsterType Type { get; private set; }
 }

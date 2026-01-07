@@ -19,13 +19,22 @@ public class TraceMoveComponent : MoveComponent
     protected override void Start()
     {
         base.Start();
-        InitializeMoveSpeed();
         _agent.stoppingDistance = _stoppingDistance;
     }
 
-    private void InitializeMoveSpeed()
+    private void OnEnable()
     {
-        _agent.speed = _stat.MoveSpeed.Value;
+        _stat.OnMoveSpeedChanged += OnMoveSpeedChanged;
+    }
+
+    private void OnDisable()
+    {
+        _stat.OnMoveSpeedChanged -= OnMoveSpeedChanged;
+    }
+
+    private void OnMoveSpeedChanged(float value)
+    {
+        _agent.speed = value;
     }
 
     protected override void Update()

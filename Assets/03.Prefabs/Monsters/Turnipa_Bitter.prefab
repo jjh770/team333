@@ -256,7 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
-  _moveSpeed: 4
   _updateInterval: 0.2
   _stoppingDistance: 2
 --- !u!114 &4456880592749316536
@@ -271,14 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa53e6f9d3889cd49800e7ff87fe8bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
-  <Health>k__BackingField:
-    _maxValue: 100
-    _reganValue: 0
-    _reganSpeed: 0
-  <AttackDamage>k__BackingField:
-    _value: 10
-  <MoveSpeed>k__BackingField:
-    _value: 3.5
+  _data: {fileID: 11400000, guid: 24c3ad6073aac6e49b75eac86757394c, type: 2}
 --- !u!114 &2376007662347303873
 MonoBehaviour:
   m_ObjectHideFlags: 0
