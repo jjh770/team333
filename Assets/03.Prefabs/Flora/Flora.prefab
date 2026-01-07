@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 606370418701093091}
   - component: {fileID: 3036415575732966257}
   - component: {fileID: 4369479193300429194}
-  - component: {fileID: 3795222413711934994}
+  - component: {fileID: 1271331776628863529}
   - component: {fileID: 4932798704078032628}
   - component: {fileID: 8368052510557095813}
+  - component: {fileID: 5231732310342022929}
   m_Layer: 0
   m_Name: Flora
   m_TagString: Untagged
@@ -154,11 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f3d964a5a2af4da28d31504100e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flora
-  _stats: {fileID: 3795222413711934994}
+  _stats: {fileID: 1271331776628863529}
   _movement: {fileID: 4932798704078032628}
   _pathProvider: {fileID: 8368052510557095813}
   _animationController: {fileID: 4069937130189001944}
---- !u!114 &3795222413711934994
+--- !u!114 &1271331776628863529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,13 +168,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2488718046737351127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da324e6d78f1869469bbbfe73068dae7, type: 3}
+  m_Script: {fileID: 11500000, guid: d1a22f935647e4643b3504c8d202bb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraStats
   _moveSpeed:
     _minValue: 0
-    _maxValue: 4
-    _baseValue: 4
+    _maxValue: 1.8
+    _baseValue: 1
     _additive: 0
     _multiplier: 1
 --- !u!114 &4932798704078032628
@@ -206,12 +207,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _resolution: 10
+--- !u!114 &5231732310342022929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c788ff8c8c4a64d96b6ad5a345c8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraSpeedUpController
+  _gauge:
+    _maxValueGauge: 1
+    _drainRate: 0.02
+  _speedTiers:
+  - TierLevel: 0
+    Multiplier: 1
+  - TierLevel: 0.4
+    Multiplier: 1.4
+  - TierLevel: 0.8
+    Multiplier: 1.8
 --- !u!1001 &7789057980649354464
 PrefabInstance:
   m_ObjectHideFlags: 0
