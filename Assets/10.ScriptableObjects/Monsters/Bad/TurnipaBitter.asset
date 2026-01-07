@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a064921fef096dd41957d6f629a5678c, type: 3}
   m_Name: TurnipaBitter
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
-  MonsterName: TurnipaBitter
+  <MonsterName>k__BackingField: TurnipaBitter
+  <MaxHealth>k__BackingField: 100
+  <AttackDamage>k__BackingField: 10
+  <MoveSpeed>k__BackingField: 4

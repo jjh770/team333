@@ -3,26 +3,24 @@ using System;
 
 public class MonsterStat : MonoBehaviour
 {
-    [field: SerializeField] public ConsumableStat Health { get; private set; }
-    [field: SerializeField] public ValueStat AttackDamage { get; private set; }
-    [field: SerializeField] public ValueStat MoveSpeed { get; private set; }
+    [SerializeField] private MonsterData _data;
+
+    public ConsumableStat Health { get; private set; } = new();
+    public ValueStat AttackDamage { get; private set; } = new();
+    public ValueStat MoveSpeed { get; private set; } = new();
 
     public event Action<float, float> OnHealthChanged
     {
         add => Health.OnValueChanged += value;
         remove => Health.OnValueChanged -= value;
     }
-    private void Awake()
-    {
-        Health ??= new ConsumableStat();
-        AttackDamage ??= new ValueStat();
-        MoveSpeed ??= new ValueStat();
-    }
 
     private void Start()
     {
-        Health.Initialize();
-        AttackDamage.Initialize();
-        MoveSpeed.Initialize();
+        if (_data == null) return;
+
+        Health.Initialize(_data.MaxHealth);
+        AttackDamage.Initialize(_data.AttackDamage);
+        MoveSpeed.Initialize(_data.MoveSpeed);
     }
 }
