@@ -16,7 +16,7 @@ public class PlacedMoveComponent : MoveComponent
         _agent.isStopped = true;
     }
 
-    private void Update()
+    protected override void Update()
     {
         TryLookAtPlayer();
     }

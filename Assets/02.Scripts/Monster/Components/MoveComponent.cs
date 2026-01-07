@@ -5,9 +5,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(MonsterController))]
 public abstract class MoveComponent : MonoBehaviour
 {
+    [SerializeField] protected float _velocityThreshold = 0.1f;
+
     protected NavMeshAgent _agent;
     protected MonsterController _monsterController;
     protected Transform _player;
+
+    public bool IsMoving { get; private set; }
 
     protected virtual void Awake()
     {
@@ -20,12 +24,29 @@ public abstract class MoveComponent : MonoBehaviour
         FindTarget();
     }
 
+    protected virtual void Update()
+    {
+        UpdateMoveState();
+    }
+
+    protected void UpdateMoveState()
+    {
+        bool isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
+
+        if (IsMoving != isMoving)
+        {
+            IsMoving = isMoving;
+            var state = IsMoving ? MonsterState.Move : MonsterState.Idle;
+            _monsterController.ChangeState(state);
+        }
+    }
+
     protected void FindTarget()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
-            this._player = playerObject.transform;
+            _player = playerObject.transform;
         }
     }
 }

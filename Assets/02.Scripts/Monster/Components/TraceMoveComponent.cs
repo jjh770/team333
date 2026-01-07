@@ -16,14 +16,16 @@ public class TraceMoveComponent : MoveComponent
         _agent.stoppingDistance = _stoppingDistance;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (_player == null) return;
 
-        Trace();
+        UpdateTraceTarget();
     }
 
-    private void Trace()
+    private void UpdateTraceTarget()
     {
         _updateTimer -= Time.deltaTime;
         if (_updateTimer <= 0f)
