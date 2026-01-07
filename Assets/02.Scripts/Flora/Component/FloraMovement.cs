@@ -25,7 +25,7 @@ public class FloraMovement : MonoBehaviour
         Initialize();
     }
     
-    public void Initialize()
+    private void Initialize()
     {
         _stats = GetComponent<FloraStats>();
         _path = GetComponent<IFloraPath>();
