@@ -19,4 +19,7 @@ public class MonsterData : ScriptableObject
 
     [Header("Type")]
     [field: SerializeField] public MonsterType Type { get; private set; }
+
+    [Header("Prefab")]
+    [field: SerializeField] public GameObject prefab { get; private set; }
 }

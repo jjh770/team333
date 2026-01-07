@@ -15,5 +15,6 @@ MonoBehaviour:
   <MonsterName>k__BackingField: TurnipaBitter
   <MaxHealth>k__BackingField: 100
   <AttackDamage>k__BackingField: 10
-  <MoveSpeed>k__BackingField: 4
+  <MoveSpeed>k__BackingField: 3.5
   <Type>k__BackingField: 1
+  <prefab>k__BackingField: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
