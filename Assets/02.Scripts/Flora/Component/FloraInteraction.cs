@@ -10,19 +10,33 @@ public class FloraInteraction : MonoBehaviour
 
     private FloraInventory _inventory;
     private FloraSpeedGaugeController _gaugeController;
+    private FloraMovement _floraMovement;
 
     private void Awake()
     {
         _inventory = GetComponent<FloraInventory>();
         _gaugeController = GetComponent<FloraSpeedGaugeController>();
+        _floraMovement = GetComponent<FloraMovement>();
     }
 
     public bool TryFeedWood()
     {
-        if (_gaugeController.IsFull) return false;
-        if (!_inventory.TryUseWood(_woodCost)) return false;
+        if (_gaugeController.IsFull)
+        {
+            return false;
+        }
+        if (!_inventory.TryUseWood(_woodCost))
+        {
+            return false;
+        }
 
         _gaugeController.TryAddGauge(_gaugeAmount);
+        
         return true;
+    }
+
+    public bool TryResume()
+    {
+        return _floraMovement.Resume();
     }
 }

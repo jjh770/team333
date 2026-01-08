@@ -55,7 +55,10 @@ public class FloraSpeedGaugeController : MonoBehaviour
     public bool IsFull => _gauge.IsFull; 
     public bool TryAddGauge(float amount)
     {
-        if (_gauge.IsFull) return false;
+        if (_gauge.IsFull)
+        {
+            return false;
+        }
 
         _gauge.AddGauge(amount);
         return true;

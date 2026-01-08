@@ -47,6 +47,17 @@ public class FloraInteractionTest : MonoBehaviour
         {
             UseWood();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Resume();
+        }
+    }
+
+    private void Resume()
+    {
+        bool success = _interaction.TryResume();
+        Debug.Log(success ? "[Test] Resume 성공! 이동 재개" : "[Test] Resume 실패 - Wait 상태가 아님");
     }
 
     private void AddWood()
