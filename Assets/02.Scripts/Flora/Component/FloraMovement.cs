@@ -46,13 +46,16 @@ public class FloraMovement : MonoBehaviour
         ChangeState(MoveState);
     }
 
-    public void Resume()
+    public bool Resume()
     {
         if (_currentState == WaitState)
         {
             _path.MoveNext();
             ChangeState(MoveState);
+            return true;
         }
+
+        return false;
     }
 
     private void OnDisable()

@@ -12,15 +12,18 @@ GameObject:
   - component: {fileID: 587568053855220258}
   - component: {fileID: 3097365870378149113}
   - component: {fileID: 606370418701093091}
+  - component: {fileID: 5015927959445878003}
   - component: {fileID: 3036415575732966257}
   - component: {fileID: 1271331776628863529}
   - component: {fileID: 4932798704078032628}
   - component: {fileID: 8368052510557095813}
   - component: {fileID: 5231732310342022929}
   - component: {fileID: 7678525517629694115}
+  - component: {fileID: 5208897952055008175}
+  - component: {fileID: 4861701462829498376}
   m_Layer: 0
   m_Name: Flora
-  m_TagString: Untagged
+  m_TagString: Flora
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +124,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5015927959445878003
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!195 &3036415575732966257
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -213,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraSpeedUpController
   _gauge:
     _maxValue: 1
-    _drainRate: 0.02
+    _drainRate: 0.04
   _speedTiers:
   - TierLevel: 0
     Multiplier: 1
@@ -233,6 +263,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4911d5d619db1ca4faf5ca42d3603bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraDamageReceiver
+--- !u!114 &5208897952055008175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bd43427cef92f4e9ba6ae00d379fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraInventory
+  _wood:
+    _value: 0
+--- !u!114 &4861701462829498376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429840adbec40d04ea8457e984d5f7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraInteraction
+  _woodCost: 1
+  _gaugeAmount: 0.2
 --- !u!1001 &7789057980649354464
 PrefabInstance:
   m_ObjectHideFlags: 0

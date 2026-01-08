@@ -1,16 +1,54 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class MonsterStateController : MonoBehaviour, IAnimationStateChanger
+[RequireComponent(typeof(MonsterMoveComponent))]
+[RequireComponent(typeof(MonsterAttackComponent))]
+public class MonsterStateController : MonoBehaviour
 {
     private Animator _animator;
     private MonsterState _currentState = MonsterState.Idle;
+
+    private MonsterAttackComponent _attackComponent;
+    private MonsterMoveComponent _moveComponent;
+
+    public MonsterState CurrentState => _currentState;
 
     private static readonly int s_animationHash = Animator.StringToHash("animation");
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _moveComponent = GetComponent<MonsterMoveComponent>();
+        _attackComponent = GetComponent<MonsterAttackComponent>();
+    }
+
+    private void Update()
+    {
+        DetermineCurrentState();
+    }
+
+    private void DetermineCurrentState()
+    {
+        // 1순위: 사망
+        // 2순위: 타격
+        // 3순위: 공격
+        if (_attackComponent.IsAttacking)
+        {
+            ChangeState(MonsterState.Attack);
+            return;
+        }
+
+        // 4순위: 플레이어 추적
+        if (_moveComponent.IsMoving)
+        {
+            ChangeState(MonsterState.Move);
+        }
+
+        // 5순위: 기본
+        else
+        {
+            ChangeState(MonsterState.Idle);
+        }
     }
 
     public void ChangeState(MonsterState newState)
