@@ -1158,10 +1158,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planta_Shadow
       objectReference: {fileID: 0}
-    - target: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1219,10 +1215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabby_Brown
       objectReference: {fileID: 0}
-    - target: {fileID: 4600686796660698352, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1244,10 +1236,6 @@ PrefabInstance:
     - target: {fileID: 548748439804291700, guid: e97ad18414708494297cda9578c40d4f, type: 3}
       propertyPath: m_Name
       value: Rabby_White
-      objectReference: {fileID: 0}
-    - target: {fileID: 548748439804291700, guid: e97ad18414708494297cda9578c40d4f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 911971765819213848, guid: e97ad18414708494297cda9578c40d4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1310,10 +1298,6 @@ PrefabInstance:
     - target: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
       propertyPath: m_Name
       value: Turnipa_Bitter
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7295405998790954751, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1417,10 +1401,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Devil_Tree_Nightmare
       objectReference: {fileID: 0}
-    - target: {fileID: 6060493489403216405, guid: f29645466055aac4d911e5a12516983d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1437,10 +1417,6 @@ PrefabInstance:
     - target: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
       propertyPath: m_Name
       value: Devil_Tree_Wither
-      objectReference: {fileID: 0}
-    - target: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8821786179341327282, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
       propertyPath: m_LocalPosition.x

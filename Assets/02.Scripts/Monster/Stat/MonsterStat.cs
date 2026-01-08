@@ -7,7 +7,10 @@ public class MonsterStat : MonoBehaviour
 
     public ConsumableStat Health { get; private set; } = new();
     public ValueStat AttackDamage { get; private set; } = new();
+    public ValueStat AttackCooltime { get; private set; } = new();
     public ValueStat MoveSpeed { get; private set; } = new();
+
+    public float GetAttackCooltime() => AttackCooltime.Value;
 
     public event Action<float, float> OnHealthChanged
     {
@@ -21,6 +24,19 @@ public class MonsterStat : MonoBehaviour
         remove => MoveSpeed.OnValueChanged -= value;
     }
 
+    public void SetMoveSpeed(float value)
+    {
+        MoveSpeed.SetValue(value);
+    }
+
+    public void ModifyMoveSpeed(float amount)
+    {
+        if (amount >= 0)
+            MoveSpeed.Increase(amount);
+        else
+            MoveSpeed.Decrease(-amount);
+    }
+
     private void Start()
     {
         if (_data == null)
@@ -31,6 +47,7 @@ public class MonsterStat : MonoBehaviour
 
         Health.Initialize(_data.MaxHealth);
         AttackDamage.Initialize(_data.AttackDamage);
+        AttackCooltime.Initialize(_data.AttackCooltime);
         MoveSpeed.Initialize(_data.MoveSpeed);
     }
 }

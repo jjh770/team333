@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
-public class TraceMoveComponent : MoveComponent
+public class MonsterTraceMoveComponent : MonsterMoveComponent
 {
     [Header("Movement")]
     [SerializeField] private float _updateInterval = 0.2f;
-    [SerializeField] private float _stoppingDistance = 2f;
+    [SerializeField] private float _stoppingDistance = 1.8f;
 
     private MonsterStat _stat;
     private float _updateTimer;
+
 
     protected override void Awake()
     {
@@ -37,10 +38,15 @@ public class TraceMoveComponent : MoveComponent
         _agent.speed = value;
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
+        UpdateMoveState();
         UpdateTraceTarget();
+    }
+
+    private void UpdateMoveState()
+    {
+        _isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
     }
 
     private void UpdateTraceTarget()
