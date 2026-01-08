@@ -17,16 +17,24 @@ public class FloraMoveState : IFloraState
 
     public void Update()
     {
-        if (_movement.HasReachedDestination())
-        {
-            if (!_movement.HasNextDestination())
-            {
-                _movement.ChangeState(_movement.IdleState);
-                return;
-            }
+        if (!_movement.HasReachedDestination())
+            return;
 
-            _movement.SetNextDestination();
+        if (_movement.ShouldWait)
+        {
+            _movement.ChangeState(_movement.WaitState);
+            return;
         }
+
+        _movement.AdvancePath();
+
+        if (!_movement.HasNextDestination())
+        {
+            _movement.ChangeState(_movement.IdleState);
+            return;
+        }
+
+        _movement.SetNextDestination();
     }
 
     public void Exit()
