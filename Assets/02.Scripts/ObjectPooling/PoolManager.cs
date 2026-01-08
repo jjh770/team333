@@ -1,12 +1,24 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour, IPoolManager
 {
+    public static PoolManager Instance { get; private set; }
+
     [SerializeField] private int _defaultPoolSize = 10;
 
     private readonly Dictionary<GameObject, Queue<GameObject>> _pools = new();
     private readonly Dictionary<GameObject, GameObject> _prefabLookup = new();
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     public void Preload(GameObject prefab, int count)
     {

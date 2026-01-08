@@ -5,12 +5,10 @@ public class MonsterSpawnTrigger : MonoBehaviour
 {
     [Header("Spawn Group Index")]
     [SerializeField] private int _spawnGroupIndex;
-    
-    [Header("MonsterPool")]
-    [SerializeField] private MonsterPool _monsterPool;
-    
+
     private BoxCollider _collider;
     private const string FloraTag = "Flora";
+
     private void Awake()
     {
         _collider = GetComponent<BoxCollider>();
@@ -19,15 +17,13 @@ public class MonsterSpawnTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag(FloraTag)) return;
-        
+
         SpawnMonsters();
     }
 
     private void SpawnMonsters()
     {
-        if(_monsterPool == null) return;
-        
-        _monsterPool.SpawnGroup(_spawnGroupIndex);
+        MonsterPool.Instance.SpawnGroup(_spawnGroupIndex);
         enabled = false;
     }
 

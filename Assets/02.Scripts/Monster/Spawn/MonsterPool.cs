@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class MonsterPool : MonoBehaviour
 {
+    public static MonsterPool Instance { get; private set; }
+
     [Header("Monsters")]
     [SerializeField] private GameObject[] _monsterPrefabs;
     [SerializeField] private int _preloadPerPrefab = 30;
@@ -14,33 +16,28 @@ public class MonsterPool : MonoBehaviour
     [Header("Spawn Groups")]
     [SerializeField] private SpawnGroup[] _spawnGroups;
 
-    [Header("Dependencies")]
-    [SerializeField] private MonoBehaviour _poolManagerComponent;
-
-    private IPoolManager _poolManager;
-
     private void Awake()
     {
-        if (_poolManagerComponent is not IPoolManager manager)
+        if (Instance != null && Instance != this)
         {
-            Debug.LogError("할당된 PoolManager 컴포넌트가 IPoolManager를 구현하지 않았습니다.", this);
+            Destroy(gameObject);
             return;
         }
-        _poolManager = manager;
+        Instance = this;
     }
 
     private void Start()
     {
         foreach (var prefab in _monsterPrefabs)
         {
-            _poolManager.Preload(prefab, _preloadPerPrefab);
+            PoolManager.Instance.Preload(prefab, _preloadPerPrefab);
         }
     }
 
     public void SpawnGroup(int groupIndex)
     {
         if (groupIndex < 1 || groupIndex > _spawnGroups.Length) return;
-        
+
         SpawnRandomInGroup(_spawnGroups[groupIndex - 1]);
     }
 
@@ -56,9 +53,8 @@ public class MonsterPool : MonoBehaviour
             GameObject prefab = GetRandomPrefab();
             if (prefab == null) continue;
 
-            GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
-            
-            // 생성될 때 죽음 이벤트 구독
+            GameObject spawned = PoolManager.Instance.Get(prefab, point.position, point.rotation);
+
             if (spawned != null && spawned.TryGetComponent<Monster>(out var monster))
             {
                 monster.OnDie += HandleMonsterDie;
@@ -66,11 +62,10 @@ public class MonsterPool : MonoBehaviour
         }
     }
 
-    // 죽을 때 죽음 이벤트 해제
     private void HandleMonsterDie(Monster monster)
     {
         monster.OnDie -= HandleMonsterDie;
-        _poolManager.Return(monster.gameObject);
+        PoolManager.Instance.Return(monster.gameObject);
     }
 
     private GameObject GetRandomPrefab()
