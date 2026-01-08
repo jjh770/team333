@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-public class MonsterPool : MonoBehaviour
+public class MonsterPool : MonoBehaviour, IMonsterSpawner
 {
     [Header("Monsters")]
     [SerializeField] private GameObject[] _monsterPrefabs;
@@ -37,16 +37,11 @@ public class MonsterPool : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void SpawnGroup(int groupIndex)
     {
-        // 테스트용 입력
-        for (int i = 0; i < _spawnGroups.Length && i < 9; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                SpawnRandomInGroup(_spawnGroups[i]);
-            }
-        }
+        if (groupIndex < 1 || groupIndex > _spawnGroups.Length) return;
+
+        SpawnRandomInGroup(_spawnGroups[groupIndex - 1]);
     }
 
     private void SpawnRandomInGroup(SpawnGroup group)
@@ -62,8 +57,7 @@ public class MonsterPool : MonoBehaviour
             if (prefab == null) continue;
 
             GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
-            
-            // 생성될 때 죽음 이벤트 구독
+
             if (spawned != null && spawned.TryGetComponent<Monster>(out var monster))
             {
                 monster.OnDie += HandleMonsterDie;
@@ -71,7 +65,6 @@ public class MonsterPool : MonoBehaviour
         }
     }
 
-    // 죽을 때 죽음 이벤트 해제
     private void HandleMonsterDie(Monster monster)
     {
         monster.OnDie -= HandleMonsterDie;
