@@ -20363,6 +20363,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3076924198181111645, guid: c221f26aeede4324dbd7bf3f5cfb2c1e, type: 3}
   m_PrefabInstance: {fileID: 542227769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &547269312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6031141197873004363, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
+  m_PrefabInstance: {fileID: 594866876}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &548165737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22382,14 +22387,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 57080825}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
-      propertyPath: _spawnGroups.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
-      propertyPath: _spawnGroups.Array.data[1]._groupName
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_spawnGroups.Array.data[0]._spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1912141895}
@@ -22397,14 +22394,6 @@ PrefabInstance:
       propertyPath: '_spawnGroups.Array.data[0]._spawnPoints.Array.data[1]'
       value: 
       objectReference: {fileID: 1523929312}
-    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
-      propertyPath: '_spawnGroups.Array.data[1]._spawnPoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
-      propertyPath: '_spawnGroups.Array.data[1]._spawnPoints.Array.data[1]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5209801935537030833, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 158.95677
@@ -22459,7 +22448,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
   m_PrefabInstance: {fileID: 594866876}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 547269312}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e272fa3972a92b47be0893a9ad745fe, type: 3}
@@ -72173,6 +72162,10 @@ PrefabInstance:
       propertyPath: _monsterPool
       value: 
       objectReference: {fileID: 594866877}
+    - target: {fileID: 7613929823779919630, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
+      propertyPath: _monsterSpawnerProvider
+      value: 
+      objectReference: {fileID: 547269312}
     - target: {fileID: 7613929823779919630, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
       propertyPath: _monsterSpawnerComponent
       value: 

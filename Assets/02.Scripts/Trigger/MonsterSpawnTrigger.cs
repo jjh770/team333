@@ -7,7 +7,7 @@ public class MonsterSpawnTrigger : MonoBehaviour
     [SerializeField] private int _spawnGroupIndex;
 
     [Header("Dependencies")]
-    [SerializeField] private MonoBehaviour _monsterSpawnerComponent;
+    [SerializeField] private GameObject _monsterSpawnerProvider;
 
     private IMonsterSpawner _monsterSpawner;
     private BoxCollider _collider;
@@ -17,12 +17,11 @@ public class MonsterSpawnTrigger : MonoBehaviour
     {
         _collider = GetComponent<BoxCollider>();
 
-        if (_monsterSpawnerComponent is not IMonsterSpawner spawner)
+        if (_monsterSpawnerProvider == null || !_monsterSpawnerProvider.TryGetComponent(out _monsterSpawner))
         {
-            Debug.LogError("할당된 컴포넌트가 IMonsterSpawner를 구현하지 않았습니다.", this);
+            Debug.LogError("할당된 GameObject에 IMonsterSpawner를 구현한 컴포넌트가 없습니다.", this);
             return;
         }
-        _monsterSpawner = spawner;
     }
 
     private void OnTriggerEnter(Collider other)

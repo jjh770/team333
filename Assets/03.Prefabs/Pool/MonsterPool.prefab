@@ -56,12 +56,4 @@ MonoBehaviour:
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
-  - _groupName: 2
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-  - _groupName: 3
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
   _poolManagerComponent: {fileID: 0}
