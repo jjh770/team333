@@ -2,109 +2,80 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Attack Settings")]
-    [SerializeField] private float _attackCooldown = 0.1f;
-    [SerializeField] private float _attackDuration = 0.5f;
-
     [Header("Combo Settings")]
-    [SerializeField] private float _comboResetTime = 0.6f;
     [SerializeField] private int _maxComboCount = 3;
+    [SerializeField] private float _comboWindowTime = 3f;
 
-    private int _maxComboMargin = 10;
+    private PlayerRotateToMouse _rotateToMouse;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
-    private float _attackCooldownTimer;
-    private float _attackDurationTimer;
+    private PlayerAttackRange _attackRange;
+    private PlayerMove _playerMove;
+    private PlayerDash _playerDash;
     private bool _canAttack = true;
-    private int _comboIndex = 0;
-    private float _comboResetTimer;
+    [SerializeField] private int _comboIndex = 0;
+    private float _lastAttackTime;
 
     private void Awake()
     {
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
-
-        // 상태 전환 검증 이벤트 구독
-        _stateManager.OnValidateStateChange += ValidateStateChange;
-        // 상태 변경 이벤트 구독 (대시로 인한 공격 캔슬)
+        _attackRange = GetComponent<PlayerAttackRange>();
+        _rotateToMouse = GetComponent<PlayerRotateToMouse>();
+        _playerMove = GetComponent<PlayerMove>();
+        _playerDash = GetComponent<PlayerDash>();
         _stateManager.OnStateChanged += OnStateChanged;
+        _playerDash.OnDashFinish += OnDashFinished;
     }
 
     private void OnDestroy()
     {
         if (_stateManager != null)
         {
-            _stateManager.OnValidateStateChange -= ValidateStateChange;
             _stateManager.OnStateChanged -= OnStateChanged;
         }
-    }
-
-    private bool ValidateStateChange(PlayerState from, PlayerState to)
-    {
-        // 공격 중 또는 ComboWindow 동안 Idle이나 Moving으로 전환 시도 시 거부
-        if (from == PlayerState.Attacking && (_attackDurationTimer > 0 || _comboResetTimer > 0))
+        if (_playerDash != null)
         {
-            if (to == PlayerState.Idle || to == PlayerState.Moving)
-                return false;
+            _playerDash.OnDashFinish -= OnDashFinished;
         }
-        return true;
     }
 
     private void OnStateChanged(PlayerState from, PlayerState to)
     {
-        // Dashing으로 변경 시 공격 캔슬
-        if (to == PlayerState.Dashing && from == PlayerState.Attacking)
+        // P2: 대시 캔슬 시 처리
+        if (from == PlayerState.Attacking && to == PlayerState.Dashing)
         {
-            CancelAttack();
+            // 공격 이동 중단
+            _playerMove.StopAttackMovement();
+
+            // 대시 캔슬 시 콤보 유지 (다음 타로 진행)
+            _comboIndex++;
+            if (_comboIndex >= _maxComboCount)
+            {
+                _comboIndex = 0;
+            }
         }
     }
 
     private void Update()
     {
-        UpdateCooldown();
-        UpdateAttackDuration();
-        UpdateComboReset();
+        CheckComboTimeout();
         HandleAttackInput();
     }
 
-    private void UpdateCooldown()
+    private void CheckComboTimeout()
     {
-        if (_attackCooldownTimer > 0)
+        if (_comboIndex > 0 && Time.time - _lastAttackTime > _comboWindowTime)
         {
-            _attackCooldownTimer -= Time.deltaTime;
-        }
-    }
-
-    private void UpdateAttackDuration()
-    {
-        if (_attackDurationTimer > 0)
-        {
-            _attackDurationTimer -= Time.deltaTime;
-        }
-    }
-
-    private void UpdateComboReset()
-    {
-        if (_comboResetTimer > 0)
-        {
-            _comboResetTimer -= Time.deltaTime;
-
-            if (_comboResetTimer <= 0)
-            {
-                // ComboWindow 종료 - 콤보 리셋 및 Idle 상태로 전환
-                ResetCombo();
-                if (_stateManager.IsState(PlayerState.Attacking))
-                {
-                    FinishAttack();
-                }
-            }
+            ResetCombo();
         }
     }
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && _canAttack && _attackCooldownTimer <= 0 && _stateManager.CanAttack)
+        if (Input.GetMouseButtonDown(0) && _canAttack && _stateManager.CanAttack)
         {
+            _rotateToMouse.RotateTowardsMouse();
             StartAttack();
         }
     }
@@ -112,23 +83,10 @@ public class PlayerAttack : MonoBehaviour
     private void StartAttack()
     {
         _stateManager.ChangeState(PlayerState.Attacking);
-
-        _attackDurationTimer = _attackDuration;
+        _canAttack = false;
+        _lastAttackTime = Time.time;
 
         AttackAnimation();
-        PerformAttack();
-    }
-
-    private void PerformAttack()
-    {
-        _attackCooldownTimer = _attackCooldown;
-        _comboResetTimer = _comboResetTime;
-
-        _comboIndex++;
-        if (_comboIndex >= _maxComboMargin)
-        {
-            _comboIndex = 0;
-        }
     }
 
     private void ResetCombo()
@@ -144,6 +102,7 @@ public class PlayerAttack : MonoBehaviour
     private void FinishAttack()
     {
         _stateManager.ChangeState(PlayerState.Idle);
+        _playerMove.StopAttackMovement();
     }
 
     private void AttackAnimation()
@@ -151,32 +110,60 @@ public class PlayerAttack : MonoBehaviour
         _animatorController.AttackAnimation(_comboIndex);
     }
 
-    // 애니메이션 이벤트에서 호출될 함수
+    /// <summary>
+    /// 애니메이션 이벤트: 공격 시작
+    /// </summary>
     public void OnAttackAnimationStart()
     {
         StartAttackAnimation();
+
+        // 공격 이동 시작
+        _playerMove.StartAttackMovement(_comboIndex);
     }
 
-    // 1, 2타 공격 애니메이션 종료 (콤보 연결 가능)
+    /// <summary>
+    /// 애니메이션 이벤트: 공격 판정
+    /// </summary>
+    public void OnAttackHit()
+    {
+        if (_attackRange != null)
+        {
+            _attackRange.PerformAttack(_comboIndex);
+        }
+        else
+        {
+            Debug.LogWarning("PlayerAttackRange component is missing!");
+        }
+    }
+
+    /// <summary>
+    /// 애니메이션 이벤트: 1, 2타 종료
+    /// </summary>
     public void OnAttackAnimationEnd()
     {
-        _attackDurationTimer = 0;
-        // FinishAttack() 호출하지 않음 - ComboWindow 유지
-        // _comboResetTimer가 끝나면 자동으로 Idle로 전환
+        _canAttack = true;
+        FinishAttack();
+
+        _comboIndex++;
+        if (_comboIndex >= _maxComboCount)
+        {
+            _comboIndex = 0;
+        }
     }
 
+    /// <summary>
+    /// 애니메이션 이벤트: 마지막 공격 종료
+    /// </summary>
     public void OnFinishAttackAnimationEnd()
     {
-        _attackDurationTimer = 0;
-        ResetCombo();
+        _canAttack = true;
         FinishAttack();
+        ResetCombo();
     }
 
-    // 공격 캔슬 (대시로 인한 캔슬)
-    public void CancelAttack()
+    // 대시 종료 이벤트
+    private void OnDashFinished()
     {
-        _attackDurationTimer = 0;
-        _comboResetTimer = 0;
-        ResetCombo();
+        _canAttack = true;
     }
 }

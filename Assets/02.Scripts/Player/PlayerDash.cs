@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerDash : MonoBehaviour
     private float _dashCooldownTimer;
     private Vector3 _dashDirection;
 
+    public Action OnDashFinish;
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -97,6 +99,7 @@ public class PlayerDash : MonoBehaviour
     {
         // 상태 변경: Idle로 전환 (자동으로 이동 가능)
         _stateManager.ChangeState(PlayerState.Idle);
+        OnDashFinish?.Invoke();
     }
 
     public bool IsDashing => _stateManager.IsState(PlayerState.Dashing);

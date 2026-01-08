@@ -4756,6 +4756,37 @@ Transform:
   - {fileID: 8904509394523318802}
   m_Father: {fileID: 5981167929965069540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6249840776056479764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4070022017240808156}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4070022017240808156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249840776056479764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6570789493408278362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6263333965041211146
 GameObject:
   m_ObjectHideFlags: 0
@@ -6498,9 +6529,11 @@ GameObject:
   - component: {fileID: 2380892331586880646}
   - component: {fileID: 3032091144929877138}
   - component: {fileID: 1179413069454028617}
+  - component: {fileID: 8554205317058724542}
+  - component: {fileID: 6254991337863408666}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6521,6 +6554,7 @@ Transform:
   - {fileID: 3871739331225534216}
   - {fileID: 8073437418900273811}
   - {fileID: 8887264979526076416}
+  - {fileID: 4070022017240808156}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4363046732050873047
@@ -6607,12 +6641,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7e265e1906b904fb623eeda6c0c41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  _moveSpeed: 3
-  _attackMoveSpeed: 2
+  _moveSpeed: 4
+  _attackMoveSpeed: 0
   _gravity: -9.81
   _rotationSpeed: 30
-  _mainCamera: {fileID: 0}
   _viewportMargin: 0.05
+  _enableAttackMovement: 1
+  _attackMoveDistance:
+  - 1.5
+  - 1.5
+  - 2
+  _attackMoveEase: 1b0000001b0000001a000000
 --- !u!114 &2380892331586880646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6637,9 +6676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66bf91820fb91e49a1fd60d56285813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
-  _dashSpeed: 7
+  _dashSpeed: 10
   _dashDuration: 0.5
   _dashCooldown: 1
+  _viewportMargin: 0.05
 --- !u!114 &1179413069454028617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6652,10 +6692,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4490909c8d113854b85b0075db1dd4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  _attackCooldown: 0.3
-  _attackDuration: 1
-  _comboResetTime: 1
   _maxComboCount: 3
+  _comboWindowTime: 3
+  _comboIndex: 0
+--- !u!114 &8554205317058724542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08774b70de99e294c9a3c9410dd20a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRotateToMouse
+  _rotationSpeed: 300
+--- !u!114 &6254991337863408666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c419def42a2c40907e0b2e66849e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerArcAttack
+  _attackRange: 2
+  _attackAngle: 120
+  _attackPoint: {fileID: 4070022017240808156}
+  _enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _baseDamage: 20
+  _comboDamageMultipliers:
+  - 1
+  - 1.2
+  - 1.5
+  _showGizmos: 1
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0

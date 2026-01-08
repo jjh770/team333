@@ -530,13 +530,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032723194}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23091093, y: -0, z: -0, w: 0.9729749}
-  m_LocalPosition: {x: 0, y: 3.05, z: -4.15}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 9.67, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 746.701, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!114 &2032723199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,18 +589,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4057839567153092297, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057839567153092297, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 2032723197}
-    - target: {fileID: 4057839567153092297, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _attackMoveSpeed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6570789493408278362, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
