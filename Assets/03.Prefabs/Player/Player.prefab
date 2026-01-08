@@ -6608,8 +6608,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   _moveSpeed: 3
+  _attackMoveSpeed: 2
   _gravity: -9.81
   _rotationSpeed: 30
+  _mainCamera: {fileID: 0}
   _viewportMargin: 0.05
 --- !u!114 &2380892331586880646
 MonoBehaviour:
@@ -6650,12 +6652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4490909c8d113854b85b0075db1dd4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  _attackRange: 2
   _attackCooldown: 0.3
-  _attackDuration: 0.5
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _attackDuration: 1
   _comboResetTime: 1
   _maxComboCount: 3
 --- !u!1 &8226203336115560033
