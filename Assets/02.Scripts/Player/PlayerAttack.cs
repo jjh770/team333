@@ -42,10 +42,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnStateChanged(PlayerState from, PlayerState to)
     {
+        // P2: 대시 캔슬 시 처리
         if (from == PlayerState.Attacking && to == PlayerState.Dashing)
         {
+            // 공격 이동 중단
             _playerMove.StopAttackMovement();
-            _stateManager.ChangeState(PlayerState.Dashing);
+
+            // 대시 캔슬 시 콤보 유지 (다음 타로 진행)
             _comboIndex++;
             if (_comboIndex >= _maxComboCount)
             {

@@ -6533,7 +6533,7 @@ GameObject:
   - component: {fileID: 6254991337863408666}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6647,8 +6647,11 @@ MonoBehaviour:
   _rotationSpeed: 30
   _viewportMargin: 0.05
   _enableAttackMovement: 1
-  _attackMoveDistance: 1.5
-  _attackMoveEase: 6
+  _attackMoveDistance:
+  - 1.5
+  - 1.5
+  - 2
+  _attackMoveEase: 1b0000001b0000001a000000
 --- !u!114 &2380892331586880646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6673,7 +6676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66bf91820fb91e49a1fd60d56285813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
-  _dashSpeed: 7
+  _dashSpeed: 10
   _dashDuration: 0.5
   _dashCooldown: 1
   _viewportMargin: 0.05

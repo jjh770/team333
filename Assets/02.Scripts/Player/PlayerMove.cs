@@ -161,7 +161,24 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     public void StartAttackMovement(int comboIndex)
     {
-        if (!_enableAttackMovement || comboIndex > 3 || comboIndex < 0) return;
+        // P0: 배열 범위 체크
+        if (!_enableAttackMovement) return;
+
+        if (_controller == null)
+        {
+            Debug.LogError("CharacterController is null!");
+            return;
+        }
+
+        // 배열 유효성 검증
+        if (comboIndex < 0 || comboIndex >= _attackMoveDistance.Length ||
+            comboIndex >= _attackMoveEase.Length)
+        {
+            Debug.LogError($"Invalid combo index: {comboIndex}. " +
+                          $"Distance array length: {_attackMoveDistance.Length}, " +
+                          $"Ease array length: {_attackMoveEase.Length}");
+            return;
+        }
 
         Vector3 direction = GetMovementDirection();
 
@@ -177,15 +194,16 @@ public class PlayerMove : MonoBehaviour
 
         _attackMoveTween = DOVirtual.Float(0f, _attackMoveDistance[comboIndex], moveDuration, (currentValue) =>
         {
-            if (_controller != null)
-            {
-                float deltaDistance = currentValue - previousValue;
-                Vector3 moveVector = moveDirection * deltaDistance;
+            float deltaDistance = currentValue - previousValue;
+            Vector3 moveVector = moveDirection * deltaDistance;
 
-                _controller.Move(moveVector);
+            // P1: 카메라 경계 내로 이동 제한
+            Vector3 clampedMove = CameraBoundsHelper.ClampMovementToCameraBounds(
+                transform.position, moveVector, _mainCamera, _viewportMargin);
 
-                previousValue = currentValue;
-            }
+            _controller.Move(clampedMove);
+
+            previousValue = currentValue;
         })
         .SetEase(_attackMoveEase[comboIndex])
         .OnComplete(() =>
