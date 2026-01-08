@@ -3,10 +3,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
-    [SerializeField] private float _attackRange = 2f;
     [SerializeField] private float _attackCooldown = 0.1f;
     [SerializeField] private float _attackDuration = 0.5f;
-    [SerializeField] private LayerMask _enemyLayer;
 
     [Header("Combo Settings")]
     [SerializeField] private float _comboResetTime = 0.6f;
@@ -87,10 +85,6 @@ public class PlayerAttack : MonoBehaviour
         _comboResetTimer = _comboResetTime;
 
         _comboIndex++;
-        if (_comboIndex >= _maxComboCount)
-        {
-            _comboIndex = 0;
-        }
     }
 
     private void ResetCombo()

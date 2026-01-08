@@ -4,16 +4,16 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _attackMoveSpeed = 2f;
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _rotationSpeed = 10f;
-
+    [SerializeField] private Camera _mainCamera;
     [Header("Camera Boundary")]
     [SerializeField] private float _viewportMargin = 0.05f;
 
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private CharacterController _controller;
-    private Camera _mainCamera;
     private Vector3 _velocity;
 
     public bool CanMove { get; set; } = true;
@@ -41,7 +41,6 @@ public class PlayerMove : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
-        _mainCamera = Camera.main;
     }
 
     private void Update()

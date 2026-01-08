@@ -22,6 +22,5 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
         _animator.SetInteger("AttackCombo", comboAttackNum);
-        Debug.Log($"AttackCombo set to: {comboAttackNum}");
     }
 }

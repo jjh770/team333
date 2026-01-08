@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public enum PlayerState
@@ -71,11 +72,6 @@ public class PlayerStateManager : MonoBehaviour
 
     public bool IsInStates(params PlayerState[] states)
     {
-        foreach (var state in states)
-        {
-            if (_currentState == state)
-                return true;
-        }
-        return false;
+        return states.Contains(_currentState);
     }
 }
