@@ -3,17 +3,12 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _attackMoveSpeed = 0f;
-    [SerializeField] private float _gravity = -9.81f;
-    [SerializeField] private float _rotationSpeed = 10f;
-    [Header("Camera Boundary")]
-    [SerializeField] private float _viewportMargin = 0.05f;
+    [Header("Data")]
+    [SerializeField] private PlayerMoveData _moveData;
+    [SerializeField] private PlayerAttackData _attackData;
+
     [Header("Attack Movement")]
     [SerializeField] private bool _enableAttackMovement = true;
-    [SerializeField] private float[] _attackMoveDistance;
-    [SerializeField] private Ease[] _attackMoveEase;
 
     private Camera _mainCamera;
     private PlayerAnimatorController _animatorController;
@@ -89,8 +84,8 @@ public class PlayerMove : MonoBehaviour
                 _stateManager.ChangeState(PlayerState.Moving);
             }
 
-            // 공격 중일 때는 이동속도 감소
-            float currentSpeed = _stateManager.IsState(PlayerState.Attacking) ? _attackMoveSpeed : _moveSpeed;
+            // 공격 중일 때는 이동속도 0
+            float currentSpeed = _stateManager.IsState(PlayerState.Attacking) ? 0 : _moveData.MoveSpeed;
             Vector3 move = direction * currentSpeed * Time.deltaTime;
 
             // 이동 전에 다음 위치를 예측하고 경계 내로 조정
@@ -107,7 +102,7 @@ public class PlayerMove : MonoBehaviour
             if (!_stateManager.IsState(PlayerState.Attacking))
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _moveData.RotationSpeed * Time.deltaTime);
             }
         }
         else
@@ -131,7 +126,7 @@ public class PlayerMove : MonoBehaviour
             _velocity.y = -2f;
         }
 
-        _velocity.y += _gravity * Time.deltaTime;
+        _velocity.y += _moveData.Gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
     }
 
@@ -141,7 +136,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private Vector3 ClampMovementToCameraBounds(Vector3 moveVector)
     {
-        return CameraBoundsHelper.ClampMovementToCameraBounds(transform.position, moveVector, _mainCamera, _viewportMargin);
+        return CameraBoundsHelper.ClampMovementToCameraBounds(transform.position, moveVector, _mainCamera, _moveData.ViewportMargin);
     }
 
     /// <summary>
@@ -150,7 +145,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void EnforceCameraBounds()
     {
-        CameraBoundsHelper.ClampPositionToCameraBounds(transform, _controller, _mainCamera, _viewportMargin);
+        CameraBoundsHelper.ClampPositionToCameraBounds(transform, _controller, _mainCamera, _moveData.ViewportMargin);
     }
 
     #region Attack Movement
@@ -171,12 +166,12 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 배열 유효성 검증
-        if (comboIndex < 0 || comboIndex >= _attackMoveDistance.Length ||
-            comboIndex >= _attackMoveEase.Length)
+        if (comboIndex < 0 || comboIndex >= _attackData.AttackMoveDistance.Length ||
+            comboIndex >= _attackData.AttackMoveEase.Length)
         {
             Debug.LogError($"Invalid combo index: {comboIndex}. " +
-                          $"Distance array length: {_attackMoveDistance.Length}, " +
-                          $"Ease array length: {_attackMoveEase.Length}");
+                          $"Distance array length: {_attackData.AttackMoveDistance.Length}, " +
+                          $"Ease array length: {_attackData.AttackMoveEase.Length}");
             return;
         }
 
@@ -192,28 +187,20 @@ public class PlayerMove : MonoBehaviour
         Vector3 moveDirection = transform.forward;
         float previousValue = 0f;
 
-        _attackMoveTween = DOVirtual.Float(0f, _attackMoveDistance[comboIndex], moveDuration, (currentValue) =>
+        _attackMoveTween = DOVirtual.Float(0f, _attackData.AttackMoveDistance[comboIndex], moveDuration, (currentValue) =>
         {
             float deltaDistance = currentValue - previousValue;
             Vector3 moveVector = moveDirection * deltaDistance;
 
             // P1: 카메라 경계 내로 이동 제한
             Vector3 clampedMove = CameraBoundsHelper.ClampMovementToCameraBounds(
-                transform.position, moveVector, _mainCamera, _viewportMargin);
+                transform.position, moveVector, _mainCamera, _moveData.ViewportMargin);
 
             _controller.Move(clampedMove);
 
             previousValue = currentValue;
         })
-        .SetEase(_attackMoveEase[comboIndex])
-        .OnComplete(() =>
-        {
-            // 이동 완료
-        })
-        .OnKill(() =>
-        {
-            // Tween 중단 시 정리
-        });
+        .SetEase(_attackData.AttackMoveEase[comboIndex]);
     }
 
     /// <summary>
