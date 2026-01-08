@@ -9,7 +9,6 @@ public class MonsterDamageComponent : MonoBehaviour, IDamageable
     [SerializeField] private float _damageDuration = 0.09f;
 
     private MonsterStat _monsterStat;
-    protected NavMeshAgent _agent;
     private bool _isDamaged;
     public bool IsDamaged => _isDamaged;
 
@@ -26,7 +25,6 @@ public class MonsterDamageComponent : MonoBehaviour, IDamageable
     private void Awake()
     {
         _monsterStat = GetComponent<MonsterStat>();
-        _agent = GetComponent<NavMeshAgent>();
 
         if (_renderer != null)
         {
@@ -68,7 +66,7 @@ public class MonsterDamageComponent : MonoBehaviour, IDamageable
         return true;
     }
 
-    private void FlashWhite()
+    public void FlashWhite()
     {
         if (_material == null) return;
 

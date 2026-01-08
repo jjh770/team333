@@ -59,4 +59,22 @@ public class MonsterController : MonoBehaviour, IPoolable
         yield return new WaitForSeconds(_deathAnimationDuration);
         OnDie?.Invoke(this);
     }
+
+    //public bool TryTakeDamage(Damage damage)
+    //{
+    //    if (damage.Value <= 0)
+    //        return false;
+
+    //    _monsterStat.DecreaseHealth(damage.Value);
+    //    _monsterDetectComponent.WhiteFlash();
+
+    //    if(_monsterStat.IsDie)
+    //    {
+    //        죽음 코루틴 실행
+    //    }
+
+
+    //    _fsm.Change
+    //    return true;
+    //}
 }

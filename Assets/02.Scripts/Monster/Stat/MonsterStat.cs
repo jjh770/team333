@@ -26,17 +26,14 @@ public class MonsterStat : MonoBehaviour
 
     public event Action OnDeath;
 
-    private void Start()
+    private void OnEnable()
     {
         if (_data == null)
         {
             Debug.LogError($"MonsterData가 {gameObject.name}에 할당되지 않았습니다.", gameObject);
             return;
         }
-    }
 
-    private void OnEnable()
-    {
         Health.Initialize(_data.MaxHealth);
         AttackDamage.Initialize(_data.AttackDamage);
         AttackCooltime.Initialize(_data.AttackCooltime);
