@@ -6,6 +6,9 @@ public class MonsterSpawnTrigger : MonoBehaviour
     [Header("Spawn Group Index")]
     [SerializeField] private int _spawnGroupIndex;
 
+    [Header("MonsterPool")]
+    [SerializeField] private MonsterPool _monsterPool;
+
     private BoxCollider _collider;
     private const string FloraTag = "Flora";
 
@@ -23,7 +26,9 @@ public class MonsterSpawnTrigger : MonoBehaviour
 
     private void SpawnMonsters()
     {
-        MonsterPool.Instance.SpawnGroup(_spawnGroupIndex);
+        if (_monsterPool == null) return;
+
+        _monsterPool.SpawnGroup(_spawnGroupIndex);
         enabled = false;
     }
 

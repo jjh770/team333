@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class MonsterPool : MonoBehaviour
 {
-    public static MonsterPool Instance { get; private set; }
-
     [Header("Monsters")]
     [SerializeField] private GameObject[] _monsterPrefabs;
     [SerializeField] private int _preloadPerPrefab = 30;
@@ -16,21 +14,26 @@ public class MonsterPool : MonoBehaviour
     [Header("Spawn Groups")]
     [SerializeField] private SpawnGroup[] _spawnGroups;
 
+    [Header("Dependencies")]
+    [SerializeField] private MonoBehaviour _poolManagerComponent;
+
+    private IPoolManager _poolManager;
+
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_poolManagerComponent is not IPoolManager manager)
         {
-            Destroy(gameObject);
+            Debug.LogError("할당된 PoolManager 컴포넌트가 IPoolManager를 구현하지 않았습니다.", this);
             return;
         }
-        Instance = this;
+        _poolManager = manager;
     }
 
     private void Start()
     {
         foreach (var prefab in _monsterPrefabs)
         {
-            PoolManager.Instance.Preload(prefab, _preloadPerPrefab);
+            _poolManager.Preload(prefab, _preloadPerPrefab);
         }
     }
 
@@ -53,7 +56,7 @@ public class MonsterPool : MonoBehaviour
             GameObject prefab = GetRandomPrefab();
             if (prefab == null) continue;
 
-            GameObject spawned = PoolManager.Instance.Get(prefab, point.position, point.rotation);
+            GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
 
             if (spawned != null && spawned.TryGetComponent<Monster>(out var monster))
             {
@@ -65,7 +68,7 @@ public class MonsterPool : MonoBehaviour
     private void HandleMonsterDie(Monster monster)
     {
         monster.OnDie -= HandleMonsterDie;
-        PoolManager.Instance.Return(monster.gameObject);
+        _poolManager.Return(monster.gameObject);
     }
 
     private GameObject GetRandomPrefab()
