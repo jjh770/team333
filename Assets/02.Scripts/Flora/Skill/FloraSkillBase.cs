@@ -8,7 +8,7 @@ public abstract class FloraSkillBase : MonoBehaviour
     [SerializeField] private float _radius = 5f;
 
     private SphereCollider _triggerCollider;
-    protected readonly HashSet<Monster> MonstersInRange =  new ();
+    protected readonly HashSet<MonsterController> MonstersInRange =  new ();
 
     public float Radius => _radius;
 
@@ -21,16 +21,17 @@ public abstract class FloraSkillBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent<Monster>(out var monster)) return;
+        if (!other.TryGetComponent<MonsterController>(out var monster)) return;
+        
         if (MonstersInRange.Contains(monster)) return;
-
+        
         MonstersInRange.Add(monster);
         OnMonsterEnter(monster);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent<Monster>(out var monster)) return;
+        if (!other.TryGetComponent<MonsterController>(out var monster)) return;
         if (!MonstersInRange.Contains(monster)) return;
 
         MonstersInRange.Remove(monster);
@@ -47,8 +48,8 @@ public abstract class FloraSkillBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected abstract void OnMonsterEnter(Monster monster);
-    protected abstract void OnMonsterExit(Monster monster);
+    protected abstract void OnMonsterEnter(MonsterController monster);
+    protected abstract void OnMonsterExit(MonsterController monster);
 
     protected virtual void OnValidate()
     {

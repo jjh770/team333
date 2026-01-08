@@ -21,6 +21,11 @@ public class FloraInteraction : MonoBehaviour
         _skillController = GetComponent<FloraSkillController>();
     }
 
+    public void AddWood(int woodAmount)
+    {
+        _inventory.AddWood(woodAmount);
+    }
+
     public bool TryFeedWood()
     {
         if (_gaugeController.IsFull)
