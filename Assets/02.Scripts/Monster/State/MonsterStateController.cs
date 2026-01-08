@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(MonsterAttackComponent))]
-[RequireComponent(typeof(MonsterDamageComponent))]
+[RequireComponent(typeof(MonsterController))]
 public class MonsterStateController : MonoBehaviour
 {
     private Animator _animator;
@@ -11,7 +11,7 @@ public class MonsterStateController : MonoBehaviour
 
     private MonsterAttackComponent _attackComponent;
     private MonsterMoveComponent _moveComponent;
-    private MonsterDamageComponent _damageComponent;
+    private MonsterController _controller;
 
     public MonsterState CurrentState => _currentState;
 
@@ -22,7 +22,7 @@ public class MonsterStateController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _moveComponent = GetComponent<MonsterMoveComponent>();
         _attackComponent = GetComponent<MonsterAttackComponent>();
-        _damageComponent = GetComponent<MonsterDamageComponent>();
+        _controller = GetComponent<MonsterController>();
     }
 
     private void Update()
@@ -33,6 +33,11 @@ public class MonsterStateController : MonoBehaviour
     private void DetermineCurrentState()
     {
         // 1순위: 사망
+        if (_controller.IsDead)
+        {
+            ChangeState(MonsterState.Die);
+            return;
+        }
         // 2순위: 타격
         // 3순위: 공격
         if (_attackComponent.IsAttacking)

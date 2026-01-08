@@ -1,15 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
-using System;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(MonsterStat))]
-public class Monster : MonoBehaviour, IPoolable
+public class MonsterController : MonoBehaviour, IPoolable
 {
+    [SerializeField] private float _deathAnimationDuration = 0.19f;
+
     private NavMeshAgent _agent;
     private MonsterStat _stat;
 
-    public event Action<Monster> OnDie;
+    public event Action<MonsterController> OnDie;
+
+    private bool _isDead;
+    public bool IsDead => _isDead;
 
     private void Awake()
     {
@@ -19,6 +25,7 @@ public class Monster : MonoBehaviour, IPoolable
 
     private void OnEnable()
     {
+        _isDead = false;
         _stat.OnDeath += Die;
     }
 
@@ -39,6 +46,16 @@ public class Monster : MonoBehaviour, IPoolable
 
     public void Die()
     {
+        if (_isDead) return;
+
+        _isDead = true;
+        _agent.isStopped = true;
+        StartCoroutine(DeathCoroutine());
+    }
+
+    private IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(_deathAnimationDuration);
         OnDie?.Invoke(this);
     }
 }
