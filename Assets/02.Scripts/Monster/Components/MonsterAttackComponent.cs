@@ -7,6 +7,7 @@ using UnityEngine;
 public class MonsterAttackComponent : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 2.5f;
+    [SerializeField] private float _attackDuration = 0.14f;
 
     private MonsterMoveComponent _moveComponent;
     private MonsterStat _stat;
@@ -41,7 +42,7 @@ public class MonsterAttackComponent : MonoBehaviour
 
         if (sqrDistanceToPlayer <= _attackDistance * _attackDistance)
         {
-            float attackCooldown = _stat.AttackCooltime.Value;
+            float attackCooldown = _stat.GetAttackCooltime();
             if (Time.time >= _lastAttackTime + attackCooldown)
             {
                 Attack();
@@ -61,7 +62,7 @@ public class MonsterAttackComponent : MonoBehaviour
 
     private IEnumerator AttackCoroutine()
     {
-        yield return new WaitForSeconds(_stat.AttackDuration.Value);
+        yield return new WaitForSeconds(_attackDuration);
         _isAttacking = false;
     }
 }
