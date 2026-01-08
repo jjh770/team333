@@ -21,7 +21,6 @@ public abstract class FloraSkillBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"OnTriggerEnter {other.gameObject.name}");
         if (!other.TryGetComponent<Monster>(out var monster)) return;
         if (MonstersInRange.Contains(monster)) return;
 
@@ -36,6 +35,16 @@ public abstract class FloraSkillBase : MonoBehaviour
 
         MonstersInRange.Remove(monster);
         OnMonsterExit(monster);
+    }
+
+    public void ResetLocalPosition()
+    {
+        transform.localPosition = Vector3.zero;
+    }
+
+    public void DestroySkill()
+    {
+        Destroy(gameObject);
     }
 
     protected abstract void OnMonsterEnter(Monster monster);

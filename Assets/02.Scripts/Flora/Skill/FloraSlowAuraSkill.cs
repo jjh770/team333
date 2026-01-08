@@ -9,14 +9,12 @@ public class FloraSlowAuraSkill : FloraSkillBase
     protected override void OnMonsterEnter(Monster monster)
     {
         if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
-        Debug.Log("Entered Slow Skill");
         stat.ModifyMoveSpeed(-_slowAmount);
     }
 
     protected override void OnMonsterExit(Monster monster)
     {
         if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
-        Debug.Log("Exited Slow Skill");
         stat.ModifyMoveSpeed(_slowAmount);
     }
 

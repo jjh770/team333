@@ -10,13 +10,15 @@ public class FloraInteraction : MonoBehaviour
 
     private FloraInventory _inventory;
     private FloraSpeedGaugeController _gaugeController;
-    private FloraMovement _floraMovement;
+    private FloraMovement _movement;
+    private FloraSkillController _skillController;
 
     private void Awake()
     {
         _inventory = GetComponent<FloraInventory>();
         _gaugeController = GetComponent<FloraSpeedGaugeController>();
-        _floraMovement = GetComponent<FloraMovement>();
+        _movement = GetComponent<FloraMovement>();
+        _skillController = GetComponent<FloraSkillController>();
     }
 
     public bool TryFeedWood()
@@ -37,6 +39,11 @@ public class FloraInteraction : MonoBehaviour
 
     public bool TryResume()
     {
-        return _floraMovement.Resume();
+        return _movement.Resume();
+    }
+
+    public void SetSkill(FloraSkillBase skill)
+    {
+        _skillController.SetSkill(skill);
     }
 }

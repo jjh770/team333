@@ -28,7 +28,7 @@ public class FloraSkillController : MonoBehaviour
         if (skillPrefab == null) return;
 
         _currentSkill = Instantiate(skillPrefab, _skillHolder);
-        _currentSkill.transform.localPosition = Vector3.zero;
+        _currentSkill.ResetLocalPosition();
 
 
         OnSkillChanged?.Invoke(_currentSkill);
@@ -37,8 +37,8 @@ public class FloraSkillController : MonoBehaviour
     public void ClearSkill()
     {
         if (_currentSkill == null) return;
-
-        Destroy(_currentSkill.gameObject);
+        
+        _currentSkill.DestroySkill();
         _currentSkill = null;
 
         OnSkillChanged?.Invoke(null);

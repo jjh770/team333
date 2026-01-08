@@ -11,9 +11,9 @@ public class FloraSkillChanger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag(FloraTag)) return;
-        if (!other.TryGetComponent<FloraSkillController>(out var skillController)) return;
+        if (!other.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
-        skillController.SetSkill(_skillPrefab);
+        interaction.SetSkill(_skillPrefab);
 
         Destroy(gameObject);
     }
