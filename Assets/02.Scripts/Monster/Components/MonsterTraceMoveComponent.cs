@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
-public class TraceMoveComponent : MoveComponent
+public class MonsterTraceMoveComponent : MonsterMoveComponent
 {
     [Header("Movement")]
     [SerializeField] private float _updateInterval = 0.2f;
-    [SerializeField] private float _stoppingDistance = 2f;
 
     private MonsterStat _stat;
     private float _updateTimer;
+
+    public bool IsMoving { get; private set; }
 
     protected override void Awake()
     {
@@ -19,7 +20,7 @@ public class TraceMoveComponent : MoveComponent
     protected override void Start()
     {
         base.Start();
-        _agent.stoppingDistance = _stoppingDistance;
+        _agent.stoppingDistance = _stat.AttackDistance.Value;
     }
 
     private void OnEnable()
@@ -37,10 +38,22 @@ public class TraceMoveComponent : MoveComponent
         _agent.speed = value;
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
+        UpdateMoveState();
         UpdateTraceTarget();
+    }
+
+    private void UpdateMoveState()
+    {
+        bool isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
+
+        if (IsMoving != isMoving)
+        {
+            IsMoving = isMoving;
+            var state = IsMoving ? MonsterState.Move : MonsterState.Idle;
+            _monsterController.ChangeState(state);
+        }
     }
 
     private void UpdateTraceTarget()

@@ -7,6 +7,8 @@ public class MonsterStat : MonoBehaviour
 
     public ConsumableStat Health { get; private set; } = new();
     public ValueStat AttackDamage { get; private set; } = new();
+    public ValueStat AttackCooltime { get; private set; } = new();
+    public ValueStat AttackDistance { get; private set; } = new();
     public ValueStat MoveSpeed { get; private set; } = new();
 
     public event Action<float, float> OnHealthChanged

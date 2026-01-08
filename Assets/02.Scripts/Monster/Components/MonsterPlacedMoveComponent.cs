@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlacedMoveComponent : MoveComponent
+public class MonsterPlacedMoveComponent : MonsterMoveComponent
 {
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
@@ -17,9 +17,8 @@ public class PlacedMoveComponent : MoveComponent
         _agent.updatePosition = false;
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
         TryLookAtPlayer();
     }
 
