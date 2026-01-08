@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class FloraSkillChanger : ItemBase
 {
     [Header("Skill Settings")]

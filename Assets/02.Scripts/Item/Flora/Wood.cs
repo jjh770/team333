@@ -1,7 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class Wood : ItemBase
 {
     [Header("Settings")]
