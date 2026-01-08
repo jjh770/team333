@@ -62,6 +62,11 @@ public class FloraSpeedUpController : MonoBehaviour
         _gauge.Set(value);
     }
 
+    public void DrainGauge(float amount)
+    {
+        _gauge.DrainGauge(amount);
+    }
+
     private void OnGaugeValueChanged(float current, float max)
     {
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
