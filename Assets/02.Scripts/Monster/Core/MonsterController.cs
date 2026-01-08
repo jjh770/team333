@@ -50,6 +50,7 @@ public class MonsterController : MonoBehaviour, IPoolable
 
         _isDead = true;
         _agent.isStopped = true;
+
         StartCoroutine(DeathCoroutine());
     }
 

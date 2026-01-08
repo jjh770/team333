@@ -411,7 +411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5095352625020930891
 Transform:
   m_ObjectHideFlags: 0
@@ -543,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+  _deathAnimationDuration: 1
 --- !u!114 &4482467526755238119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
+  _damageDuration: 0.09
+  _nockbackDuration: 1
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0
