@@ -16,11 +16,16 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     {
         TryLookAtTarget();
         _isMoving = false;
+        Debug.Log("UpdateMove");
     }
 
     private void TryLookAtTarget()
     {
-        if (_target == null) return;
+        if (_target == null)
+        {
+            Debug.Log("_target == null");
+            return;
+        }
 
         float sqrDistance = (_target.position - transform.position).sqrMagnitude;
 

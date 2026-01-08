@@ -5,10 +5,7 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(MonsterStat))]
 [RequireComponent(typeof(MonsterMoveComponent))]
-[RequireComponent(typeof(MonsterAttackComponent))]
-[RequireComponent(typeof(MonsterDamageComponent))]
 public class MonsterController : MonoBehaviour, IPoolable, IDamageable
 {
     [Header("Death")]
@@ -19,8 +16,9 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
 
     private Animator _animator;
     private NavMeshAgent _agent;
-    private MonsterStat _stat;
     private MonsterMoveComponent _move;
+
+    private MonsterStat _stat;
     private MonsterAttackComponent _attack;
     private MonsterDamageComponent _damage;
 
@@ -32,7 +30,7 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
 
     public bool IsDead => _isDead;
     public bool IsDamaged => _isDamaged;
-    public bool IsAttacking => _attack.IsAttacking;
+    public bool IsAttacking => _attack != null && _attack.IsAttacking;
     public bool IsMoving => _move.IsMoving;
 
     public event Action<MonsterController> OnDie;
@@ -46,8 +44,9 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
     {
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        _stat = GetComponent<MonsterStat>();
         _move = GetComponent<MonsterMoveComponent>();
+
+        _stat = GetComponent<MonsterStat>();
         _attack = GetComponent<MonsterAttackComponent>();
         _damage = GetComponent<MonsterDamageComponent>();
     }
@@ -62,12 +61,11 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
     private void FindTarget()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            Transform player = playerObject.transform;
-            _move.SetTarget(player);
-            _attack.SetTarget(player);
-        }
+        if (playerObject == null) return;
+
+        Transform player = playerObject.transform;
+        _move.SetTarget(player);
+        _attack?.SetTarget(player);
     }
 
     public void OnDespawn()
@@ -105,13 +103,20 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         {
             _move.UpdateMove();
 
-            if (_attack.TryAttack())
+            if (_attack != null && _attack.TryAttack())
             {
                 _move.LookAtTargetImmediate();
             }
         }
 
         UpdateState();
+
+        // 테스트용 코드
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            var testDamage = new Damage(10f, null);
+            bool ok = TryTakeDamage(testDamage);
+        }
     }
 
     private void UpdateState()
@@ -143,6 +148,7 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
     {
         if (damage.Value <= 0) return false;
         if (_isDead) return false;
+        if (_stat == null) return false;
 
         _stat.Health.Decrease(damage.Value);
         _damage.FlashWhite();
@@ -188,6 +194,6 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         OnDie?.Invoke(this);
     }
 
-    public void SetMoveSpeed(float value) => _stat.SetMoveSpeed(value);
-    public void ChangeMoveSpeed(float amount) => _stat.ChangeMoveSpeed(amount);
+    public void SetMoveSpeed(float value) => _stat?.SetMoveSpeed(value);
+    public void ChangeMoveSpeed(float amount) => _stat?.ChangeMoveSpeed(amount);
 }
