@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerDash))]
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerStateManager))]
+[RequireComponent(typeof(PlayerRotateToMouse))]
 
 public class Player : MonoBehaviour
 {

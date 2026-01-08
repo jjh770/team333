@@ -7,16 +7,27 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _attackMoveSpeed = 2f;
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _rotationSpeed = 10f;
-    [SerializeField] private Camera _mainCamera;
     [Header("Camera Boundary")]
     [SerializeField] private float _viewportMargin = 0.05f;
 
+    private Camera _mainCamera;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private CharacterController _controller;
     private Vector3 _velocity;
 
     public bool CanMove { get; set; } = true;
+    private void Awake()
+    {
+        if (_mainCamera == null)
+        {
+            _mainCamera = Camera.main;
+        }
+
+        _controller = GetComponent<CharacterController>();
+        _animatorController = GetComponent<PlayerAnimatorController>();
+        _stateManager = GetComponent<PlayerStateManager>();
+    }
 
     public Vector3 GetMovementDirection()
     {
@@ -36,12 +47,6 @@ public class PlayerMove : MonoBehaviour
         return direction;
     }
 
-    private void Awake()
-    {
-        _controller = GetComponent<CharacterController>();
-        _animatorController = GetComponent<PlayerAnimatorController>();
-        _stateManager = GetComponent<PlayerStateManager>();
-    }
 
     private void Update()
     {
