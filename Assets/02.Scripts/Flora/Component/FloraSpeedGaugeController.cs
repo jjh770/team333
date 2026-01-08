@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(FloraStats))]
-public class FloraSpeedUpController : MonoBehaviour
+public class FloraSpeedGaugeController : MonoBehaviour
 {
     [Serializable]
     public struct SpeedTier
@@ -60,6 +60,11 @@ public class FloraSpeedUpController : MonoBehaviour
     public void SetGauge(float value)
     {
         _gauge.Set(value);
+    }
+
+    public void DrainGauge(float amount)
+    {
+        _gauge.DrainGauge(amount);
     }
 
     private void OnGaugeValueChanged(float current, float max)

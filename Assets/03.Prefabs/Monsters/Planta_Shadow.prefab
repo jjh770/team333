@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 4762377517291527843}
   - component: {fileID: 2504741413279115568}
   - component: {fileID: 590382309419593974}
+  - component: {fileID: 3543699426634746670}
   m_Layer: 0
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -527,6 +528,18 @@ MonoBehaviour:
   _gaugeImage: {fileID: 4610090846043402856}
   _duration: 0.3
   _ease: 6
+--- !u!114 &3543699426634746670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Monster
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

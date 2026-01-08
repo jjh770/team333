@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4932798704078032628}
   - component: {fileID: 8368052510557095813}
   - component: {fileID: 5231732310342022929}
+  - component: {fileID: 7678525517629694115}
   m_Layer: 0
   m_Name: Flora
   m_TagString: Untagged
@@ -220,6 +221,18 @@ MonoBehaviour:
     Multiplier: 1.4
   - TierLevel: 0.8
     Multiplier: 1.8
+--- !u!114 &7678525517629694115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4911d5d619db1ca4faf5ca42d3603bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraDamageReceiver
 --- !u!1001 &7789057980649354464
 PrefabInstance:
   m_ObjectHideFlags: 0
