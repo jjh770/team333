@@ -52,9 +52,13 @@ public class FloraSpeedGaugeController : MonoBehaviour
         _gauge.Drain(Time.deltaTime);
     }
 
-    public void AddGauge(float amount)
+    public bool IsFull => _gauge.IsFull; 
+    public bool TryAddGauge(float amount)
     {
+        if (_gauge.IsFull) return false;
+
         _gauge.AddGauge(amount);
+        return true;
     }
 
     public void SetGauge(float value)
