@@ -1,29 +1,30 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class MonsterPlacedMoveComponent : MonsterMoveComponent
 {
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _agent.isStopped = true;
         _agent.updatePosition = false;
     }
 
-    private void Update()
+    public override void UpdateMove()
     {
-        TryLookAtPlayer();
+        TryLookAtTarget();
+        _isMoving = false;
     }
 
-    private void TryLookAtPlayer()
+    private void TryLookAtTarget()
     {
-        if (_player == null) return;
+        if (_target == null) return;
 
-        float sqrDistanceToPlayer = (_player.position - transform.position).sqrMagnitude;
+        float sqrDistance = (_target.position - transform.position).sqrMagnitude;
 
-        if (sqrDistanceToPlayer <= _detectionRange * _detectionRange)
+        if (sqrDistance <= _detectionRange * _detectionRange)
         {
             LookAtTarget();
         }

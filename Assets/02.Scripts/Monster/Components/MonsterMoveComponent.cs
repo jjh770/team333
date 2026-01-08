@@ -1,4 +1,3 @@
-﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +11,7 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     private const float MinLookDirectionSqrMagnitude = 1e-6f;
 
     protected NavMeshAgent _agent;
-    protected Transform _player;
+    protected Transform _target;
 
     protected bool _isMoving;
     public bool IsMoving => _isMoving;
@@ -22,23 +21,23 @@ public abstract class MonsterMoveComponent : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    protected virtual void Start()
+    public void SetTarget(Transform target)
     {
-        FindTarget();
+        _target = target;
     }
 
-    protected void FindTarget()
+    public abstract void UpdateMove();
+
+    protected void UpdateMoveState()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            _player = playerObject.transform;
-        }
+        _isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
     }
 
     protected void LookAtTarget()
     {
-        Vector3 direction = _player.position - transform.position;
+        if (_target == null) return;
+
+        Vector3 direction = _target.position - transform.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
@@ -50,9 +49,9 @@ public abstract class MonsterMoveComponent : MonoBehaviour
 
     public void LookAtTargetImmediate()
     {
-        if (_player == null) return;
+        if (_target == null) return;
 
-        Vector3 direction = _player.position - transform.position;
+        Vector3 direction = _target.position - transform.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
