@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 using System;
 
+[RequireComponent (typeof(NavMeshAgent))]
 public class Monster : MonoBehaviour, IPoolable
 {
     private NavMeshAgent _agent;
@@ -15,13 +16,11 @@ public class Monster : MonoBehaviour, IPoolable
 
     public void OnSpawn()
     {
-        if (_agent == null) return;
         _agent.enabled = true;
     }
 
     public void OnDespawn()
     {
-        if (_agent == null) return;
         _agent.enabled = false;
     }
 

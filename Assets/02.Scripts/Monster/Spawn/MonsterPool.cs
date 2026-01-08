@@ -15,13 +15,18 @@ public class MonsterPool : MonoBehaviour
     [SerializeField] private SpawnGroup[] _spawnGroups;
 
     [Header("Dependencies")]
-    [SerializeField] private PoolManager _poolManagerComponent;
+    [SerializeField] private MonoBehaviour _poolManagerComponent;
 
     private IPoolManager _poolManager;
 
     private void Awake()
     {
-        _poolManager = _poolManagerComponent;
+        if (_poolManagerComponent is not IPoolManager manager)
+        {
+            Debug.LogError("할당된 PoolManager 컴포넌트가 IPoolManager를 구현하지 않았습니다.", this);
+            return;
+        }
+        _poolManager = manager;
     }
 
     private void Start()
