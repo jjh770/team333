@@ -16,3 +16,5 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <AttackDamage>k__BackingField: 10
   <MoveSpeed>k__BackingField: 4
+  <Type>k__BackingField: 0
+  <prefab>k__BackingField: {fileID: 6060493489403216405, guid: f29645466055aac4d911e5a12516983d, type: 3}
