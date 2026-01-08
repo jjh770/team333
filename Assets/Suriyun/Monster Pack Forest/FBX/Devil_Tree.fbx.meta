@@ -1,29 +1,72 @@
 fileFormatVersion: 2
 guid: 3426e6e4e6c49c24ebf093a97ccab00c
+AssetOrigin:
+  serializedVersion: 1
+  productId: 167364
+  packageName: Monsters Forest Pack
+  packageVersion: 3.2
+  assetPath: Assets/Suriyun/Monster Pack Forest/FBX/Devil_Tree.fbx
+  uploadId: 834642
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: body
-    100002: //RootNode
-    100004: Devil_Tree
-    100006: head
-    100008: mouth_top
-    100010: mouth_under
-    100012: Root
-    400000: body
-    400002: //RootNode
-    400004: Devil_Tree
-    400006: head
-    400008: mouth_top
-    400010: mouth_under
-    400012: Root
-    2100000: M_Devil_Tree_01
-    4300000: Devil_Tree
-    9500000: //RootNode
-    13700000: Devil_Tree
+  serializedVersion: 24200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: body
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: Devil_Tree
+  - first:
+      1: 100006
+    second: head
+  - first:
+      1: 100008
+    second: mouth_top
+  - first:
+      1: 100010
+    second: mouth_under
+  - first:
+      1: 100012
+    second: Root
+  - first:
+      4: 400000
+    second: body
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: Devil_Tree
+  - first:
+      4: 400006
+    second: head
+  - first:
+      4: 400008
+    second: mouth_top
+  - first:
+      4: 400010
+    second: mouth_under
+  - first:
+      4: 400012
+    second: Root
+  - first:
+      21: 2100000
+    second: M_Devil_Tree_01
+  - first:
+      43: 4300000
+    second: Devil_Tree
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Devil_Tree
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 2
     materialLocation: 0
@@ -32,9 +75,8 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -52,29 +94,43 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -83,10 +139,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -96,21 +152,20 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.005
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 167364
-  packageName: Monsters Forest Pack
-  packageVersion: 3.2
-  assetPath: Assets/Suriyun/Monster Pack Forest/FBX/Devil_Tree.fbx
-  uploadId: 834642
