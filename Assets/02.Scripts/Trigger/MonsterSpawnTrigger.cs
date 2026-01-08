@@ -1,0 +1,46 @@
+using UnityEngine;
+
+public class MonsterSpawnTrigger : MonoBehaviour
+{
+    [Header("Spawn Group Index")]
+    [SerializeField] private int _spawnGroupName;
+    
+    [Header("MonsterPool")]
+    [SerializeField] private MonsterPool _monsterPool;
+    
+    private BoxCollider _collider;
+    private const string FloraTag = "Flora";
+    private void Awake()
+    {
+        _collider = GetComponent<BoxCollider>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(FloraTag)) return;
+        
+        SpawnMonsters();
+    }
+
+    private void SpawnMonsters()
+    {
+        if(_monsterPool == null) return;
+        
+        _monsterPool.SpawnGroup(_spawnGroupName);
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        BoxCollider box = _collider != null ? _collider : GetComponent<BoxCollider>();
+        if (box == null) return;
+
+        Gizmos.color = new Color(1f, 0.5f, 0f, 0.3f);
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawCube(box.center, box.size);
+
+        Gizmos.color = new Color(1f, 0.5f, 0f, 1f);
+        Gizmos.DrawWireCube(box.center, box.size);
+    }
+#endif
+}

@@ -37,16 +37,11 @@ public class MonsterPool : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void SpawnGroup(int groupName)
     {
-        // 테스트용 입력
-        for (int i = 0; i < _spawnGroups.Length && i < 9; i++)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
-                SpawnRandomInGroup(_spawnGroups[i]);
-            }
-        }
+        if (groupName < 0 || groupName > _spawnGroups.Length) return;
+        
+        SpawnRandomInGroup(_spawnGroups[groupName - 1]);
     }
 
     private void SpawnRandomInGroup(SpawnGroup group)
