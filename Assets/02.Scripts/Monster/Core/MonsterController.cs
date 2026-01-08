@@ -104,7 +104,11 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         if (!_isDead)
         {
             _move.UpdateMove();
-            _attack.TryAttack();
+
+            if (_attack.TryAttack())
+            {
+                _move.LookAtTargetImmediate();
+            }
         }
 
         UpdateState();

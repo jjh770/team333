@@ -29,7 +29,6 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
     {
         if (_target == null) return;
 
-        Debug.Log("UpdateTraceTarget");
         _updateTimer -= Time.deltaTime;
         if (_updateTimer <= 0f)
         {

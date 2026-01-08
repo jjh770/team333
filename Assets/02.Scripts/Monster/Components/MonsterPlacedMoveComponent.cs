@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonsterPlacedMoveComponent : MonsterMoveComponent
 {
@@ -26,6 +26,7 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
 
         if (sqrDistance <= _detectionRange * _detectionRange)
         {
+            Debug.Log("TryLookAtTarget");
             LookAtTarget();
         }
     }

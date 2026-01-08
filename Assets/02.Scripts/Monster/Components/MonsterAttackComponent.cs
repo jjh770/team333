@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,8 +15,6 @@ public class MonsterAttackComponent : MonoBehaviour
     private bool _isAttacking;
     public bool IsAttacking => _isAttacking;
 
-    public event Action OnAttackStart;
-
     private void Awake()
     {
         _stat = GetComponent<MonsterStat>();
@@ -27,28 +25,24 @@ public class MonsterAttackComponent : MonoBehaviour
         _target = target;
     }
 
-    public void TryAttack()
+    public bool TryAttack()
     {
-        if (_isAttacking || _target == null) return;
+        if (_isAttacking || _target == null) return false;
 
         float sqrDistance = (_target.position - transform.position).sqrMagnitude;
+        if (sqrDistance > _attackDistance * _attackDistance) return false;
 
-        if (sqrDistance <= _attackDistance * _attackDistance)
-        {
-            float attackCooldown = _stat.GetAttackCooltime();
-            if (Time.time >= _lastAttackTime + attackCooldown)
-            {
-                Attack();
-            }
-        }
+        float attackCooldown = _stat.GetAttackCooltime();
+        if (Time.time < _lastAttackTime + attackCooldown) return false;
+
+        Attack();
+        return true;
     }
 
     private void Attack()
     {
         _isAttacking = true;
         _lastAttackTime = Time.time;
-
-        OnAttackStart?.Invoke();
 
         // Todo: 플레이어에게 데미지 입히기
 
