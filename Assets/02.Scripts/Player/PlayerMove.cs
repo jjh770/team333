@@ -1,22 +1,29 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _attackMoveSpeed = 2f;
+    [SerializeField] private float _attackMoveSpeed = 0f;
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _rotationSpeed = 10f;
     [Header("Camera Boundary")]
     [SerializeField] private float _viewportMargin = 0.05f;
+    [Header("Attack Movement")]
+    [SerializeField] private bool _enableAttackMovement = true;
+    [SerializeField] private float[] _attackMoveDistance;
+    [SerializeField] private Ease[] _attackMoveEase;
 
     private Camera _mainCamera;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private CharacterController _controller;
     private Vector3 _velocity;
+    private Tweener _attackMoveTween;
 
     public bool CanMove { get; set; } = true;
+
     private void Awake()
     {
         if (_mainCamera == null)
@@ -27,6 +34,11 @@ public class PlayerMove : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
+    }
+
+    private void OnDestroy()
+    {
+        _attackMoveTween?.Kill();
     }
 
     public Vector3 GetMovementDirection()
@@ -46,7 +58,6 @@ public class PlayerMove : MonoBehaviour
         Vector3 direction = (cameraForward * vertical + cameraRight * horizontal).normalized;
         return direction;
     }
-
 
     private void Update()
     {
@@ -101,7 +112,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            if (_stateManager.IsState(PlayerState.Moving))
+            if (_stateManager.IsInStates(PlayerState.Moving, PlayerState.Dashing))
             {
                 _stateManager.ChangeState(PlayerState.Idle);
             }
@@ -141,4 +152,62 @@ public class PlayerMove : MonoBehaviour
     {
         CameraBoundsHelper.ClampPositionToCameraBounds(transform, _controller, _mainCamera, _viewportMargin);
     }
+
+    #region Attack Movement
+
+    /// <summary>
+    /// 공격 시 전방으로 돌진 이동 시작
+    /// PlayerAttack에서 호출됨
+    /// </summary>
+    public void StartAttackMovement(int comboIndex)
+    {
+        if (!_enableAttackMovement || comboIndex > 3 || comboIndex < 0) return;
+
+        Vector3 direction = GetMovementDirection();
+
+        if (direction.magnitude < 0.1f) return;
+
+        _attackMoveTween?.Kill();
+
+        // 애니메이션 길이를 이동 시간으로 사용
+        float moveDuration = _animatorController.GetCurrentAttackAnimationDuration();
+
+        Vector3 moveDirection = transform.forward;
+        float previousValue = 0f;
+
+        _attackMoveTween = DOVirtual.Float(0f, _attackMoveDistance[comboIndex], moveDuration, (currentValue) =>
+        {
+            if (_controller != null)
+            {
+                float deltaDistance = currentValue - previousValue;
+                Vector3 moveVector = moveDirection * deltaDistance;
+
+                _controller.Move(moveVector);
+
+                previousValue = currentValue;
+            }
+        })
+        .SetEase(_attackMoveEase[comboIndex])
+        .OnComplete(() =>
+        {
+            // 이동 완료
+        })
+        .OnKill(() =>
+        {
+            // Tween 중단 시 정리
+        });
+    }
+
+    /// <summary>
+    /// 공격 이동 중단
+    /// PlayerAttack에서 호출됨
+    /// </summary>
+    public void StopAttackMovement()
+    {
+        if (_attackMoveTween != null && _attackMoveTween.IsActive())
+        {
+            _attackMoveTween.Kill();
+        }
+    }
+    #endregion
 }

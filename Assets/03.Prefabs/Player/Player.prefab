@@ -6642,11 +6642,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   _moveSpeed: 4
-  _attackMoveSpeed: 1
+  _attackMoveSpeed: 0
   _gravity: -9.81
   _rotationSpeed: 30
-  _mainCamera: {fileID: 0}
   _viewportMargin: 0.05
+  _enableAttackMovement: 1
+  _attackMoveDistance: 1.5
+  _attackMoveEase: 6
 --- !u!114 &2380892331586880646
 MonoBehaviour:
   m_ObjectHideFlags: 0

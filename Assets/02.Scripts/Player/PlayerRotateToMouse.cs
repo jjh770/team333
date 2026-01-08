@@ -14,9 +14,6 @@ public class PlayerRotateToMouse : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Plane 방식으로 마우스 방향 회전
-    /// </summary>
     public void RotateTowardsMouse()
     {
         Plane groundPlane = new Plane(Vector3.up, transform.position);
