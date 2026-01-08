@@ -23,6 +23,19 @@ public class MonsterStat : MonoBehaviour
         remove => MoveSpeed.OnValueChanged -= value;
     }
 
+    public void SetMoveSpeed(float value)
+    {
+        MoveSpeed.SetValue(value);
+    }
+
+    public void ModifyMoveSpeed(float amount)
+    {
+        if (amount >= 0)
+            MoveSpeed.Increase(amount);
+        else
+            MoveSpeed.Decrease(-amount);
+    }
+
     private void Start()
     {
         if (_data == null)
