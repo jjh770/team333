@@ -8409,38 +8409,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31695ec91881c594ea4a93e4c7717d56, type: 3}
---- !u!1 &215770139 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2488718046737351127, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+--- !u!114 &215770150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4861701462829498376, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
   m_PrefabInstance: {fileID: 6667338798674275833}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &215770149
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429840adbec40d04ea8457e984d5f7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraInteraction
+--- !u!114 &215770151 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5208897952055008175, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+  m_PrefabInstance: {fileID: 6667338798674275833}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215770139}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bd43427cef92f4e9ba6ae00d379fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraInventory
+--- !u!114 &215770153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5231732310342022929, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+  m_PrefabInstance: {fileID: 6667338798674275833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c788ff8c8c4a64d96b6ad5a345c8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraSpeedUpController
 --- !u!4 &218146850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8826354705480527198, guid: 11a8891e8a0172a42859fb2c9cb4aae8, type: 3}
@@ -22374,6 +22375,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 157542235833823428, guid: 3efef0c3914bf95429aeb0141ca3a994, type: 3}
   m_PrefabInstance: {fileID: 591607217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &594081113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594081115}
+  - component: {fileID: 594081114}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &594081114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594081113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d16554efa2a6645a1b18fc3b91ca4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraInteractionTest
+  _inventory: {fileID: 215770151}
+  _interaction: {fileID: 215770150}
+  _gaugeController: {fileID: 215770153}
+  _addWoodAmount: 1
+--- !u!4 &594081115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594081113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 155.10988, y: 0.3333, z: 12.4968}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &594866876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72278,10 +72327,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2488718046737351127, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 215770149}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
 --- !u!1001 &6839537778046267144
 PrefabInstance:
@@ -72363,3 +72409,4 @@ SceneRoots:
   - {fileID: 5275607149341228047}
   - {fileID: 594866876}
   - {fileID: 1481524015}
+  - {fileID: 594081115}
