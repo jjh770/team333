@@ -48,4 +48,17 @@ public abstract class MonsterMoveComponent : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
     }
+
+    public void LookAtTargetImmediate()
+    {
+        if (_player == null) return;
+
+        Vector3 direction = _player.position - transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+    }
 }

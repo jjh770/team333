@@ -2,24 +2,28 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
+[RequireComponent(typeof(MonsterMoveComponent))]
 public class MonsterAttackComponent : MonoBehaviour
 {
-    protected IAnimationStateChanger _monsterController;
-
-    private const float MinLookDirectionSqrMagnitude = 1e-6f;
-
-    protected GameObject _player;
+    private IAnimationStateChanger _monsterController;
+    private MonsterMoveComponent _moveComponent;
     private MonsterStat _stat;
 
+    private Transform _player;
     private float _lastAttackTime;
     private bool _isAttacking;
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-
         _monsterController = GetComponent<IAnimationStateChanger>();
+        _moveComponent = GetComponent<MonsterMoveComponent>();
         _stat = GetComponent<MonsterStat>();
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            _player = playerObject.transform;
+        }
     }
 
     private void Update()
@@ -29,9 +33,9 @@ public class MonsterAttackComponent : MonoBehaviour
 
     private void TryAttack()
     {
-        if (_isAttacking) return;
+        if (_isAttacking || _player == null) return;
 
-        float sqrDistanceToPlayer = (_player.transform.position - transform.position).sqrMagnitude;
+        float sqrDistanceToPlayer = (_player.position - transform.position).sqrMagnitude;
         float attackDistance = _stat.AttackDistance.Value;
 
         if (sqrDistanceToPlayer <= attackDistance * attackDistance)
@@ -49,22 +53,10 @@ public class MonsterAttackComponent : MonoBehaviour
         _isAttacking = true;
         _lastAttackTime = Time.time;
 
-        LookAtTarget();
-
+        _moveComponent.LookAtTargetImmediate();
         _monsterController.ChangeState(MonsterState.Attack);
-        
+
         StartCoroutine(AttackCoroutine());
-    }
-
-    private void LookAtTarget()
-    {
-        Vector3 direction = _player.transform.position - transform.position;
-        direction.y = 0f;
-
-        if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
-        {
-            transform.rotation = Quaternion.LookRotation(direction);
-        }
     }
 
     private IEnumerator AttackCoroutine()
