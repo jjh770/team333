@@ -258,7 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
+  _rotationSpeed: 5
   _updateInterval: 0.2
+  _stoppingDistance: 1.8
 --- !u!114 &4456880592749316536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e51ff00adcdde48bfe3e2acd2a410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
+  _attackDistance: 2.5
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0

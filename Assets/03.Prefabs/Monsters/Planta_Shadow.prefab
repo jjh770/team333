@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 816921454918310283}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.0000036285378, y: -12.346436, z: 8.436422}
 --- !u!1 &226362165172809424
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ Transform:
   - {fileID: 6956963701393174601}
   - {fileID: 2123418499442495424}
   m_Father: {fileID: 7978298464831006260}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.449441, y: 0, z: 0}
 --- !u!1 &758354489311368710
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5787109555470076412}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 66.51995, y: -7.617608, z: -21.606207}
 --- !u!1 &2276620583076317624
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +486,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
+  _rotationSpeed: 5
   _updateInterval: 0.2
+  _stoppingDistance: 1.8
 --- !u!114 &4762377517291527843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e51ff00adcdde48bfe3e2acd2a410d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
+  _attackDistance: 2.5
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +588,7 @@ Transform:
   - {fileID: 5787109555470076412}
   - {fileID: 816921454918310283}
   m_Father: {fileID: 3040347031651395315}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.7976743, y: -12.216869, z: 8.2440195}
 --- !u!1 &8879492003369183657
 GameObject:
   m_ObjectHideFlags: 0

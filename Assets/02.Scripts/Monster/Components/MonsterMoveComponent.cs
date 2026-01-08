@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(MonsterStateController))]
 public abstract class MonsterMoveComponent : MonoBehaviour
 {
     [SerializeField] protected float _velocityThreshold = 0.1f;
@@ -14,13 +14,12 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     protected NavMeshAgent _agent;
     protected Transform _player;
 
-    protected IAnimationStateChanger _monsterController;
-
+    protected bool _isMoving;
+    public bool IsMoving => _isMoving;
 
     protected virtual void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _monsterController = GetComponent<IAnimationStateChanger>();
     }
 
     protected virtual void Start()

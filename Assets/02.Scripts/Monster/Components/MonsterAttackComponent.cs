@@ -1,21 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
 [RequireComponent(typeof(MonsterMoveComponent))]
 public class MonsterAttackComponent : MonoBehaviour
 {
-    private IAnimationStateChanger _monsterController;
+    [SerializeField] private float _attackDistance = 2.5f;
+
     private MonsterMoveComponent _moveComponent;
     private MonsterStat _stat;
 
     private Transform _player;
     private float _lastAttackTime;
     private bool _isAttacking;
+    public bool IsAttacking => _isAttacking;
 
     private void Awake()
     {
-        _monsterController = GetComponent<IAnimationStateChanger>();
         _moveComponent = GetComponent<MonsterMoveComponent>();
         _stat = GetComponent<MonsterStat>();
 
@@ -36,9 +38,8 @@ public class MonsterAttackComponent : MonoBehaviour
         if (_isAttacking || _player == null) return;
 
         float sqrDistanceToPlayer = (_player.position - transform.position).sqrMagnitude;
-        float attackDistance = _stat.AttackDistance.Value;
 
-        if (sqrDistanceToPlayer <= attackDistance * attackDistance)
+        if (sqrDistanceToPlayer <= _attackDistance * _attackDistance)
         {
             float attackCooldown = _stat.AttackCooltime.Value;
             if (Time.time >= _lastAttackTime + attackCooldown)
@@ -54,7 +55,6 @@ public class MonsterAttackComponent : MonoBehaviour
         _lastAttackTime = Time.time;
 
         _moveComponent.LookAtTargetImmediate();
-        _monsterController.ChangeState(MonsterState.Attack);
 
         StartCoroutine(AttackCoroutine());
     }
@@ -63,6 +63,5 @@ public class MonsterAttackComponent : MonoBehaviour
     {
         yield return new WaitForSeconds(_stat.AttackDuration.Value);
         _isAttacking = false;
-        _monsterController.ChangeState(MonsterState.Idle);
     }
 }

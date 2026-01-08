@@ -10,7 +10,6 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
     private MonsterStat _stat;
     private float _updateTimer;
 
-    public bool IsMoving { get; private set; }
 
     protected override void Awake()
     {
@@ -47,14 +46,7 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
 
     private void UpdateMoveState()
     {
-        bool isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
-
-        if (IsMoving != isMoving)
-        {
-            IsMoving = isMoving;
-            var state = IsMoving ? MonsterState.Move : MonsterState.Idle;
-            _monsterController.ChangeState(state);
-        }
+        _isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
     }
 
     private void UpdateTraceTarget()
