@@ -73,7 +73,9 @@ public class PlayerMove : MonoBehaviour
                 _stateManager.ChangeState(PlayerState.Moving);
             }
 
-            Vector3 move = direction * _moveSpeed * Time.deltaTime;
+            // 공격 중일 때는 이동속도 감소
+            float currentSpeed = _stateManager.IsState(PlayerState.Attacking) ? _attackMoveSpeed : _moveSpeed;
+            Vector3 move = direction * currentSpeed * Time.deltaTime;
 
             // 이동 전에 다음 위치를 예측하고 경계 내로 조정
             Vector3 clampedMove = ClampMovementToCameraBounds(move);
@@ -123,30 +125,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private Vector3 ClampMovementToCameraBounds(Vector3 moveVector)
     {
-        Vector3 nextPosition = transform.position + moveVector;
-        Vector3 viewportPos = _mainCamera.WorldToViewportPoint(nextPosition);
-
-        bool isOutOfBounds = viewportPos.x < _viewportMargin || viewportPos.x > 1f - _viewportMargin ||
-                             viewportPos.y < _viewportMargin || viewportPos.y > 1f - _viewportMargin ||
-                             viewportPos.z <= 0;
-
-        if (isOutOfBounds)
-        {
-            viewportPos.x = Mathf.Clamp(viewportPos.x, _viewportMargin, 1f - _viewportMargin);
-            viewportPos.y = Mathf.Clamp(viewportPos.y, _viewportMargin, 1f - _viewportMargin);
-
-            Vector3 clampedWorldPos = _mainCamera.ViewportToWorldPoint(viewportPos);
-
-            Vector3 adjustedMove = new Vector3(
-                clampedWorldPos.x - transform.position.x,
-                moveVector.y,
-                clampedWorldPos.z - transform.position.z
-            );
-
-            return adjustedMove;
-        }
-
-        return moveVector;
+        return CameraBoundsHelper.ClampMovementToCameraBounds(transform.position, moveVector, _mainCamera, _viewportMargin);
     }
 
     /// <summary>
@@ -155,31 +134,6 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private void EnforceCameraBounds()
     {
-        Vector3 viewportPos = _mainCamera.WorldToViewportPoint(transform.position);
-
-        bool isOutOfBounds = viewportPos.x < _viewportMargin || viewportPos.x > 1f - _viewportMargin ||
-                             viewportPos.y < _viewportMargin || viewportPos.y > 1f - _viewportMargin ||
-                             viewportPos.z <= 0;
-
-        if (isOutOfBounds)
-        {
-            viewportPos.x = Mathf.Clamp(viewportPos.x, _viewportMargin, 1f - _viewportMargin);
-            viewportPos.y = Mathf.Clamp(viewportPos.y, _viewportMargin, 1f - _viewportMargin);
-
-            Vector3 clampedWorldPos = _mainCamera.ViewportToWorldPoint(viewportPos);
-
-            // CharacterController.Move()를 사용하여 안전하게 위치 보정
-            Vector3 correctionMove = new Vector3(
-                clampedWorldPos.x - transform.position.x,
-                0f, // Y축은 건드리지 않음
-                clampedWorldPos.z - transform.position.z
-            );
-
-            // 보정이 필요한 경우에만 Move 호출
-            if (correctionMove.sqrMagnitude > 0.0001f)
-            {
-                _controller.Move(correctionMove);
-            }
-        }
+        CameraBoundsHelper.ClampPositionToCameraBounds(transform, _controller, _mainCamera, _viewportMargin);
     }
 }

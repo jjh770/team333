@@ -17,6 +17,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerState CurrentState => _currentState;
 
     public event Action<PlayerState, PlayerState> OnStateChanged;
+    public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
 
     public bool CanMove => _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
     public bool CanAttack => _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
@@ -41,6 +42,17 @@ public class PlayerStateManager : MonoBehaviour
 
     private bool IsValidTransition(PlayerState from, PlayerState to)
     {
+        // 외부 검증자들에게 먼저 검증 요청
+        if (OnValidateStateChange != null)
+        {
+            foreach (var validator in OnValidateStateChange.GetInvocationList())
+            {
+                if (!(bool)validator.DynamicInvoke(from, to))
+                    return false;
+            }
+        }
+
+        // 기본 상태 전환 규칙 검증
         if (to == PlayerState.Idle)
             return true;
 
