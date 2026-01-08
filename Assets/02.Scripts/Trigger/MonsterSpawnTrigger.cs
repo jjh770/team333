@@ -1,9 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class MonsterSpawnTrigger : MonoBehaviour
 {
     [Header("Spawn Group Index")]
-    [SerializeField] private int _spawnGroupName;
+    [SerializeField] private int _spawnGroupIndex;
     
     [Header("MonsterPool")]
     [SerializeField] private MonsterPool _monsterPool;
@@ -26,7 +27,8 @@ public class MonsterSpawnTrigger : MonoBehaviour
     {
         if(_monsterPool == null) return;
         
-        _monsterPool.SpawnGroup(_spawnGroupName);
+        _monsterPool.SpawnGroup(_spawnGroupIndex);
+        enabled = false;
     }
 
 #if UNITY_EDITOR

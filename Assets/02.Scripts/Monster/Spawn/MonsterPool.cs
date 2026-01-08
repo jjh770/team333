@@ -37,11 +37,11 @@ public class MonsterPool : MonoBehaviour
         }
     }
 
-    public void SpawnGroup(int groupName)
+    public void SpawnGroup(int groupIndex)
     {
-        if (groupName < 0 || groupName > _spawnGroups.Length) return;
+        if (groupIndex < 1 || groupIndex > _spawnGroups.Length) return;
         
-        SpawnRandomInGroup(_spawnGroups[groupName - 1]);
+        SpawnRandomInGroup(_spawnGroups[groupIndex - 1]);
     }
 
     private void SpawnRandomInGroup(SpawnGroup group)
