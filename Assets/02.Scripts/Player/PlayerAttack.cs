@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _comboResetTime = 0.6f;
     [SerializeField] private int _maxComboCount = 3;
 
+    private int _maxComboMargin = 10;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private float _attackCooldownTimer;
@@ -85,6 +86,10 @@ public class PlayerAttack : MonoBehaviour
         _comboResetTimer = _comboResetTime;
 
         _comboIndex++;
+        if (_comboIndex >= _maxComboMargin)
+        {
+            _comboIndex = 0;
+        }
     }
 
     private void ResetCombo()
