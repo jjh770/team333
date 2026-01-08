@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class Monster : MonoBehaviour, IPoolable
 {
-    private MonsterStat _stat;
     private NavMeshAgent _agent;
+
+    public event Action<Monster> OnDie;
 
     private void Awake()
     {
-        _stat = GetComponent<MonsterStat>();
         _agent = GetComponent<NavMeshAgent>();
     }
-
 
     public void OnSpawn()
     {
@@ -27,6 +27,6 @@ public class Monster : MonoBehaviour, IPoolable
 
     public void Die()
     {
-        PoolManager.Instance.Return(gameObject);
+        OnDie?.Invoke(this);
     }
 }

@@ -11,14 +11,24 @@ public class MonsterPool : MonoBehaviour
     [SerializeField] private int _minSpawnCount = 5;
     [SerializeField] private int _maxSpawnCount = 10;
 
-    [Header("Spawn Groups (1~9 키)")]
+    [Header("Spawn Groups")]
     [SerializeField] private SpawnGroup[] _spawnGroups;
+
+    [Header("Dependencies")]
+    [SerializeField] private PoolManager _poolManagerComponent;
+
+    private IPoolManager _poolManager;
+
+    private void Awake()
+    {
+        _poolManager = _poolManagerComponent;
+    }
 
     private void Start()
     {
         foreach (var prefab in _monsterPrefabs)
         {
-            PoolManager.Instance.Preload(prefab, _preloadPerPrefab);
+            _poolManager.Preload(prefab, _preloadPerPrefab);
         }
     }
 
@@ -46,8 +56,21 @@ public class MonsterPool : MonoBehaviour
             GameObject prefab = GetRandomPrefab();
             if (prefab == null) continue;
 
-            PoolManager.Instance.Get(prefab, point.position, point.rotation);
+            GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
+            
+            // 생성될 때 죽음 이벤트 구독
+            if (spawned != null && spawned.TryGetComponent<Monster>(out var monster))
+            {
+                monster.OnDie += HandleMonsterDie;
+            }
         }
+    }
+
+    // 죽을 때 죽음 이벤트 해제
+    private void HandleMonsterDie(Monster monster)
+    {
+        monster.OnDie -= HandleMonsterDie;
+        _poolManager.Return(monster.gameObject);
     }
 
     private GameObject GetRandomPrefab()

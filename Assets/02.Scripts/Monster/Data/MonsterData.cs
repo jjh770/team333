@@ -21,5 +21,5 @@ public class MonsterData : ScriptableObject
     [field: SerializeField] public MonsterType Type { get; private set; }
 
     [Header("Prefab")]
-    [field: SerializeField] public GameObject prefab { get; private set; }
+    [field: SerializeField] public GameObject Prefab { get; private set; }
 }
