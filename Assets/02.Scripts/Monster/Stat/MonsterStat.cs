@@ -24,6 +24,8 @@ public class MonsterStat : MonoBehaviour
         remove => MoveSpeed.OnValueChanged -= value;
     }
 
+    public event Action OnDeath;
+
     private void Start()
     {
         if (_data == null)
@@ -31,7 +33,10 @@ public class MonsterStat : MonoBehaviour
             Debug.LogError($"MonsterData가 {gameObject.name}에 할당되지 않았습니다.", gameObject);
             return;
         }
+    }
 
+    private void OnEnable()
+    {
         Health.Initialize(_data.MaxHealth);
         AttackDamage.Initialize(_data.AttackDamage);
         AttackCooltime.Initialize(_data.AttackCooltime);
@@ -54,5 +59,10 @@ public class MonsterStat : MonoBehaviour
     public void DecreaseHealth(float amount)
     {
         Health.Decrease(amount);
+
+        if (Health.IsEmpty)
+        {
+            OnDeath?.Invoke();
+        }
     }
 }

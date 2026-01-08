@@ -10,7 +10,6 @@ public class MonsterDamageComponent : MonoBehaviour, IDamageable
         _monsterStat = GetComponent<MonsterStat>();
     }
 
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 590382309419593974}
   - component: {fileID: 3543699426634746670}
   - component: {fileID: 4482467526755238119}
+  - component: {fileID: 7019950551574458289}
   m_Layer: 0
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -556,6 +557,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
   _attackDuration: 0.14
+--- !u!114 &7019950551574458289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

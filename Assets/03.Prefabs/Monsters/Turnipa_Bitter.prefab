@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 3768543114877331655}
   - component: {fileID: 6912039742612250802}
   - component: {fileID: 2115344407468010350}
+  - component: {fileID: 5181280867894159192}
   m_Layer: 0
   m_Name: Turnipa_Bitter
   m_TagString: Untagged
@@ -328,6 +329,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
   _attackDuration: 0.14
+--- !u!114 &5181280867894159192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834583176937093337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
