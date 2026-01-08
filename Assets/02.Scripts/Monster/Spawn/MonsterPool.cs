@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class MonsterPool : MonoBehaviour, IMonsterSpawner
@@ -67,6 +67,7 @@ public class MonsterPool : MonoBehaviour, IMonsterSpawner
 
     private void HandleMonsterDie(Monster monster)
     {
+        Debug.Log("죽음");
         monster.OnDie -= HandleMonsterDie;
         _poolManager.Return(monster.gameObject);
     }

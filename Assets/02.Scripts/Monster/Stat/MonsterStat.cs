@@ -24,6 +24,20 @@ public class MonsterStat : MonoBehaviour
         remove => MoveSpeed.OnValueChanged -= value;
     }
 
+    private void Start()
+    {
+        if (_data == null)
+        {
+            Debug.LogError($"MonsterData가 {gameObject.name}에 할당되지 않았습니다.", gameObject);
+            return;
+        }
+
+        Health.Initialize(_data.MaxHealth);
+        AttackDamage.Initialize(_data.AttackDamage);
+        AttackCooltime.Initialize(_data.AttackCooltime);
+        MoveSpeed.Initialize(_data.MoveSpeed);
+    }
+
     public void SetMoveSpeed(float value)
     {
         MoveSpeed.SetValue(value);
@@ -37,17 +51,8 @@ public class MonsterStat : MonoBehaviour
             MoveSpeed.Decrease(-amount);
     }
 
-    private void Start()
+    public void DecreaseHealth(float amount)
     {
-        if (_data == null)
-        {
-            Debug.LogError($"MonsterData가 {gameObject.name}에 할당되지 않았습니다.", gameObject);
-            return;
-        }
-
-        Health.Initialize(_data.MaxHealth);
-        AttackDamage.Initialize(_data.AttackDamage);
-        AttackCooltime.Initialize(_data.AttackCooltime);
-        MoveSpeed.Initialize(_data.MoveSpeed);
+        Health.Decrease(amount);
     }
 }

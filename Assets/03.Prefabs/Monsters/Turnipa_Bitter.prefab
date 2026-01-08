@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
+  _attackDuration: 0.14
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0

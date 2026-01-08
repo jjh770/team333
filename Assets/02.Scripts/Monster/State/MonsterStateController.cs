@@ -3,6 +3,7 @@
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(MonsterMoveComponent))]
 [RequireComponent(typeof(MonsterAttackComponent))]
+[RequireComponent(typeof(MonsterDamageComponent))]
 public class MonsterStateController : MonoBehaviour
 {
     private Animator _animator;
@@ -10,6 +11,7 @@ public class MonsterStateController : MonoBehaviour
 
     private MonsterAttackComponent _attackComponent;
     private MonsterMoveComponent _moveComponent;
+    private MonsterDamageComponent _damageComponent;
 
     public MonsterState CurrentState => _currentState;
 
@@ -20,6 +22,7 @@ public class MonsterStateController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _moveComponent = GetComponent<MonsterMoveComponent>();
         _attackComponent = GetComponent<MonsterAttackComponent>();
+        _damageComponent = GetComponent<MonsterDamageComponent>();
     }
 
     private void Update()
