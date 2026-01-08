@@ -1,31 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
-using System;
+﻿using System;
+using UnityEngine;
 
-[RequireComponent (typeof(NavMeshAgent))]
-public class Monster : MonoBehaviour, IPoolable
+public class Monster : MonoBehaviour
 {
-    private NavMeshAgent _agent;
-
-    public event Action<Monster> OnDie;
-
-    private void Awake()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-    }
-
-    public void OnSpawn()
-    {
-        _agent.enabled = true;
-    }
-
-    public void OnDespawn()
-    {
-        _agent.enabled = false;
-    }
-
-    public void Die()
-    {
-        OnDie?.Invoke(this);
-    }
+    //
 }

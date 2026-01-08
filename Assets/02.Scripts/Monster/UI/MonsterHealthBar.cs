@@ -24,6 +24,7 @@ public class MonsterHealthBar : MonoBehaviour
     private void OnEnable()
     {
         _stat.OnHealthChanged += OnHealthChanged;
+        _gaugeImage.fillAmount = 1f;
     }
 
     private void OnDisable()

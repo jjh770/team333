@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class MonsterPool : MonoBehaviour, IMonsterSpawner
@@ -37,6 +37,14 @@ public class MonsterPool : MonoBehaviour, IMonsterSpawner
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SpawnGroup(1);
+        }
+    }
+
     public void SpawnGroup(int groupIndex)
     {
         if (groupIndex < 1 || groupIndex > _spawnGroups.Length) return;
@@ -58,14 +66,16 @@ public class MonsterPool : MonoBehaviour, IMonsterSpawner
 
             GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
 
-            if (spawned != null && spawned.TryGetComponent<Monster>(out var monster))
+            // 소환될 때 OnDie 구독
+            if (spawned != null && spawned.TryGetComponent<MonsterController>(out var monster))
             {
                 monster.OnDie += HandleMonsterDie;
             }
         }
     }
 
-    private void HandleMonsterDie(Monster monster)
+    // 죽을 때 OnDie 해제
+    private void HandleMonsterDie(MonsterController monster)
     {
         monster.OnDie -= HandleMonsterDie;
         _poolManager.Return(monster.gameObject);

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3399846184697600}
-  m_LocalEulerAnglesHint: {x: -6.603359, y: -4.218393, z: -0.028576741}
+  m_LocalEulerAnglesHint: {x: -0.0000014305115, y: 0, z: 0.000000059604645}
 --- !u!1 &1840730416945172021
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ Transform:
   m_Children:
   - {fileID: 3399846184697600}
   m_Father: {fileID: 8876014874684424592}
-  m_LocalEulerAnglesHint: {x: -12.583518, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -87.60011, y: -6.1199694, z: -0.000036239624}
 --- !u!1 &3657062162637843533
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3399846184697600}
-  m_LocalEulerAnglesHint: {x: 7.922793, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3687906777993336048
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,13 +239,14 @@ GameObject:
   - component: {fileID: 3730317163615485846}
   - component: {fileID: 586412662737019160}
   - component: {fileID: 1691357191710163181}
+  - component: {fileID: 5259985373391122418}
   m_Layer: 0
   m_Name: Devil_Tree_Wither
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8821786179341327282
 Transform:
   m_ObjectHideFlags: 0
@@ -377,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+  _deathAnimationDuration: 1
 --- !u!114 &1691357191710163181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +392,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
+  _attackDuration: 0.14
+--- !u!114 &5259985373391122418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986010498025588172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
+  _damageDuration: 0.09
+  _renderer: {fileID: 7087891614945725617}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.3
 --- !u!1 &9097755878706329246
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +441,7 @@ Transform:
   - {fileID: 7006842756740785221}
   - {fileID: 4487840360957097735}
   m_Father: {fileID: 5871374419535556307}
-  m_LocalEulerAnglesHint: {x: -17.44475, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!1001 &4815018692602506774
 PrefabInstance:
   m_ObjectHideFlags: 0

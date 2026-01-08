@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 5702935738390199367}
   m_Father: {fileID: 8284761806730895881}
-  m_LocalEulerAnglesHint: {x: -11.249564, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -87.60011, y: -6.1199694, z: -0.000036239624}
 --- !u!1 &854687471379102280
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5702935738390199367}
-  m_LocalEulerAnglesHint: {x: 16.171282, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &886880486664493489
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5702935738390199367}
-  m_LocalEulerAnglesHint: {x: -5.9071574, y: 2.83143, z: -0.477662}
+  m_LocalEulerAnglesHint: {x: -0.0000014305115, y: 0, z: 0.000000059604645}
 --- !u!1 &5708630478899574472
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ Transform:
   - {fileID: 4502296511015788510}
   - {fileID: 8209635394112415592}
   m_Father: {fileID: 5970268877106588881}
-  m_LocalEulerAnglesHint: {x: -10.321137, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!1 &6060493489403216405
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,13 +176,14 @@ GameObject:
   - component: {fileID: 5865237457331278705}
   - component: {fileID: 439236860113699187}
   - component: {fileID: 4683845436847467853}
+  - component: {fileID: 8581182682219715534}
   m_Layer: 0
   m_Name: Devil_Tree_Nightmare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2747576698439034365
 Transform:
   m_ObjectHideFlags: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+  _deathAnimationDuration: 1
 --- !u!114 &4683845436847467853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +328,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
+  _attackDuration: 0.14
+--- !u!114 &8581182682219715534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060493489403216405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
+  _damageDuration: 0.09
+  _renderer: {fileID: 3141990875462986981}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.3
 --- !u!1 &7191071975125149397
 GameObject:
   m_ObjectHideFlags: 0
