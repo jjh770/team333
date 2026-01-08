@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(FloraSpeedUpController))]
+[RequireComponent(typeof(FloraSpeedGaugeController))]
 public class FloraDamageReceiver : MonoBehaviour, IDamageable
 {
-    private FloraSpeedUpController _speedUpController;
+    private FloraSpeedGaugeController _speedGaugeController;
 
     private void Awake()
     {
-        _speedUpController = GetComponent<FloraSpeedUpController>();
+        _speedGaugeController = GetComponent<FloraSpeedGaugeController>();
     }
 
     public bool TryTakeDamage(Damage damage)
@@ -15,7 +15,7 @@ public class FloraDamageReceiver : MonoBehaviour, IDamageable
         if (damage.Value <= 0)
             return false;
 
-        _speedUpController.DrainGauge(damage.Value);
+        _speedGaugeController.DrainGauge(damage.Value);
         return true;
     }
 }

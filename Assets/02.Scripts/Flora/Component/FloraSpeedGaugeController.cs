@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(FloraStats))]
-public class FloraSpeedUpController : MonoBehaviour
+public class FloraSpeedGaugeController : MonoBehaviour
 {
     [Serializable]
     public struct SpeedTier

@@ -1,7 +1,13 @@
 using UnityEngine;
 
-public struct Damage
+public readonly struct Damage
 {
-    public float Value;
-    public GameObject Attacker;
+    public float Value { get; }
+    public GameObject Attacker { get; }
+    
+    public Damage(float value, GameObject attacker)
+    {
+        Value = value;
+        Attacker = attacker;
+    }
 }
