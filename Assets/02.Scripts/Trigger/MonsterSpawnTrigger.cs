@@ -6,15 +6,23 @@ public class MonsterSpawnTrigger : MonoBehaviour
     [Header("Spawn Group Index")]
     [SerializeField] private int _spawnGroupIndex;
 
-    [Header("MonsterPool")]
-    [SerializeField] private MonsterPool _monsterPool;
+    [Header("Dependencies")]
+    [SerializeField] private MonoBehaviour _monsterSpawnerComponent;
 
+    private IMonsterSpawner _monsterSpawner;
     private BoxCollider _collider;
     private const string FloraTag = "Flora";
 
     private void Awake()
     {
         _collider = GetComponent<BoxCollider>();
+
+        if (_monsterSpawnerComponent is not IMonsterSpawner spawner)
+        {
+            Debug.LogError("할당된 컴포넌트가 IMonsterSpawner를 구현하지 않았습니다.", this);
+            return;
+        }
+        _monsterSpawner = spawner;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,9 +34,9 @@ public class MonsterSpawnTrigger : MonoBehaviour
 
     private void SpawnMonsters()
     {
-        if (_monsterPool == null) return;
+        if (_monsterSpawner == null) return;
 
-        _monsterPool.SpawnGroup(_spawnGroupIndex);
+        _monsterSpawner.SpawnGroup(_spawnGroupIndex);
         enabled = false;
     }
 

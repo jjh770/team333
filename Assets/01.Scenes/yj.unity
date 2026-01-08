@@ -22383,7 +22383,7 @@ PrefabInstance:
       objectReference: {fileID: 57080825}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: _spawnGroups.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: _spawnGroups.Array.data[1]._groupName
@@ -72171,6 +72171,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7613929823779919630, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
       propertyPath: _monsterPool
+      value: 
+      objectReference: {fileID: 594866877}
+    - target: {fileID: 7613929823779919630, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
+      propertyPath: _monsterSpawnerComponent
       value: 
       objectReference: {fileID: 594866877}
     - target: {fileID: 8068769174952791077, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
