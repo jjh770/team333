@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 4772548064785721458}
   - component: {fileID: 3730317163615485846}
   - component: {fileID: 586412662737019160}
+  - component: {fileID: 1691357191710163181}
   m_Layer: 0
   m_Name: Devil_Tree_Wither
   m_TagString: Untagged
@@ -321,7 +322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _updateInterval: 0.2
-  _stoppingDistance: 2
 --- !u!114 &8237467816518253206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +375,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+--- !u!114 &1691357191710163181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986010498025588172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e51ff00adcdde48bfe3e2acd2a410d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
 --- !u!1 &9097755878706329246
 GameObject:
   m_ObjectHideFlags: 0

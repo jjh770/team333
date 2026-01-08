@@ -15,6 +15,9 @@ MonoBehaviour:
   <MonsterName>k__BackingField: DevilTreeWither
   <MaxHealth>k__BackingField: 100
   <AttackDamage>k__BackingField: 10
+  <AttackCooltime>k__BackingField: 1.5
+  <AttackDistance>k__BackingField: 2.5
+  <AttackDuration>k__BackingField: 0.14
   <MoveSpeed>k__BackingField: 4
   <Type>k__BackingField: 1
-  <prefab>k__BackingField: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}

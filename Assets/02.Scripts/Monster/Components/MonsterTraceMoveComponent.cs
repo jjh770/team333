@@ -5,6 +5,7 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
 {
     [Header("Movement")]
     [SerializeField] private float _updateInterval = 0.2f;
+    [SerializeField] private float _stoppingDistance = 1.8f;
 
     private MonsterStat _stat;
     private float _updateTimer;
@@ -20,7 +21,7 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
     protected override void Start()
     {
         base.Start();
-        _agent.stoppingDistance = _stat.AttackDistance.Value;
+        _agent.stoppingDistance = _stoppingDistance;
     }
 
     private void OnEnable()

@@ -5,11 +5,6 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
 
-    [Header("Rotation")]
-    [SerializeField] private float _rotationSpeed = 5f;
-
-    private const float MinLookDirectionSqrMagnitude = 1e-6f;
-
     protected override void Start()
     {
         base.Start();
@@ -30,19 +25,7 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
 
         if (sqrDistanceToPlayer <= _detectionRange * _detectionRange)
         {
-            LookAtPlayer();
-        }
-    }
-
-    private void LookAtPlayer()
-    {
-        Vector3 direction = _player.position - transform.position;
-        direction.y = 0f;
-
-        if (direction.sqrMagnitude > MinLookDirectionSqrMagnitude)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            LookAtTarget();
         }
     }
 

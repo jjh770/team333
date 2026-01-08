@@ -9,6 +9,7 @@ public class MonsterStat : MonoBehaviour
     public ValueStat AttackDamage { get; private set; } = new();
     public ValueStat AttackCooltime { get; private set; } = new();
     public ValueStat AttackDistance { get; private set; } = new();
+    public ValueStat AttackDuration { get; private set; } = new();
     public ValueStat MoveSpeed { get; private set; } = new();
 
     public event Action<float, float> OnHealthChanged
@@ -33,6 +34,9 @@ public class MonsterStat : MonoBehaviour
 
         Health.Initialize(_data.MaxHealth);
         AttackDamage.Initialize(_data.AttackDamage);
+        AttackCooltime.Initialize(_data.AttackCooltime);
+        AttackDistance.Initialize(_data.AttackDistance);
+        AttackDuration.Initialize(_data.AttackDuration);
         MoveSpeed.Initialize(_data.MoveSpeed);
     }
 }

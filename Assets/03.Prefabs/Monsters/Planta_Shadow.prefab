@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 2504741413279115568}
   - component: {fileID: 590382309419593974}
   - component: {fileID: 3543699426634746670}
+  - component: {fileID: 4482467526755238119}
   m_Layer: 0
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -486,7 +487,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _updateInterval: 0.2
-  _stoppingDistance: 2
 --- !u!114 &4762377517291527843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +540,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
+--- !u!114 &4482467526755238119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e51ff00adcdde48bfe3e2acd2a410d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

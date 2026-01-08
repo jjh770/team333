@@ -16,8 +16,10 @@ public class MonsterData : ScriptableObject
     [field: SerializeField] public float MaxHealth { get; private set; } = 100f;
     [field: SerializeField] public float AttackDamage { get; private set; } = 10f;
     [field: SerializeField] public float AttackCooltime { get; private set; } = 1.5f;
-    [field: SerializeField] public float AttackDistance { get; private set; } = 1.5f;
+    [field: SerializeField] public float AttackDistance { get; private set; } = 2.5f;
+    [field: SerializeField] public float AttackDuration { get; private set; } = 0.14f;
     [field: SerializeField] public float MoveSpeed { get; private set; } = 4f;
+
 
     [Header("Type")]
     [field: SerializeField] public MonsterType Type { get; private set; }
