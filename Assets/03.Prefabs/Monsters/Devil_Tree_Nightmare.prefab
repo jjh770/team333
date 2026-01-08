@@ -342,7 +342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
   _damageDuration: 0.09
-  _nockbackDuration: 1
+  _renderer: {fileID: 3141990875462986981}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.3
 --- !u!1 &7191071975125149397
 GameObject:
   m_ObjectHideFlags: 0

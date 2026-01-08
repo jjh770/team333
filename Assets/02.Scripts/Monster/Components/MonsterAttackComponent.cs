@@ -57,6 +57,8 @@ public class MonsterAttackComponent : MonoBehaviour
 
         _moveComponent.LookAtTargetImmediate();
 
+        // Todo.플레이어에게 데미지 입히기
+
         StartCoroutine(AttackCoroutine());
     }
 
