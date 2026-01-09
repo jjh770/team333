@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FloraStunSkill : FloraSkillBase
@@ -7,6 +8,9 @@ public class FloraStunSkill : FloraSkillBase
     [SerializeField] private float _stunInterval = 2f;
     [SerializeField] private float _stunDuration = 0.5f;
 
+    [Header("Lightning Effect Timing")]
+    [SerializeField] private float _lightningStrikeDelay = 0.1f;
+    
     private Coroutine _stunRoutine;
 
     private void OnEnable()
@@ -30,12 +34,22 @@ public class FloraStunSkill : FloraSkillBase
         while (true)
         {
             yield return new WaitForSeconds(_stunInterval);
-
+            
             foreach (var monster in MonstersInRange)
             {
                 if (monster == null) continue;
-
+                Vector3 position = monster.transform.position;
+                _effectPool.PlayLightningStrike(position, _lightningStrikeDelay);
+            }
+            
+            yield return new WaitForSeconds(_lightningStrikeDelay);
+            
+            foreach (var monster in MonstersInRange)
+            {
+                if (monster == null) continue;
+                Vector3 position = monster.transform.position;
                 monster.ApplyStun(_stunDuration);
+                _effectPool.PlayLightningHit(position, _stunDuration);
             }
         }
     }

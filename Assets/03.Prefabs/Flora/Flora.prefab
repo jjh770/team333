@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraSkillController
   _skillHolder: {fileID: 8255128165809274537}
+  _effectPool: {fileID: 0}
 --- !u!1 &5326104044287521027
 GameObject:
   m_ObjectHideFlags: 0

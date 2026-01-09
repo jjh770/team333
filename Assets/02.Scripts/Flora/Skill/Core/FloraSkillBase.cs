@@ -4,9 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public abstract class FloraSkillBase : MonoBehaviour
 {
-    [Header("Range Settings")]
+    [Header("Range Settings")] 
     [SerializeField] private float _radius = 4f;
-
+        
+    protected EffectPool _effectPool;
     private SphereCollider _triggerCollider;
     protected readonly HashSet<BadMonsterController> MonstersInRange =  new ();
 
@@ -17,6 +18,11 @@ public abstract class FloraSkillBase : MonoBehaviour
         _triggerCollider = GetComponent<SphereCollider>();
         _triggerCollider.isTrigger = true;
         _triggerCollider.radius = _radius;
+    }
+
+    public virtual void Initailize(EffectPool effectPool)
+    {
+        _effectPool = effectPool;
     }
 
     private void OnTriggerEnter(Collider other)
