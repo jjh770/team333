@@ -5,7 +5,10 @@ public class FloraSkillController : MonoBehaviour
 {
     [Header("Skill Settings")]
     [SerializeField] private Transform _skillHolder;
-
+    
+    [Header("Effect")]
+    [SerializeField] private FloraEffectPool _effectPool;
+    
     private FloraSkillBase _currentSkill;
 
     public FloraSkillBase CurrentSkill => _currentSkill;
@@ -29,7 +32,7 @@ public class FloraSkillController : MonoBehaviour
 
         _currentSkill = Instantiate(skillPrefab, _skillHolder);
         _currentSkill.ResetLocalPosition();
-
+        _currentSkill.Initialize(_effectPool);
 
         OnSkillChanged?.Invoke(_currentSkill);
     }

@@ -4,9 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public abstract class FloraSkillBase : MonoBehaviour
 {
-    [Header("Range Settings")]
+    [Header("Range Settings")] 
     [SerializeField] private float _radius = 4f;
-
+        
+    protected FloraEffectPool _effectPool;
     private SphereCollider _triggerCollider;
     protected readonly HashSet<BadMonsterController> MonstersInRange =  new ();
 
@@ -19,6 +20,11 @@ public abstract class FloraSkillBase : MonoBehaviour
         _triggerCollider.radius = _radius;
     }
 
+    public virtual void Initialize(FloraEffectPool effectPool)
+    {
+        _effectPool = effectPool;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent<BadMonsterController>(out var monster)) return;
@@ -26,6 +32,9 @@ public abstract class FloraSkillBase : MonoBehaviour
         if (MonstersInRange.Contains(monster)) return;
         
         MonstersInRange.Add(monster);
+        
+        monster.OnDie += HandleMonsterDeath;
+        
         OnMonsterEnter(monster);
     }
 
@@ -35,7 +44,34 @@ public abstract class FloraSkillBase : MonoBehaviour
         if (!MonstersInRange.Contains(monster)) return;
 
         MonstersInRange.Remove(monster);
+        
+        monster.OnDie -= HandleMonsterDeath;
+        
         OnMonsterExit(monster);
+    }
+    
+    protected virtual void OnDisable()
+    {
+        foreach (var monster in MonstersInRange)
+        {
+            if (monster != null)
+            {
+                monster.OnDie -= HandleMonsterDeath;
+            }
+        }
+        
+        MonstersInRange.Clear();
+    }
+    
+    private void HandleMonsterDeath(BadMonsterController monster)
+    {
+        if (monster == null) return;
+
+        monster.OnDie -= HandleMonsterDeath;
+        
+        MonstersInRange.Remove(monster);
+        
+        OnMonsterDeath(monster);
     }
 
     public void ResetLocalPosition()
@@ -50,7 +86,8 @@ public abstract class FloraSkillBase : MonoBehaviour
 
     protected abstract void OnMonsterEnter(BadMonsterController monster);
     protected abstract void OnMonsterExit(BadMonsterController monster);
-
+    protected virtual void OnMonsterDeath(BadMonsterController monster) { }
+    
     protected virtual void OnValidate()
     {
         SphereCollider sphereCollider = GetComponent<SphereCollider>();
