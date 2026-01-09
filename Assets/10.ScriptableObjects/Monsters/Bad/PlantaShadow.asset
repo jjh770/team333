@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlantaShadow
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
   <MonsterName>k__BackingField: PlantaShadow
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 30
   <AttackDamage>k__BackingField: 10
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
