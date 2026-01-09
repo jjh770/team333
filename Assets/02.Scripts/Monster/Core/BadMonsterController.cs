@@ -26,7 +26,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     private Coroutine _deathRoutine;
     private Coroutine _damageRoutine;
 
-    private void Awake()
+    override protected void Awake()
     {
         base.Awake();
 
@@ -89,7 +89,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
         _move.UpdateMove();
 
-        if (_attack != null && _attack.TryAttack())
+        if (_attack.TryAttack())
         {
             _move.LookAtTargetImmediate();
         }
@@ -97,7 +97,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.H))
         {
-            var testDamage = new Damage(10f, null);
+            var testDamage = new Damage(30f, null);
             bool ok = TryTakeDamage(testDamage);
         }
     }
