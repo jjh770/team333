@@ -5,16 +5,15 @@ public class FloraSlowSkill : FloraSkillBase
     [Header("Slow Settings")]
     [SerializeField] private float _slowAmount = 2f;
     
-    protected override void OnMonsterEnter(MonsterController monster)
+    protected override void OnMonsterEnter(BadMonsterController monster)
     {
-        if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
-        stat.ModifyMoveSpeed(-_slowAmount);
+        monster.ChangeMoveSpeed(-_slowAmount);
     }
 
-    protected override void OnMonsterExit(MonsterController monster)
+    protected override void OnMonsterExit(BadMonsterController monster)
     {
         if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
-        stat.ModifyMoveSpeed(_slowAmount);
+        monster.ChangeMoveSpeed(_slowAmount);
     }
 
     private void OnDisable()
@@ -22,9 +21,8 @@ public class FloraSlowSkill : FloraSkillBase
         foreach (var monster in MonstersInRange)
         {
             if (monster == null) continue;
-            if (!monster.TryGetComponent<MonsterStat>(out var stat)) continue;
 
-            stat.ModifyMoveSpeed(_slowAmount);
+            monster.ChangeMoveSpeed(_slowAmount);
         }
 
         MonstersInRange.Clear();

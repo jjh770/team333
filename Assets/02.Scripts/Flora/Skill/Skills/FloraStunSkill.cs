@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class FloraStunSkill : FloraSkillBase
@@ -9,9 +7,8 @@ public class FloraStunSkill : FloraSkillBase
     [SerializeField] private float _stunInterval = 2f;
     [SerializeField] private float _stunDuration = 0.5f;
 
-    private readonly Dictionary<MonsterController, float> _originalSpeeds = new();
     private Coroutine _stunRoutine;
-    
+
     private void OnEnable()
     {
         _stunRoutine = StartCoroutine(StunRoutine());
@@ -25,7 +22,6 @@ public class FloraStunSkill : FloraSkillBase
             _stunRoutine = null;
         }
 
-        ReleaseStun();
         MonstersInRange.Clear();
     }
 
@@ -35,54 +31,18 @@ public class FloraStunSkill : FloraSkillBase
         {
             yield return new WaitForSeconds(_stunInterval);
 
-            ApplyStun();
+            foreach (var monster in MonstersInRange)
+            {
+                if (monster == null) continue;
 
-            yield return new WaitForSeconds(_stunDuration);
-
-            ReleaseStun();
+                monster.ApplyStun(_stunDuration);
+            }
         }
     }
 
-    private void ApplyStun()
-    {
-        _originalSpeeds.Clear();
+    protected override void OnMonsterEnter(BadMonsterController monster) { }
 
-        foreach (var monster in new List<MonsterController>(MonstersInRange))
-        {
-            if (monster == null) continue;
-            if (!monster.TryGetComponent<MonsterStat>(out var stat)) continue;
-
-            _originalSpeeds[monster] = stat.MoveSpeed.Value;
-            stat.SetMoveSpeed(0f);
-        }
-    }
-
-    private void ReleaseStun()
-    {
-        foreach (var speeds in _originalSpeeds.ToList())
-        {
-            var monster = speeds.Key;
-            var originalSpeed = speeds.Value;
-
-            if (monster == null) continue;
-            if (!monster.TryGetComponent<MonsterStat>(out var stat)) continue;
-
-            stat.SetMoveSpeed(originalSpeed);
-        }
-
-        _originalSpeeds.Clear();
-    }
-
-    protected override void OnMonsterEnter(MonsterController monster) { }
-
-    protected override void OnMonsterExit(MonsterController monster)
-    {
-        if (!_originalSpeeds.TryGetValue(monster, out var originalSpeed)) return;
-        if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
-
-        stat.SetMoveSpeed(originalSpeed);
-        _originalSpeeds.Remove(monster);
-    }
+    protected override void OnMonsterExit(BadMonsterController monster) { }
 
 #if UNITY_EDITOR
     protected override void OnDrawGizmosSelected()
