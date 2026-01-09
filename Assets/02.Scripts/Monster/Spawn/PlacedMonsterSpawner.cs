@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PlacedMonsterSpawner : MonoBehaviour
+public class PlacedMonsterSpawner : BaseMonsterSpawner
 {
-    [SerializeField] private PoolManager _poolManager;
-
     [Header("Bad Monster")]
     [SerializeField] private GameObject _badMonster;
     [SerializeField] private Transform[] _badMonsterPoints;
@@ -22,7 +19,6 @@ public class PlacedMonsterSpawner : MonoBehaviour
         SpawnBully();
     }
 
-
     [ContextMenu("Spawn Placed Bad Monsters")]
     private void SpawnPlacedMonster()
     {
@@ -34,9 +30,7 @@ public class PlacedMonsterSpawner : MonoBehaviour
 
         foreach (var point in spawnPoints)
         {
-            Vector3 position = GetNavMeshPosition(point.position);
-            GameObject monster = _poolManager.Get(_badMonster, position, point.rotation);
-            SubscribeOnDie(monster);
+            SpawnMonster(_badMonster, point.position, point.rotation);
         }
     }
 
@@ -55,37 +49,10 @@ public class PlacedMonsterSpawner : MonoBehaviour
 
             foreach (var point in spawnPoints)
             {
-                Vector3 pos = GetNavMeshPosition(point.position);
-                GameObject monster = _poolManager.Get(bullyPrefab, pos, point.rotation);
-                SubscribeOnDie(monster);
+                SpawnMonster(bullyPrefab, point.position, point.rotation);
             }
         }
     }
-
-    private void SubscribeOnDie(GameObject monster)
-    {
-        if (monster.TryGetComponent(out BadMonsterController controller))
-        {
-            controller.OnDie += HandleMonsterDie;
-        }
-    }
-
-    private void HandleMonsterDie(BadMonsterController controller)
-    {
-        controller.OnDie -= HandleMonsterDie;
-        _poolManager.Return(controller.gameObject);
-    }
-
-    private Vector3 GetNavMeshPosition(Vector3 position)
-    {
-        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-        {
-            return hit.position;
-        }
-        return position;
-    }
-
-    // --------- Helpers ---------
 
     private List<Transform> PickUniquePoints(Transform[] points, int count)
     {

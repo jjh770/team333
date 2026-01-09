@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-public class TraceMonsterSpawner : MonoBehaviour, IMonsterSpawner
+public class TraceMonsterSpawner : BaseMonsterSpawner, IMonsterSpawner
 {
     [Header("Monsters")]
     [SerializeField] private GameObject[] _monsterPrefabs;
@@ -13,21 +13,6 @@ public class TraceMonsterSpawner : MonoBehaviour, IMonsterSpawner
 
     [Header("Spawn Groups")]
     [SerializeField] private SpawnGroup[] _spawnGroups;
-
-    [Header("Dependencies")]
-    [SerializeField] private MonoBehaviour _poolManagerComponent;
-
-    private IPoolManager _poolManager;
-
-    private void Awake()
-    {
-        if (_poolManagerComponent is not IPoolManager manager)
-        {
-            Debug.LogError("할당된 PoolManager 컴포넌트가 IPoolManager를 구현하지 않았습니다.", this);
-            return;
-        }
-        _poolManager = manager;
-    }
 
     private void Start()
     {
@@ -64,19 +49,8 @@ public class TraceMonsterSpawner : MonoBehaviour, IMonsterSpawner
             GameObject prefab = GetRandomPrefab();
             if (prefab == null) continue;
 
-            GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
-
-            if (spawned.TryGetComponent<BadMonsterController>(out var monster))
-            {
-                monster.OnDie += HandleMonsterDie;
-            }
+            SpawnMonster(prefab, point.position, point.rotation);
         }
-    }
-
-    private void HandleMonsterDie(BadMonsterController monster)
-    {
-        monster.OnDie -= HandleMonsterDie;
-        _poolManager.Return(monster.gameObject);
     }
 
     private GameObject GetRandomPrefab()

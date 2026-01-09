@@ -2105,6 +2105,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
+      propertyPath: _poolManager
+      value: 
+      objectReference: {fileID: 2021056260}
+    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: _poolManagerComponent
       value: 
       objectReference: {fileID: 2021056260}
