@@ -40,15 +40,19 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
         if (_bully == null || _bully.Length == 0) return;
         if (_bullyPoints == null || _bullyPoints.Length == 0) return;
 
+        int totalSpawnCount = _bully.Length * _bullyCount;
+        totalSpawnCount = Mathf.Clamp(totalSpawnCount, 0, _bullyPoints.Length);
+
+        var allPoints = PickUniquePoints(_bullyPoints, totalSpawnCount);
+        int pointIndex = 0;
+
         foreach (var bullyPrefab in _bully)
         {
             if (bullyPrefab == null) continue;
 
-            int spawnCount = Mathf.Clamp(_bullyCount, 0, _bullyPoints.Length);
-            var spawnPoints = PickUniquePoints(_bullyPoints, spawnCount);
-
-            foreach (var point in spawnPoints)
+            for (int i = 0; i < _bullyCount && pointIndex < allPoints.Count; i++)
             {
+                var point = allPoints[pointIndex++];
                 SpawnMonster(bullyPrefab, point.position, point.rotation);
             }
         }
