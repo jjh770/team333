@@ -78,7 +78,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && _canAttack && _stateManager.CanAttack)
+        if (Input.GetMouseButton(0) && _canAttack && _stateManager.CanAttack)
         {
             _rotateToMouse.RotateTowardsMouse();
             StartAttack();
@@ -99,11 +99,6 @@ public class PlayerAttack : MonoBehaviour
         _comboIndex = 0;
     }
 
-    private void StartAttackAnimation()
-    {
-        _stateManager.ChangeState(PlayerState.Attacking);
-    }
-
     private void FinishAttack()
     {
         _stateManager.ChangeState(PlayerState.Idle);
@@ -120,8 +115,6 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     public void OnAttackAnimationStart()
     {
-        StartAttackAnimation();
-
         // 공격 이동 시작
         _playerMove.StartAttackMovement(_comboIndex);
     }

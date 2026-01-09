@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PlayerStat))]
 public class PlayerHealthBar : MonoBehaviour
 {
-    [Header("체력 게이지")]
+    [Header("체력 바 설정")]
     [SerializeField] private Transform _healthBarTransform;
     [SerializeField] private Image _gaugeImage;
     [SerializeField] private float _duration = 0.3f;

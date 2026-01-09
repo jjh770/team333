@@ -14,9 +14,6 @@ public class PlayerAttackRange : MonoBehaviour
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private LayerMask _monsterLayers;
 
-    [Header("Visual Feedback")]
-    [SerializeField] private bool _showGizmos = true;
-
     [Header("Continuous Detection")]
     [SerializeField] private bool _enableContinuousDetection = true;
     [Tooltip("프레임당 체크 간격 (0 = 매 프레임)")]

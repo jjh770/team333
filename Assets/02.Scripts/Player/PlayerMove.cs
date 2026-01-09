@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
                 _stateManager.ChangeState(PlayerState.Idle);
             }
 
-            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving))
+            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.Attacking))
             {
                 _animatorController.MoveAnimation(false);
             }
@@ -200,7 +200,8 @@ public class PlayerMove : MonoBehaviour
 
             previousValue = currentValue;
         })
-        .SetEase(_attackData.AttackMoveEase[comboIndex]);
+        .SetEase(_attackData.AttackMoveEase[comboIndex])
+        .OnKill(() => _attackMoveTween = null);
     }
 
     /// <summary>

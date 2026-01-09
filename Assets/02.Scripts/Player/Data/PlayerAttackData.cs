@@ -44,25 +44,17 @@ public class PlayerAttackData : ScriptableObject
     // 유효성 검증
     private void OnValidate()
     {
-        // 배열 길이 검증
-        if (AttackAngle.Length != MaxComboCount)
-        {
-            Debug.LogWarning($"AttackAngle 배열 크기({AttackAngle.Length})가 MaxComboCount({MaxComboCount})와 다릅니다!");
-        }
+        ValidateArrayLength(AttackAngle, nameof(AttackAngle));
+        ValidateArrayLength(ComboDamageMultipliers, nameof(ComboDamageMultipliers));
+        ValidateArrayLength(AttackMoveDistance, nameof(AttackMoveDistance));
+        ValidateArrayLength(AttackMoveEase, nameof(AttackMoveEase));
+    }
 
-        if (ComboDamageMultipliers.Length != MaxComboCount)
+    private void ValidateArrayLength(System.Array array, string arrayName)
+    {
+        if (array.Length != MaxComboCount)
         {
-            Debug.LogWarning($"ComboDamageMultipliers 배열 크기({ComboDamageMultipliers.Length})가 MaxComboCount({MaxComboCount})와 다릅니다!");
-        }
-
-        if (AttackMoveDistance.Length != MaxComboCount)
-        {
-            Debug.LogWarning($"AttackMoveDistance 배열 크기({AttackMoveDistance.Length})가 MaxComboCount({MaxComboCount})와 다릅니다!");
-        }
-
-        if (AttackMoveEase.Length != MaxComboCount)
-        {
-            Debug.LogWarning($"AttackMoveEase 배열 크기({AttackMoveEase.Length})가 MaxComboCount({MaxComboCount})와 다릅니다!");
+            Debug.LogWarning($"{arrayName} 배열의 크기({array.Length})가 MaxComboCount({MaxComboCount})와 다릅니다.");
         }
     }
 }

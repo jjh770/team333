@@ -12,6 +12,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     [SerializeField] private float _flashInterval = 0.1f;
 
     private PlayerStat _playerStat;
+    private PlayerStateManager _stateManager;
     private bool _isDamaged;
     private bool _isInvincible;
     private Renderer[] _renderers;
@@ -22,6 +23,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     private void Awake()
     {
         _playerStat = GetComponent<PlayerStat>();
+        _stateManager = GetComponent<PlayerStateManager>();
         _renderers = GetComponentsInChildren<Renderer>();
     }
 
@@ -36,11 +38,14 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
 
     public bool TryTakeDamage(Damage damage)
     {
-        if (damage.Value <= 0)
+        if (_stateManager.IsState(PlayerState.Die))
             return false;
 
         // 무적 상태면 데미지 무시
         if (_isInvincible)
+            return false;
+
+        if (damage.Value <= 0)
             return false;
 
         _playerStat.DecreaseHealth(damage.Value);
