@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FloraStunSkill : FloraSkillBase
@@ -10,7 +11,6 @@ public class FloraStunSkill : FloraSkillBase
 
     private readonly Dictionary<MonsterController, float> _originalSpeeds = new();
     private Coroutine _stunRoutine;
-    private bool _isStunActive;
     
     private void OnEnable()
     {
@@ -26,7 +26,6 @@ public class FloraStunSkill : FloraSkillBase
         }
 
         ReleaseStun();
-        _originalSpeeds.Clear();
         MonstersInRange.Clear();
     }
 
@@ -46,10 +45,9 @@ public class FloraStunSkill : FloraSkillBase
 
     private void ApplyStun()
     {
-        _isStunActive = true;
         _originalSpeeds.Clear();
 
-        foreach (var monster in MonstersInRange)
+        foreach (var monster in new List<MonsterController>(MonstersInRange))
         {
             if (monster == null) continue;
             if (!monster.TryGetComponent<MonsterStat>(out var stat)) continue;
@@ -61,9 +59,7 @@ public class FloraStunSkill : FloraSkillBase
 
     private void ReleaseStun()
     {
-        _isStunActive = false;
-
-        foreach (var speeds in _originalSpeeds)
+        foreach (var speeds in _originalSpeeds.ToList())
         {
             var monster = speeds.Key;
             var originalSpeed = speeds.Value;
