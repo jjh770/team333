@@ -6,13 +6,13 @@ public class FloraSlowAuraSkill : FloraSkillBase
     [Header("Slow Settings")]
     [SerializeField] private float _slowAmount = 2f;
     
-    protected override void OnMonsterEnter(Monster monster)
+    protected override void OnMonsterEnter(MonsterController monster)
     {
         if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
         stat.ModifyMoveSpeed(-_slowAmount);
     }
 
-    protected override void OnMonsterExit(Monster monster)
+    protected override void OnMonsterExit(MonsterController monster)
     {
         if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
         stat.ModifyMoveSpeed(_slowAmount);

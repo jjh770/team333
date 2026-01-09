@@ -18,14 +18,6 @@ public class MonsterStat : MonoBehaviour
         remove => Health.OnValueChanged -= value;
     }
 
-    public event Action<float> OnMoveSpeedChanged
-    {
-        add => MoveSpeed.OnValueChanged += value;
-        remove => MoveSpeed.OnValueChanged -= value;
-    }
-
-    public event Action OnDeath;
-
     private void OnEnable()
     {
         if (_data == null)
@@ -45,21 +37,20 @@ public class MonsterStat : MonoBehaviour
         MoveSpeed.SetValue(value);
     }
 
-    public void ModifyMoveSpeed(float amount)
+    public void ChangeMoveSpeed(float amount)
     {
-        if (amount >= 0)
-            MoveSpeed.Increase(amount);
-        else
-            MoveSpeed.Decrease(-amount);
-    }
-
-    public void DecreaseHealth(float amount)
-    {
-        Health.Decrease(amount);
-
-        if (Health.IsEmpty)
+        if(amount >= 0)
         {
-            OnDeath?.Invoke();
+            MoveSpeed.Increase(amount);
+        }
+        else
+        {
+            MoveSpeed.Decrease(-amount);
         }
     }
+    public void TakeDamage(float amount)
+    {
+        Health.Decrease(amount);
+    }
+
 }

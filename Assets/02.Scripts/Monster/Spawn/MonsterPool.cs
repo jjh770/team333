@@ -66,16 +66,14 @@ public class MonsterPool : MonoBehaviour, IMonsterSpawner
 
             GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
 
-            // 소환될 때 OnDie 구독
-            if (spawned != null && spawned.TryGetComponent<MonsterController>(out var monster))
+            if (spawned.TryGetComponent<BadMonsterController>(out var monster))
             {
                 monster.OnDie += HandleMonsterDie;
             }
         }
     }
 
-    // 죽을 때 OnDie 해제
-    private void HandleMonsterDie(MonsterController monster)
+    private void HandleMonsterDie(BadMonsterController monster)
     {
         monster.OnDie -= HandleMonsterDie;
         _poolManager.Return(monster.gameObject);

@@ -1,0 +1,64 @@
+﻿using UnityEngine;
+
+public class GoodMonsterController : BaseMonsterController
+{
+    private void Update()
+    {
+        UpdateState();
+        _move.UpdateMove();
+    }
+
+    override protected void UpdateState()
+    {
+        MonsterState newState = GetCurrentState();
+
+        if (_currentState != newState)
+        {
+            ApplyState(newState);
+        }
+    }
+
+    override protected MonsterState GetCurrentState()
+    {
+        if (_move.IsMoving) return MonsterState.Move;
+        return MonsterState.Idle;
+    }
+
+    override protected void FindTarget()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject == null) return;
+
+        Transform player = playerObject.transform;
+        _move.SetTarget(player);
+    }
+
+    override public void OnSpawn()
+    {
+        FindTarget();
+        ResetState();
+        _agent.enabled = true;
+    }
+
+    override public void OnDespawn()
+    {
+        StopAllRoutines();
+        _agent.enabled = false;
+    }
+
+    override protected void StopAllRoutines()
+    {
+        // Todo. StopAllRoutines
+    }
+
+    override protected void ApplyState(MonsterState newState)
+    {
+        _currentState = newState;
+        _animator.SetInteger(s_animationHash, (int)_currentState);
+    }
+
+    override protected void ResetState()
+    {
+        ApplyState(MonsterState.Idle);
+    }
+}
