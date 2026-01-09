@@ -13,8 +13,8 @@ public class Wood : ItemBase
     {
         if (_isHeld) return;
         
-        if (!other.collider.CompareTag(FloraTag)) return;
-        if (!other.collider.TryGetComponent<FloraInteraction>(out var interaction)) return;
+        if (!other.gameObject.CompareTag(FloraTag)) return;
+        if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
         interaction.AddWood(_addWoodAmount);
         Destroy(gameObject);

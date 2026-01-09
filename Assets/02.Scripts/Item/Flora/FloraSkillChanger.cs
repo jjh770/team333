@@ -9,8 +9,8 @@ public class FloraSkillChanger : ItemBase
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.collider.CompareTag(FloraTag)) return;
-        if (!other.collider.TryGetComponent<FloraInteraction>(out var interaction)) return;
+        if (!other.gameObject.CompareTag(FloraTag)) return;
+        if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
         interaction.SetSkill(_skillPrefab);
 
