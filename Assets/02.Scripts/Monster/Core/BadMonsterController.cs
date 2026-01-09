@@ -142,6 +142,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
         _stat.TakeDamage(damage.Value);
         _damage.FlashWhite();
+        _attack.InitCooltime();
 
         if (!_damage.IsDamaged)
         {
