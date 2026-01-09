@@ -18,6 +18,6 @@ public class UI_SpeedGauge : MonoBehaviour
     
     private void UpdateUI(float current, float max)
     {
-        _speedGaugeSlider.value = current / max;
+        _speedGaugeSlider.value = max > 0f ? current / max : 0f;
     }
 }
