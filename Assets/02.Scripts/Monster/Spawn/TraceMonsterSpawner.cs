@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class MonsterPool : MonoBehaviour, IMonsterSpawner
+public class TraceMonsterSpawner : MonoBehaviour, IMonsterSpawner
 {
     [Header("Monsters")]
     [SerializeField] private GameObject[] _monsterPrefabs;

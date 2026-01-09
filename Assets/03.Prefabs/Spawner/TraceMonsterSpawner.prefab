@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5209801935537030833}
   - component: {fileID: 3563033049080075564}
   m_Layer: 0
-  m_Name: MonsterPool
+  m_Name: TraceMonsterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
