@@ -21,10 +21,14 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     private bool _isDead;
     public bool IsDead => _isDead;
 
+    private bool _isStunned;
+    public bool IsStunned => _isStunned;
+
     public event Action<BadMonsterController> OnDie;
 
     private Coroutine _deathRoutine;
     private Coroutine _damageRoutine;
+    private Coroutine _stunRoutine;
 
     override protected void Awake()
     {
@@ -64,6 +68,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _agent.isStopped = false;
         _agent.speed = _stat.MoveSpeed.Value;
         _isDead = false;
+        _isStunned = false;
 
         ApplyState(MonsterState.Idle);
     }
@@ -80,12 +85,19 @@ public class BadMonsterController : BaseMonsterController, IDamageable
             StopCoroutine(_damageRoutine);
             _damageRoutine = null;
         }
+        if (_stunRoutine != null)
+        {
+            StopCoroutine(_stunRoutine);
+            _stunRoutine = null;
+            _isStunned = false;
+        }
     }
 
     private void Update()
     {
         UpdateState();
 
+        if (_isStunned) return;
         if (_damage.IsDamaged) return;
 
         _move.UpdateMove();
@@ -93,18 +105,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         if (_attack.TryAttack())
         {
             _move.LookAtTargetImmediate();
-        }
-
-        // 테스트용 코드
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            var testDamage = new Damage(30f, null);
-            bool ok = TryTakeDamage(testDamage);
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            ChangeMoveSpeed(-1);
         }
     }
 
@@ -121,6 +121,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     override protected MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;
+        if (_isStunned) return MonsterState.Idle;
         if (_damage.IsDamaged) return MonsterState.Damage;
         if (_attack.IsAttacking) return MonsterState.Attack;
         if (_move.IsMoving) return MonsterState.Move;
@@ -186,5 +187,27 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     {
         _stat.ChangeMoveSpeed(amount);
         _agent.speed = _stat.GetMoveSpeed();
+    }
+
+    public void ApplyStun(float duration)
+    {
+        if (_stunRoutine != null)
+        {
+            StopCoroutine(_stunRoutine);
+        }
+        _stunRoutine = StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        _isStunned = true;
+        _agent.isStopped = true;
+        _agent.ResetPath();
+
+        yield return new WaitForSeconds(duration);
+
+        _isStunned = false;
+        _agent.isStopped = false;
+        _stunRoutine = null;
     }
 }

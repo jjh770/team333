@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
@@ -10,6 +9,7 @@ public class MonsterAttackComponent : MonoBehaviour
 
     private MonsterStat _stat;
     private Transform _target;
+    private IDamageable _targetDamageable;
     private float _lastAttackTime;
 
     private bool _isAttacking;
@@ -23,6 +23,7 @@ public class MonsterAttackComponent : MonoBehaviour
     public void SetTarget(Transform target)
     {
         _target = target;
+        _targetDamageable = target != null ? target.GetComponent<IDamageable>() : null;
     }
 
     public bool TryAttack()
@@ -44,7 +45,11 @@ public class MonsterAttackComponent : MonoBehaviour
         _isAttacking = true;
         _lastAttackTime = Time.time;
 
-        // Todo: 플레이어에게 데미지 입히기
+        if (_targetDamageable != null)
+        {
+            Damage damage = new Damage(_stat.GetAttackDamage(), transform.gameObject);
+            _targetDamageable.TryTakeDamage(damage);
+        }
 
         StartCoroutine(AttackCoroutine());
     }
