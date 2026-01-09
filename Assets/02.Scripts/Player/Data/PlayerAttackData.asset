@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8200e95e324a749a8e20735df57fbf, type: 3}
+  m_Name: PlayerAttackData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackData
+  <AttackDamage>k__BackingField: 10
+  <AttackRange>k__BackingField: 2
+  <AttackAngle>k__BackingField:
+  - 120
+  - 120
+  - 360
+  <MaxComboCount>k__BackingField: 3
+  <ComboWindowTime>k__BackingField: 3
+  <ComboDamageMultipliers>k__BackingField:
+  - 1
+  - 1.2
+  - 1.5
+  <AttackMoveDistance>k__BackingField:
+  - 1
+  - 1.5
+  - 2
+  <AttackMoveEase>k__BackingField: 1b0000001b0000001a000000

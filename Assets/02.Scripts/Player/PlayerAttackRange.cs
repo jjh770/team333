@@ -7,42 +7,72 @@ using UnityEngine;
 /// </summary>
 public class PlayerAttackRange : MonoBehaviour
 {
-    [Header("Attack Range Settings")]
-    [SerializeField] private float _attackRange = 3f;
-    [SerializeField] private float _attackAngle = 90f;
+    [Header("Data")]
+    [SerializeField] private PlayerAttackData _attackData;
+
+    [Header("Attack Point")]
     [SerializeField] private Transform _attackPoint;
-    [SerializeField] private LayerMask _enemyLayers;
+    [SerializeField] private LayerMask _monsterLayers;
 
-    [Header("Damage Settings")]
-    [SerializeField] private float _baseDamage = 20f;
-    [SerializeField] private float[] _comboDamageMultipliers = { 1f, 1.2f, 1.5f }; // 1타, 2타, 3타 데미지 배율
-
-    [Header("Visual Feedback")]
-    [SerializeField] private bool _showGizmos = true;
+    [Header("Continuous Detection")]
+    [SerializeField] private bool _enableContinuousDetection = true;
+    [Tooltip("프레임당 체크 간격 (0 = 매 프레임)")]
+    [SerializeField] private int _checkInterval = 2;
 
     private HashSet<Collider> _hitEnemiesThisAttack = new HashSet<Collider>();
+    private bool _isAttacking = false;
+    private int _currentComboIndex = 0;
+    private int _frameCounter = 0;
+
+    private void Update()
+    {
+        if (_enableContinuousDetection && _isAttacking)
+        {
+            _frameCounter++;
+
+            // 체크 간격마다 판정 수행
+            if (_frameCounter > _checkInterval)
+            {
+                _frameCounter = 0;
+                CheckHitDetection();
+            }
+        }
+    }
 
     /// <summary>
-    /// 공격 실행 - PlayerAttack에서 호출
+    /// 공격 시작 - PlayerAttack에서 호출
+    /// 연속 판정을 시작하고 히트 기록 초기화
     /// </summary>
-    /// <param name="comboIndex">현재 콤보 인덱스 (0, 1, 2)</param>
-    public void PerformAttack(int comboIndex)
+    public void StartAttack(int comboIndex)
     {
-        if (_attackPoint == null)
-        {
-            Debug.LogWarning("Attack Point is not assigned!");
-            return;
-        }
-
-        // 이전 공격의 히트 기록 초기화
+        _isAttacking = true;
+        _currentComboIndex = comboIndex;
+        _frameCounter = 0;
         _hitEnemiesThisAttack.Clear();
+    }
+
+    /// <summary>
+    /// 공격 종료 - PlayerAttack에서 호출
+    /// 연속 판정을 멈추고 히트 기록 유지
+    /// </summary>
+    public void StopAttack()
+    {
+        _isAttacking = false;
+    }
+
+    /// <summary>
+    /// 연속 판정 체크 (매 프레임 또는 간격마다 실행)
+    /// </summary>
+    private void CheckHitDetection()
+    {
+        if (_attackPoint == null) return;
 
         // 범위 내 적 탐지
-        Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackRange, _enemyLayers);
+        Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackData.AttackRange, _monsterLayers);
 
         foreach (Collider col in hitColliders)
         {
-            // 이미 이번 공격에서 맞은 적은 스킵
+            // 중복 방지
             if (_hitEnemiesThisAttack.Contains(col))
                 continue;
 
@@ -51,15 +81,15 @@ public class PlayerAttackRange : MonoBehaviour
             float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
 
             // 공격 각도 범위 내에 있는지 체크
-            if (angleToTarget <= _attackAngle / 2f)
+            if (angleToTarget <= _attackData.AttackAngle[_currentComboIndex] / 2f)
             {
                 // 데미지 계산
-                float damage = CalculateDamage(comboIndex);
+                float damage = CalculateDamage(_currentComboIndex);
 
                 // 적에게 데미지 적용
-                ApplyDamage(col.gameObject, damage, comboIndex);
+                ApplyDamage(col.gameObject, damage, _currentComboIndex);
 
-                // 히트 기록
+                // 히트 기록 (같은 적을 다시 맞지 않도록)
                 _hitEnemiesThisAttack.Add(col);
             }
         }
@@ -71,8 +101,8 @@ public class PlayerAttackRange : MonoBehaviour
     private float CalculateDamage(int comboIndex)
     {
         // 콤보 인덱스가 배열 범위를 벗어나지 않도록 체크
-        int safeIndex = Mathf.Clamp(comboIndex, 0, _comboDamageMultipliers.Length - 1);
-        return _baseDamage * _comboDamageMultipliers[safeIndex];
+        int safeIndex = Mathf.Clamp(comboIndex, 0, _attackData.ComboDamageMultipliers.Length - 1);
+        return _attackData.AttackDamage * _attackData.ComboDamageMultipliers[safeIndex];
     }
 
     /// <summary>
@@ -80,62 +110,15 @@ public class PlayerAttackRange : MonoBehaviour
     /// </summary>
     private void ApplyDamage(GameObject target, float damage, int comboIndex)
     {
-        // TODO: 적의 Health 컴포넌트에 데미지 전달
-        // 예: target.GetComponent<EnemyHealth>()?.TakeDamage(damage);
-
-        Debug.Log($"Combo {comboIndex + 1} Hit: {target.name} for {damage} damage!");
-
-        // 현재는 임시로 로그만 출력
-        // 나중에 적 컴포넌트가 생기면 아래처럼 사용:
-        // if (target.TryGetComponent<Enemy>(out Enemy enemy))
-        // {
-        //     enemy.TakeDamage(damage);
-        // }
-    }
-
-    /// <summary>
-    /// 특정 위치에서 공격 (스킬이나 특수 공격용)
-    /// </summary>
-    public void PerformAttackAtPosition(Vector3 position, int comboIndex)
-    {
-        _hitEnemiesThisAttack.Clear();
-
-        Collider[] hitColliders = Physics.OverlapSphere(position, _attackRange, _enemyLayers);
-
-        foreach (Collider col in hitColliders)
+        Damage takeDamage = new Damage(damage, gameObject);
+        if (target.TryGetComponent<MonsterDamageComponent>(out var damageable))
         {
-            if (_hitEnemiesThisAttack.Contains(col))
-                continue;
-
-            float damage = CalculateDamage(comboIndex);
-            ApplyDamage(col.gameObject, damage, comboIndex);
-            _hitEnemiesThisAttack.Add(col);
+            damageable.TryTakeDamage(takeDamage);
         }
     }
 
-    /// <summary>
-    /// 공격 범위 시각화 (에디터 전용)
-    /// </summary>
-    private void OnDrawGizmosSelected()
-    {
-        if (!_showGizmos || _attackPoint == null)
-            return;
-
-        // 공격 범위 구체
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(_attackPoint.position, _attackRange);
-
-        // 공격 각도 범위 시각화
-        Vector3 leftBoundary = Quaternion.Euler(0, -_attackAngle / 2f, 0) * transform.forward * _attackRange;
-        Vector3 rightBoundary = Quaternion.Euler(0, _attackAngle / 2f, 0) * transform.forward * _attackRange;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(_attackPoint.position, _attackPoint.position + leftBoundary);
-        Gizmos.DrawLine(_attackPoint.position, _attackPoint.position + rightBoundary);
-    }
-
     // 프로퍼티
-    public float AttackRange => _attackRange;
-    public float AttackAngle => _attackAngle;
-    public float BaseDamage => _baseDamage;
+    public float AttackRange => _attackData.AttackRange;
+    public float AttackAngle => _attackData.AttackAngle[_currentComboIndex];
+    public float BaseDamage => _attackData.AttackDamage;
 }

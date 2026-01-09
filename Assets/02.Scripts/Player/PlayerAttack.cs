@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("Combo Settings")]
-    [SerializeField] private int _maxComboCount = 3;
-    [SerializeField] private float _comboWindowTime = 3f;
+    [Header("Data")]
+    [SerializeField] private PlayerAttackData _attackData;
 
     private PlayerRotateToMouse _rotateToMouse;
     private PlayerAnimatorController _animatorController;
@@ -48,9 +47,15 @@ public class PlayerAttack : MonoBehaviour
             // 공격 이동 중단
             _playerMove.StopAttackMovement();
 
+            // 연속 판정 중단
+            if (_attackRange != null)
+            {
+                _attackRange.StopAttack();
+            }
+
             // 대시 캔슬 시 콤보 유지 (다음 타로 진행)
             _comboIndex++;
-            if (_comboIndex >= _maxComboCount)
+            if (_comboIndex >= _attackData.MaxComboCount)
             {
                 _comboIndex = 0;
             }
@@ -65,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void CheckComboTimeout()
     {
-        if (_comboIndex > 0 && Time.time - _lastAttackTime > _comboWindowTime)
+        if (_comboIndex > 0 && Time.time - _lastAttackTime > _attackData.ComboWindowTime)
         {
             ResetCombo();
         }
@@ -73,7 +78,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && _canAttack && _stateManager.CanAttack)
+        if (Input.GetMouseButton(0) && _canAttack && _stateManager.CanAttack)
         {
             _rotateToMouse.RotateTowardsMouse();
             StartAttack();
@@ -94,11 +99,6 @@ public class PlayerAttack : MonoBehaviour
         _comboIndex = 0;
     }
 
-    private void StartAttackAnimation()
-    {
-        _stateManager.ChangeState(PlayerState.Attacking);
-    }
-
     private void FinishAttack()
     {
         _stateManager.ChangeState(PlayerState.Idle);
@@ -111,33 +111,40 @@ public class PlayerAttack : MonoBehaviour
     }
 
     /// <summary>
-    /// 애니메이션 이벤트: 공격 시작
+    /// 애니메이션 이벤트: 공격 시작 (애니메이션 시작)
     /// </summary>
     public void OnAttackAnimationStart()
     {
-        StartAttackAnimation();
-
         // 공격 이동 시작
         _playerMove.StartAttackMovement(_comboIndex);
     }
 
     /// <summary>
-    /// 애니메이션 이벤트: 공격 판정
+    /// 애니메이션 이벤트: 공격 판정 (칼을 정확히 휘두르기 시작)
+    /// 연속 판정 시작 (움직이는 동안 계속 체크)
     /// </summary>
-    public void OnAttackHit()
+    public void OnAttackHitStart()
     {
         if (_attackRange != null)
         {
-            _attackRange.PerformAttack(_comboIndex);
-        }
-        else
-        {
-            Debug.LogWarning("PlayerAttackRange component is missing!");
+            _attackRange.StartAttack(_comboIndex);
         }
     }
 
     /// <summary>
-    /// 애니메이션 이벤트: 1, 2타 종료
+    /// 애니메이션 이벤트: 공격 판정 끝 (칼을 모두 휘두름)
+    /// 연속 판정 종료
+    /// </summary>
+    public void OnAttackHitFinish()
+    {
+        if (_attackRange != null)
+        {
+            _attackRange.StopAttack();
+        }
+    }
+
+    /// <summary>
+    /// 애니메이션 이벤트: 1, 2타 종료 (애니메이션 끝)
     /// </summary>
     public void OnAttackAnimationEnd()
     {
@@ -145,14 +152,14 @@ public class PlayerAttack : MonoBehaviour
         FinishAttack();
 
         _comboIndex++;
-        if (_comboIndex >= _maxComboCount)
+        if (_comboIndex >= _attackData.MaxComboCount)
         {
             _comboIndex = 0;
         }
     }
 
     /// <summary>
-    /// 애니메이션 이벤트: 마지막 공격 종료
+    /// 애니메이션 이벤트: 3타 종료 (애니메이션 끝)
     /// </summary>
     public void OnFinishAttackAnimationEnd()
     {

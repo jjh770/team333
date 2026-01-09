@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2de98ffaea6b0346b166149a229b9b6, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  <Stats>k__BackingField: {fileID: 11400000, guid: e6b4afd5434a57c408d1427e307cf5df, type: 2}
+  <Attack>k__BackingField: {fileID: 11400000, guid: c2bc743208c9de645ad056059a9016df, type: 2}
+  <Dash>k__BackingField: {fileID: 11400000, guid: 8eb7d82191f53134f8c569736c7c3314, type: 2}
+  <Move>k__BackingField: {fileID: 11400000, guid: 5858733b1ce8e8f498aa40aa0c47678f, type: 2}
+  <Prefab>k__BackingField: {fileID: 8199843730985661094, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}

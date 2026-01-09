@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    [Header("Dash Settings")]
-    [SerializeField] private float _dashSpeed = 10f;
-    [SerializeField] private float _dashDuration = 0.5f;
-    [SerializeField] private float _dashCooldown = 1f;
-
-    [Header("Camera Boundary")]
-    [SerializeField] private float _viewportMargin = 0.05f;
+    [Header("Data")]
+    [SerializeField] private PlayerDashData _dashData;
+    [SerializeField] private PlayerMoveData _moveData;
 
     private PlayerAnimatorController _animatorController;
     private CharacterController _controller;
@@ -68,9 +64,9 @@ public class PlayerDash : MonoBehaviour
         // PlayerAttack이 OnStateChanged 이벤트를 구독하여 자동으로 공격 캔슬
         _stateManager.ChangeState(PlayerState.Dashing);
 
-        _dashTimer = _dashDuration;
+        _dashTimer = _dashData.DashDuration;
         _dashDirection = direction;
-        _dashCooldownTimer = _dashCooldown;
+        _dashCooldownTimer = _dashData.DashCoolDown;
         _animatorController.DashAnimation();
 
         transform.rotation = Quaternion.LookRotation(direction);
@@ -86,11 +82,11 @@ public class PlayerDash : MonoBehaviour
             return;
         }
 
-        Vector3 dashMove = _dashDirection * _dashSpeed * Time.deltaTime;
+        Vector3 dashMove = _dashDirection * _dashData.DashSpeed * Time.deltaTime;
 
         // 카메라 경계 내로 이동 벡터를 클램핑
         Vector3 clampedDashMove = CameraBoundsHelper.ClampMovementToCameraBounds(
-            transform.position, dashMove, _mainCamera, _viewportMargin);
+            transform.position, dashMove, _mainCamera, _moveData.ViewportMargin);
 
         _controller.Move(clampedDashMove);
     }

@@ -24,6 +24,11 @@ public class PlayerAnimatorController : MonoBehaviour
         _animator.SetInteger("AttackCombo", comboAttackNum);
     }
 
+    public void DieAnimation()
+    {
+        _animator.SetTrigger("Die");
+    }
+
     /// <summary>
     /// 현재 재생 중인 공격 애니메이션의 길이를 가져옴
     /// </summary>

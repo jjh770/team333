@@ -7,7 +7,8 @@ public enum PlayerState
     Idle,
     Moving,
     Attacking,
-    Dashing
+    Dashing,
+    Die
 }
 
 public class PlayerStateManager : MonoBehaviour
@@ -18,10 +19,10 @@ public class PlayerStateManager : MonoBehaviour
 
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
-
-    public bool CanMove => _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
-    public bool CanAttack => _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
-    public bool CanDash => _currentState != PlayerState.Dashing;
+    public bool IsDead => _currentState == PlayerState.Die;
+    public bool CanMove => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
+    public bool CanAttack => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
+    public bool CanDash => !IsDead && _currentState != PlayerState.Dashing;
 
     public void ChangeState(PlayerState newState)
     {
@@ -42,6 +43,9 @@ public class PlayerStateManager : MonoBehaviour
 
     private bool IsValidTransition(PlayerState from, PlayerState to)
     {
+        if (from == PlayerState.Die)
+            return false;
+
         // 외부 검증자들에게 먼저 검증 요청
         if (OnValidateStateChange != null)
         {
@@ -51,6 +55,10 @@ public class PlayerStateManager : MonoBehaviour
                     return false;
             }
         }
+
+        // Die 상태로는 어느 상태에서든 전환 가능
+        if (to == PlayerState.Die)
+            return true;
 
         // 기본 상태 전환 규칙 검증
         if (to == PlayerState.Idle)
@@ -71,7 +79,6 @@ public class PlayerStateManager : MonoBehaviour
             case PlayerState.Dashing:
                 // 대시 중에는 상태 전환 불가 (대시가 끝나야 함)
                 return false;
-
             default:
                 return false;
         }
