@@ -60,10 +60,6 @@ public class FloraSpeedGaugeController : MonoBehaviour
 
     private void OnGaugeValueChanged(float current, float max)
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        Debug.Log($"[Flora] Gauge: {current:F2} / {max:F2}");
-#endif
-
         GaugeChanged?.Invoke(current, max);
 
         EvaluateMultiplier(current);
