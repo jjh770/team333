@@ -12,7 +12,6 @@ public class FloraSlowSkill : FloraSkillBase
 
     protected override void OnMonsterExit(BadMonsterController monster)
     {
-        if (!monster.TryGetComponent<MonsterStat>(out var stat)) return;
         monster.ChangeMoveSpeed(_slowAmount);
     }
 
