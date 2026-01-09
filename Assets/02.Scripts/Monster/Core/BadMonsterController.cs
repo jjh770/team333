@@ -62,6 +62,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _agent.enabled = true;
         _agent.ResetPath();
         _agent.isStopped = false;
+        _agent.speed = _stat.MoveSpeed.Value;
         _isDead = false;
 
         ApplyState(MonsterState.Idle);
@@ -99,6 +100,11 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         {
             var testDamage = new Damage(30f, null);
             bool ok = TryTakeDamage(testDamage);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ChangeMoveSpeed(-1);
         }
     }
 
@@ -170,6 +176,15 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         OnDie.Invoke(this);
     }
 
-    public void SetMoveSpeed(float value) => _stat.SetMoveSpeed(value);
-    public void ChangeMoveSpeed(float amount) => _stat.ChangeMoveSpeed(amount);
+    public void SetMoveSpeed(float value)
+    {
+        _stat.SetMoveSpeed(value);
+        _agent.speed = _stat.GetMoveSpeed();
+    }
+
+    public void ChangeMoveSpeed(float amount)
+    {
+        _stat.ChangeMoveSpeed(amount);
+        _agent.speed = _stat.GetMoveSpeed();
+    }
 }

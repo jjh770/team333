@@ -11,6 +11,7 @@ public class MonsterStat : MonoBehaviour
     public ValueStat MoveSpeed { get; private set; } = new();
 
     public float GetAttackCooltime() => AttackCooltime.Value;
+    public float GetMoveSpeed() => MoveSpeed.Value;
 
     public event Action<float, float> OnHealthChanged
     {
