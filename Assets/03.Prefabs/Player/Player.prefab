@@ -6570,6 +6570,8 @@ GameObject:
   - component: {fileID: 1574357458763293867}
   - component: {fileID: 1790983908737419883}
   - component: {fileID: 6229917204903142099}
+  - component: {fileID: 7814041808843602986}
+  - component: {fileID: 1805365390455759174}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6817,7 +6819,6 @@ MonoBehaviour:
   - {fileID: 4962518582471307749}
   - {fileID: 5904420856373808656}
   _throwForce: 10
-  _pickUpThrowKey: 101
 --- !u!135 &6229917204903142099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6839,6 +6840,32 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7814041808843602986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86669b57c1a42b649bc51d8c026cb81a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponVisual
+  _weapon: {fileID: 8692825259112985568}
+--- !u!114 &1805365390455759174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cafc1af0f163c1458abb466abbd50c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  _interactKey: 101
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0

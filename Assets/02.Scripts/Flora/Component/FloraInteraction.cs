@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(FloraInventory))]
 [RequireComponent(typeof(FloraSpeedGaugeController))]
-public class FloraInteraction : MonoBehaviour
+public class FloraInteraction : MonoBehaviour, ITalkable
 {
     [Header("Wood Interaction Settings")]
     [SerializeField] private int _woodCost = 1;
@@ -12,6 +12,12 @@ public class FloraInteraction : MonoBehaviour
     private FloraSpeedGaugeController _gaugeController;
     private FloraMovement _movement;
     private FloraSkillController _skillController;
+
+    public InteractionType Type => InteractionType.Talk;
+
+    public Transform Transform => transform;
+
+    public bool CanInteract => true; // Todo : ÄðÅ¸ÀÓ? Á¶°Ç?
 
     private void Awake()
     {
@@ -38,7 +44,7 @@ public class FloraInteraction : MonoBehaviour
         }
 
         _gaugeController.TryAddGauge(_gaugeAmount);
-        
+
         return true;
     }
 
@@ -50,5 +56,11 @@ public class FloraInteraction : MonoBehaviour
     public void SetSkill(FloraSkillBase skill)
     {
         _skillController.SetSkill(skill);
+    }
+
+    public void Interact(GameObject interactor)
+    {
+        Debug.Log($"{interactor.name}");
+        TryFeedWood();
     }
 }

@@ -7,18 +7,19 @@ public class PlayerPickUpThrow : MonoBehaviour
     [SerializeField] private int _maxPickUpCount = 2;
     [SerializeField] private Transform[] _holdPoints;
     [SerializeField] private float _throwForce = 10f;
-    [SerializeField] private KeyCode _pickUpThrowKey = KeyCode.E;
 
     [Header("Debug")]
     [SerializeField] private List<IPickable> _heldObjects = new List<IPickable>();
-    [SerializeField] private List<IPickable> _nearbyPickables = new List<IPickable>();
 
     private PlayerStateManager _stateManager;
     private PlayerAnimatorController _animatorController;
     private PlayerRotateToMouse _rotateToMouse;
+    private PlayerInteraction _playerInteraction;
+
+    private IPickable _pendingPickable;
 
     public bool IsHoldingObject => _heldObjects.Count > 0;
-    public bool CanPickUp => _nearbyPickables.Count > 0 && _heldObjects.Count < _maxPickUpCount && _heldObjects.Count < _holdPoints.Length;
+    public bool CanPickUp => _heldObjects.Count < _maxPickUpCount && _heldObjects.Count < _holdPoints.Length;
     public int HeldCount => _heldObjects.Count;
 
     private void Awake()
@@ -26,26 +27,43 @@ public class PlayerPickUpThrow : MonoBehaviour
         _stateManager = GetComponent<PlayerStateManager>();
         _animatorController = GetComponent<PlayerAnimatorController>();
         _rotateToMouse = GetComponent<PlayerRotateToMouse>();
+        _playerInteraction = GetComponent<PlayerInteraction>();
+    }
+
+    private void OnEnable()
+    {
+        _playerInteraction.OnInteract += HandleInteract;
+    }
+
+    private void OnDisable()
+    {
+        _playerInteraction.OnInteract -= HandleInteract;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(_pickUpThrowKey))
+        // Throw 입력 처리 (PickUp 상태에서만)
+        if (Input.GetKeyDown(KeyCode.E) && IsHoldingObject && CanDoThrow() && !CanPickUpNearby())
         {
-            HandlePickUpThrowInput();
+            StartThrow();
         }
     }
 
-    private void HandlePickUpThrowInput()
+    private bool CanPickUpNearby()
     {
-        // PickUp이 Throw보다 우선
-        if (CanPickUp && CanDoPickUp())
+        var closest = _playerInteraction.ClosestInteractable;
+        return closest != null && closest is IPickable && CanPickUp && CanDoPickUp();
+    }
+
+    private void HandleInteract(IInteractable interactable)
+    {
+        if (interactable is IPickable pickable)
         {
-            StartPickUp();
-        }
-        else if (IsHoldingObject && CanDoThrow())
-        {
-            StartThrow();
+            if (CanPickUp && CanDoPickUp())
+            {
+                _pendingPickable = pickable;
+                StartPickUp();
+            }
         }
     }
 
@@ -77,18 +95,15 @@ public class PlayerPickUpThrow : MonoBehaviour
     /// </summary>
     public void OnPickUp()
     {
-        if (_nearbyPickables.Count > 0)
+        if (_pendingPickable != null)
         {
-            IPickable pickable = GetClosestPickable();
-            if (pickable != null)
+            int holdIndex = _heldObjects.Count;
+            if (holdIndex < _holdPoints.Length)
             {
-                int holdIndex = _heldObjects.Count;
-                if (holdIndex < _holdPoints.Length)
-                {
-                    pickable.OnPickedUp(_holdPoints[holdIndex]);
-                    _heldObjects.Add(pickable);
-                    _nearbyPickables.Remove(pickable);
-                }
+                _pendingPickable.OnPickedUp(_holdPoints[holdIndex]);
+                _heldObjects.Add(_pendingPickable);
+                _playerInteraction.Remove(_pendingPickable);
+                _pendingPickable = null;
             }
         }
     }
@@ -149,46 +164,6 @@ public class PlayerPickUpThrow : MonoBehaviour
         {
             _stateManager.ChangeState(PlayerState.Idle);
             _animatorController.ThrowFinishAnimation();
-        }
-    }
-
-    private IPickable GetClosestPickable()
-    {
-        if (_nearbyPickables.Count == 0) return null;
-
-        IPickable closest = null;
-        float closestDistance = float.MaxValue;
-
-        foreach (var pickable in _nearbyPickables)
-        {
-            if (pickable == null) continue;
-
-            float distance = Vector3.Distance(transform.position, pickable.Transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = pickable;
-            }
-        }
-
-        return closest;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        IPickable pickable = other.GetComponent<IPickable>();
-        if (pickable != null && !_nearbyPickables.Contains(pickable) && !_heldObjects.Contains(pickable))
-        {
-            _nearbyPickables.Add(pickable);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IPickable pickable = other.GetComponent<IPickable>();
-        if (pickable != null && _nearbyPickables.Contains(pickable))
-        {
-            _nearbyPickables.Remove(pickable);
         }
     }
 }
