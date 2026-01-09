@@ -462,9 +462,9 @@ GameObject:
   - component: {fileID: 6690052025713768110}
   - component: {fileID: 1780633793686190866}
   - component: {fileID: 2971247195460965979}
-  - component: {fileID: 439236860113699187}
   - component: {fileID: 4683845436847467853}
   - component: {fileID: 8581182682219715534}
+  - component: {fileID: 1270267246690427616}
   m_Layer: 0
   m_Name: Devil_Tree_Nightmare
   m_TagString: Untagged
@@ -578,20 +578,6 @@ MonoBehaviour:
   _gaugeImage: {fileID: 2730640063615527535}
   _duration: 0.3
   _ease: 6
---- !u!114 &439236860113699187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6060493489403216405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Monster
-  _deathAnimationDuration: 1
-  _damageDuration: 0.09
 --- !u!114 &4683845436847467853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +608,20 @@ MonoBehaviour:
   _renderer: {fileID: 3141990875462986981}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
+--- !u!114 &1270267246690427616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060493489403216405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552a8e3a681538f42ba15aeefe9511a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
+  _deathAnimationDuration: 0.19
+  _damageDuration: 0.09
 --- !u!1 &7191071975125149397
 GameObject:
   m_ObjectHideFlags: 0

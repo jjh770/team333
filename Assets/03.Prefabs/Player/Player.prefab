@@ -6500,7 +6500,7 @@ GameObject:
   - component: {fileID: 1179413069454028617}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6640,6 +6640,7 @@ MonoBehaviour:
   _dashSpeed: 7
   _dashDuration: 0.5
   _dashCooldown: 1
+  _viewportMargin: 0.05
 --- !u!114 &1179413069454028617
 MonoBehaviour:
   m_ObjectHideFlags: 0

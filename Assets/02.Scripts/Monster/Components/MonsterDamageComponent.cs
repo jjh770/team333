@@ -19,6 +19,7 @@ public class MonsterDamageComponent : MonoBehaviour
     private Material _material;
     private Tweener _flashTween;
 
+
     private static readonly int s_emissionColor = Shader.PropertyToID("_Emissive_Color");
 
     private void Awake()
@@ -29,6 +30,11 @@ public class MonsterDamageComponent : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _isDamaged = false;
+    }
+
     private void OnDisable()
     {
         _flashTween?.Kill();
@@ -36,6 +42,13 @@ public class MonsterDamageComponent : MonoBehaviour
         {
             _material.SetColor(s_emissionColor, Color.black);
         }
+    }
+
+    public IEnumerator DamageCoroutine()
+    {
+        _isDamaged = true;
+        yield return new WaitForSeconds(_damageDuration);
+        _isDamaged = false;
     }
 
     public void FlashWhite()

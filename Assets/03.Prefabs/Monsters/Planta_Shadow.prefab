@@ -690,9 +690,9 @@ GameObject:
   - component: {fileID: 680300244620075721}
   - component: {fileID: 4762377517291527843}
   - component: {fileID: 590382309419593974}
-  - component: {fileID: 3543699426634746670}
   - component: {fileID: 4482467526755238119}
   - component: {fileID: 7019950551574458289}
+  - component: {fileID: 7357302793078663457}
   m_Layer: 0
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -807,20 +807,6 @@ MonoBehaviour:
   _gaugeImage: {fileID: 4610090846043402856}
   _duration: 0.3
   _ease: 6
---- !u!114 &3543699426634746670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656837306392291822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Monster
-  _deathAnimationDuration: 1
-  _damageDuration: 0.09
 --- !u!114 &4482467526755238119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +837,20 @@ MonoBehaviour:
   _renderer: {fileID: 4976591450016639683}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
+--- !u!114 &7357302793078663457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552a8e3a681538f42ba15aeefe9511a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
+  _deathAnimationDuration: 0.19
+  _damageDuration: 0.09
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

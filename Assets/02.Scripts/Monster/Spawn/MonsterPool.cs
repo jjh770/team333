@@ -66,14 +66,14 @@ public class MonsterPool : MonoBehaviour, IMonsterSpawner
 
             GameObject spawned = _poolManager.Get(prefab, point.position, point.rotation);
 
-            if (spawned.TryGetComponent<MonsterController>(out var monster))
+            if (spawned.TryGetComponent<BadMonsterController>(out var monster))
             {
                 monster.OnDie += HandleMonsterDie;
             }
         }
     }
 
-    private void HandleMonsterDie(MonsterController monster)
+    private void HandleMonsterDie(BadMonsterController monster)
     {
         monster.OnDie -= HandleMonsterDie;
         _poolManager.Return(monster.gameObject);

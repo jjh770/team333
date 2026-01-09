@@ -3,10 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(MonsterMoveComponent))]
-public class MonsterController : MonoBehaviour, IPoolable, IDamageable
+[RequireComponent(typeof(MonsterStat))]
+[RequireComponent(typeof(MonsterAttackComponent))]
+[RequireComponent(typeof(MonsterDamageComponent))]
+public class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
     [SerializeField] private float _deathAnimationDuration = 0.19f;
@@ -14,76 +14,60 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
     [Header("Damage")]
     [SerializeField] private float _damageDuration = 0.09f;
 
-    private Animator _animator;
-    private NavMeshAgent _agent;
-    private MonsterMoveComponent _move;
-
     private MonsterStat _stat;
     private MonsterAttackComponent _attack;
     private MonsterDamageComponent _damage;
 
-    private MonsterState _currentState = MonsterState.Idle;
-    public MonsterState CurrentState => _currentState;
-
     private bool _isDead;
-    private bool _isDamaged;
-
     public bool IsDead => _isDead;
-    public bool IsDamaged => _isDamaged;
-    public bool IsAttacking => _attack != null && _attack.IsAttacking;
-    public bool IsMoving => _move.IsMoving;
 
-    public event Action<MonsterController> OnDie;
+    public event Action<BadMonsterController> OnDie;
 
     private Coroutine _deathRoutine;
     private Coroutine _damageRoutine;
 
-    private static readonly int s_animationHash = Animator.StringToHash("animation");
-
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _agent = GetComponent<NavMeshAgent>();
-        _move = GetComponent<MonsterMoveComponent>();
+        base.Awake();
 
         _stat = GetComponent<MonsterStat>();
         _attack = GetComponent<MonsterAttackComponent>();
         _damage = GetComponent<MonsterDamageComponent>();
     }
 
-    public void OnSpawn()
+    override public void OnSpawn()
     {
-        _agent.enabled = true;
         FindTarget();
         ResetState();
     }
 
-    private void FindTarget()
+    override public void OnDespawn()
+    {
+        StopAllRoutines();
+        _agent.enabled = false;
+    }
+
+    override protected void FindTarget()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject == null) return;
 
         Transform player = playerObject.transform;
         _move.SetTarget(player);
-        _attack?.SetTarget(player);
+        _attack.SetTarget(player);
     }
 
-    public void OnDespawn()
+    override protected void ResetState()
     {
-        StopAllRoutines();
-        _agent.enabled = false;
-    }
-
-    private void ResetState()
-    {
-        _isDead = false;
-        _isDamaged = false;
-        _agent.isStopped = false;
+        _agent.enabled = true;
         _agent.ResetPath();
+        _agent.isStopped = false;
+        _isDead = false;
+
         ApplyState(MonsterState.Idle);
     }
 
-    private void StopAllRoutines()
+    override protected void StopAllRoutines()
     {
         if (_deathRoutine != null)
         {
@@ -99,17 +83,16 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
 
     private void Update()
     {
-        if (!_isDead)
-        {
-            _move.UpdateMove();
-
-            if (_attack != null && _attack.TryAttack())
-            {
-                _move.LookAtTargetImmediate();
-            }
-        }
-
         UpdateState();
+
+        if (_damage.IsDamaged) return;
+
+        _move.UpdateMove();
+
+        if (_attack != null && _attack.TryAttack())
+        {
+            _move.LookAtTargetImmediate();
+        }
 
         // 테스트용 코드
         if (Input.GetKeyDown(KeyCode.H))
@@ -119,7 +102,7 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         }
     }
 
-    private void UpdateState()
+    override protected void UpdateState()
     {
         MonsterState newState = GetCurrentState();
 
@@ -129,16 +112,16 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         }
     }
 
-    private MonsterState GetCurrentState()
+    override protected MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;
-        if (_isDamaged) return MonsterState.Damage;
-        if (IsAttacking) return MonsterState.Attack;
-        if (IsMoving) return MonsterState.Move;
+        if (_damage.IsDamaged) return MonsterState.Damage;
+        if (_attack.IsAttacking) return MonsterState.Attack;
+        if (_move.IsMoving) return MonsterState.Move;
         return MonsterState.Idle;
     }
 
-    private void ApplyState(MonsterState newState)
+    override protected void ApplyState(MonsterState newState)
     {
         _currentState = newState;
         _animator.SetInteger(s_animationHash, (int)_currentState);
@@ -150,12 +133,13 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         if (_isDead) return false;
         if (_stat == null) return false;
 
-        _stat.Health.Decrease(damage.Value);
+        _stat.TakeDamage(damage.Value);
         _damage.FlashWhite();
 
-        if (!_isDamaged)
+        if (!_damage.IsDamaged)
         {
-            _damageRoutine = StartCoroutine(DamageCoroutine());
+            _damageRoutine = StartCoroutine(_damage.DamageCoroutine());
+            _damageRoutine = null;
         }
 
         if (_stat.Health.IsEmpty)
@@ -164,14 +148,6 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
         }
 
         return true;
-    }
-
-    private IEnumerator DamageCoroutine()
-    {
-        _isDamaged = true;
-        yield return new WaitForSeconds(_damageDuration);
-        _isDamaged = false;
-        _damageRoutine = null;
     }
 
     private void Die()
@@ -191,9 +167,9 @@ public class MonsterController : MonoBehaviour, IPoolable, IDamageable
     {
         yield return new WaitForSeconds(_deathAnimationDuration);
         _deathRoutine = null;
-        OnDie?.Invoke(this);
+        OnDie.Invoke(this);
     }
 
-    public void SetMoveSpeed(float value) => _stat?.SetMoveSpeed(value);
-    public void ChangeMoveSpeed(float amount) => _stat?.ChangeMoveSpeed(amount);
+    public void SetMoveSpeed(float value) => _stat.SetMoveSpeed(value);
+    public void ChangeMoveSpeed(float amount) => _stat.ChangeMoveSpeed(amount);
 }

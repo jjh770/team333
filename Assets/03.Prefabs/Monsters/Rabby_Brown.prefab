@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 71117910191372383}
   - component: {fileID: 8252888362389853930}
   - component: {fileID: 2268053225086339685}
-  - component: {fileID: 5969976837276778810}
+  - component: {fileID: 1338555567686348152}
   m_Layer: 0
   m_Name: Rabby_Brown
   m_TagString: Untagged
@@ -295,7 +295,7 @@ MonoBehaviour:
   _velocityThreshold: 0.1
   _rotationSpeed: 5
   _detectionRange: 10
---- !u!114 &5969976837276778810
+--- !u!114 &1338555567686348152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,11 +304,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4600686796660698352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46799f91013ea3d4f9d198f0de051b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d633d6c0cb064a4696d53b40a22fe7b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterController
-  _deathAnimationDuration: 0.19
-  _damageDuration: 0.09
+  m_EditorClassIdentifier: Assembly-CSharp::GoodMonsterController
 --- !u!1 &5775444039678406906
 GameObject:
   m_ObjectHideFlags: 0

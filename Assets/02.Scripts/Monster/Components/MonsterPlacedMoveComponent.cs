@@ -8,6 +8,7 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     protected override void Awake()
     {
         base.Awake();
+        _isMoving = false;
         _agent.isStopped = true;
         _agent.updatePosition = false;
     }
@@ -15,15 +16,12 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     public override void UpdateMove()
     {
         TryLookAtTarget();
-        _isMoving = false;
-        Debug.Log("UpdateMove");
     }
 
     private void TryLookAtTarget()
     {
         if (_target == null)
         {
-            Debug.Log("_target == null");
             return;
         }
 
@@ -31,7 +29,6 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
 
         if (sqrDistance <= _detectionRange * _detectionRange)
         {
-            Debug.Log("TryLookAtTarget");
             LookAtTarget();
         }
     }

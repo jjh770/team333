@@ -34,19 +34,23 @@ public class MonsterStat : MonoBehaviour
 
     public void SetMoveSpeed(float value)
     {
-        Health.SetValue(value);
+        MoveSpeed.SetValue(value);
     }
 
     public void ChangeMoveSpeed(float amount)
     {
         if(amount >= 0)
         {
-            Health.Increase(amount);
+            MoveSpeed.Increase(amount);
         }
         else
         {
-            Health.Decrease(-amount);
+            MoveSpeed.Decrease(-amount);
         }
+    }
+    public void TakeDamage(float amount)
+    {
+        Health.Decrease(amount);
     }
 
 }
