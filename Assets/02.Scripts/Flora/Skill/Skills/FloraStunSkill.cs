@@ -18,15 +18,15 @@ public class FloraStunSkill : FloraSkillBase
         _stunRoutine = StartCoroutine(StunRoutine());
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (_stunRoutine != null)
         {
             StopCoroutine(_stunRoutine);
             _stunRoutine = null;
         }
-
-        MonstersInRange.Clear();
+        
+        base.OnDisable();
     }
 
     private IEnumerator StunRoutine()
@@ -35,7 +35,8 @@ public class FloraStunSkill : FloraSkillBase
         {
             yield return new WaitForSeconds(_stunInterval);
             
-            foreach (var monster in MonstersInRange)
+            List<BadMonsterController> monsters = new(MonstersInRange);
+            foreach (var monster in monsters)
             {
                 if (monster == null) continue;
                 Vector3 position = monster.transform.position;
@@ -44,12 +45,20 @@ public class FloraStunSkill : FloraSkillBase
             
             yield return new WaitForSeconds(_lightningStrikeDelay);
             
-            foreach (var monster in MonstersInRange)
+            foreach (var monster in monsters)
             {
-                if (monster == null) continue;
+                if (monster == null || !monster.gameObject.activeInHierarchy) continue;
+                
                 Vector3 position = monster.transform.position;
                 monster.ApplyStun(_stunDuration);
-                _effectPool.PlayLightningHit(position, _stunDuration);
+                
+                GameObject hitEffect = _effectPool.PlayLightningHit(position, _stunDuration);
+                
+                if (hitEffect != null)
+                {
+                    hitEffect.transform.SetParent(monster.transform);
+                    hitEffect.transform.localPosition = Vector3.zero;
+                }
             }
         }
     }
@@ -58,6 +67,7 @@ public class FloraStunSkill : FloraSkillBase
 
     protected override void OnMonsterExit(BadMonsterController monster) { }
 
+    
 #if UNITY_EDITOR
     protected override void OnDrawGizmosSelected()
     {

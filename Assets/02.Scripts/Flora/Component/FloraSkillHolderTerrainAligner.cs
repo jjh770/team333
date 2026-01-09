@@ -15,7 +15,8 @@ public class FloraSkillHolderTerrainAligner : MonoBehaviour
 
     [Header("Debug / Preview")]
     [SerializeField] private float _previewRadius = 4f;
-
+    
+    private const int SamplePointCount = 5;
     private Vector3 _targetPosition;
     private Quaternion _targetRotation;
 
@@ -69,11 +70,11 @@ public class FloraSkillHolderTerrainAligner : MonoBehaviour
             Vector3.zero               // 중앙
         };
 
-        Vector3[] worldPoints = new Vector3[5];
-        float[] heights = new float[5];
+        Vector3[] worldPoints = new Vector3[SamplePointCount];
+        float[] heights = new float[SamplePointCount];
         int validCount = 0;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < SamplePointCount; i++)
         {
             Vector3 samplePos = center + sampleOffsets[i];
             Vector3 rayOrigin = samplePos + Vector3.up * _raycastHeight;

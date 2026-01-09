@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EffectPool : MonoBehaviour
+public class FloraEffectPool : MonoBehaviour
 {
     [Header("Lightning Effects")]
-    [SerializeField] private GameObject _lightningStrikePrefab; // 번개 떨어지는 이펙트
-    [SerializeField] private GameObject _lightningHitPrefab; // 번개 맞은 이펙트
+    [SerializeField] private GameObject _lightningStrikePrefab; 
+    [SerializeField] private GameObject _lightningHitPrefab; 
     
     [Header("Slow Effects")]
     [SerializeField] private GameObject _slowEffectPrefab;

@@ -5,30 +5,36 @@ public class FloraSlowSkill : FloraSkillBase
 {
     [Header("Slow Settings")]
     [SerializeField] private float _slowAmount = 2f;
+    
     private readonly Dictionary<BadMonsterController, GameObject> _activeSlowEffects = new();
     
     protected override void OnMonsterEnter(BadMonsterController monster)
     {
+        if (monster == null) return;
+
         monster.ChangeMoveSpeed(-_slowAmount);
         
         GameObject slowEffect = _effectPool.PlaySlowEffect(monster.transform.position);
         if (slowEffect != null)
         {
-            slowEffect.transform.SetParent(monster.transform);
-            slowEffect.transform.localPosition = Vector3.zero;
-            
             _activeSlowEffects[monster] = slowEffect;
         }
     }
 
     protected override void OnMonsterExit(BadMonsterController monster)
     {
+        if (monster == null) return;
+
         monster.ChangeMoveSpeed(_slowAmount);
-        
         RemoveSlowEffect(monster);
     }
 
-    private void OnDisable()
+    protected override void OnMonsterDeath(BadMonsterController monster)
+    {
+        RemoveSlowEffect(monster);
+    }
+
+    protected override void OnDisable()
     {
         foreach (var monster in MonstersInRange)
         {
@@ -38,7 +44,23 @@ public class FloraSlowSkill : FloraSkillBase
             RemoveSlowEffect(monster);
         }
 
-        MonstersInRange.Clear();
+        base.OnDisable();
+    }
+
+    private void LateUpdate()
+    {
+        if (_activeSlowEffects.Count == 0) return;
+        
+        foreach (var activeEffect in _activeSlowEffects)
+        {
+            BadMonsterController monster = activeEffect.Key;
+            GameObject effect = activeEffect.Value;
+
+            if (monster != null && effect != null && monster.gameObject.activeInHierarchy)
+            {
+                effect.transform.position = monster.transform.position;
+            }
+        }
     }
     
     private void RemoveSlowEffect(BadMonsterController monster)
@@ -47,7 +69,6 @@ public class FloraSlowSkill : FloraSkillBase
         {
             if (effect != null)
             {
-                effect.transform.SetParent(null);
                 _effectPool.ReturnEffect(effect);
             }
             _activeSlowEffects.Remove(monster);
