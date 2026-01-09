@@ -173,13 +173,13 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     public void SetMoveSpeed(float value)
     {
         _stat.SetMoveSpeed(value);
-        _move.SetSpeed(_stat.MoveSpeed.Value);
+        _move.SetSpeed(_stat.GetMoveSpeed());
     }
 
     public void ChangeMoveSpeed(float amount)
     {
         _stat.ChangeMoveSpeed(amount);
-        _move.SetSpeed(_stat.MoveSpeed.Value);
+        _move.SetSpeed(_stat.GetMoveSpeed());
     }
 
     public virtual void ApplyStun(float duration)

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BadPlacedMonsterController : BadMonsterController
 {
@@ -22,7 +22,11 @@ public class BadPlacedMonsterController : BadMonsterController
     protected override void OnUpdate()
     {
         _move.UpdateMove();
-        _attack.TryAttack();
+
+        if (_attack.TryAttack())
+        {
+            _move.LookAtTargetImmediate();
+        }
     }
 
     protected override MonsterState GetCurrentState()

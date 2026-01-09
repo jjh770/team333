@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BadTraceMonsterController : BadMonsterController
@@ -44,7 +44,7 @@ public class BadTraceMonsterController : BadMonsterController
     protected override void ResetState()
     {
         _move.ResetMove();
-        _move.SetSpeed(_stat.MoveSpeed.Value);
+        _move.SetSpeed(_stat.GetMoveSpeed());
         _isDead = false;
         _isStunned = false;
 
