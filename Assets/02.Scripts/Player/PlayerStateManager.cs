@@ -8,6 +8,8 @@ public enum PlayerState
     Moving,
     Attacking,
     Dashing,
+    PickUp,
+    Throw,
     Die
 }
 
@@ -20,7 +22,9 @@ public class PlayerStateManager : MonoBehaviour
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
     public bool IsDead => _currentState == PlayerState.Die;
-    public bool CanMove => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
+    public bool CanMove => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking || _currentState == PlayerState.PickUp);
+    public bool CanCarry => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.PickUp);
+    public bool CanThrow => !IsDead && _currentState == PlayerState.PickUp;
     public bool CanAttack => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
     public bool CanDash => !IsDead && _currentState != PlayerState.Dashing;
 
@@ -34,6 +38,7 @@ public class PlayerStateManager : MonoBehaviour
         // 상태 전환 규칙 검증
         if (!IsValidTransition(previousState, newState))
         {
+            Debug.Log($"{previousState}에서는 {newState}로 갈수 없음");
             return;
         }
 
@@ -79,6 +84,15 @@ public class PlayerStateManager : MonoBehaviour
             case PlayerState.Dashing:
                 // 대시 중에는 상태 전환 불가 (대시가 끝나야 함)
                 return false;
+
+            case PlayerState.PickUp:
+                // PickUp 상태에서는 Throw로 전환 가능
+                return to == PlayerState.Throw;
+
+            case PlayerState.Throw:
+                // Throw 상태에서는 Idle로만 전환 가능
+                return to == PlayerState.PickUp;
+
             default:
                 return false;
         }
