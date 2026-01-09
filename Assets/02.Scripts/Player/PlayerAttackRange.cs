@@ -111,7 +111,7 @@ public class PlayerAttackRange : MonoBehaviour
     private void ApplyDamage(GameObject target, float damage, int comboIndex)
     {
         Damage takeDamage = new Damage(damage, gameObject);
-        if (target.TryGetComponent<MonsterDamageComponent>(out var damageable))
+        if (target.TryGetComponent<BadMonsterController>(out var damageable))
         {
             damageable.TryTakeDamage(takeDamage);
         }
