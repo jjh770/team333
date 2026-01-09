@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,10 +11,12 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     [SerializeField] protected float _deathAnimationDuration = 0.19f;
 
     [Header("Target")]
-    [SerializeField] protected float _playerNearDistance = 4f;
+    [SerializeField] protected float _playerNearDistance = 7f;
+    [SerializeField] protected float _targetUpdateInterval = 0.3f;
 
     protected Transform _player;
     protected Transform _flora;
+    protected float _targetUpdateTimer;
 
     protected MonsterStat _stat;
     protected MonsterAttackComponent _attack;
@@ -53,7 +55,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         if (flora == null) return player;
 
         float sqrNear = _playerNearDistance * _playerNearDistance;
-        float playerSqr = (player.position - flora.position).sqrMagnitude;
+        float playerSqr = (player.position - this.transform.position).sqrMagnitude;
 
         return playerSqr <= sqrNear ? player : flora;
     }
@@ -87,7 +89,19 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         if (_isStunned) return;
         if (_damage.IsDamaged) return;
 
+        UpdateTargetPeriodically();
         OnUpdate();
+    }
+
+    // 일정 시간마다 타겟 업데이트
+    private void UpdateTargetPeriodically()
+    {
+        _targetUpdateTimer -= Time.deltaTime;
+        if (_targetUpdateTimer <= 0f)
+        {
+            FindTarget();
+            _targetUpdateTimer = _targetUpdateInterval;
+        }
     }
 
     protected virtual void OnUpdate()
@@ -187,5 +201,13 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
         _isStunned = false;
         _stunRoutine = null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_flora == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _playerNearDistance);
     }
 }

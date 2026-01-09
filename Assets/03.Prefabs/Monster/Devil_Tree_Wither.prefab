@@ -709,7 +709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadTraceMonsterController
   _deathAnimationDuration: 0.19
-  _playerNearDistance: 4
+  _playerNearDistance: 7
+  _targetUpdateInterval: 0.3
 --- !u!1 &9097755878706329246
 GameObject:
   m_ObjectHideFlags: 0

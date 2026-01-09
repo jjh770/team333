@@ -2445,6 +2445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5272989473133375994, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
+      propertyPath: _playerNearDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
       propertyPath: m_Name
       value: Planta_Shadow
@@ -2779,6 +2783,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133915229}
     m_Modifications:
+    - target: {fileID: 236190500294039788, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
+      propertyPath: _playerNearDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
       propertyPath: m_Name
       value: Turnipa_Bitter
@@ -2906,6 +2914,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133915229}
     m_Modifications:
+    - target: {fileID: 2396218106149406627, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
+      propertyPath: _playerNearDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
       propertyPath: m_Name
       value: Devil_Tree_Wither
