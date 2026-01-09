@@ -6866,6 +6866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   _interactKey: 101
+  _updateInterval: 0.1
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0
