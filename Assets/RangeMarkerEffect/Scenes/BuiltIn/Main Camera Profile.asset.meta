@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 98453039661ffbb41b2dd7e707ac29f9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 343966
+  packageName: Area of Effect_Pack1
+  packageVersion: 1.0
+  assetPath: Assets/RangeMarkerEffect/Scenes/BuiltIn/Main Camera Profile.asset
+  uploadId: 816526

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 04140ca923ad1ed4da44680fca2dda22
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 343966
+  packageName: Area of Effect_Pack1
+  packageVersion: 1.0
+  assetPath: Assets/RangeMarkerEffect/Prefabs/BuiltIn/Effect1_BuiltIn.prefab
+  uploadId: 816526

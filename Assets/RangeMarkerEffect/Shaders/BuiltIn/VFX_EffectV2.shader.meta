@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: cabc99b7a531f384899de2fb8bca7439
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 343966
+  packageName: Area of Effect_Pack1
+  packageVersion: 1.0
+  assetPath: Assets/RangeMarkerEffect/Shaders/BuiltIn/VFX_EffectV2.shader
+  uploadId: 816526
