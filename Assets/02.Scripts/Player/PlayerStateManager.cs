@@ -26,7 +26,7 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanCarry => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.PickUp);
     public bool CanThrow => !IsDead && _currentState == PlayerState.PickUp;
     public bool CanAttack => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
-    public bool CanDash => !IsDead && _currentState != PlayerState.Dashing;
+    public bool CanDash => !IsDead && _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
 
     public void ChangeState(PlayerState newState)
     {
