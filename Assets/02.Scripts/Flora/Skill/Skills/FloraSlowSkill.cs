@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FloraSlowAuraSkill : FloraSkillBase
+public class FloraSlowSkill : FloraSkillBase
 {
     [Header("Slow Settings")]
     [SerializeField] private float _slowAmount = 2f;

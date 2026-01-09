@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class FloraSkillBase : MonoBehaviour
 {
     [Header("Range Settings")]
-    [SerializeField] private float _radius = 5f;
+    [SerializeField] private float _radius = 4f;
 
     private SphereCollider _triggerCollider;
     protected readonly HashSet<MonsterController> MonstersInRange =  new ();
