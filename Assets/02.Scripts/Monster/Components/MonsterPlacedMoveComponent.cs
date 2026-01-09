@@ -5,12 +5,9 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         _isMoving = false;
-        _agent.isStopped = true;
-        _agent.updatePosition = false;
     }
 
     public override void UpdateMove()
