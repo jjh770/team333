@@ -111,9 +111,10 @@ public class PlayerAttackRange : MonoBehaviour
     private void ApplyDamage(GameObject target, float damage, int comboIndex)
     {
         Damage takeDamage = new Damage(damage, gameObject);
-        target.GetComponent<MonsterDamageComponent>().TryTakeDamage(takeDamage);
-
-        Debug.Log($"Combo {comboIndex + 1} Hit: {target.name} for {damage} damage!");
+        if (target.TryGetComponent<MonsterDamageComponent>(out var damageable))
+        {
+            damageable.TryTakeDamage(takeDamage);
+        }
     }
 
     // 프로퍼티
