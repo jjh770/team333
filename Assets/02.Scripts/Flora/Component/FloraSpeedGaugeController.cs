@@ -4,36 +4,20 @@ using UnityEngine;
 [RequireComponent(typeof(FloraStats))]
 public class FloraSpeedGaugeController : MonoBehaviour
 {
-    [Serializable]
-    public struct SpeedTier
-    {
-        public float TierLevel;
-        public float Multiplier;
-
-        public SpeedTier(float tierLevel, float multiplier)
-        {
-            TierLevel = tierLevel;
-            Multiplier = multiplier;
-        }
-    }
-
     private FloraStats _stats;
-    
+
     [Header("Gauge")]
     [SerializeField] private FloraSpeedGauge _gauge;
-    
+
     [Header("Speed Rule")]
-    [SerializeField] private SpeedTier[] _speedTiers;
+    [SerializeField] private float _minMultiplier = 1f;
+    [SerializeField] private float _maxMultiplier = 1.5f;
 
     public event Action<float, float> GaugeChanged;
 
     private void Awake()
     {
         _stats = GetComponent<FloraStats>();
-        if (_speedTiers != null)
-        {
-            Array.Sort(_speedTiers, (a, b) => a.TierLevel.CompareTo(b.TierLevel));
-        }
     }
 
     private void OnEnable()
@@ -87,16 +71,9 @@ public class FloraSpeedGaugeController : MonoBehaviour
 
     private void EvaluateMultiplier(float gauge)
     {
-        float multiplier = 1f;
-        for (int i = _speedTiers.Length - 1; i >= 0; i--)
-        {
-            if (gauge >= _speedTiers[i].TierLevel)
-            {
-                multiplier = _speedTiers[i].Multiplier;
-                break;
-            }
-        }
-        
+        float percent = gauge / _gauge.MaxValue;
+        float multiplier = Mathf.Lerp(_minMultiplier, _maxMultiplier, percent);
+
         _stats.SetSpeedMultiplier(multiplier);
     }
 }
