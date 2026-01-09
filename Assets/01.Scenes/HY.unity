@@ -936,6 +936,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dc5d4484d1bce45b4254645ec1496c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoolManager
+--- !u!1001 &2057144631
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 825764883784918327, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2962721324235051946, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
+      propertyPath: m_Name
+      value: FloraSlowAuraSkill
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 23350ac05ccbf2d4db7d5fd4e279957a, type: 3}
 --- !u!1 &2084142226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,9 +1508,13 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
+      propertyPath: _monsterPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_monsterPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
+      objectReference: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_monsterPrefabs.Array.data[1]'
       value: 
@@ -1552,3 +1613,4 @@ SceneRoots:
   - {fileID: 179230455918324118}
   - {fileID: 2084142227}
   - {fileID: 1052815502}
+  - {fileID: 2057144631}
