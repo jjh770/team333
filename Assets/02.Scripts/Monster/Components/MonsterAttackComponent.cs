@@ -3,51 +3,40 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
-[RequireComponent(typeof(MonsterMoveComponent))]
 public class MonsterAttackComponent : MonoBehaviour
 {
     [SerializeField] private float _attackDistance = 2.5f;
     [SerializeField] private float _attackDuration = 0.14f;
 
-    private MonsterMoveComponent _moveComponent;
     private MonsterStat _stat;
-
-    private Transform _player;
+    private Transform _target;
     private float _lastAttackTime;
+
     private bool _isAttacking;
     public bool IsAttacking => _isAttacking;
 
     private void Awake()
     {
-        _moveComponent = GetComponent<MonsterMoveComponent>();
         _stat = GetComponent<MonsterStat>();
-
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            _player = playerObject.transform;
-        }
     }
 
-    private void Update()
+    public void SetTarget(Transform target)
     {
-        TryAttack();
+        _target = target;
     }
 
-    private void TryAttack()
+    public bool TryAttack()
     {
-        if (_isAttacking || _player == null) return;
+        if (_isAttacking || _target == null) return false;
 
-        float sqrDistanceToPlayer = (_player.position - transform.position).sqrMagnitude;
+        float sqrDistance = (_target.position - transform.position).sqrMagnitude;
+        if (sqrDistance > _attackDistance * _attackDistance) return false;
 
-        if (sqrDistanceToPlayer <= _attackDistance * _attackDistance)
-        {
-            float attackCooldown = _stat.GetAttackCooltime();
-            if (Time.time >= _lastAttackTime + attackCooldown)
-            {
-                Attack();
-            }
-        }
+        float attackCooldown = _stat.GetAttackCooltime();
+        if (Time.time < _lastAttackTime + attackCooldown) return false;
+
+        Attack();
+        return true;
     }
 
     private void Attack()
@@ -55,9 +44,7 @@ public class MonsterAttackComponent : MonoBehaviour
         _isAttacking = true;
         _lastAttackTime = Time.time;
 
-        _moveComponent.LookAtTargetImmediate();
-
-        // Todo.플레이어에게 데미지 입히기
+        // Todo: 플레이어에게 데미지 입히기
 
         StartCoroutine(AttackCoroutine());
     }
