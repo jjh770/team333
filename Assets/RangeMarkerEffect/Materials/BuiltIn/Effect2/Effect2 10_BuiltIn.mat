@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Effect2 10_BuiltIn
   m_Shader: {fileID: 4800000, guid: cabc99b7a531f384899de2fb8bca7439, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _USEALPHAPART
   - _USEPARTICLECUSTOMDATA
@@ -37,6 +39,7 @@ Material:
   disabledShaderPasses:
   - SHADOWCASTER
   - DepthOnly
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -53,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RemapColTex:
-        m_Texture: {fileID: 2800000, guid: b521a2d00338d024b93f880245d7e033, type: 3}
+        m_Texture: {fileID: 2800000, guid: c9c8e0808e242f04394e9ad8df6e4f7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexOffsetTex:
@@ -124,7 +127,7 @@ Material:
     - _DissolveTexTillingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _DissolveTexWarpStrength: {r: 0, g: 0, b: 0, a: 0}
     - _FMissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 1, g: 0.28773582, b: 0.28773582, a: 1}
+    - _MainColor: {r: 1, g: 0.72042394, b: 0.28627455, a: 1}
     - _MainTexMoveSpeed: {r: 0, g: 0.2, b: 0, a: 0}
     - _MainTexTillingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _MainTexWarpStrength: {r: 0.15, g: 0.06, b: 0, a: 0}
@@ -135,3 +138,4 @@ Material:
     - _WarpTexMoveSpeed: {r: 0.2, g: 0.25, b: 0, a: 0}
     - _WarpTexTillingOffset: {r: 1, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Effect2 11_BuiltIn
   m_Shader: {fileID: 4800000, guid: cabc99b7a531f384899de2fb8bca7439, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _USEPARTICLECUSTOMDATA
   m_InvalidKeywords:
@@ -34,6 +36,7 @@ Material:
   disabledShaderPasses:
   - SHADOWCASTER
   - DepthOnly
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -121,7 +124,7 @@ Material:
     - _DissolveTexTillingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _DissolveTexWarpStrength: {r: 0, g: 0, b: 0, a: 0}
     - _FMissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _MainColor: {r: 10.680627, g: 4.584609, b: 4.584609, a: 1}
+    - _MainColor: {r: 10.680627, g: 9.87258, b: 4.5854, a: 1}
     - _MainTexMoveSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _MainTexTillingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _MainTexWarpStrength: {r: 0, g: 0, b: 0, a: 0}
@@ -132,3 +135,4 @@ Material:
     - _WarpTexMoveSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _WarpTexTillingOffset: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
