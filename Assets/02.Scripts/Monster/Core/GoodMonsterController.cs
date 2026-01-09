@@ -37,13 +37,11 @@ public class GoodMonsterController : BaseMonsterController
     {
         FindTarget();
         ResetState();
-        _agent.enabled = true;
     }
 
     override public void OnDespawn()
     {
         StopAllRoutines();
-        _agent.enabled = false;
     }
 
     override protected void StopAllRoutines()

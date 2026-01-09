@@ -1,36 +1,38 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(MonsterStat))]
 [RequireComponent(typeof(MonsterAttackComponent))]
 [RequireComponent(typeof(MonsterDamageComponent))]
-public class BadMonsterController : BaseMonsterController, IDamageable
+public abstract class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
-    [SerializeField] private float _deathAnimationDuration = 0.19f;
+    [SerializeField] protected float _deathAnimationDuration = 0.19f;
 
-    [Header("Damage")]
-    [SerializeField] private float _damageDuration = 0.09f;
+    [Header("Target")]
+    [SerializeField] protected float _playerNearDistance = 4f;
 
-    private MonsterStat _stat;
-    private MonsterAttackComponent _attack;
-    private MonsterDamageComponent _damage;
+    protected Transform _player;
+    protected Transform _flora;
 
-    private bool _isDead;
+    protected MonsterStat _stat;
+    protected MonsterAttackComponent _attack;
+    protected MonsterDamageComponent _damage;
+
+    protected bool _isDead;
     public bool IsDead => _isDead;
 
-    private bool _isStunned;
+    protected bool _isStunned;
     public bool IsStunned => _isStunned;
 
     public event Action<BadMonsterController> OnDie;
 
-    private Coroutine _deathRoutine;
-    private Coroutine _damageRoutine;
-    private Coroutine _stunRoutine;
+    protected Coroutine _deathRoutine;
+    protected Coroutine _damageRoutine;
+    protected Coroutine _stunRoutine;
 
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
@@ -39,41 +41,24 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _damage = GetComponent<MonsterDamageComponent>();
     }
 
-    override public void OnSpawn()
+    public override void OnSpawn()
     {
         FindTarget();
         ResetState();
     }
 
-    override public void OnDespawn()
+    protected Transform ChooseTargetByDistance(Transform player, Transform flora)
     {
-        StopAllRoutines();
-        _agent.enabled = false;
+        if (player == null) return flora;
+        if (flora == null) return player;
+
+        float sqrNear = _playerNearDistance * _playerNearDistance;
+        float playerSqr = (player.position - flora.position).sqrMagnitude;
+
+        return playerSqr <= sqrNear ? player : flora;
     }
 
-    override protected void FindTarget()
-    {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject == null) return;
-
-        Transform player = playerObject.transform;
-        _move.SetTarget(player);
-        _attack.SetTarget(player);
-    }
-
-    override protected void ResetState()
-    {
-        _agent.enabled = true;
-        _agent.ResetPath();
-        _agent.isStopped = false;
-        _agent.speed = _stat.MoveSpeed.Value;
-        _isDead = false;
-        _isStunned = false;
-
-        ApplyState(MonsterState.Idle);
-    }
-
-    override protected void StopAllRoutines()
+    protected override void StopAllRoutines()
     {
         if (_deathRoutine != null)
         {
@@ -93,13 +78,20 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        if (_isDead) return;
+
         UpdateState();
 
         if (_isStunned) return;
         if (_damage.IsDamaged) return;
 
+        OnUpdate();
+    }
+
+    protected virtual void OnUpdate()
+    {
         _move.UpdateMove();
 
         if (_attack.TryAttack())
@@ -108,7 +100,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         }
     }
 
-    override protected void UpdateState()
+    protected override void UpdateState()
     {
         MonsterState newState = GetCurrentState();
 
@@ -118,17 +110,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         }
     }
 
-    override protected MonsterState GetCurrentState()
-    {
-        if (_isDead) return MonsterState.Die;
-        if (_isStunned) return MonsterState.Idle;
-        if (_damage.IsDamaged) return MonsterState.Damage;
-        if (_attack.IsAttacking) return MonsterState.Attack;
-        if (_move.IsMoving) return MonsterState.Move;
-        return MonsterState.Idle;
-    }
-
-    override protected void ApplyState(MonsterState newState)
+    protected override void ApplyState(MonsterState newState)
     {
         _currentState = newState;
         _animator.SetInteger(s_animationHash, (int)_currentState);
@@ -147,7 +129,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         if (!_damage.IsDamaged)
         {
             _damageRoutine = StartCoroutine(_damage.DamageCoroutine());
-            _damageRoutine = null;
         }
 
         if (_stat.Health.IsEmpty)
@@ -158,40 +139,39 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         return true;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         if (_isDead) return;
 
         _isDead = true;
-        _agent.isStopped = true;
-        _agent.ResetPath();
-
         ApplyState(MonsterState.Die);
 
         _deathRoutine = StartCoroutine(DeathCoroutine());
     }
 
-    private IEnumerator DeathCoroutine()
+    protected virtual IEnumerator DeathCoroutine()
     {
         yield return new WaitForSeconds(_deathAnimationDuration);
         _deathRoutine = null;
-        OnDie.Invoke(this);
+        OnDie?.Invoke(this);
     }
 
     public void SetMoveSpeed(float value)
     {
         _stat.SetMoveSpeed(value);
-        _agent.speed = _stat.GetMoveSpeed();
+        _move.SetSpeed(_stat.MoveSpeed.Value);
     }
 
     public void ChangeMoveSpeed(float amount)
     {
         _stat.ChangeMoveSpeed(amount);
-        _agent.speed = _stat.GetMoveSpeed();
+        _move.SetSpeed(_stat.MoveSpeed.Value);
     }
 
-    public void ApplyStun(float duration)
+    public virtual void ApplyStun(float duration)
     {
+        if (_isDead) return;
+
         if (_stunRoutine != null)
         {
             StopCoroutine(_stunRoutine);
@@ -199,16 +179,13 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _stunRoutine = StartCoroutine(StunCoroutine(duration));
     }
 
-    private IEnumerator StunCoroutine(float duration)
+    protected virtual IEnumerator StunCoroutine(float duration)
     {
         _isStunned = true;
-        _agent.isStopped = true;
-        _agent.ResetPath();
 
         yield return new WaitForSeconds(duration);
 
         _isStunned = false;
-        _agent.isStopped = false;
         _stunRoutine = null;
     }
 }

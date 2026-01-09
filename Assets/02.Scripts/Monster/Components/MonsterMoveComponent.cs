@@ -1,7 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public abstract class MonsterMoveComponent : MonoBehaviour
 {
     [SerializeField] protected float _velocityThreshold = 0.1f;
@@ -10,16 +8,10 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     private const float MinLookDirectionSqrMagnitude = 1e-6f;
 
-    protected NavMeshAgent _agent;
     protected Transform _target;
 
     protected bool _isMoving;
     public bool IsMoving => _isMoving;
-
-    protected virtual void Awake()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-    }
 
     public void SetTarget(Transform target)
     {
@@ -28,10 +20,12 @@ public abstract class MonsterMoveComponent : MonoBehaviour
 
     public abstract void UpdateMove();
 
-    protected void UpdateMoveState()
-    {
-        _isMoving = _agent.velocity.sqrMagnitude > _velocityThreshold * _velocityThreshold;
-    }
+    public virtual void Enable() { }
+    public virtual void Disable() { }
+    public virtual void Stop() { }
+    public virtual void Resume() { }
+    public virtual void SetSpeed(float speed) { }
+    public virtual void ResetMove() { }
 
     protected void LookAtTarget()
     {
