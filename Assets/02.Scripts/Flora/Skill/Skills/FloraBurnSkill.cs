@@ -9,6 +9,7 @@ public class FloraBurnSkill : FloraSkillBase
     [SerializeField] private float _damageAmount = 1f;
     
     private readonly Dictionary<BadMonsterController, GameObject> _activeBurnEffects = new();
+    private readonly List<BadMonsterController> _monsterCache = new();
     private Coroutine _burnRoutine;
 
     private void OnEnable()
@@ -24,7 +25,8 @@ public class FloraBurnSkill : FloraSkillBase
             _burnRoutine = null;
         }
 
-        foreach (var monster in MonstersInRange)
+        var monstersInRangeCopy = new List<BadMonsterController>(MonstersInRange);
+        foreach (var monster in monstersInRangeCopy)
         {
             if (monster == null) continue;
             RemoveBurnEffect(monster);
@@ -39,9 +41,10 @@ public class FloraBurnSkill : FloraSkillBase
         {
             yield return new WaitForSeconds(_damageInterval);
             
-            List<BadMonsterController> monsters = new(MonstersInRange);
+            _monsterCache.Clear();
+            _monsterCache.AddRange(MonstersInRange);
             
-            foreach (var monster in monsters)
+            foreach (var monster in _monsterCache)
             {
                 if (monster == null || !monster.gameObject.activeInHierarchy || monster.IsDead) 
                     continue;
