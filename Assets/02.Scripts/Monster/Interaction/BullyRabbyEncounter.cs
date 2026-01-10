@@ -5,11 +5,10 @@ public class BullyRabbyEncounter : MonoBehaviour
     [Header("Monsters")]
     [SerializeField] private GameObject[] _bullyMonsters;
     [SerializeField] private GameObject _rabbyMonster;
+    private ItemBase _rabbyItemBase;
 
     private BadMonsterController[] _bullyControllers;
     private int _aliveCount;
-
-    private ItemBase _rabbyItemBase;
 
     [SerializeField] private UI_MonsterSpeechBubble _speechBubble;
 
@@ -44,7 +43,6 @@ public class BullyRabbyEncounter : MonoBehaviour
         _bullyControllers = new BadMonsterController[_bullyMonsters.Length];
         _aliveCount = 0;
 
-        // 전체 bully 
         for (int i = 0; i < _bullyMonsters.Length; i++)
         {
             var go = _bullyMonsters[i];
@@ -87,12 +85,17 @@ public class BullyRabbyEncounter : MonoBehaviour
     private void LockRabby()
     {
         _speechBubble.SetSad();
-        // _rabbyItemBase.SetLocked(true);
+        _rabbyItemBase.SetLocked(true);
     }
 
     private void UnlockRabby()
     {
         _speechBubble.SetHappy();
-        // _rabbyItemBase.SetLocked(false);
+        _rabbyItemBase.SetLocked(false);
+    }
+
+    private void HideSpeechBubble()
+    {
+        // Todo. 들렸을 때 말풍선 사라지도록.
     }
 }

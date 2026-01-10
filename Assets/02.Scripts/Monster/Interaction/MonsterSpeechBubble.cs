@@ -1,12 +1,9 @@
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MonsterSpeechBubble : MonoBehaviour
 {
-    [SerializeField] private Transform _speechBubbleTransform;
+    [SerializeField] private RectTransform _speechBubbleTransform;
     private Transform _cameraTransform;
-    private Tweener _tween;
 
     private void Awake()
     {
