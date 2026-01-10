@@ -87,6 +87,7 @@ public class CameraController : MonoBehaviour
             yield break;
         }
 
+        // 1단계: IntroTransform 위치에서 대기
         yield return new WaitForSeconds(_introHoldDuration);
 
         Vector3 startPos = _introTransform.position;
@@ -114,7 +115,6 @@ public class CameraController : MonoBehaviour
         transform.rotation = targetRot;
 
         OnIntroComplete?.Invoke();
-        GameStateManager.Instance?.OnIntroComplete();
     }
 
     private IEnumerator OutroTransition()
@@ -154,6 +154,5 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(_outroHoldDuration);
 
         OnOutroComplete?.Invoke();
-        GameStateManager.Instance?.OnOutroComplete();
     }
 }

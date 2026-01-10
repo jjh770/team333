@@ -39,14 +39,23 @@ public class GameStateManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeState(GameState.Intro);
-        
-        _floraPath = _floraInteraction.FloraPath;
-        if (_floraPath != null)
+        if (_floraInteraction != null)
         {
-            Debug.Log($"Flora Path");
-            _floraPath.OnPathCompleted += HandlePathCompleted;
+            _floraPath = _floraInteraction.FloraPath;
+            
+            if (_floraPath != null)
+            {
+                _floraPath.OnPathCompleted += HandlePathCompleted;
+            }
         }
+        
+        if (_cameraController != null)
+        {
+            _cameraController.OnIntroComplete += HandleIntroComplete;
+            _cameraController.OnOutroComplete += HandleOutroComplete;
+        }
+      
+        ChangeState(GameState.Intro);
     }
 
     private void OnDestroy()
@@ -55,14 +64,25 @@ public class GameStateManager : MonoBehaviour
         {
             _floraPath.OnPathCompleted -= HandlePathCompleted;
         }
+        
+        if (_cameraController != null)
+        {
+            _cameraController.OnIntroComplete -= HandleIntroComplete;
+            _cameraController.OnOutroComplete -= HandleOutroComplete;
+        }
     }
 
     public void ChangeState(GameState newState)
     {
-        if (_currentState == newState) return;
+        if (_currentState == newState)
+        {
+            return;
+        }
         
         GameState oldState = _currentState;
         _currentState = newState;
+
+        Debug.Log($"Game State: {oldState} → {newState}");
 
         OnStateChanged?.Invoke(oldState, newState);
 
@@ -99,14 +119,14 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public void OnIntroComplete()
+    private void HandleIntroComplete()
     {
         ChangeState(GameState.Playing);
     }
 
-    public void OnOutroComplete()
+    private void HandleOutroComplete()
     {
-        Debug.Log("Outro Complete - Load Next Scene");
+        Debug.Log("HandleOutroComplete called");
         // SceneManager.LoadScene("EndScene");
     }
 }
