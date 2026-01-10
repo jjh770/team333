@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 
-public class MonsterPlacedMoveComponent : MonsterMoveComponent
+public class MonsterBullyMoveComponent : MonsterMoveComponent
 {
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
 
+    [SerializeField] private GameObject _bullyTarget;
+
     protected void Awake()
     {
         _isMoving = false;
+    }
+
+    private void Start()
+    {
+        _target = _bullyTarget.transform;
     }
 
     public override void UpdateMove()

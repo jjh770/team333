@@ -1737,7 +1737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6570789493408278362, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.27
       objectReference: {fileID: 0}
     - target: {fileID: 6570789493408278362, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2601,6 +2601,14 @@ PrefabInstance:
       propertyPath: _poolManager
       value: 
       objectReference: {fileID: 2021056260}
+    - target: {fileID: 601270690582859857, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
+      propertyPath: _bully.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 601270690582859857, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
+      propertyPath: '_bully.Array.data[0]'
+      value: 
+      objectReference: {fileID: 230860933391095005, guid: f4db4263d5fa3ce47ad71d90c1d6e9ad, type: 3}
     - target: {fileID: 601270690582859857, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
       propertyPath: '_bullyPoints.Array.data[0]'
       value: 

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour, IPoolManager
@@ -42,7 +42,8 @@ public class PoolManager : MonoBehaviour, IPoolManager
         obj.transform.SetPositionAndRotation(position, rotation);
         obj.SetActive(true);
 
-        if (obj.TryGetComponent(out IPoolable poolable))
+        var poolables = obj.GetComponentsInChildren<IPoolable>();
+        foreach (var poolable in poolables)
         {
             poolable.OnSpawn();
         }
@@ -59,7 +60,8 @@ public class PoolManager : MonoBehaviour, IPoolManager
             return;
         }
 
-        if (obj.TryGetComponent(out IPoolable poolable))
+        var poolables = obj.GetComponentsInChildren<IPoolable>();
+        foreach (var poolable in poolables)
         {
             poolable.OnDespawn();
         }
