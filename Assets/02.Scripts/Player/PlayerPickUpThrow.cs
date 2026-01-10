@@ -7,6 +7,7 @@ public class PlayerPickUpThrow : MonoBehaviour
     [SerializeField] private int _maxPickUpCount = 2;
     [SerializeField] private Transform[] _holdPoints;
     [SerializeField] private float _throwForce = 10f;
+    [SerializeField] private float _throwUpwardAngle = 0.5f;
 
     [Header("Debug")]
     [SerializeField] private List<IPickable> _heldObjects = new List<IPickable>();
@@ -121,7 +122,7 @@ public class PlayerPickUpThrow : MonoBehaviour
             IPickable pickable = _heldObjects[0];
             _heldObjects.RemoveAt(0);
 
-            Vector3 throwDirection = transform.forward + transform.up * 0.5f;
+            Vector3 throwDirection = transform.forward + transform.up * _throwUpwardAngle;
             pickable.OnThrown(throwDirection, _throwForce);
 
             // 남은 오브젝트 위치 재정렬

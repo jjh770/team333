@@ -133,15 +133,15 @@ public class PlayerInteraction : MonoBehaviour
     {
         _nearbyInteractables.RemoveAll(i =>
         {
-            if (i == null) return true;
-            if (i is MonoBehaviour mb && mb == null) return true;
-
             try
             {
-                return i.Transform == null;
+                // Unity Object의 null 체크는 파괴된 MonoBehaviour도 처리합니다.
+                return i == null || i.Transform == null;
             }
-            catch
+            catch (Exception e)
             {
+                // 예외 발생 시 로그를 남기고, 해당 항목을 제거 대상으로 처리합니다.
+                Debug.LogException(e);
                 return true;
             }
         });
@@ -160,26 +160,22 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        foreach (var component in other.GetComponents<MonoBehaviour>())
+        var interactables = other.GetComponents<IInteractable>();
+        foreach (var interactable in interactables)
         {
-            if (component is IInteractable interactable &&
-                !_nearbyInteractables.Contains(interactable))
+            if (!_nearbyInteractables.Contains(interactable))
             {
                 _nearbyInteractables.Add(interactable);
-                break;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        foreach (var component in other.GetComponents<MonoBehaviour>())
+        var interactables = other.GetComponents<IInteractable>();
+        foreach (var interactable in interactables)
         {
-            if (component is IInteractable interactable)
-            {
-                _nearbyInteractables.Remove(interactable);
-                break;
-            }
+            _nearbyInteractables.Remove(interactable);
         }
     }
 

@@ -25,8 +25,8 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanMove => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking || _currentState == PlayerState.PickUp);
     public bool CanCarry => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.PickUp);
     public bool CanThrow => !IsDead && _currentState == PlayerState.PickUp;
-    public bool CanAttack => !IsDead && _currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
-    public bool CanDash => !IsDead && _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking;
+    public bool CanAttack => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
+    public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
     public void ChangeState(PlayerState newState)
     {
@@ -90,9 +90,8 @@ public class PlayerStateManager : MonoBehaviour
                 return to == PlayerState.Throw;
 
             case PlayerState.Throw:
-                // Throw 상태에서는 Idle로만 전환 가능
-                return to == PlayerState.PickUp;
-
+                // Throw 상태에서는 Idle이나 PickUp으로 전환 가능
+                return to == PlayerState.PickUp || to == PlayerState.Idle;
             default:
                 return false;
         }
