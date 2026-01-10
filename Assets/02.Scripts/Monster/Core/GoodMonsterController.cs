@@ -46,7 +46,7 @@ public class GoodMonsterController : BaseMonsterController
 
     override protected void StopAllRoutines()
     {
-        // Todo. StopAllRoutines
+        //
     }
 
     override protected void ApplyState(MonsterState newState)

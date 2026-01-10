@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class MonsterPlacedMoveComponent : MonsterMoveComponent
+public class MonsterBullyMoveComponent : MonsterMoveComponent
 {
     [Header("Detection")]
-    [SerializeField] private float _detectionRange = 10f;
+    [SerializeField] private float _detectionRange = 30f;
 
     protected void Awake()
     {

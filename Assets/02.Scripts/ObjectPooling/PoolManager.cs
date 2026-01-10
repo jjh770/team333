@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour, IPoolManager
@@ -42,7 +42,8 @@ public class PoolManager : MonoBehaviour, IPoolManager
         obj.transform.SetPositionAndRotation(position, rotation);
         obj.SetActive(true);
 
-        if (obj.TryGetComponent(out IPoolable poolable))
+        var poolables = obj.GetComponentsInChildren<IPoolable>();
+        foreach (var poolable in poolables)
         {
             poolable.OnSpawn();
         }
@@ -54,12 +55,12 @@ public class PoolManager : MonoBehaviour, IPoolManager
     {
         if (!_prefabLookup.TryGetValue(obj, out GameObject prefab))
         {
-            Debug.LogWarning($"풀에 등록되지 않은 오브젝트입니다: {obj.name}");
             Destroy(obj);
             return;
         }
 
-        if (obj.TryGetComponent(out IPoolable poolable))
+        var poolables = obj.GetComponentsInChildren<IPoolable>();
+        foreach (var poolable in poolables)
         {
             poolable.OnDespawn();
         }

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public abstract class BaseMonsterSpawner : MonoBehaviour
@@ -15,7 +15,8 @@ public abstract class BaseMonsterSpawner : MonoBehaviour
 
     private void SubscribeOnDie(GameObject monster)
     {
-        if (monster.TryGetComponent(out BadMonsterController controller))
+        var controllers = monster.GetComponentsInChildren<BadMonsterController>();
+        foreach (var controller in controllers)
         {
             controller.OnDie += HandleMonsterDie;
         }
