@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8052690821298281937}
   - component: {fileID: 8431350785123473436}
   - component: {fileID: 4858222084999767126}
-  - component: {fileID: 8385384058661492464}
   - component: {fileID: 6659818613876850983}
+  - component: {fileID: 662590446910119658}
   m_Layer: 9
   m_Name: Bully_Tree
   m_TagString: Untagged
@@ -146,21 +146,6 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &8385384058661492464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450748814917048331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef00d405b436be847a045f75ca0623a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BadPlacedMonsterController
-  _deathAnimationDuration: 0.19
-  _playerNearDistance: 4
-  _targetUpdateInterval: 0.3
 --- !u!114 &6659818613876850983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +162,21 @@ MonoBehaviour:
   _rotationSpeed: 5
   _detectionRange: 10
   _bullyTarget: {fileID: 0}
+--- !u!114 &662590446910119658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e882564aec30a8e4886ea01e076df91c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BullyMonsterController
+  _deathAnimationDuration: 0.19
+  _playerNearDistance: 7
+  _targetUpdateInterval: 0.3
 --- !u!1 &2018052630478496335
 GameObject:
   m_ObjectHideFlags: 0

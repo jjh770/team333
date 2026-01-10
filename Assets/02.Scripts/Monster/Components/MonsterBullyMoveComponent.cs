@@ -3,18 +3,13 @@
 public class MonsterBullyMoveComponent : MonsterMoveComponent
 {
     [Header("Detection")]
-    [SerializeField] private float _detectionRange = 10f;
+    [SerializeField] private float _detectionRange = 30f;
 
-    [SerializeField] private GameObject _bullyTarget;
+    
 
     protected void Awake()
     {
         _isMoving = false;
-    }
-
-    private void Start()
-    {
-        _target = _bullyTarget.transform;
     }
 
     public override void UpdateMove()
