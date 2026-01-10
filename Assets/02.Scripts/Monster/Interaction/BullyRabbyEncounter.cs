@@ -11,6 +11,8 @@ public class BullyRabbyEncounter : MonoBehaviour
 
     private ItemBase _rabbyItemBase;
 
+    [SerializeField] private UI_MonsterSpeechBubble _speechBubble;
+
     private void Awake()
     {
         if (_rabbyMonster != null)
@@ -84,11 +86,13 @@ public class BullyRabbyEncounter : MonoBehaviour
 
     private void LockRabby()
     {
+        _speechBubble.SetSad();
         // _rabbyItemBase.SetLocked(true);
     }
 
     private void UnlockRabby()
     {
+        _speechBubble.SetHappy();
         // _rabbyItemBase.SetLocked(false);
     }
 }

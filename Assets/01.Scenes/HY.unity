@@ -2535,6 +2535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BullyRabbyEncounter
       objectReference: {fileID: 0}
+    - target: {fileID: 230860933391095005, guid: f4db4263d5fa3ce47ad71d90c1d6e9ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4961958177543672994, guid: f4db4263d5fa3ce47ad71d90c1d6e9ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
