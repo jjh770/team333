@@ -27,5 +27,5 @@ MonoBehaviour:
   <AttackMoveDistance>k__BackingField:
   - 1
   - 1.5
-  - 2
-  <AttackMoveEase>k__BackingField: 1b0000001b0000001a000000
+  - 3
+  <AttackMoveEase>k__BackingField: 1b0000001b00000022000000
