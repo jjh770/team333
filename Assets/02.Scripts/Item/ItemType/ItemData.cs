@@ -13,5 +13,5 @@ public class ItemData : ScriptableObject
     [field: SerializeField] public ItemType Type { get; private set; }
     
     [Header("HealthUp")]
-    [field: SerializeField] public float _healthUpAmount { get; private set; } = 20f;
+    [field: SerializeField] public float HealthUpAmount { get; private set; } = 20f;
 }

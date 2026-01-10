@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ItemFactory : MonoBehaviour
 {
-    public static ItemFactory Instance;
+    public static ItemFactory Instance { get; private set; }
 
-    [SerializeField] protected PoolManager _poolManager;
+    [SerializeField] private PoolManager _poolManager;
 
     [Header("items")]
     [SerializeField] private GameObject[] _itemPrefabs;
