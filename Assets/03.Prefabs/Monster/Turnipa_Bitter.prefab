@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 5181280867894159192}
   - component: {fileID: 923049114728438877}
   - component: {fileID: 236190500294039788}
+  - component: {fileID: 1762204574321019548}
   m_Layer: 9
   m_Name: Turnipa_Bitter
   m_TagString: Untagged
@@ -359,6 +360,20 @@ MonoBehaviour:
   _deathAnimationDuration: 0.19
   _playerNearDistance: 7
   _targetUpdateInterval: 0.3
+--- !u!114 &1762204574321019548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834583176937093337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
+  _itemFactory: {fileID: 0}
+  _dropItem: {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0

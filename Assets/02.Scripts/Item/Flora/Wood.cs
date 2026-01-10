@@ -6,6 +6,13 @@ public class Wood : ItemBase
     [SerializeField] private int _addWoodAmount = 1;
 
     private const string FloraTag = "Flora";
+    private ItemFactory _itemFactory;
+
+    override protected void Awake()
+    {
+        base.Awake();
+        _itemFactory = ItemFactory.Instance;
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -15,6 +22,6 @@ public class Wood : ItemBase
         if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
         interaction.AddWood(_addWoodAmount);
-        Destroy(gameObject);
+        _itemFactory.Despawn(this.gameObject);
     }
 }

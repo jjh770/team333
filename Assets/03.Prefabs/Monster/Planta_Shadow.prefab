@@ -694,6 +694,7 @@ GameObject:
   - component: {fileID: 7019950551574458289}
   - component: {fileID: 6841837773811639747}
   - component: {fileID: 5272989473133375994}
+  - component: {fileID: 6042458324824495107}
   m_Layer: 9
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -876,6 +877,20 @@ MonoBehaviour:
   _deathAnimationDuration: 0.19
   _playerNearDistance: 7
   _targetUpdateInterval: 0.3
+--- !u!114 &6042458324824495107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
+  _itemFactory: {fileID: 0}
+  _dropItem: {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0
