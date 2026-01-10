@@ -31142,55 +31142,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6790975709568033399, guid: 005b461492c85674e9ac6d614dcb9a38, type: 3}
   m_PrefabInstance: {fileID: 1990886873}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &868257014
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 868257016}
-  - component: {fileID: 868257015}
-  m_Layer: 0
-  m_Name: FloraEffectPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &868257015
+--- !u!114 &868257015 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3665436153545646068, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+  m_PrefabInstance: {fileID: 5434375624535483897}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868257014}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 692d57b2792af2b419e2462a41433b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EffectPool
-  _lightningStrikePrefab: {fileID: 8974203713140315807, guid: be7167ebbb649b64b9a7daa303a63f03, type: 3}
-  _lightningHitPrefab: {fileID: 7131401307255788800, guid: 7d420fe326c4b434298866ed3626884c, type: 3}
-  _slowEffectPrefab: {fileID: 6126188424833946103, guid: 1ed473e0b6c9eca4d8a42ee2ab684839, type: 3}
-  _preloadCount: 10
-  _poolManagerComponent: {fileID: 57080825}
---- !u!4 &868257016
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868257014}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 156.5131, y: 0.08959, z: 8.74295}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &869831992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8826354705480527198, guid: 11a8891e8a0172a42859fb2c9cb4aae8, type: 3}
@@ -49187,6 +49149,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6222969872329965028, guid: 8eda3d22b0808c348b791a5c3f0e2214, type: 3}
   m_PrefabInstance: {fileID: 1437642480}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1437874768
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4585550538243332359, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_Name
+      value: FloraSkillChangerItem_Burn
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.02557
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51372635
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.159901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790007911216312192, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b68615a44e44c64b9623b09c7b1b5dd, type: 3}
 --- !u!1001 &1438282185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73590,6 +73609,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
+--- !u!1001 &5434375624535483897
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3293193506534927350, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_Name
+      value: FloraEffectPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665436153545646068, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: _poolManagerComponent
+      value: 
+      objectReference: {fileID: 57080825}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 156.5131
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.08959
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.74295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794463537244808058, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
 --- !u!1001 &6077789120496099996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74521,7 +74601,7 @@ SceneRoots:
   - {fileID: 5275607149341228047}
   - {fileID: 594866876}
   - {fileID: 1481524015}
-  - {fileID: 868257016}
+  - {fileID: 5434375624535483897}
   - {fileID: 1243467494}
   - {fileID: 1662994549}
   - {fileID: 959165409}
@@ -74531,3 +74611,4 @@ SceneRoots:
   - {fileID: 6077789120496099996}
   - {fileID: 515293953}
   - {fileID: 874173663}
+  - {fileID: 1437874768}
