@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(FloraInventory))]
 [RequireComponent(typeof(FloraSpeedGaugeController))]
-public class FloraInteraction : MonoBehaviour
+public class FloraInteraction : MonoBehaviour, IInteractable
 {
     [Header("Wood Interaction Settings")]
     [SerializeField] private int _woodCost = 1;
@@ -15,6 +15,24 @@ public class FloraInteraction : MonoBehaviour
     private IFloraPath _floraPath;
     public IFloraPath FloraPath => _floraPath;
     
+
+    private bool CanMove => _movement != null && _movement.IsWaiting;
+    private bool CanSpeedUp => _inventory != null && _inventory.WoodCount >= _woodCost && !_gaugeController.IsFull;
+
+    public InteractionType Type
+    {
+        get
+        {
+            if (CanMove) return InteractionType.TalkToMove;
+            if (CanSpeedUp) return InteractionType.TalkToSpeedUp;
+            return InteractionType.TalkToMove;
+        }
+    }
+
+    public Transform Transform => transform;
+
+    public bool CanInteract => CanMove || CanSpeedUp;
+
     private void Awake()
     {
         _inventory = GetComponent<FloraInventory>();
@@ -41,7 +59,7 @@ public class FloraInteraction : MonoBehaviour
         }
 
         _gaugeController.TryAddGauge(_gaugeAmount);
-        
+
         return true;
     }
 
@@ -53,5 +71,17 @@ public class FloraInteraction : MonoBehaviour
     public void SetSkill(FloraSkillBase skill)
     {
         _skillController.SetSkill(skill);
+    }
+
+    public void Interact(GameObject interactor)
+    {
+        if (CanMove)
+        {
+            TryResume();
+        }
+        else if (CanSpeedUp)
+        {
+            TryFeedWood();
+        }
     }
 }

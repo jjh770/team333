@@ -64,8 +64,6 @@ public class GameStateManager : MonoBehaviour
         GameState oldState = _currentState;
         _currentState = newState;
 
-        Debug.Log($"Game State: {oldState} → {newState}");
-
         OnStateChanged?.Invoke(oldState, newState);
 
         HandleStateEnter(newState);
@@ -95,7 +93,6 @@ public class GameStateManager : MonoBehaviour
 
     private void HandlePathCompleted()
     {
-        Debug.Log("Path Completed");
         if (_currentState == GameState.Playing)
         {
             ChangeState(GameState.Outro);
