@@ -20,7 +20,6 @@ public class MonsterData : ScriptableObject
     [field: SerializeField] public float AttackDuration { get; private set; } = 0.14f;
     [field: SerializeField] public float MoveSpeed { get; private set; } = 4f;
 
-
     [Header("Type")]
     [field: SerializeField] public MonsterType Type { get; private set; }
 
