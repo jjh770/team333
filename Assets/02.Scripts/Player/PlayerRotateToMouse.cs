@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerRotateToMouse : MonoBehaviour
+public class PlayerMouseHelper : MonoBehaviour
 {
     private Camera _mainCamera;
     [Header("Mouse Rotation")]
@@ -31,5 +31,19 @@ public class PlayerRotateToMouse : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
             }
         }
+    }
+
+    // 마우스 월드 좌표를 가져오는 헬퍼 메서드
+    public Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        // 플레이어의 발밑 높이(y=0 또는 transform.position.y)를 기준으로 평면 생성
+        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+
+        if (groundPlane.Raycast(ray, out float enter))
+        {
+            return ray.GetPoint(enter);
+        }
+        return transform.position; // 실패 시 현재 위치 반환
     }
 }

@@ -14,7 +14,7 @@ public class PlayerPickUpThrow : MonoBehaviour
 
     private PlayerStateManager _stateManager;
     private PlayerAnimatorController _animatorController;
-    private PlayerRotateToMouse _rotateToMouse;
+    private PlayerMouseHelper _mouseHelper;
     private PlayerInteraction _playerInteraction;
 
     private IPickable _pendingPickable;
@@ -27,7 +27,7 @@ public class PlayerPickUpThrow : MonoBehaviour
     {
         _stateManager = GetComponent<PlayerStateManager>();
         _animatorController = GetComponent<PlayerAnimatorController>();
-        _rotateToMouse = GetComponent<PlayerRotateToMouse>();
+        _mouseHelper = GetComponent<PlayerMouseHelper>();
         _playerInteraction = GetComponent<PlayerInteraction>();
     }
 
@@ -80,7 +80,7 @@ public class PlayerPickUpThrow : MonoBehaviour
 
     private void StartThrow()
     {
-        _rotateToMouse.RotateTowardsMouse();
+        _mouseHelper.RotateTowardsMouse();
         _stateManager.ChangeState(PlayerState.Throw);
         _animatorController.ThrowAnimation();
     }

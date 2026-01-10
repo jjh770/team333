@@ -1,11 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private PlayerMoveData _moveData;
     [SerializeField] private PlayerAttackData _attackData;
+    [SerializeField] private PlayerSkillData _skillData;
 
     [Header("Attack Movement")]
     [SerializeField] private bool _enableAttackMovement = true;
@@ -14,8 +16,10 @@ public class PlayerMove : MonoBehaviour
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private CharacterController _controller;
+    private PlayerMouseHelper _mouseHelper;
     private Vector3 _velocity;
     private Tweener _attackMoveTween;
+    private Tweener _skillMoveTween;
 
     public bool CanMove { get; set; } = true;
 
@@ -29,11 +33,13 @@ public class PlayerMove : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
+        _mouseHelper = GetComponent<PlayerMouseHelper>();
     }
 
     private void OnDestroy()
     {
         _attackMoveTween?.Kill();
+        _skillMoveTween?.Kill();
     }
 
     public Vector3 GetMovementDirection()
@@ -99,7 +105,7 @@ public class PlayerMove : MonoBehaviour
             // 조정된 이동 벡터로 안전하게 이동
             _controller.Move(clampedMove);
 
-            if (!_stateManager.IsState(PlayerState.Attacking))
+            if (!_stateManager.IsInStates(PlayerState.Attacking, PlayerState.Skill))
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _moveData.RotationSpeed * Time.deltaTime);
@@ -148,6 +154,64 @@ public class PlayerMove : MonoBehaviour
         CameraBoundsHelper.ClampPositionToCameraBounds(transform, _controller, _mainCamera, _moveData.ViewportMargin);
     }
 
+    #region Skill Movement
+    public void StartSkillMovement()
+    {
+        if (_controller == null)
+        {
+            Debug.LogError("CharacterController is null!");
+            return;
+        }
+
+        // 1. 마우스 위치를 월드 좌표로 변환 (바닥 평면 기준)
+        Vector3 mouseWorldPos = _mouseHelper.GetMouseWorldPosition();
+
+        // 2. 플레이어와의 거리 및 방향 계산
+        Vector3 offset = mouseWorldPos - transform.position;
+        offset.y = 0; // 높이 차이 제거
+
+        // 3. 거리 제한 (최대 스킬 이동 거리로 클램프)
+        float maxDistance = _skillData.SkillMaxDistance;
+        Vector3 clampedOffset = Vector3.ClampMagnitude(offset, maxDistance);
+        float finalHorizontalDistance = clampedOffset.magnitude;
+
+        // 4. 이동 방향 설정 (마우스 방향 혹은 현재 보고 있는 방향)
+        Vector3 moveDirection = clampedOffset.normalized;
+        if (moveDirection == Vector3.zero) moveDirection = transform.forward;
+
+        // 트윈 초기화
+        _skillMoveTween?.Kill();
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
+
+        float prevHorizontal = 0f;
+        float prevVertical = 0f;
+
+        _skillMoveTween = DOVirtual.Float(0f, 1f, moveDuration, (t) =>
+        {
+            // 전방 이동 (클램프된 마우스 거리까지)
+            float currentHorizontal = t * finalHorizontalDistance;
+            float deltaHorizontal = currentHorizontal - prevHorizontal;
+
+            // 상하 포물선 이동
+            float currentVertical = 4 * _skillData.SkillJumpHeight * t * (1 - t);
+            float deltaVertical = currentVertical - prevVertical;
+
+            Vector3 moveVector = (moveDirection * deltaHorizontal) + (Vector3.up * deltaVertical);
+
+            // 카메라 경계 제한 및 이동 적용
+            Vector3 clampedMove = CameraBoundsHelper.ClampMovementToCameraBounds(
+                transform.position, moveVector, _mainCamera, _moveData.ViewportMargin);
+
+            _controller.Move(clampedMove);
+
+            prevHorizontal = currentHorizontal;
+            prevVertical = currentVertical;
+        })
+        .SetEase(_skillData.SkillMoveEase)
+        .OnKill(() => _skillMoveTween = null);
+    }
+    #endregion
+
     #region Attack Movement
 
     /// <summary>
@@ -182,7 +246,7 @@ public class PlayerMove : MonoBehaviour
         _attackMoveTween?.Kill();
 
         // 애니메이션 길이를 이동 시간으로 사용
-        float moveDuration = _animatorController.GetCurrentAttackAnimationDuration();
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
 
         Vector3 moveDirection = transform.forward;
         float previousValue = 0f;

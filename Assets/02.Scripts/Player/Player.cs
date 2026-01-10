@@ -7,9 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAttack))]
 [RequireComponent(typeof(PlayerAttackRange))]
 [RequireComponent(typeof(PlayerStateManager))]
-[RequireComponent(typeof(PlayerRotateToMouse))]
+[RequireComponent(typeof(PlayerMouseHelper))]
 [RequireComponent(typeof(PlayerStat))]
 [RequireComponent(typeof(PlayerWeaponVisual))]
+[RequireComponent(typeof(PlayerInteraction))]
+[RequireComponent(typeof(PlayerPickUpThrow))]
+[RequireComponent(typeof(PlayerTalk))]
+[RequireComponent(typeof(PlayerSkillController))]
+[RequireComponent(typeof(PlayerDamageComponent))]
 
 public class Player : MonoBehaviour
 {

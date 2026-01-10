@@ -17,9 +17,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         InteractionType.TalkToMove,
         InteractionType.TalkToSpeedUp,
-        InteractionType.PickUp,
-        InteractionType.Use
+        InteractionType.Use,
+        InteractionType.PickUp
     };
+    private Dictionary<InteractionType, int> _priorityMap;
 
     public IInteractable ClosestInteractable => _closestInteractable;
     public bool HasInteractable => _closestInteractable != null;
@@ -28,6 +29,14 @@ public class PlayerInteraction : MonoBehaviour
     public event Action<IInteractable> OnInteractableChanged;
     public event Action<IInteractable> OnInteract;
 
+    private void Awake()
+    {
+        _priorityMap = new Dictionary<InteractionType, int>();
+        for (int i = 0; i < _priorityOrder.Length; i++)
+        {
+            _priorityMap[_priorityOrder[i]] = i;
+        }
+    }
     private void OnEnable()
     {
         InteractionEvents.OnInteractableDestroyed += HandleInteractableDestroyed;
@@ -73,8 +82,10 @@ public class PlayerInteraction : MonoBehaviour
         if (_closestInteractable == null || !_closestInteractable.CanInteract)
             return;
 
-        _closestInteractable.Interact(gameObject);
-        OnInteract?.Invoke(_closestInteractable);
+        // Interact 중 객체가 파괴될 수 있으므로 미리 참조 저장
+        IInteractable interactable = _closestInteractable;
+        interactable.Interact(gameObject);
+        OnInteract?.Invoke(interactable);
     }
 
     /// <summary>
@@ -83,67 +94,76 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable GetClosestInteractableByPriority()
     {
         CleanupNull();
-
         if (_nearbyInteractables.Count == 0) return null;
 
-        // 우선순위대로 순회
-        foreach (var priorityType in _priorityOrder)
-        {
-            IInteractable closest = GetClosestOfType(priorityType);
-            if (closest != null)
-            {
-                return closest;
-            }
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// 특정 타입 중에서 가장 가까운 상호작용 가능한 오브젝트 반환
-    /// </summary>
-    private IInteractable GetClosestOfType(InteractionType type)
-    {
-        IInteractable closest = null;
-        float closestDistanceSqr = float.MaxValue;
+        IInteractable bestMatch = null;
+        int bestPriorityIndex = int.MaxValue;
+        float bestDistanceSqr = float.MaxValue;
 
         Vector3 playerPos = transform.position;
 
         foreach (var interactable in _nearbyInteractables)
         {
-            if (interactable == null || interactable.Type != type)
-                continue;
+            if (!interactable.CanInteract) continue;
 
-            if (!interactable.CanInteract)
-                continue;
+            if (!_priorityMap.TryGetValue(interactable.Type, out int priorityIndex)) continue;
 
-            float distanceSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
+            float distSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
 
-            if (distanceSqr < closestDistanceSqr)
+            // 1. 우선순위가 더 높거나 2. 우선순위는 같은데 거리가 더 가까운 경우 교체
+            if (priorityIndex < bestPriorityIndex || (priorityIndex == bestPriorityIndex && distSqr < bestDistanceSqr))
             {
-                closestDistanceSqr = distanceSqr;
-                closest = interactable;
+                bestPriorityIndex = priorityIndex;
+                bestDistanceSqr = distSqr;
+                bestMatch = interactable;
             }
         }
-
-        return closest;
+        return bestMatch;
     }
+
+    ///// <summary>
+    ///// 특정 타입 중에서 가장 가까운 상호작용 가능한 오브젝트 반환
+    ///// </summary>
+    //private IInteractable GetClosestOfType(InteractionType type)
+    //{
+    //    IInteractable closest = null;
+    //    float closestDistanceSqr = float.MaxValue;
+
+    //    Vector3 playerPos = transform.position;
+
+    //    foreach (var interactable in _nearbyInteractables)
+    //    {
+    //        if (interactable == null || interactable.Type != type)
+    //            continue;
+
+    //        if (!interactable.CanInteract)
+    //            continue;
+
+    //        float distanceSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
+
+    //        if (distanceSqr < closestDistanceSqr)
+    //        {
+    //            closestDistanceSqr = distanceSqr;
+    //            closest = interactable;
+    //        }
+    //    }
+
+    //    return closest;
+    //}
 
     private void CleanupNull()
     {
         _nearbyInteractables.RemoveAll(i =>
         {
-            try
+            // 1. 인터페이스 참조를 UnityEngine.Object로 캐스팅
+            // 유니티의 == null 연산자가 파괴된 객체를 true로 판정해줍니다.
+            if (i is UnityEngine.Object obj)
             {
-                // Unity Object의 null 체크는 파괴된 MonoBehaviour도 처리합니다.
-                return i == null || i.Transform == null;
+                return obj == null;
             }
-            catch (Exception e)
-            {
-                // 예외 발생 시 로그를 남기고, 해당 항목을 제거 대상으로 처리합니다.
-                Debug.LogException(e);
-                return true;
-            }
+
+            // 2. 만약 유니티 오브젝트가 아닌 일반 C# 클래스라면 단순 null 체크
+            return i == null;
         });
     }
 

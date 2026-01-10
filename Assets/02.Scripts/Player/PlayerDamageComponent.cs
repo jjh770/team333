@@ -5,7 +5,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
 {
     [Header("Damage Settings")]
     [SerializeField] private float _damageDuration = 0.09f;
-    [SerializeField] private float _invincibilityDuration = 1f; // ¹«Àû ½Ã°£
+    [SerializeField] private float _invincibilityDuration = 1f; // ë¬´ì  ì‹œê°„
 
     [Header("Visual Feedback")]
     [SerializeField] private bool _enableFlashing = true;
@@ -41,7 +41,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
         if (_stateManager.IsState(PlayerState.Die))
             return false;
 
-        // ¹«Àû »óÅÂ¸é µ¥¹ÌÁö ¹«½Ã
+        // ë¬´ì  ìƒíƒœë©´ ë°ë¯¸ì§€ ë¬´ì‹œ
         if (_isInvincible)
             return false;
 
@@ -61,30 +61,29 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     {
         _isDamaged = true;
 
-        // µ¥¹ÌÁö ÀÌÆåÆ® ½Ã°£
+        // í”¼ê²© ì´í™íŠ¸ ì‹œê°„
         yield return new WaitForSeconds(_damageDuration);
 
         _isDamaged = false;
 
-        // ¹«Àû ½Ã°£ ½ÃÀÛ
+        // ë¬´ì  ì‹œê°„ ì‹œì‘
         StartCoroutine(Invincibility_Coroutine());
     }
 
     /// <summary>
-    /// ¹«Àû ½Ã°£ Ã³¸® ÄÚ·çÆ¾
-    /// ±ôºıÀÓ È¿°ú Æ÷ÇÔ
+    /// ë¬´ì  ì‹œê°„ ì²˜ë¦¬ ì½”ë£¨í‹´
     /// </summary>
     private IEnumerator Invincibility_Coroutine()
     {
         _isInvincible = true;
         float elapsedTime = 0f;
 
-        // ±ôºıÀÓ È¿°ú
+        // ê¹œë¹¡ì„ íš¨ê³¼
         if (_enableFlashing)
         {
             while (elapsedTime < _invincibilityDuration)
             {
-                // ·»´õ·¯ Åä±Û
+                // ë Œë”ëŸ¬ ë„ê¸°
                 SetRenderersEnabled(false);
                 yield return new WaitForSeconds(_flashInterval);
 
@@ -94,12 +93,12 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
                 elapsedTime += _flashInterval * 2f;
             }
 
-            // ¹«Àû Á¾·á ½Ã ·»´õ·¯ º¹¿ø
+            // ë¬´ì  ì¢…ë£Œ ì‹œ ë Œë”ëŸ¬ ì¼œê¸°
             SetRenderersEnabled(true);
         }
         else
         {
-            // ±ôºıÀÓ ¾øÀÌ ¹«Àû ½Ã°£¸¸ ´ë±â
+            // ê¹œë¹¡ì„ ì—†ì´ ë¬´ì  ì‹œê°„ë§Œ ëŒ€ê¸°
             yield return new WaitForSeconds(_invincibilityDuration);
         }
 
@@ -107,7 +106,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     }
 
     /// <summary>
-    /// ¸ğµç ·»´õ·¯ È°¼ºÈ­/ºñÈ°¼ºÈ­
+    /// ëª¨ë“  ë Œë”ëŸ¬ í™œì„±í™”/ë¹„í™œì„±í™”
     /// </summary>
     private void SetRenderersEnabled(bool enabled)
     {
@@ -121,7 +120,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     }
 
     /// <summary>
-    /// ¿ÜºÎ¿¡¼­ ¹«Àû »óÅÂ¸¦ °­Á¦·Î ¼³Á¤/ÇØÁ¦
+    /// ì™¸ë¶€ì—ì„œ ë¬´ì  ìƒíƒœë¥¼ ê°•ì œë¡œ ì„¤ì •/í•´ì œ
     /// </summary>
     public void SetInvincible(bool invincible)
     {
