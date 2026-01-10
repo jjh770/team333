@@ -12,6 +12,9 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     private FloraSpeedGaugeController _gaugeController;
     private FloraMovement _movement;
     private FloraSkillController _skillController;
+    private IFloraPath _floraPath;
+    public IFloraPath FloraPath => _floraPath;
+    
 
     private bool CanMove => _movement != null && _movement.IsWaiting;
     private bool CanSpeedUp => _inventory != null && _inventory.WoodCount >= _woodCost && !_gaugeController.IsFull;
@@ -36,6 +39,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         _gaugeController = GetComponent<FloraSpeedGaugeController>();
         _movement = GetComponent<FloraMovement>();
         _skillController = GetComponent<FloraSkillController>();
+        _floraPath = GetComponent<IFloraPath>();
     }
 
     public void AddWood(int woodAmount)
