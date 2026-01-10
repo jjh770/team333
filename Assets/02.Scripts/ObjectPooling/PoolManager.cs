@@ -55,7 +55,6 @@ public class PoolManager : MonoBehaviour, IPoolManager
     {
         if (!_prefabLookup.TryGetValue(obj, out GameObject prefab))
         {
-            Debug.LogWarning($"풀에 등록되지 않은 오브젝트입니다: {obj.name}");
             Destroy(obj);
             return;
         }

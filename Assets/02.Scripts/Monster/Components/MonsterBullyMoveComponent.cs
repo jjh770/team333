@@ -5,8 +5,6 @@ public class MonsterBullyMoveComponent : MonsterMoveComponent
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 30f;
 
-    
-
     protected void Awake()
     {
         _isMoving = false;
