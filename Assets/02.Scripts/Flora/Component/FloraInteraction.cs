@@ -12,13 +12,16 @@ public class FloraInteraction : MonoBehaviour
     private FloraSpeedGaugeController _gaugeController;
     private FloraMovement _movement;
     private FloraSkillController _skillController;
-
+    private IFloraPath _floraPath;
+    public IFloraPath FloraPath => _floraPath;
+    
     private void Awake()
     {
         _inventory = GetComponent<FloraInventory>();
         _gaugeController = GetComponent<FloraSpeedGaugeController>();
         _movement = GetComponent<FloraMovement>();
         _skillController = GetComponent<FloraSkillController>();
+        _floraPath = GetComponent<IFloraPath>();
     }
 
     public void AddWood(int woodAmount)

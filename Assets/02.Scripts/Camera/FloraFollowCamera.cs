@@ -20,15 +20,23 @@ public class FloraFollowCamera : MonoBehaviour
 
     private void Start()
     {
-        ResetLastTargetPosition();
+        if (enabled)
+        {
+            ResetLastTargetPosition();
+        }
     }
 
     private void LateUpdate()
     {
-        if (_target == null)
+        if (!enabled || _target == null)
             return;
 
         UpdateCamera();
+    }
+    
+    private void OnEnable()
+    {
+        ResetLastTargetPosition();
     }
     
     private void UpdateCamera()
@@ -109,6 +117,11 @@ public class FloraFollowCamera : MonoBehaviour
         {
             _lastTargetPosition = _target.position;
         }
+    }
+    
+    public Vector3 GetLocalOffset()
+    {
+        return _localOffset;
     }
     
 #if UNITY_EDITOR
