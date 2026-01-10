@@ -42,17 +42,11 @@ public class PlayerPickUpThrow : MonoBehaviour
 
     private void Update()
     {
-        // Throw 입력 처리 (PickUp 상태에서만)
-        if (Input.GetKeyDown(KeyCode.E) && IsHoldingObject && CanDoThrow() && !CanPickUpNearby())
+        // Throw 입력 처리 (마우스 좌클릭, PickUp 상태에서만)
+        if (Input.GetMouseButtonDown(0) && IsHoldingObject && CanDoThrow())
         {
             StartThrow();
         }
-    }
-
-    private bool CanPickUpNearby()
-    {
-        var closest = _playerInteraction.ClosestInteractable;
-        return closest != null && closest is IPickable && CanPickUp && CanDoPickUp();
     }
 
     private void HandleInteract(IInteractable interactable)

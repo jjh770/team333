@@ -12,12 +12,13 @@ public class PlayerInteraction : MonoBehaviour
     private IInteractable _closestInteractable;
     private float _nextUpdateTime;
 
-    // ¿ì¼±¼øÀ§ Á¤ÀÇ: Talk > Use > PickUp
+    // ìš°ì„ ìˆœìœ„: Move > SpeedUp > PickUp > Use
     private static readonly InteractionType[] _priorityOrder = new InteractionType[]
     {
-        InteractionType.Talk,
-        InteractionType.Use,
-        InteractionType.PickUp
+        InteractionType.TalkToMove,
+        InteractionType.TalkToSpeedUp,
+        InteractionType.PickUp,
+        InteractionType.Use
     };
 
     public IInteractable ClosestInteractable => _closestInteractable;
@@ -77,8 +78,7 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ì¼±¼øÀ§¿¡ µû¶ó °¡Àå °¡±î¿î »óÈ£ÀÛ¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ® ¹İÈ¯
-    /// Talk > Use > PickUp ¼ø¼­
+    /// ìš°ì„ ìˆœìœ„ì— ë”°ë¼ ê°€ì¥ ê°€ê¹Œìš´ ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ ë°˜í™˜
     /// </summary>
     private IInteractable GetClosestInteractableByPriority()
     {
@@ -86,13 +86,13 @@ public class PlayerInteraction : MonoBehaviour
 
         if (_nearbyInteractables.Count == 0) return null;
 
-        // ¿ì¼±¼øÀ§º°·Î ¼øÈ¸
+        // ìš°ì„ ìˆœìœ„ëŒ€ë¡œ ìˆœíšŒ
         foreach (var priorityType in _priorityOrder)
         {
             IInteractable closest = GetClosestOfType(priorityType);
             if (closest != null)
             {
-                return closest; // ¿ì¼±¼øÀ§°¡ ³ôÀº °ÍºÎÅÍ Ã£À½
+                return closest;
             }
         }
 
@@ -100,7 +100,7 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     /// <summary>
-    /// Æ¯Á¤ Å¸ÀÔ Áß¿¡¼­ °¡Àå °¡±î¿î »óÈ£ÀÛ¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ® ¹İÈ¯
+    /// íŠ¹ì • íƒ€ì… ì¤‘ì—ì„œ ê°€ì¥ ê°€ê¹Œìš´ ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ ë°˜í™˜
     /// </summary>
     private IInteractable GetClosestOfType(InteractionType type)
     {
@@ -111,15 +111,12 @@ public class PlayerInteraction : MonoBehaviour
 
         foreach (var interactable in _nearbyInteractables)
         {
-            // null Ã¼Å© ¹× Å¸ÀÔ Ã¼Å©
             if (interactable == null || interactable.Type != type)
                 continue;
 
-            // »óÈ£ÀÛ¿ë °¡´É ¿©ºÎ Ã¼Å©
             if (!interactable.CanInteract)
                 continue;
 
-            // °Å¸® °è»ê (Á¦°ö °Å¸® »ç¿ëÀ¸·Î ÃÖÀûÈ­)
             float distanceSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
 
             if (distanceSqr < closestDistanceSqr)
@@ -154,7 +151,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         _nearbyInteractables.Remove(interactable);
 
-        // Á¦°ÅµÈ °ÍÀÌ ÇöÀç ¼±ÅÃµÈ °ÍÀÌ¸é Áï½Ã ¾÷µ¥ÀÌÆ®
+        // ì œê±°ëœ ê²ƒì´ í˜„ì¬ ì„ íƒëœ ê²ƒì´ë©´ ë‹¤ì‹œ ì—…ë°ì´íŠ¸
         if (_closestInteractable == interactable)
         {
             UpdateClosestInteractable();
@@ -195,7 +192,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (interactable?.Transform == null) continue;
 
-            // ÇöÀç ¼±ÅÃµÈ °ÍÀº ³ì»ö, ³ª¸ÓÁö´Â Å¸ÀÔº° »ö»ó
+            // í˜„ì¬ ì„ íƒëœ ê²ƒì€ ë…¹ìƒ‰, ë‚˜ë¨¸ì§€ëŠ” íƒ€ì…ë³„ ìƒ‰ìƒ
             if (interactable == _closestInteractable)
             {
                 Gizmos.color = Color.green;
@@ -213,9 +210,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         return type switch
         {
-            InteractionType.Talk => Color.cyan,
-            InteractionType.Use => Color.yellow,
+            InteractionType.TalkToMove => Color.cyan,
+            InteractionType.TalkToSpeedUp => Color.green,
             InteractionType.PickUp => Color.blue,
+            InteractionType.Use => Color.yellow,
             _ => Color.gray
         };
     }

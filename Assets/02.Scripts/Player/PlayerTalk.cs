@@ -7,9 +7,9 @@ public class PlayerTalk : MonoBehaviour
 
     private PlayerStateManager _stateManager;
     private PlayerInteraction _playerInteraction;
-    private ITalkable _currentTalkable;
+    private IInteractable _currentTalkTarget;
 
-    public bool IsTalking => _currentTalkable != null;
+    public bool IsTalking => _currentTalkTarget != null;
     public bool CanStartTalk => !IsTalking;
 
     private void Awake()
@@ -33,26 +33,30 @@ public class PlayerTalk : MonoBehaviour
         return _stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.PickUp);
     }
 
+    private bool IsTalkInteraction(InteractionType type)
+    {
+        return type == InteractionType.TalkToMove || type == InteractionType.TalkToSpeedUp;
+    }
+
     private void HandleInteract(IInteractable interactable)
     {
-        // ITalkable인지 체크
-        if (interactable is ITalkable talkable)
+        // Talk 타입인지 체크
+        if (IsTalkInteraction(interactable.Type))
         {
             // 대화 가능한 상태인지 체크
             if (CanStartTalk && CanDoTalk())
             {
-                StartTalk(talkable);
+                StartTalk(interactable);
             }
         }
     }
 
-    private void StartTalk(ITalkable talkable)
+    private void StartTalk(IInteractable talkTarget)
     {
-        if (talkable == null) return;
+        if (talkTarget == null) return;
 
-        _currentTalkable = talkable;
+        _currentTalkTarget = talkTarget;
 
-        // 대화 시작
-        talkable.Interact(gameObject);
+        // 대화 시작 (Interact는 PlayerInteraction에서 이미 호출됨)
     }
 }

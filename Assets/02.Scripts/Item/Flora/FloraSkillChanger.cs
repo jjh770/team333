@@ -9,6 +9,8 @@ public class FloraSkillChanger : ItemBase
 
     private void OnCollisionEnter(Collision other)
     {
+        if (_isHeld) return;
+
         if (!other.gameObject.CompareTag(FloraTag)) return;
         if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 

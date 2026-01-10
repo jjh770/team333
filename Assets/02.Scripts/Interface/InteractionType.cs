@@ -1,6 +1,7 @@
 public enum InteractionType
 {
+    TalkToMove,
+    TalkToSpeedUp,
     PickUp,
-    Talk,
     Use
 }
