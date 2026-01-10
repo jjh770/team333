@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class PlayerTalk : MonoBehaviour
 {
-    [Header("Debug")]
-    [SerializeField] private GameObject _currentTalkObjectDebug;
-
     private PlayerStateManager _stateManager;
     private PlayerInteraction _playerInteraction;
     private IInteractable _currentTalkTarget;
@@ -40,6 +37,8 @@ public class PlayerTalk : MonoBehaviour
 
     private void HandleInteract(IInteractable interactable)
     {
+        if (interactable == null) return;
+
         // Talk 타입인지 체크
         if (IsTalkInteraction(interactable.Type))
         {

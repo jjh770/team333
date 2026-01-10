@@ -6573,6 +6573,7 @@ GameObject:
   - component: {fileID: 7814041808843602986}
   - component: {fileID: 1805365390455759174}
   - component: {fileID: 408865662072570645}
+  - component: {fileID: 998564929154840911}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6698,6 +6699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   _moveData: {fileID: 11400000, guid: 5858733b1ce8e8f498aa40aa0c47678f, type: 2}
   _attackData: {fileID: 11400000, guid: c2bc743208c9de645ad056059a9016df, type: 2}
+  _skillData: {fileID: 11400000, guid: 23dddd361eaa4314e96ca34107816498, type: 2}
   _enableAttackMovement: 1
 --- !u!114 &2380892331586880646
 MonoBehaviour:
@@ -6882,8 +6884,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillController
   _skillKey: 113
-  _unlockedSkills: []
-  _currentSkillIndex: 0
+  _cooldown: 2
+--- !u!114 &998564929154840911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a56b171a66611941badd8c4befd9567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTalk
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,11 @@ public class PlayerAnimatorController : MonoBehaviour
         _animator.SetTrigger("ThrowFinish");
     }
 
+    public void SkillAnimation()
+    {
+        _animator.SetTrigger("Skill");
+    }
+
     public float GetCurrentAttackAnimationDuration()
     {
         if (_animator == null)

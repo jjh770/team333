@@ -5,7 +5,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Data")]
     [SerializeField] private PlayerAttackData _attackData;
 
-    private PlayerRotateToMouse _rotateToMouse;
+    private PlayerMouseHelper _mouseHelper;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private PlayerAttackRange _attackRange;
@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
         _attackRange = GetComponent<PlayerAttackRange>();
-        _rotateToMouse = GetComponent<PlayerRotateToMouse>();
+        _mouseHelper = GetComponent<PlayerMouseHelper>();
         _playerMove = GetComponent<PlayerMove>();
         _playerDash = GetComponent<PlayerDash>();
         _stateManager.OnStateChanged += OnStateChanged;
@@ -80,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && _canAttack && _stateManager.CanAttack)
         {
-            _rotateToMouse.RotateTowardsMouse();
+            _mouseHelper.RotateTowardsMouse();
             StartAttack();
         }
     }

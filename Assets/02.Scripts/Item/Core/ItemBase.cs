@@ -9,6 +9,14 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     protected bool _isHeld;
 
+    private bool _isLocked;
+    public void SetLocked(bool locked) => _isLocked = locked;
+
+    // IInteractable
+    public Transform Transform => transform;
+    public virtual InteractionType Type => InteractionType.PickUp;
+    public virtual bool CanInteract => !_isHeld && !_isLocked;
+    public virtual void Interact(GameObject interactor) { }
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -19,12 +27,6 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     {
         InteractionEvents.NotifyDestroyed(this);
     }
-
-    // IInteractable
-    public Transform Transform => transform;
-    public virtual InteractionType Type => InteractionType.PickUp;
-    public virtual bool CanInteract => !_isHeld;
-    public virtual void Interact(GameObject interactor) { }
 
     // IPickable
     public void OnPickedUp(Transform holdPoint)
@@ -41,6 +43,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     protected virtual void PickUp(Transform holder)
     {
+        if (_rigidbody == null) return; // 파괴 중일 경우 방지
+
         _isHeld = true;
 
         _rigidbody.linearVelocity = Vector3.zero;
