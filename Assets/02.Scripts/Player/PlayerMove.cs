@@ -181,7 +181,7 @@ public class PlayerMove : MonoBehaviour
 
         // 트윈 초기화
         _skillMoveTween?.Kill();
-        float moveDuration = _animatorController.GetCurrentAttackAnimationDuration();
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
 
         float prevHorizontal = 0f;
         float prevVertical = 0f;
@@ -246,7 +246,7 @@ public class PlayerMove : MonoBehaviour
         _attackMoveTween?.Kill();
 
         // 애니메이션 길이를 이동 시간으로 사용
-        float moveDuration = _animatorController.GetCurrentAttackAnimationDuration();
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
 
         Vector3 moveDirection = transform.forward;
         float previousValue = 0f;

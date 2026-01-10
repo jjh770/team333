@@ -20,6 +20,7 @@ public class PlayerInteraction : MonoBehaviour
         InteractionType.Use,
         InteractionType.PickUp
     };
+    private Dictionary<InteractionType, int> _priorityMap;
 
     public IInteractable ClosestInteractable => _closestInteractable;
     public bool HasInteractable => _closestInteractable != null;
@@ -28,6 +29,14 @@ public class PlayerInteraction : MonoBehaviour
     public event Action<IInteractable> OnInteractableChanged;
     public event Action<IInteractable> OnInteract;
 
+    private void Awake()
+    {
+        _priorityMap = new Dictionary<InteractionType, int>();
+        for (int i = 0; i < _priorityOrder.Length; i++)
+        {
+            _priorityMap[_priorityOrder[i]] = i;
+        }
+    }
     private void OnEnable()
     {
         InteractionEvents.OnInteractableDestroyed += HandleInteractableDestroyed;
@@ -97,9 +106,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (!interactable.CanInteract) continue;
 
-            // 우선순위 배열에서 현재 인덱스 찾기 (Dictionary 등으로 캐싱하면 더 빠름)
-            int priorityIndex = Array.IndexOf(_priorityOrder, interactable.Type);
-            if (priorityIndex == -1) continue;
+            if (!_priorityMap.TryGetValue(interactable.Type, out int priorityIndex)) continue;
 
             float distSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
 

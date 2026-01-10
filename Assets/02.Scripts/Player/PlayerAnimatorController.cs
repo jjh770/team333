@@ -49,7 +49,7 @@ public class PlayerAnimatorController : MonoBehaviour
         _animator.SetTrigger("Skill");
     }
 
-    public float GetCurrentAttackAnimationDuration()
+    public float GetCurrentAnimationDuration()
     {
         if (_animator == null)
             return 0.5f;
