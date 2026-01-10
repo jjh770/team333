@@ -39,6 +39,7 @@ public class PoolManager : MonoBehaviour, IPoolManager
             obj = CreateNewObject(prefab);
         }
 
+        obj.transform.SetParent(null);
         obj.transform.SetPositionAndRotation(position, rotation);
         obj.SetActive(true);
 
@@ -66,6 +67,7 @@ public class PoolManager : MonoBehaviour, IPoolManager
         }
 
         obj.SetActive(false);
+        obj.transform.SetParent(this.transform);
         _pools[prefab].Enqueue(obj);
     }
 

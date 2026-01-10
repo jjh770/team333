@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MonsterStat))]
 [RequireComponent(typeof(MonsterAttackComponent))]
 [RequireComponent(typeof(MonsterDamageComponent))]
+[RequireComponent(typeof(MonsterItemDropComponent))]
 public abstract class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
@@ -21,6 +22,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     protected MonsterStat _stat;
     protected MonsterAttackComponent _attack;
     protected MonsterDamageComponent _damage;
+    protected MonsterItemDropComponent _itemDrop;
 
     protected bool _isDead;
     public bool IsDead => _isDead;
@@ -41,6 +43,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         _stat = GetComponent<MonsterStat>();
         _attack = GetComponent<MonsterAttackComponent>();
         _damage = GetComponent<MonsterDamageComponent>();
+        _itemDrop = GetComponent<MonsterItemDropComponent>();
     }
 
     public override void OnSpawn()
@@ -79,7 +82,6 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
             _isStunned = false;
         }
     }
-
     protected virtual void Update()
     {
         if (_isDead) return;
@@ -158,8 +160,8 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         if (_isDead) return;
 
         _isDead = true;
+        _itemDrop.DropItem();
         ApplyState(MonsterState.Die);
-
         _deathRoutine = StartCoroutine(DeathCoroutine());
     }
 

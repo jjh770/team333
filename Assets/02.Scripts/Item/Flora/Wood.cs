@@ -14,7 +14,8 @@ public class Wood : ItemBase
         if (!other.gameObject.CompareTag(FloraTag)) return;
         if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
+        Debug.Log("OnCollisionEnter");
         interaction.AddWood(_addWoodAmount);
-        Destroy(gameObject);
+        ItemFactory.Instance.Despawn(this.gameObject);
     }
 }
