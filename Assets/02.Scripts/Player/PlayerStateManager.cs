@@ -10,6 +10,7 @@ public enum PlayerState
     Dashing,
     PickUp,
     Throw,
+    Skill,
     Die
 }
 
@@ -27,6 +28,7 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanThrow => !IsDead && _currentState == PlayerState.PickUp;
     public bool CanAttack => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
     public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
+    public bool CanSkill => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
     public void ChangeState(PlayerState newState)
     {
@@ -78,7 +80,7 @@ public class PlayerStateManager : MonoBehaviour
                 return true; // Moving에서도 모든 상태로 전환 가능
 
             case PlayerState.Attacking:
-                // 공격 중에는 이동 또는 대시로 전환 가능
+                // 공격 중에는 이동, 대시, 스킬로 전환 가능
                 return to == PlayerState.Moving || to == PlayerState.Dashing;
 
             case PlayerState.Dashing:
@@ -92,6 +94,11 @@ public class PlayerStateManager : MonoBehaviour
             case PlayerState.Throw:
                 // Throw 상태에서는 Idle이나 PickUp으로 전환 가능
                 return to == PlayerState.PickUp || to == PlayerState.Idle;
+
+            case PlayerState.Skill:
+                // Skill 상태에서는 Idle로만 전환 가능 (스킬 종료 시)
+                return to == PlayerState.Idle || to == PlayerState.Moving;
+
             default:
                 return false;
         }

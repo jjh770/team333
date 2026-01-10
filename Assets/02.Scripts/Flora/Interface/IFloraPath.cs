@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public interface IFloraPath
@@ -6,4 +7,6 @@ public interface IFloraPath
     bool MoveNext();
     bool IsFinished { get; }
     bool ShouldWait { get; }
+    
+    event Action OnPathCompleted;
 }

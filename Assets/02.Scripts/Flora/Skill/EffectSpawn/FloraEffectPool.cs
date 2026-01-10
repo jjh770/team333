@@ -11,6 +11,9 @@ public class FloraEffectPool : MonoBehaviour
     [Header("Slow Effects")]
     [SerializeField] private GameObject _slowEffectPrefab;
     
+    [Header("Burn Effects")]
+    [SerializeField] private GameObject _burnEffectPrefab;
+    
     [Header("Settings")]
     [SerializeField] private int _preloadCount = 10;
 
@@ -44,6 +47,9 @@ public class FloraEffectPool : MonoBehaviour
         
         if (_slowEffectPrefab != null)
             _poolManager.Preload(_slowEffectPrefab, _preloadCount);
+        
+        if (_burnEffectPrefab != null)
+            _poolManager.Preload(_burnEffectPrefab, _preloadCount);
     }
 
     public GameObject PlayLightningStrike(Vector3 position, float duration = 1f)
@@ -59,6 +65,11 @@ public class FloraEffectPool : MonoBehaviour
     public GameObject PlaySlowEffect(Vector3 position)
     {
         return PlayEffect(_slowEffectPrefab, position, Quaternion.identity);
+    }
+
+    public GameObject PlayBurnEffect(Vector3 position)
+    {
+        return PlayEffect(_burnEffectPrefab, position, Quaternion.identity);
     }
 
     private GameObject PlayEffect(GameObject prefab, Vector3 position, Quaternion rotation)

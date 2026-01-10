@@ -11,10 +11,13 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     private List<Vector3> _splinePoints;
     private HashSet<int> _waitPointIndex;
     private int _currentIndex;
+    private bool _isCompleted;
 
     public bool IsFinished => _currentIndex >= _splinePoints.Count;
     public bool ShouldWait => _waitPointIndex != null && _waitPointIndex.Contains(_currentIndex);
 
+    public event Action OnPathCompleted;
+    
     private void Awake()
     {
         GenerateSplinePoints();
@@ -28,7 +31,15 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     public bool MoveNext()
     {
         _currentIndex++;
-        return _currentIndex < _splinePoints.Count;
+        bool hasNext = _currentIndex < _splinePoints.Count;
+    
+        if (!hasNext && !_isCompleted)
+        {
+            _isCompleted = true;
+            OnPathCompleted?.Invoke();
+        }
+    
+        return hasNext;
     }
 
     private void GenerateSplinePoints()

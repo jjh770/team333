@@ -1,12 +1,21 @@
 using UnityEngine;
 
-public class SkillUnlocker : ItemBase
+public class SkillUnlocker : MonoBehaviour, IInteractable
 {
-    public override InteractionType Type => InteractionType.Use;
+    public InteractionType Type => InteractionType.Use;
+    public Transform Transform
+    {
+        get
+        {
+            // 이미 파괴된 상태에서 누군가 호출할 경우 null 반환
+            if (this == null) return null;
+            return transform;
+        }
+    }
+    public bool CanInteract => true;
 
-    public override bool CanInteract => !_isHeld;
 
-    public override void Interact(GameObject interactor)
+    public void Interact(GameObject interactor)
     {
         if (interactor.TryGetComponent<PlayerSkillController>(out var controller))
         {

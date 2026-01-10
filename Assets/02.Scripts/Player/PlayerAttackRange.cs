@@ -106,12 +106,12 @@ public class PlayerAttackRange : MonoBehaviour
     }
 
     /// <summary>
-    /// 적에게 데미지 적용
+    /// 대상에게 데미지 적용
     /// </summary>
     private void ApplyDamage(GameObject target, float damage, int comboIndex)
     {
         Damage takeDamage = new Damage(damage, gameObject);
-        if (target.TryGetComponent<BadMonsterController>(out var damageable))
+        if (target.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TryTakeDamage(takeDamage);
         }

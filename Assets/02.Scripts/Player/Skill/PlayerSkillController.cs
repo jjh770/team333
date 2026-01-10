@@ -5,8 +5,12 @@ public class PlayerSkillController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private KeyCode _skillKey = KeyCode.Q;
-    [SerializeField] private float _cooldown = 5f;
+    [SerializeField] private float _cooldown = 3f;
 
+    private PlayerStateManager _stateManager;
+    private PlayerAnimatorController _animatorController;
+    private PlayerMove _playerMove;
+    private PlayerMouseHelper _mouseHelper;
     private bool _isUnlocked = false;
     private float _lastUseTime = -999f;
 
@@ -16,12 +20,25 @@ public class PlayerSkillController : MonoBehaviour
     public event Action OnSkillUnlocked;
     public event Action OnSkillUsed;
 
+    private void Awake()
+    {
+        _stateManager = GetComponent<PlayerStateManager>();
+        _animatorController = GetComponent<PlayerAnimatorController>();
+        _playerMove = GetComponent<PlayerMove>();
+        _mouseHelper = GetComponent<PlayerMouseHelper>();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(_skillKey) && _isUnlocked && IsReady)
+        if (Input.GetKeyDown(_skillKey) && CanUseSkill())
         {
             UseSkill();
         }
+    }
+
+    private bool CanUseSkill()
+    {
+        return _isUnlocked && IsReady && _stateManager.CanSkill;
     }
 
     public void UnlockSkill()
@@ -34,7 +51,26 @@ public class PlayerSkillController : MonoBehaviour
 
     private void UseSkill()
     {
+        _stateManager.ChangeState(PlayerState.Skill);
+        _mouseHelper.RotateTowardsMouse();
+        _animatorController.SkillAnimation();
         _lastUseTime = Time.time;
         OnSkillUsed?.Invoke();
     }
-}
+
+
+    public void OnSkillAnimationStart()
+    {
+        // 공격 이동 시작
+        _playerMove.StartSkillMovement();
+    }
+
+
+    /// <summary>
+    /// 스킬 애니메이션 종료 시 호출 (Animation Event)
+    /// </summary>
+    public void OnSkillAnimationEnd()
+    {
+        _stateManager.ChangeState(PlayerState.Idle);
+    }
+} 
