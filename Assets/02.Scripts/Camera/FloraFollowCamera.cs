@@ -29,7 +29,9 @@ public class FloraFollowCamera : MonoBehaviour
     private void LateUpdate()
     {
         if (!enabled || _target == null)
+        {
             return;
+        }
 
         UpdateCamera();
     }

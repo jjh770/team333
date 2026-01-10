@@ -37,7 +37,6 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
         {
             _isCompleted = true;
             OnPathCompleted?.Invoke();
-            Debug.Log("SplineWaypointPath: Path Completed!");
         }
     
         return hasNext;

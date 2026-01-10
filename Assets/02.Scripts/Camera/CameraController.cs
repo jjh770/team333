@@ -29,7 +29,9 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         if (_camera == null)
+        {
             _camera = GetComponent<Camera>();
+        }
         
         if (_followCamera != null)
         {
@@ -87,7 +89,6 @@ public class CameraController : MonoBehaviour
             yield break;
         }
 
-        // 1단계: IntroTransform 위치에서 대기
         yield return new WaitForSeconds(_introHoldDuration);
 
         Vector3 startPos = _introTransform.position;
@@ -135,12 +136,6 @@ public class CameraController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = _outroEaseCurve.Evaluate(elapsed / _outroMoveDuration);
-
-            if (_outroTransform != null)
-            {
-                targetPos = _outroTransform.position;
-                targetRot = _outroTransform.rotation;
-            }
 
             transform.position = Vector3.Lerp(startPos, targetPos, t);
             transform.rotation = Quaternion.Slerp(startRot, targetRot, t);

@@ -106,7 +106,7 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.Paused:
-                Time.timeScale = 0f;
+                //Time.timeScale = 0f;
                 break;
         }
     }
