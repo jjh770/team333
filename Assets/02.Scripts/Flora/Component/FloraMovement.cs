@@ -19,6 +19,7 @@ public class FloraMovement : MonoBehaviour
     public IFloraPath Path => _path;
     public float CurrentSpeed => _agent.speed;
     public bool ShouldWait => _path.ShouldWait;
+    public bool IsWaiting => _currentState == WaitState;
 
     public void Awake()
     {

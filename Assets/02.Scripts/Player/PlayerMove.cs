@@ -91,7 +91,7 @@ public class PlayerMove : MonoBehaviour
             // 이동 전에 다음 위치를 예측하고 경계 내로 조정
             Vector3 clampedMove = ClampMovementToCameraBounds(move);
 
-            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.Dashing))
+            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.Dashing, PlayerState.PickUp))
             {
                 _animatorController.MoveAnimation(true);
             }
@@ -112,7 +112,7 @@ public class PlayerMove : MonoBehaviour
                 _stateManager.ChangeState(PlayerState.Idle);
             }
 
-            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.Attacking))
+            if (_stateManager.IsInStates(PlayerState.Idle, PlayerState.Moving, PlayerState.Attacking, PlayerState.PickUp))
             {
                 _animatorController.MoveAnimation(false);
             }

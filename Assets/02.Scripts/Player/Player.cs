@@ -9,12 +9,13 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStateManager))]
 [RequireComponent(typeof(PlayerRotateToMouse))]
 [RequireComponent(typeof(PlayerStat))]
+[RequireComponent(typeof(PlayerWeaponVisual))]
 
 public class Player : MonoBehaviour
 {
     private PlayerStat _stat;
     private PlayerAnimatorController _animatorController;
-    private PlayerStateManager _playerStateManager;
+    private PlayerStateManager _stateManager;
     private bool _isDead;
     public bool IsDead => _isDead;
 
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     {
         _stat = GetComponent<PlayerStat>();
         _animatorController = GetComponent<PlayerAnimatorController>();
-        _playerStateManager = GetComponent<PlayerStateManager>();
+        _stateManager = GetComponent<PlayerStateManager>();
     }
 
     private void OnEnable()
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
         if (_isDead) return;
         _isDead = true;
 
-        _playerStateManager.ChangeState(PlayerState.Die);
+        _stateManager.ChangeState(PlayerState.Die);
         _animatorController.DieAnimation();
     }
 }
