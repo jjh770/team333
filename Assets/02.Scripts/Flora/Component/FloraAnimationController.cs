@@ -54,4 +54,9 @@ public class FloraAnimationController : MonoBehaviour
     {
         return _maxSpeed > 0 ? Mathf.Clamp01(speed / _maxSpeed) : 0f;
     }
+    
+    public void PlaySkill()
+    {
+        _animator.SetTrigger("Skill");
+    }
 }
