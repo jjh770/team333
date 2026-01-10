@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 4502119741021904064}
   - component: {fileID: 2330930645351150873}
   - component: {fileID: 6564419541110563934}
+  - component: {fileID: 1161257413162680445}
   m_Layer: 5
   m_Name: UI_MonsterSpeechBubble
   m_TagString: Untagged
@@ -176,9 +177,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3791058723434626671}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 405196480801409631}
@@ -209,8 +210,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 130902285
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2330930645351150873
 MonoBehaviour:
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6564419541110563934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +253,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1161257413162680445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3791058723434626671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43deb8dc87efa1642a18740d9aac3791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_MonsterSpeechBubble
+  _speechBubble: {fileID: 6448378286007762498}
+  _iconImage: {fileID: 6509211165374625979}
+  _sadSprite: {fileID: 21300000, guid: 0b5999a6878e3d2469d0af855333cd94, type: 3}
+  _happySprite: {fileID: 21300000, guid: 65bdce3a6a9bf624aa1a0ad02700e00e, type: 3}
+  _fadeDuration: 0.12
+  _popScale: 1.08
+  _popDuration: 0.12
+  _floatDistance: 1
+  _floatDuration: 1.5
 --- !u!1 &6448378286007762498
 GameObject:
   m_ObjectHideFlags: 0

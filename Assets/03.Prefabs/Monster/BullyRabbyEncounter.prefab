@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 6844680784718112079}
   - {fileID: 857111078620955074}
   _rabbyMonster: {fileID: 824806326937808585}
-  _speechBubble: {fileID: 598945719642481333}
+  _speechBubble: {fileID: 6110443940932963008}
 --- !u!1001 &932182689275626685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,17 +104,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5179553613198314270, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179553613198314270, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5179553613198314270, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _speechBubble
+      value: 
+      objectReference: {fileID: 8092333869636908242}
+    - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _floatDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523213909001927449, guid: e97ad18414708494297cda9578c40d4f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8522020162399769280, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522020162399769280, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522020162399769280, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 130902285
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8980874678824022127, guid: e97ad18414708494297cda9578c40d4f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 598945719642481333}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e97ad18414708494297cda9578c40d4f, type: 3}
 --- !u!4 &20334688939658405 stripped
 Transform:
@@ -126,27 +155,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 548748439804291700, guid: e97ad18414708494297cda9578c40d4f, type: 3}
   m_PrefabInstance: {fileID: 932182689275626685}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2198996886118969862 stripped
+--- !u!114 &6110443940932963008 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1327347152783242939, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
   m_PrefabInstance: {fileID: 932182689275626685}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!1 &8092333869636908242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8980874678824022127, guid: e97ad18414708494297cda9578c40d4f, type: 3}
-  m_PrefabInstance: {fileID: 932182689275626685}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &598945719642481333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8092333869636908242}
   m_Enabled: 1
@@ -154,13 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43deb8dc87efa1642a18740d9aac3791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_MonsterSpeechBubble
-  _speechBubble: {fileID: 8092333869636908242}
-  _iconImage: {fileID: 2198996886118969862}
-  _sadSprite: {fileID: 21300000, guid: 0b5999a6878e3d2469d0af855333cd94, type: 3}
-  _happySprite: {fileID: 21300000, guid: 65bdce3a6a9bf624aa1a0ad02700e00e, type: 3}
-  _fadeDuration: 0.12
-  _popScale: 1.08
-  _popDuration: 0.12
+--- !u!1 &8092333869636908242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8980874678824022127, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+  m_PrefabInstance: {fileID: 932182689275626685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2289809519501515209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,6 +261,14 @@ PrefabInstance:
     - target: {fileID: 1450748814917048331, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
       propertyPath: m_Name
       value: Bully_Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060705045125913385, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060705045125913385, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 130902285
       objectReference: {fileID: 0}
     - target: {fileID: 6659818613876850983, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
       propertyPath: _bullyTarget
