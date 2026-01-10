@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FloraStunSkill : FloraSkillBase
@@ -7,6 +8,9 @@ public class FloraStunSkill : FloraSkillBase
     [SerializeField] private float _stunInterval = 2f;
     [SerializeField] private float _stunDuration = 0.5f;
 
+    [Header("Lightning Effect Timing")]
+    [SerializeField] private float _lightningStrikeDelay = 0.1f;
+    
     private Coroutine _stunRoutine;
 
     private void OnEnable()
@@ -14,15 +18,15 @@ public class FloraStunSkill : FloraSkillBase
         _stunRoutine = StartCoroutine(StunRoutine());
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         if (_stunRoutine != null)
         {
             StopCoroutine(_stunRoutine);
             _stunRoutine = null;
         }
-
-        MonstersInRange.Clear();
+        
+        base.OnDisable();
     }
 
     private IEnumerator StunRoutine()
@@ -30,12 +34,31 @@ public class FloraStunSkill : FloraSkillBase
         while (true)
         {
             yield return new WaitForSeconds(_stunInterval);
-
-            foreach (var monster in MonstersInRange)
+            
+            List<BadMonsterController> monsters = new(MonstersInRange);
+            foreach (var monster in monsters)
             {
                 if (monster == null) continue;
-
+                Vector3 position = monster.transform.position;
+                _effectPool.PlayLightningStrike(position, _lightningStrikeDelay);
+            }
+            
+            yield return new WaitForSeconds(_lightningStrikeDelay);
+            
+            foreach (var monster in monsters)
+            {
+                if (monster == null || !monster.gameObject.activeInHierarchy) continue;
+                
+                Vector3 position = monster.transform.position;
                 monster.ApplyStun(_stunDuration);
+                
+                GameObject hitEffect = _effectPool.PlayLightningHit(position, _stunDuration);
+                
+                if (hitEffect != null)
+                {
+                    hitEffect.transform.SetParent(monster.transform);
+                    hitEffect.transform.localPosition = Vector3.zero;
+                }
             }
         }
     }
@@ -44,6 +67,7 @@ public class FloraStunSkill : FloraSkillBase
 
     protected override void OnMonsterExit(BadMonsterController monster) { }
 
+    
 #if UNITY_EDITOR
     protected override void OnDrawGizmosSelected()
     {

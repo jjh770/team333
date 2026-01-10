@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fac3a986c74a7504a906d2f8bd2418ae
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 343966
+  packageName: Area of Effect_Pack1
+  packageVersion: 1.0
+  assetPath: Assets/RangeMarkerEffect/Materials/BuiltIn/Effect4/Effect4 9_BuiltIn.mat
+  uploadId: 816526
