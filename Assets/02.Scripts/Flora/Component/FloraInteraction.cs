@@ -22,7 +22,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         {
             if (CanMove) return InteractionType.TalkToMove;
             if (CanSpeedUp) return InteractionType.TalkToSpeedUp;
-            return InteractionType.TalkToMove; // 기본값
+            return InteractionType.TalkToMove;
         }
     }
 

@@ -6572,6 +6572,7 @@ GameObject:
   - component: {fileID: 6229917204903142099}
   - component: {fileID: 7814041808843602986}
   - component: {fileID: 1805365390455759174}
+  - component: {fileID: 408865662072570645}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6819,6 +6820,7 @@ MonoBehaviour:
   - {fileID: 4962518582471307749}
   - {fileID: 5904420856373808656}
   _throwForce: 10
+  _throwUpwardAngle: 0.5
 --- !u!135 &6229917204903142099
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6867,6 +6869,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   _interactKey: 101
   _updateInterval: 0.1
+--- !u!114 &408865662072570645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6be5aa6c4e646418169ddb78e1d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillController
+  _skillKey: 113
+  _unlockedSkills: []
+  _currentSkillIndex: 0
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0
