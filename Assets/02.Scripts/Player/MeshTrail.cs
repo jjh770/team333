@@ -25,12 +25,18 @@ public class MeshTrail : MonoBehaviour
     private Queue<TrailObject> _pool = new();
     private Transform _poolParent;
 
+    private int _shaderPropertyId;
+    private float _initialShaderValue;
+    private WaitForSeconds _meshRefreshWait;
+    private WaitForSeconds _shaderRefreshWait;
+
     private class TrailObject
     {
         public GameObject GameObject;
         public MeshRenderer MeshRenderer;
         public MeshFilter MeshFilter;
         public Mesh Mesh;
+        public MaterialPropertyBlock PropertyBlock;
     }
 
     private void Awake()
@@ -41,6 +47,11 @@ public class MeshTrail : MonoBehaviour
         {
             _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         }
+
+        _shaderPropertyId = Shader.PropertyToID(_shaderVarRef);
+        _initialShaderValue = _defaultMat.GetFloat(_shaderPropertyId);
+        _meshRefreshWait = new WaitForSeconds(_meshRefreshRate);
+        _shaderRefreshWait = new WaitForSeconds(_shaderVarRefreshRate);
 
         InitializePool();
     }
@@ -65,8 +76,10 @@ public class MeshTrail : MonoBehaviour
         trailObject.MeshRenderer = trailObject.GameObject.AddComponent<MeshRenderer>();
         trailObject.MeshFilter = trailObject.GameObject.AddComponent<MeshFilter>();
         trailObject.Mesh = new Mesh();
+        trailObject.PropertyBlock = new MaterialPropertyBlock();
 
         trailObject.MeshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        trailObject.MeshRenderer.sharedMaterial = _defaultMat;
         trailObject.MeshFilter.mesh = trailObject.Mesh;
 
         trailObject.GameObject.SetActive(false);
@@ -126,13 +139,14 @@ public class MeshTrail : MonoBehaviour
 
                 _skinnedMeshRenderers[i].BakeMesh(trail.Mesh);
 
-                trail.MeshRenderer.material = _defaultMat;
+                trail.PropertyBlock.SetFloat(_shaderPropertyId, _initialShaderValue);
+                trail.MeshRenderer.SetPropertyBlock(trail.PropertyBlock);
                 trail.GameObject.SetActive(true);
 
                 StartCoroutine(AnimateAndReturn(trail));
             }
 
-            yield return new WaitForSeconds(_meshRefreshRate);
+            yield return _meshRefreshWait;
         }
 
         _isTrailActive = false;
@@ -140,16 +154,16 @@ public class MeshTrail : MonoBehaviour
 
     private IEnumerator AnimateAndReturn(TrailObject trail)
     {
-        Material mat = trail.MeshRenderer.material;
-        float valueToAnimate = mat.GetFloat(_shaderVarRef);
+        float valueToAnimate = _initialShaderValue;
 
         float elapsed = 0f;
         while (elapsed < _meshLifetime && valueToAnimate > 0)
         {
             valueToAnimate -= _shaderVarRate;
-            mat.SetFloat(_shaderVarRef, valueToAnimate);
+            trail.PropertyBlock.SetFloat(_shaderPropertyId, valueToAnimate);
+            trail.MeshRenderer.SetPropertyBlock(trail.PropertyBlock);
             elapsed += _shaderVarRefreshRate;
-            yield return new WaitForSeconds(_shaderVarRefreshRate);
+            yield return _shaderRefreshWait;
         }
 
         ReturnToPool(trail);
