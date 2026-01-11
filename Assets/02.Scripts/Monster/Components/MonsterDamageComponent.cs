@@ -19,10 +19,14 @@ public class MonsterDamageComponent : MonoBehaviour
     [Header("Knockback")]
     [SerializeField] private float _knockbackForce = 2.0f;
     [SerializeField] private float _knockbackDuration = 0.2f;
+    [SerializeField] private float _knockbackStunDuration = 0.3f;
 
     private Material _material;
     private Tweener _flashTween;
     private Tweener _knockbackTween;
+
+    private bool _isKnockbackStunned;
+    public bool IsKnockbackStunned => _isKnockbackStunned;
 
     private static readonly int s_emissionColor = Shader.PropertyToID("_Emissive_Color");
 
@@ -37,6 +41,7 @@ public class MonsterDamageComponent : MonoBehaviour
     private void OnEnable()
     {
         _isDamaged = false;
+        _isKnockbackStunned = false;
     }
 
     private void OnDisable()
@@ -73,9 +78,17 @@ public class MonsterDamageComponent : MonoBehaviour
         Vector3 knockbackTarget = transform.position + (direction * _knockbackForce);
 
         _knockbackTween?.Kill();
+        _isKnockbackStunned = true;
 
         // 뒤로 밀려나기
         _knockbackTween = transform.DOMove(knockbackTarget, _knockbackDuration)
-                    .SetEase(Ease.OutQuad);
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() => StartCoroutine(KnockbackStunCoroutine()));
+    }
+
+    private IEnumerator KnockbackStunCoroutine()
+    {
+        yield return new WaitForSeconds(_knockbackStunDuration);
+        _isKnockbackStunned = false;
     }
 }

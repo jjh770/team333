@@ -57,6 +57,14 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
 
     public override void UpdateMove()
     {
+        if (_damage != null && _damage.IsKnockbackStunned)
+        {
+            _agent.isStopped = true;
+            _isMoving = false;
+            return;
+        }
+
+        _agent.isStopped = false;
         UpdateTraceTarget();
         UpdateMoveState();
     }
