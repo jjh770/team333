@@ -5,18 +5,18 @@ using UnityEngine;
 public class MeshTrail : MonoBehaviour
 {
     [Header("Mesh Related")]
-    [SerializeField] private float _meshRefreshRate = 0.1f;
-    [SerializeField] private float _meshLifetime = 3f;
-    [SerializeField] private Transform _positionToSpawn;
+    [SerializeField] private float _meshRefreshRate = 0.1f; // 잔상 생성 간격 (초)
+    [SerializeField] private float _meshLifetime = 3f; // 잔상 유지 시간 (초)
+    [SerializeField] private Transform _positionToSpawn; // 잔상 생성 위치 기준점
 
     [Header("Shader Related")]
-    [SerializeField] private Material _defaultMat;
-    [SerializeField] private string _shaderVarRef;
-    [SerializeField] private float _shaderVarRate = 0.1f;
-    [SerializeField] private float _shaderVarRefreshRate = 0.05f;
+    [SerializeField] private Material _defaultMat; // 잔상에 적용할 머티리얼
+    [SerializeField] private string _shaderVarRef; // 페이드 효과에 사용할 셰이더 프로퍼티 이름
+    [SerializeField] private float _shaderVarRate = 0.1f; // 셰이더 값(알파값) 감소량 (프레임당)
+    [SerializeField] private float _shaderVarRefreshRate = 0.05f; // 셰이더 값 업데이트 간격 (초)
 
     [Header("Pool Settings")]
-    [SerializeField] private int _initialPoolSize = 10;
+    [SerializeField] private int _initialPoolSize = 30; 
 
     private PlayerDash _playerDash;
     private bool _isTrailActive;
