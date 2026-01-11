@@ -49,6 +49,11 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
         SetIcon(_happySprite);
     }
 
+    public void Hide()
+    {
+        _speechBubble.SetActive(false);
+    }
+
     private void SetIcon(Sprite sprite)
     {
         _currrentSprite = sprite;
