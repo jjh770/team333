@@ -16,6 +16,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerTalk))]
 [RequireComponent(typeof(PlayerSkillController))]
 [RequireComponent(typeof(PlayerDamageComponent))]
+[RequireComponent(typeof(TweenMovement))]
 
 public class Player : MonoBehaviour
 {
