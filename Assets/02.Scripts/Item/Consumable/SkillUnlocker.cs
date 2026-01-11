@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SkillUnlocker : MonoBehaviour, IInteractable
 {
+    private ItemFactory _itemFactory;
+
     public InteractionType Type => InteractionType.Use;
     public Transform Transform
     {
@@ -22,7 +24,7 @@ public class SkillUnlocker : MonoBehaviour, IInteractable
             if (!controller.IsUnlocked)
             {
                 controller.UnlockSkill();
-                Destroy(gameObject);
+                _itemFactory.Despawn(this.gameObject);
             }
         }
     }

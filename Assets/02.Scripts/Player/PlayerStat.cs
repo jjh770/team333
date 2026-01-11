@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerStat : MonoBehaviour
+public class PlayerStat : MonoBehaviour, IHealable
 {
     [SerializeField] private PlayerData _data;
 
@@ -23,6 +23,11 @@ public class PlayerStat : MonoBehaviour
         }
 
         Health.Initialize(_data.Stats.MaxHealth);
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        Health.Increase(amount);
     }
 
     public void DecreaseHealth(float amount)
