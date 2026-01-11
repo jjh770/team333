@@ -3,7 +3,6 @@
 public class HealthUpItem : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _healthUpAmount;
-    private ItemFactory _itemFactory;
 
     public InteractionType Type => InteractionType.Use;
     public Transform Transform
@@ -22,7 +21,7 @@ public class HealthUpItem : MonoBehaviour, IInteractable
         if (interactor.TryGetComponent(out IHealable healable))
         {
             healable.IncreaseHealth(_healthUpAmount);
-            _itemFactory.Despawn(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
