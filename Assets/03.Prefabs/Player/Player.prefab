@@ -6575,6 +6575,8 @@ GameObject:
   - component: {fileID: 408865662072570645}
   - component: {fileID: 998564929154840911}
   - component: {fileID: 6266291790437428858}
+  - component: {fileID: 4122885670284437715}
+  - component: {fileID: 6705333385193998649}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6699,9 +6701,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   _moveData: {fileID: 11400000, guid: 5858733b1ce8e8f498aa40aa0c47678f, type: 2}
-  _attackData: {fileID: 11400000, guid: c2bc743208c9de645ad056059a9016df, type: 2}
-  _skillData: {fileID: 11400000, guid: 23dddd361eaa4314e96ca34107816498, type: 2}
-  _enableAttackMovement: 1
 --- !u!114 &2380892331586880646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6727,7 +6726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
   _dashData: {fileID: 11400000, guid: 8eb7d82191f53134f8c569736c7c3314, type: 2}
-  _moveData: {fileID: 11400000, guid: 5858733b1ce8e8f498aa40aa0c47678f, type: 2}
 --- !u!114 &1179413069454028617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6741,6 +6739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   _attackData: {fileID: 11400000, guid: c2bc743208c9de645ad056059a9016df, type: 2}
+  _enableAttackMovement: 1
   _comboIndex: 0
 --- !u!114 &8554205317058724542
 MonoBehaviour:
@@ -6870,7 +6869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cafc1af0f163c1458abb466abbd50c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  _interactKey: 101
   _updateInterval: 0.1
 --- !u!114 &408865662072570645
 MonoBehaviour:
@@ -6884,7 +6882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6be5aa6c4e646418169ddb78e1d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillController
-  _skillKey: 113
+  _skillData: {fileID: 11400000, guid: 23dddd361eaa4314e96ca34107816498, type: 2}
   _cooldown: 2
 --- !u!114 &998564929154840911
 MonoBehaviour:
@@ -6918,6 +6916,33 @@ MonoBehaviour:
   _shaderVarRate: 0.1
   _shaderVarRefreshRate: 0.05
   _initialPoolSize: 30
+--- !u!114 &4122885670284437715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a59c5ff3cd1684b9d7fcd0762fef93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
+  _dashKey: 32
+  _skillKey: 113
+  _interactKey: 101
+--- !u!114 &6705333385193998649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199843730985661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4336a8d474aea1f4d8fa954e4e3d9d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TweenMovement
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0

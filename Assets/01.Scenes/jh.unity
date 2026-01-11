@@ -1514,11 +1514,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!4 &2079597458 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6570789493408278362, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-  m_PrefabInstance: {fileID: 485349377971019018}
-  m_PrefabAsset: {fileID: 0}
 --- !u!135 &43051129738874013
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1549,32 +1544,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _defaultMat
-      value: 
-      objectReference: {fileID: 2100000, guid: 6a5aa65f13d59ba4cbcb96e53bb3a8d5, type: 2}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _meshLifetime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _shaderVarRef
-      value: _Alpha
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _initialPoolSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _meshRefreshRate
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: _positionToSpawn
-      value: 
-      objectReference: {fileID: 2079597458}
-    - target: {fileID: 6266291790437428858, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-      propertyPath: meshDestroyDelay
-      value: 0.5
+      propertyPath: _shaderVarRefreshRate
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6570789493408278362, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_LocalPosition.x

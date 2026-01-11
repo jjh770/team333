@@ -3,14 +3,19 @@ using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
+    [Header("Data")]
+    [SerializeField] private PlayerSkillData _skillData;
+
     [Header("Settings")]
-    [SerializeField] private KeyCode _skillKey = KeyCode.Q;
     [SerializeField] private float _cooldown = 3f;
 
     private PlayerStateManager _stateManager;
     private PlayerAnimatorController _animatorController;
     private PlayerMove _playerMove;
     private PlayerMouseHelper _mouseHelper;
+    private PlayerInputHandler _inputHandler;
+    private TweenMovement _tweenMovement;
+
     private bool _isUnlocked = false;
     private float _lastUseTime = -999f;
 
@@ -26,14 +31,25 @@ public class PlayerSkillController : MonoBehaviour
         _animatorController = GetComponent<PlayerAnimatorController>();
         _playerMove = GetComponent<PlayerMove>();
         _mouseHelper = GetComponent<PlayerMouseHelper>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
+        _tweenMovement = GetComponent<TweenMovement>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(_skillKey) && CanUseSkill())
-        {
-            UseSkill();
-        }
+        _inputHandler.OnSkillInput += HandleSkillInput;
+    }
+
+    private void OnDisable()
+    {
+        _inputHandler.OnSkillInput -= HandleSkillInput;
+    }
+
+    private void HandleSkillInput()
+    {
+        if (!CanUseSkill()) return;
+
+        UseSkill();
     }
 
     private bool CanUseSkill()
@@ -58,19 +74,45 @@ public class PlayerSkillController : MonoBehaviour
         OnSkillUsed?.Invoke();
     }
 
+    #region Skill Movement
+
+    private void StartSkillMovement()
+    {
+        Vector3 mouseWorldPos = _mouseHelper.GetMouseWorldPosition();
+
+        Vector3 offset = mouseWorldPos - transform.position;
+        offset.y = 0;
+
+        float maxDistance = _skillData.SkillMaxDistance;
+        Vector3 clampedOffset = Vector3.ClampMagnitude(offset, maxDistance);
+        float finalHorizontalDistance = clampedOffset.magnitude;
+
+        Vector3 moveDirection = clampedOffset.normalized;
+        if (moveDirection == Vector3.zero) moveDirection = transform.forward;
+
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
+
+        _tweenMovement.StartParabolicMovement(
+            moveDirection,
+            finalHorizontalDistance,
+            _skillData.SkillJumpHeight,
+            moveDuration,
+            _skillData.SkillMoveEase);
+    }
+
+    #endregion
+
+    #region Animation Events
 
     public void OnSkillAnimationStart()
     {
-        // 공격 이동 시작
-        _playerMove.StartSkillMovement();
+        StartSkillMovement();
     }
 
-
-    /// <summary>
-    /// 스킬 애니메이션 종료 시 호출 (Animation Event)
-    /// </summary>
     public void OnSkillAnimationEnd()
     {
         _stateManager.ChangeState(PlayerState.Idle);
     }
-} 
+
+    #endregion
+}

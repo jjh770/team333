@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerAnimatorController))]
+[RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerDash))]
 [RequireComponent(typeof(PlayerAttack))]
@@ -15,6 +16,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerTalk))]
 [RequireComponent(typeof(PlayerSkillController))]
 [RequireComponent(typeof(PlayerDamageComponent))]
+[RequireComponent(typeof(TweenMovement))]
 
 public class Player : MonoBehaviour
 {
