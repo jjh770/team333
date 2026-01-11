@@ -14,7 +14,6 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     private Sprite _currrentSprite;
 
     [Header("Icon Animation")]
-    [SerializeField] private float _fadeDuration = 0.12f;
     [SerializeField] private float _popScale = 1.08f;
     [SerializeField] private float _popDuration = 0.12f;
 

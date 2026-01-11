@@ -8,6 +8,8 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
     [SerializeField] private float _updateInterval = 0.2f;
     [SerializeField] private float _stoppingDistance = 1.8f;
 
+    private MonsterDamageComponent _damage;
+
     private NavMeshAgent _agent;
     private float _updateTimer;
 
@@ -15,6 +17,8 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.stoppingDistance = _stoppingDistance;
+
+        _damage = GetComponent<MonsterDamageComponent>();
     }
 
     public override void Enable()

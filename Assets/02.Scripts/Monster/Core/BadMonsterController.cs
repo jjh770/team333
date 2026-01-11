@@ -132,28 +132,6 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         _animator.SetInteger(s_animationHash, (int)_currentState);
     }
 
-    public bool TryTakeDamage(Damage damage)
-    {
-        if (damage.Value <= 0) return false;
-        if (_isDead) return false;
-        if (_stat == null) return false;
-
-        _stat.TakeDamage(damage.Value);
-        _damage.FlashWhite();
-        _attack.InitCooltime();
-
-        if (!_damage.IsDamaged)
-        {
-            _damageRoutine = StartCoroutine(_damage.DamageCoroutine());
-        }
-
-        if (_stat.Health.IsEmpty)
-        {
-            Die();
-        }
-
-        return true;
-    }
 
     protected virtual void Die()
     {
@@ -205,11 +183,5 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         _stunRoutine = null;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (_flora == null) return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _playerNearDistance);
-    }
+    abstract public bool TryTakeDamage(Damage damage);
 }

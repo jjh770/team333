@@ -29,6 +29,29 @@ public class BadPlacedMonsterController : BadMonsterController
         }
     }
 
+    public override bool TryTakeDamage(Damage damage)
+    {
+        if (damage.Value <= 0) return false;
+        if (_isDead) return false;
+        if (_stat == null) return false;
+
+        _stat.TakeDamage(damage.Value);
+        _damage.FlashWhite();
+        _attack.InitCooltime();
+
+        if (!_damage.IsDamaged)
+        {
+            _damageRoutine = StartCoroutine(_damage.DamageCoroutine());
+        }
+
+        if (_stat.Health.IsEmpty)
+        {
+            Die();
+        }
+
+        return true;
+    }
+
     protected override MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;

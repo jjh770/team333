@@ -322,6 +322,9 @@ MonoBehaviour:
   _renderer: {fileID: 9027805059539703070}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _stunDuration: 1
 --- !u!136 &923049114728438877
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -372,8 +375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _itemFactory: {fileID: 0}
   _dropItem: {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
+  _yOffset: 0.5
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
