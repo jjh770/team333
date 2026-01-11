@@ -16,7 +16,8 @@ public class PlayerDash : MonoBehaviour
     private float _dashCooldownTimer;
     private Vector3 _dashDirection;
 
-    public Action OnDashFinish;
+    public event Action<float> OnDashStart;
+    public event Action OnDashFinish;
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -70,6 +71,8 @@ public class PlayerDash : MonoBehaviour
         _animatorController.DashAnimation();
 
         transform.rotation = Quaternion.LookRotation(direction);
+
+        OnDashStart?.Invoke(_dashData.DashDuration);
     }
 
     private void PerformDash()
