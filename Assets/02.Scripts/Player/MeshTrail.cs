@@ -43,7 +43,7 @@ public class MeshTrail : MonoBehaviour
     {
         _playerDash = GetComponent<PlayerDash>();
 
-        if (_skinnedMeshRenderers == null || _skinnedMeshRenderers.Length == 0)
+        if (_skinnedMeshRenderers == null)
         {
             _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         }
