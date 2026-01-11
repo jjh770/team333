@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     private PlayerStateManager _stateManager;
     private CharacterController _controller;
     private PlayerMouseHelper _mouseHelper;
+    private PlayerInputHandler _inputHandler;
     private Vector3 _velocity;
     private Tweener _attackMoveTween;
     private Tweener _skillMoveTween;
@@ -34,6 +35,7 @@ public class PlayerMove : MonoBehaviour
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
         _mouseHelper = GetComponent<PlayerMouseHelper>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
     }
 
     private void OnDestroy()
@@ -44,8 +46,7 @@ public class PlayerMove : MonoBehaviour
 
     public Vector3 GetMovementDirection()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        Vector2 input = _inputHandler.MoveInput;
 
         Vector3 cameraForward = _mainCamera.transform.forward;
         Vector3 cameraRight = _mainCamera.transform.right;
@@ -56,7 +57,7 @@ public class PlayerMove : MonoBehaviour
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 direction = (cameraForward * vertical + cameraRight * horizontal).normalized;
+        Vector3 direction = (cameraForward * input.y + cameraRight * input.x).normalized;
         return direction;
     }
 

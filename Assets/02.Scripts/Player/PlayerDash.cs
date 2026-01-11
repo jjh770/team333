@@ -11,6 +11,7 @@ public class PlayerDash : MonoBehaviour
     private CharacterController _controller;
     private PlayerMove _playerMove;
     private PlayerStateManager _stateManager;
+    private PlayerInputHandler _inputHandler;
     private Camera _mainCamera;
     private float _dashTimer;
     private float _dashCooldownTimer;
@@ -18,19 +19,30 @@ public class PlayerDash : MonoBehaviour
 
     public event Action<float> OnDashStart;
     public event Action OnDashFinish;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _playerMove = GetComponent<PlayerMove>();
         _animatorController = GetComponent<PlayerAnimatorController>();
         _stateManager = GetComponent<PlayerStateManager>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
         _mainCamera = Camera.main;
+    }
+
+    private void OnEnable()
+    {
+        _inputHandler.OnDashInput += HandleDashInput;
+    }
+
+    private void OnDisable()
+    {
+        _inputHandler.OnDashInput -= HandleDashInput;
     }
 
     private void Update()
     {
         UpdateDashCooldown();
-        HandleDashInput();
 
         if (_stateManager.IsState(PlayerState.Dashing))
         {
@@ -48,14 +60,13 @@ public class PlayerDash : MonoBehaviour
 
     private void HandleDashInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _dashCooldownTimer <= 0 && _stateManager.CanDash)
-        {
-            Vector3 direction = _playerMove.GetMovementDirection();
+        if (_dashCooldownTimer > 0 || !_stateManager.CanDash) return;
 
-            if (direction.magnitude >= 0.1f)
-            {
-                StartDash(direction);
-            }
+        Vector3 direction = _playerMove.GetMovementDirection();
+
+        if (direction.magnitude >= 0.1f)
+        {
+            StartDash(direction);
         }
     }
 

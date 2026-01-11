@@ -4,13 +4,13 @@ using UnityEngine;
 public class PlayerSkillController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private KeyCode _skillKey = KeyCode.Q;
     [SerializeField] private float _cooldown = 3f;
 
     private PlayerStateManager _stateManager;
     private PlayerAnimatorController _animatorController;
     private PlayerMove _playerMove;
     private PlayerMouseHelper _mouseHelper;
+    private PlayerInputHandler _inputHandler;
     private bool _isUnlocked = false;
     private float _lastUseTime = -999f;
 
@@ -26,14 +26,24 @@ public class PlayerSkillController : MonoBehaviour
         _animatorController = GetComponent<PlayerAnimatorController>();
         _playerMove = GetComponent<PlayerMove>();
         _mouseHelper = GetComponent<PlayerMouseHelper>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(_skillKey) && CanUseSkill())
-        {
-            UseSkill();
-        }
+        _inputHandler.OnSkillInput += HandleSkillInput;
+    }
+
+    private void OnDisable()
+    {
+        _inputHandler.OnSkillInput -= HandleSkillInput;
+    }
+
+    private void HandleSkillInput()
+    {
+        if (!CanUseSkill()) return;
+
+        UseSkill();
     }
 
     private bool CanUseSkill()

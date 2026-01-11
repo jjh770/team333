@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerAttackRange _attackRange;
     private PlayerMove _playerMove;
     private PlayerDash _playerDash;
+    private PlayerInputHandler _inputHandler;
     private bool _canAttack = true;
     [SerializeField] private int _comboIndex = 0;
     private float _lastAttackTime;
@@ -23,20 +24,21 @@ public class PlayerAttack : MonoBehaviour
         _mouseHelper = GetComponent<PlayerMouseHelper>();
         _playerMove = GetComponent<PlayerMove>();
         _playerDash = GetComponent<PlayerDash>();
-        _stateManager.OnStateChanged += OnStateChanged;
-        _playerDash.OnDashFinish += OnDashFinished;
+        _inputHandler = GetComponent<PlayerInputHandler>();
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        if (_stateManager != null)
-        {
-            _stateManager.OnStateChanged -= OnStateChanged;
-        }
-        if (_playerDash != null)
-        {
-            _playerDash.OnDashFinish -= OnDashFinished;
-        }
+        _stateManager.OnStateChanged += OnStateChanged;
+        _playerDash.OnDashFinish += OnDashFinished;
+        _inputHandler.OnAttackInput += HandleAttackInput;
+    }
+
+    private void OnDisable()
+    {
+        _stateManager.OnStateChanged -= OnStateChanged;
+        _playerDash.OnDashFinish -= OnDashFinished;
+        _inputHandler.OnAttackInput -= HandleAttackInput;
     }
 
     private void OnStateChanged(PlayerState from, PlayerState to)
@@ -65,7 +67,6 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         CheckComboTimeout();
-        HandleAttackInput();
     }
 
     private void CheckComboTimeout()
@@ -78,11 +79,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButton(0) && _canAttack && _stateManager.CanAttack)
-        {
-            _mouseHelper.RotateTowardsMouse();
-            StartAttack();
-        }
+        if (!_canAttack || !_stateManager.CanAttack) return;
+
+        _mouseHelper.RotateTowardsMouse();
+        StartAttack();
     }
 
     private void StartAttack()
