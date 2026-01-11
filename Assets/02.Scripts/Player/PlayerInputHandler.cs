@@ -51,7 +51,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         // 마우스 홀드 - 연속 공격용
-        if (Input.GetMouseButton(0) && !_stateManager.IsHolding)
+        else if (Input.GetMouseButton(0) && !_stateManager.IsHolding)
         {
             OnAttackInput?.Invoke();
         }
