@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MonsterDamageComponent : MonoBehaviour
 {
