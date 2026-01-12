@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacedMonsterSpawner : BaseMonsterSpawner
@@ -13,10 +13,12 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     [SerializeField] private Transform[] _bullyPoints;
     [SerializeField] private int _bullyCount;
 
+    [SerializeField] private Transform _spawnRoot;
+
     private void Start()
     {
         SpawnPlacedMonster();
-        SpawnBully();
+        SpawnBullyRabbyEncounter();
     }
 
     [ContextMenu("Spawn Placed Bad Monsters")]
@@ -30,12 +32,16 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
 
         foreach (var point in spawnPoints)
         {
-            SpawnMonster(_badMonster, point.position, point.rotation);
+            GameObject instance = SpawnMonster(_badMonster, point.position, point.rotation);
+            if (instance != null)
+            {
+                instance.transform.SetParent(this.transform);
+            }
         }
     }
 
     [ContextMenu("Spawn Bully Monsters")]
-    private void SpawnBully()
+    private void SpawnBullyRabbyEncounter()
     {
         if (_bully == null || _bully.Length == 0) return;
         if (_bullyPoints == null || _bullyPoints.Length == 0) return;
@@ -46,14 +52,18 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
         var allPoints = PickUniquePoints(_bullyPoints, totalSpawnCount);
         int pointIndex = 0;
 
-        foreach (var bullyPrefab in _bully)
+        foreach (var bullyrabbyEncounterPrefab in _bully)
         {
-            if (bullyPrefab == null) continue;
+            if (bullyrabbyEncounterPrefab == null) continue;
 
             for (int i = 0; i < _bullyCount && pointIndex < allPoints.Count; i++)
             {
                 var point = allPoints[pointIndex++];
-                SpawnMonster(bullyPrefab, point.position, point.rotation);
+                GameObject instance = SpawnMonster(bullyrabbyEncounterPrefab, point.position, point.rotation);
+                if (instance != null)
+                {
+                    instance.transform.SetParent(this.transform);
+                }
             }
         }
     }
