@@ -17,7 +17,8 @@ public enum PlayerState
 public class PlayerStateManager : MonoBehaviour
 {
     [SerializeField] private PlayerState _currentState = PlayerState.Idle;
-
+    private PlayerInputHandler _inputHandler;
+    private PlayerMove _playerMove;
     public PlayerState CurrentState => _currentState;
 
     public event Action<PlayerState, PlayerState> OnStateChanged;
@@ -30,6 +31,35 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
     public bool CanSkill => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
+
+    private void Awake()
+    {
+        _inputHandler = GetComponent<PlayerInputHandler>();
+        _playerMove = GetComponent<PlayerMove>();
+    }
+
+    private void Start()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
+        }
+    }
+
+    private void HandleGameStateChanged(GameState oldState, GameState newState)
+    {
+        bool isPlaying = (newState == GameState.Playing);
+        _inputHandler.enabled = isPlaying;
+        _playerMove.enabled = isPlaying;
+
+    }
     public void ChangeState(PlayerState newState)
     {
         if (_currentState == newState)

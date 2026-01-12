@@ -59,8 +59,6 @@ public class PlayerMove : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameStateManager.Instance == null || !GameStateManager.Instance.IsPlaying) return;
-
         EnforceCameraBounds();
     }
 
