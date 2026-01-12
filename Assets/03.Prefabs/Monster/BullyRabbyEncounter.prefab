@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4961958177543672994
 Transform:
   m_ObjectHideFlags: 0
@@ -117,6 +117,18 @@ PrefabInstance:
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _text
+      value: 
+      objectReference: {fileID: 5626266243274307596}
+    - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _sadText
+      value: Help me
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _happyText
+      value: Take me
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}
       propertyPath: _speechBubble
       value: 
       objectReference: {fileID: 8092333869636908242}
@@ -155,6 +167,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 548748439804291700, guid: e97ad18414708494297cda9578c40d4f, type: 3}
   m_PrefabInstance: {fileID: 932182689275626685}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5626266243274307596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4826526610237177009, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+  m_PrefabInstance: {fileID: 932182689275626685}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &6110443940932963008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6351042307352268413, guid: e97ad18414708494297cda9578c40d4f, type: 3}

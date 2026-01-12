@@ -8,6 +8,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     protected Collider _collider;
 
     protected bool _isHeld;
+    public bool IsHeld => _isHeld;
 
     private bool _isLocked;
     public void SetLocked(bool locked) => _isLocked = locked;
@@ -43,7 +44,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     protected virtual void PickUp(Transform holder)
     {
-        if (_rigidbody == null) return; // ÆÄ±« ÁßÀÏ °æ¿ì ¹æÁö
+        if (_rigidbody == null) return; // ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         _isHeld = true;
 
