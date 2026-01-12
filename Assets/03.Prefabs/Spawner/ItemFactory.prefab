@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1160b3bb7b7b2a74789c6694235140fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemFactory
-  _poolManager: {fileID: 6922016748788762025, guid: ede11c9a14c6e8f45b59062190b280c5, type: 3}
+  _poolManager: {fileID: 0}
+  _itemPrefabs:
+  - {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
+  - {fileID: 6644677349506842761, guid: a09f061b2a833e14d84aad3bfb55c298, type: 3}
+  - {fileID: 6596305241058014818, guid: 5786545fd8be4ee44a9a6e9a0e87d9ba, type: 3}
+  _preloadPerPrefab: 30
