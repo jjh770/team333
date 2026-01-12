@@ -139,6 +139,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
         _isDead = true;
         _itemDrop.DropItem();
+
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
     }

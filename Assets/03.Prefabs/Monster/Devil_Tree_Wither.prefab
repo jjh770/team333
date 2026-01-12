@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1304ac1b8b13aa4d90470a0d7c09b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadTraceMonsterController
-  _deathAnimationDuration: 0.19
+  _deathAnimationDuration: 0.4
   _playerNearDistance: 7
   _targetUpdateInterval: 0.3
 --- !u!114 &8700229199533437471
