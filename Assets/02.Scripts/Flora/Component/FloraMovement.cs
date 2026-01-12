@@ -73,10 +73,14 @@ public class FloraMovement : MonoBehaviour
     private void OnDisable()
     {
         if (_stats != null)
+        {
             _stats.SpeedChanged -= OnSpeedChanged;
+        }
 
         if (_path != null)
+        {
             _path.OnProgressChanged -= HandleProgressChanged;
+        }
     }
 
     private void Update()

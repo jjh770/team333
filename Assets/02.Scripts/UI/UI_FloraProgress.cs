@@ -8,7 +8,11 @@ public class UI_FloraProgress : MonoBehaviour
 
     private void OnEnable()
     {
-        _floraMovement.OnProgressChanged += UpdateUI;
+        if (_floraMovement != null)
+        {
+            _floraMovement.OnProgressChanged += UpdateUI;
+            UpdateUI(0f);
+        }
     }
 
     private void OnDisable()
@@ -18,6 +22,9 @@ public class UI_FloraProgress : MonoBehaviour
 
     private void UpdateUI(float progress)
     {
-        _progressBar.fillAmount = progress;
+        if (_progressBar != null)
+        {
+            _progressBar.fillAmount = progress;
+        }
     }
 }
