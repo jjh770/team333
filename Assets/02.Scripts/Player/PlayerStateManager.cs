@@ -17,10 +17,10 @@ public enum PlayerState
 public class PlayerStateManager : MonoBehaviour
 {
     [SerializeField] private PlayerState _currentState = PlayerState.Idle;
-    private PlayerInputHandler _inputHandler;
-    private PlayerMove _playerMove;
+
     public PlayerState CurrentState => _currentState;
 
+    public event Action<bool> OnPlayStateChanged;
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
     public bool IsDead => _currentState == PlayerState.Die;
@@ -31,12 +31,6 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
     public bool CanSkill => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
-
-    private void Awake()
-    {
-        _inputHandler = GetComponent<PlayerInputHandler>();
-        _playerMove = GetComponent<PlayerMove>();
-    }
 
     private void Start()
     {
@@ -56,9 +50,7 @@ public class PlayerStateManager : MonoBehaviour
     private void HandleGameStateChanged(GameState oldState, GameState newState)
     {
         bool isPlaying = (newState == GameState.Playing);
-        _inputHandler.enabled = isPlaying;
-        _playerMove.enabled = isPlaying;
-
+        OnPlayStateChanged?.Invoke(isPlaying);
     }
     public void ChangeState(PlayerState newState)
     {
