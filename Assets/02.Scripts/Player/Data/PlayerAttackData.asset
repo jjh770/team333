@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: PlayerAttackData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackData
   <AttackDamage>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
+  <AttackRange>k__BackingField: 2.5
   <AttackAngle>k__BackingField:
-  - 120
-  - 120
+  - 210
+  - 210
   - 360
+  <AttackDirectionOffsets>k__BackingField:
+  - 45
+  - -10
+  - 0
   <MaxComboCount>k__BackingField: 3
   <ComboWindowTime>k__BackingField: 3
   <ComboDamageMultipliers>k__BackingField:

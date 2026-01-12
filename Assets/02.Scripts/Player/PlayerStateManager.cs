@@ -20,6 +20,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public PlayerState CurrentState => _currentState;
 
+    public event Action<bool> OnPlayStateChanged;
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
     public bool IsDead => _currentState == PlayerState.Die;
@@ -30,6 +31,27 @@ public class PlayerStateManager : MonoBehaviour
     public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
     public bool CanSkill => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
+
+    private void Start()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
+        }
+    }
+
+    private void HandleGameStateChanged(GameState oldState, GameState newState)
+    {
+        bool isPlaying = (newState == GameState.Playing);
+        OnPlayStateChanged?.Invoke(isPlaying);
+    }
     public void ChangeState(PlayerState newState)
     {
         if (_currentState == newState)

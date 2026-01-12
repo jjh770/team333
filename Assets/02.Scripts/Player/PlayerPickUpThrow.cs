@@ -124,7 +124,7 @@ public class PlayerPickUpThrow : MonoBehaviour
             IPickable pickable = _heldObjects[0];
             _heldObjects.RemoveAt(0);
 
-            Vector3 throwDirection = transform.forward + transform.up * _throwUpwardAngle;
+            Vector3 throwDirection = (transform.forward + Vector3.up * _throwUpwardAngle).normalized;
             pickable.OnThrown(throwDirection, _throwForce);
 
             // 남은 오브젝트 위치 재정렬

@@ -15,8 +15,10 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
     public bool IsFinished => _currentIndex >= _splinePoints.Count;
     public bool ShouldWait => _waitPointIndex != null && _waitPointIndex.Contains(_currentIndex);
+    public float Progress => _isCompleted ? 1f : (_splinePoints.Count <= 1 ? 0f : Mathf.Clamp01((float)_currentIndex / (_splinePoints.Count - 1)));
 
     public event Action OnPathCompleted;
+    public event Action<float> OnProgressChanged;
     
     private void Awake()
     {
@@ -32,13 +34,15 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     {
         _currentIndex++;
         bool hasNext = _currentIndex < _splinePoints.Count;
-    
+
+        OnProgressChanged?.Invoke(Progress);
+
         if (!hasNext && !_isCompleted)
         {
             _isCompleted = true;
             OnPathCompleted?.Invoke();
         }
-    
+
         return hasNext;
     }
 

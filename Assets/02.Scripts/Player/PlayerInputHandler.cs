@@ -22,6 +22,18 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _stateManager = GetComponent<PlayerStateManager>();
     }
+    private void Start()
+    {
+        _stateManager.OnPlayStateChanged += HandleCanMove;
+    }
+    private void OnDestroy()
+    {
+        _stateManager.OnPlayStateChanged -= HandleCanMove;
+    }
+    private void HandleCanMove(bool canInput)
+    {
+        this.enabled = canInput;
+    }
 
     private void Update()
     {

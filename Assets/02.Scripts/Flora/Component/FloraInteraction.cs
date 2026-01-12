@@ -14,9 +14,10 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     private FloraSkillController _skillController;
     private IFloraPath _floraPath;
     public IFloraPath FloraPath => _floraPath;
-    
 
-    private bool CanMove => _movement != null && _movement.IsWaiting;
+    private bool _isMoveLocked;
+
+    private bool CanMove => _movement != null && _movement.IsWaiting && !_isMoveLocked;
     private bool CanSpeedUp => _inventory != null && _inventory.WoodCount >= _woodCost && !_gaugeController.IsFull;
 
     public InteractionType Type
@@ -76,6 +77,11 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     public void SetSkill(FloraSkillBase skill)
     {
         _skillController.SetSkill(skill);
+    }
+
+    public void SetMoveLock(bool isLocked)
+    {
+        _isMoveLocked = isLocked;
     }
 
     public void Interact(GameObject interactor)

@@ -76,9 +76,10 @@ public class PlayerAttackRange : MonoBehaviour
             if (_hitEnemiesThisAttack.Contains(col))
                 continue;
 
-            // 각도 체크 (플레이어가 바라보는 방향 기준)
+            // 각도 체크 (콤보별 오프셋 적용된 공격 방향 기준)
+            Vector3 attackDirection = GetAttackDirection(_currentComboIndex);
             Vector3 directionToTarget = (col.transform.position - _attackPoint.position).normalized;
-            float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+            float angleToTarget = Vector3.Angle(attackDirection, directionToTarget);
 
             // 공격 각도 범위 내에 있는지 체크
             if (angleToTarget <= _attackData.AttackAngle[_currentComboIndex] / 2f)
@@ -117,8 +118,18 @@ public class PlayerAttackRange : MonoBehaviour
         }
     }
 
-    // 프로퍼티
+    /// <summary>
+    /// 콤보별 오프셋이 적용된 공격 방향 반환
+    /// </summary>
+    private Vector3 GetAttackDirection(int comboIndex)
+    {
+        int safeIndex = Mathf.Clamp(comboIndex, 0, _attackData.AttackDirectionOffsets.Length - 1);
+        float offset = _attackData.AttackDirectionOffsets[safeIndex];
+        return Quaternion.Euler(0, offset, 0) * transform.forward;
+    }
+
     public float AttackRange => _attackData.AttackRange;
     public float AttackAngle => _attackData.AttackAngle[_currentComboIndex];
+    public float AttackDirectionOffset => _attackData.AttackDirectionOffsets[_currentComboIndex];
     public float BaseDamage => _attackData.AttackDamage;
 }

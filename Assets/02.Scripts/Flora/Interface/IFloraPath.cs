@@ -7,6 +7,8 @@ public interface IFloraPath
     bool MoveNext();
     bool IsFinished { get; }
     bool ShouldWait { get; }
-    
+    float Progress { get; }
+
     event Action OnPathCompleted;
+    event Action<float> OnProgressChanged;
 }

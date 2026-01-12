@@ -5,6 +5,7 @@ public class PlayerMouseHelper : MonoBehaviour
     private Camera _mainCamera;
     [Header("Mouse Rotation")]
     [SerializeField] private float _rotationSpeed = 300f;
+    [SerializeField] private LayerMask _groundLayer;
 
     private void Awake()
     {
@@ -16,34 +17,53 @@ public class PlayerMouseHelper : MonoBehaviour
 
     public void RotateTowardsMouse()
     {
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        Vector3 targetPosition;
 
-        if (groundPlane.Raycast(ray, out float distance))
+        // Ground Layerë¡œ Raycast, ì‹¤íŒ¨í•˜ë©´ Plane ì‚¬ìš©
+        if (_groundLayer != 0 && Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
         {
-            Vector3 targetPosition = ray.GetPoint(distance);
-            Vector3 direction = (targetPosition - transform.position).normalized;
-            direction.y = 0f;
-
-            if (direction.sqrMagnitude > 0.01f)
+            targetPosition = hit.point;
+        }
+        else
+        {
+            Plane groundPlane = new Plane(Vector3.up, transform.position);
+            if (groundPlane.Raycast(ray, out float distance))
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                targetPosition = ray.GetPoint(distance);
             }
+            else
+            {
+                return;
+            }
+        }
+
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
     }
 
-    // ¸¶¿ì½º ¿ùµå ÁÂÇ¥¸¦ °¡Á®¿À´Â ÇïÆÛ ¸Þ¼­µå
     public Vector3 GetMouseWorldPosition()
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        // ÇÃ·¹ÀÌ¾îÀÇ ¹ß¹Ø ³ôÀÌ(y=0 ¶Ç´Â transform.position.y)¸¦ ±âÁØÀ¸·Î Æò¸é »ý¼º
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
 
+        // Ground Layerë¡œ Raycast, ì‹¤íŒ¨í•˜ë©´ Plane ì‚¬ìš©
+        if (_groundLayer != 0 && Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundLayer))
+        {
+            return hit.point;
+        }
+
+        Plane groundPlane = new Plane(Vector3.up, transform.position);
         if (groundPlane.Raycast(ray, out float enter))
         {
             return ray.GetPoint(enter);
         }
-        return transform.position; // ½ÇÆÐ ½Ã ÇöÀç À§Ä¡ ¹ÝÈ¯
+
+        return transform.position;
     }
 }
