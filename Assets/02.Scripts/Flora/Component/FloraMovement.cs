@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,9 @@ public class FloraMovement : MonoBehaviour
     public float CurrentSpeed => _agent.speed;
     public bool ShouldWait => _path.ShouldWait;
     public bool IsWaiting => _currentState == WaitState;
+    public float Progress => _path.Progress;
+
+    public event Action<float> OnProgressChanged;
 
     public void Awake()
     {
@@ -40,11 +44,18 @@ public class FloraMovement : MonoBehaviour
             _animationController?.Initialize(_stats.MaxSpeed);
         }
 
+        _path.OnProgressChanged += HandleProgressChanged;
+
         IdleState = new FloraIdleState(this);
         MoveState = new FloraMoveState(this);
         WaitState = new FloraWaitState(this);
 
         ChangeState(MoveState);
+    }
+
+    private void HandleProgressChanged(float progress)
+    {
+        OnProgressChanged?.Invoke(progress);
     }
 
     public bool Resume()
@@ -63,6 +74,9 @@ public class FloraMovement : MonoBehaviour
     {
         if (_stats != null)
             _stats.SpeedChanged -= OnSpeedChanged;
+
+        if (_path != null)
+            _path.OnProgressChanged -= HandleProgressChanged;
     }
 
     private void Update()
