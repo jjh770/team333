@@ -1,4 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+[System.Serializable]
+public class Slash
+{
+    public GameObject SlashObject;
+}
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -15,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private int _comboIndex = 0;
     private float _lastAttackTime;
 
+    [SerializeField] private List<Slash> _slashes;
     private void Awake()
     {
         _animatorController = GetComponent<PlayerAnimatorController>();
@@ -25,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
         _playerDash = GetComponent<PlayerDash>();
         _stateManager.OnStateChanged += OnStateChanged;
         _playerDash.OnDashFinish += OnDashFinished;
+        DisableAllSlashes();
     }
 
     private void OnDestroy()
@@ -127,6 +137,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_attackRange != null)
         {
+            StartCoroutine(SlashStart());
             _attackRange.StartAttack(_comboIndex);
         }
     }
@@ -172,5 +183,21 @@ public class PlayerAttack : MonoBehaviour
     private void OnDashFinished()
     {
         _canAttack = true;
+    }
+
+    private void DisableAllSlashes()
+    {
+        foreach (Slash slash in _slashes)
+        {
+            slash.SlashObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator SlashStart()
+    {
+        DisableAllSlashes();
+        _slashes[_comboIndex].SlashObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.7f);
     }
 }
