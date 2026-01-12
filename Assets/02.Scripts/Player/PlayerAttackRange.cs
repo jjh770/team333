@@ -128,47 +128,8 @@ public class PlayerAttackRange : MonoBehaviour
         return Quaternion.Euler(0, offset, 0) * transform.forward;
     }
 
-    // 프로퍼티
     public float AttackRange => _attackData.AttackRange;
     public float AttackAngle => _attackData.AttackAngle[_currentComboIndex];
     public float AttackDirectionOffset => _attackData.AttackDirectionOffsets[_currentComboIndex];
     public float BaseDamage => _attackData.AttackDamage;
-
-#if UNITY_EDITOR
-    [Header("Debug")]
-    [SerializeField] private bool _showGizmos = true;
-    [SerializeField] private Color _gizmoColor = new Color(1f, 0f, 0f, 0.3f);
-
-    private void OnDrawGizmosSelected()
-    {
-        if (!_showGizmos || _attackData == null) return;
-
-        Vector3 origin = _attackPoint != null ? _attackPoint.position : transform.position;
-        float range = _attackData.AttackRange;
-        float angle = _attackData.AttackAngle.Length > 0 ? _attackData.AttackAngle[_currentComboIndex] : 90f;
-
-        Gizmos.color = _gizmoColor;
-        UnityEditor.Handles.color = _gizmoColor;
-
-        // 오프셋 적용된 공격 방향
-        float offset = _attackData.AttackDirectionOffsets.Length > 0
-            ? _attackData.AttackDirectionOffsets[_currentComboIndex] : 0f;
-        Vector3 attackDirection = Quaternion.Euler(0, offset, 0) * transform.forward;
-        float halfAngle = angle / 2f;
-
-        // 좌우 경계선
-        Vector3 leftDir = Quaternion.Euler(0, -halfAngle, 0) * attackDirection;
-        Vector3 rightDir = Quaternion.Euler(0, halfAngle, 0) * attackDirection;
-
-        Gizmos.DrawLine(origin, origin + leftDir * range);
-        Gizmos.DrawLine(origin, origin + rightDir * range);
-
-        // 호(arc) 그리기
-        UnityEditor.Handles.DrawSolidArc(origin, Vector3.up, leftDir, angle, range);
-
-        // 외곽선
-        UnityEditor.Handles.color = new Color(_gizmoColor.r, _gizmoColor.g, _gizmoColor.b, 1f);
-        UnityEditor.Handles.DrawWireArc(origin, Vector3.up, leftDir, angle, range);
-    }
-#endif
 }
