@@ -81,7 +81,7 @@ public class BadTraceMonsterController : BadMonsterController
 
         _isDead = true;
         _move.Stop();
-
+        _itemDrop.DropItem();
         ApplyState(MonsterState.Die);
 
         _deathRoutine = StartCoroutine(DeathCoroutine());

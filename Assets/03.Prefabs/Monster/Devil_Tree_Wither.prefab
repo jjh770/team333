@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _dropItem: {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
+  _dropItem: {fileID: 6596305241058014818, guid: 5786545fd8be4ee44a9a6e9a0e87d9ba, type: 3}
   _yOffset: 0.5
 --- !u!1 &9097755878706329246
 GameObject:

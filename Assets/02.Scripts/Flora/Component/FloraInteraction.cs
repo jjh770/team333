@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(FloraInventory))]
 [RequireComponent(typeof(FloraSpeedGaugeController))]
@@ -61,6 +61,11 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         _gaugeController.TryAddGauge(_gaugeAmount);
 
         return true;
+    }
+
+    public void AddBoard(int boardAmount)
+    {
+        _inventory.AddBoard(boardAmount);
     }
 
     public bool TryResume()
