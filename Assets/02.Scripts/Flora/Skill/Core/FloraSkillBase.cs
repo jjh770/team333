@@ -32,19 +32,12 @@ public abstract class FloraSkillBase : MonoBehaviour
 
         transform.localScale = Vector3.zero;
 
-        transform.DOScale(Vector3.one, _scaleInDuration)
-            .SetEase(Ease.OutBack)
-            .OnComplete(() =>
-            {
-                DOVirtual.DelayedCall(_skillDuration, StartScaleOut);
-            });
-    }
-
-    private void StartScaleOut()
-    {
-        transform.DOScale(Vector3.zero, _scaleOutDuration)
-            .SetEase(Ease.InBack)
-            .OnComplete(DestroySkill);
+        DOTween.Sequence()
+            .Append(transform.DOScale(Vector3.one, _scaleInDuration).SetEase(Ease.OutBack))
+            .AppendInterval(_skillDuration)
+            .Append(transform.DOScale(Vector3.zero, _scaleOutDuration).SetEase(Ease.InBack))
+            .AppendCallback(DestroySkill)
+            .SetTarget(transform);
     }
 
     private void OnTriggerEnter(Collider other)
