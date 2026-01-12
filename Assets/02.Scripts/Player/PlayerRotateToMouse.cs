@@ -58,7 +58,7 @@ public class PlayerMouseHelper : MonoBehaviour
             return hit.point;
         }
 
-        Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+        Plane groundPlane = new Plane(Vector3.up, transform.position);
         if (groundPlane.Raycast(ray, out float enter))
         {
             return ray.GetPoint(enter);

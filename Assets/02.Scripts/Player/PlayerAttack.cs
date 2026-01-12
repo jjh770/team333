@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,10 +39,6 @@ public class PlayerAttack : MonoBehaviour
         _playerDash = GetComponent<PlayerDash>();
         _inputHandler = GetComponent<PlayerInputHandler>();
         _tweenMovement = GetComponent<TweenMovement>();
-
-        _stateManager.OnStateChanged += OnStateChanged;
-        _playerDash.OnDashFinish += OnDashFinished;
-        DisableAllSlashes();
     }
 
     private void OnEnable()
@@ -51,6 +46,7 @@ public class PlayerAttack : MonoBehaviour
         _stateManager.OnStateChanged += OnStateChanged;
         _playerDash.OnDashFinish += OnDashFinished;
         _inputHandler.OnAttackInput += HandleAttackInput;
+        DisableAllSlashes();
     }
 
     private void OnDisable()
@@ -169,7 +165,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_attackRange != null)
         {
-            StartCoroutine(SlashStart());
+            SlashStart();
             _attackRange.StartAttack(_comboIndex);
         }
     }
@@ -220,11 +216,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private IEnumerator SlashStart()
+    private void SlashStart()
     {
         DisableAllSlashes();
         _slashes[_comboIndex].SlashObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.7f);
     }
 }
