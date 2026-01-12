@@ -19,7 +19,7 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     [SerializeField] private float _popDuration = 0.12f;
 
     [Header("Floating Animation")]
-    [SerializeField] private float _floatDistance = 0.1f;
+    [SerializeField] private float _floatDistance = 0.5f;
     [SerializeField] private float _floatDuration = 1.5f;
 
     private Tween _floatTween;

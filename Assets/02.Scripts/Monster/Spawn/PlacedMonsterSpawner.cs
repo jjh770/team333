@@ -13,12 +13,18 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     [SerializeField] private Transform[] _bullyPoints;
     [SerializeField] private int _bullyCount;
 
+    [Header("Skill Monster")]
+    [SerializeField] private GameObject _skillMonster;
+    [SerializeField] private Transform[] _skillMonsterPoints;
+    [SerializeField] private int _skillMonsterCount;
+
     [SerializeField] private Transform _spawnRoot;
 
     private void Start()
     {
         SpawnPlacedMonster();
         SpawnBullyRabbyEncounter();
+        SpawnSkillMonster();
     }
 
     [ContextMenu("Spawn Placed Bad Monsters")]
@@ -64,6 +70,25 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
                 {
                     instance.transform.SetParent(this.transform);
                 }
+            }
+        }
+    }
+
+    [ContextMenu("Spawn Placed Skill Monsters")]
+    private void SpawnSkillMonster()
+    {
+        if (_skillMonster == null) return;
+        if (_skillMonsterPoints == null || _skillMonsterPoints.Length == 0) return;
+
+        int spawnCount = Mathf.Clamp(_skillMonsterCount, 0, _skillMonsterPoints.Length);
+        var spawnPoints = PickUniquePoints(_skillMonsterPoints, spawnCount);
+
+        foreach (var point in spawnPoints)
+        {
+            GameObject instance = SpawnMonster(_skillMonster, point.position, point.rotation);
+            if (instance != null)
+            {
+                instance.transform.SetParent(this.transform);
             }
         }
     }
