@@ -15,6 +15,10 @@ public class PlayerAttackData : ScriptableObject
     [Tooltip("각 콤보별 공격 각도 (90도 = 전방 90도 부채꼴)")]
     public float[] AttackAngle { get; private set; } = { 90f, 120f, 150f };
 
+    [field: SerializeField]
+    [Tooltip("각 콤보별 공격 방향 오프셋 (0 = 정면, 양수 = 우측, 음수 = 좌측)")]
+    public float[] AttackDirectionOffsets { get; private set; } = { 0f, 0f, 0f };
+
     [Header("Combo System")]
     [field: SerializeField]
     [Tooltip("최대 콤보 단계 (3 = 1타, 2타, 3타)")]
@@ -45,6 +49,7 @@ public class PlayerAttackData : ScriptableObject
     private void OnValidate()
     {
         ValidateArrayLength(AttackAngle, nameof(AttackAngle));
+        ValidateArrayLength(AttackDirectionOffsets, nameof(AttackDirectionOffsets));
         ValidateArrayLength(ComboDamageMultipliers, nameof(ComboDamageMultipliers));
         ValidateArrayLength(AttackMoveDistance, nameof(AttackMoveDistance));
         ValidateArrayLength(AttackMoveEase, nameof(AttackMoveEase));

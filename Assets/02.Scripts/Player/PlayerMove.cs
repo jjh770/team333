@@ -30,6 +30,20 @@ public class PlayerMove : MonoBehaviour
         _inputHandler = GetComponent<PlayerInputHandler>();
     }
 
+    private void Start()
+    {
+        _stateManager.OnPlayStateChanged += HandleCanMove;
+    }
+
+    private void OnDestroy()
+    {
+        _stateManager.OnPlayStateChanged -= HandleCanMove;
+    }
+    private void HandleCanMove(bool canMove)
+    {
+        this.enabled = canMove;
+    }
+
     public Vector3 GetMovementDirection()
     {
         Vector2 input = _inputHandler.MoveInput;

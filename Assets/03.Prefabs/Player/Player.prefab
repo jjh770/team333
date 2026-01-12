@@ -6761,6 +6761,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRotateToMouse
   _rotationSpeed: 300
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &6254991337863408666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6780,6 +6783,8 @@ MonoBehaviour:
     m_Bits: 512
   _enableContinuousDetection: 1
   _checkInterval: 2
+  _showGizmos: 1
+  _gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
 --- !u!114 &6251575932655284957
 MonoBehaviour:
   m_ObjectHideFlags: 0
