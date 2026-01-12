@@ -674,9 +674,9 @@ MonoBehaviour:
   _renderer: {fileID: 7087891614945725617}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
+  _knockbackForce: 1
   _knockbackDuration: 0.2
-  _stunDuration: 1
+  _knockbackStunDuration: 0.3
 --- !u!136 &4245116945006452521
 CapsuleCollider:
   m_ObjectHideFlags: 0
