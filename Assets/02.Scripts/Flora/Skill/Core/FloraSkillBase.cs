@@ -1,12 +1,18 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public abstract class FloraSkillBase : MonoBehaviour
 {
-    [Header("Range Settings")] 
+    [Header("Range Settings")]
     [SerializeField] private float _radius = 4f;
-        
+
+    [Header("Duration Settings")]
+    [SerializeField] private float _skillDuration = 15f;
+    [SerializeField] private float _scaleInDuration = 0.3f;
+    [SerializeField] private float _scaleOutDuration = 0.3f;
+
     protected FloraEffectPool _effectPool;
     private SphereCollider _triggerCollider;
     protected readonly HashSet<BadMonsterController> MonstersInRange =  new ();
@@ -23,6 +29,22 @@ public abstract class FloraSkillBase : MonoBehaviour
     public virtual void Initialize(FloraEffectPool effectPool)
     {
         _effectPool = effectPool;
+
+        transform.localScale = Vector3.zero;
+
+        transform.DOScale(Vector3.one, _scaleInDuration)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() =>
+            {
+                DOVirtual.DelayedCall(_skillDuration, StartScaleOut);
+            });
+    }
+
+    private void StartScaleOut()
+    {
+        transform.DOScale(Vector3.zero, _scaleOutDuration)
+            .SetEase(Ease.InBack)
+            .OnComplete(DestroySkill);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,6 +74,8 @@ public abstract class FloraSkillBase : MonoBehaviour
     
     protected virtual void OnDisable()
     {
+        transform.DOKill();
+
         foreach (var monster in MonstersInRange)
         {
             if (monster != null)
@@ -59,7 +83,7 @@ public abstract class FloraSkillBase : MonoBehaviour
                 monster.OnDie -= HandleMonsterDeath;
             }
         }
-        
+
         MonstersInRange.Clear();
     }
     
