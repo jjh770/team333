@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] private float _needBoardCount = 15;
+    [SerializeField] private int _needBoardCount = 15;
     [SerializeField] private FloraInventory _floraInventory;
 
     public bool IsQuestCompleted { get; private set; }

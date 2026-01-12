@@ -21,7 +21,7 @@ public class FloraInventory : MonoBehaviour
     private void OnDisable()
     {
         _wood.OnValueChanged -= HandleWoodChanged;
-        _board.OnValueChanged += HandleBoardChanged;
+        _board.OnValueChanged -= HandleBoardChanged;
     }
 
     public void AddWood(int amount)

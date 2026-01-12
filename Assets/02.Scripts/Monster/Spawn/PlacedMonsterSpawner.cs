@@ -18,8 +18,6 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     [SerializeField] private Transform[] _skillMonsterPoints;
     [SerializeField] private int _skillMonsterCount;
 
-    [SerializeField] private Transform _spawnRoot;
-
     private void Start()
     {
         SpawnPlacedMonster();
