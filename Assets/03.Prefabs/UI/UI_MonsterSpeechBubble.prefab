@@ -333,7 +333,7 @@ MonoBehaviour:
   _sadText: Take me
   _popScale: 1.08
   _popDuration: 0.12
-  _floatDistance: 1
+  _floatDistance: 0.7
   _floatDuration: 1.5
 --- !u!1 &6448378286007762498
 GameObject:

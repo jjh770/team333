@@ -2263,6 +2263,11 @@ Transform:
   - {fileID: 1111092904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2093664274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8730835948696207427, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
+  m_PrefabInstance: {fileID: 4389422985610249526}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2104799074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2597,6 +2602,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 601270690582859857, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
+      propertyPath: _root
+      value: 
+      objectReference: {fileID: 2093664274}
     - target: {fileID: 601270690582859857, guid: 267a1e1aa53f7ea4ea52d42004a04c62, type: 3}
       propertyPath: _poolManager
       value: 

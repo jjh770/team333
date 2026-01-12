@@ -1,0 +1,27 @@
+﻿using UnityEngine;
+
+public class Board : ItemBase
+{
+    [Header("Settings")]
+    [SerializeField] private int _addBoardAmount = 1;
+
+    private const string FloraTag = "Flora";
+    private ItemFactory _itemFactory;
+
+    override protected void Awake()
+    {
+        base.Awake();
+        _itemFactory = ItemFactory.Instance;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (_isHeld) return;
+
+        if (!other.gameObject.CompareTag(FloraTag)) return;
+        if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
+
+        interaction.AddBoard(_addBoardAmount);
+        _itemFactory.Despawn(this.gameObject);
+    }
+}
