@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(MonsterAttackComponent))]
 [RequireComponent(typeof(MonsterDamageComponent))]
 [RequireComponent(typeof(MonsterItemDropComponent))]
+[RequireComponent(typeof(MonsterHealthBar))]
+
 public abstract class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
@@ -23,6 +25,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     protected MonsterAttackComponent _attack;
     protected MonsterDamageComponent _damage;
     protected MonsterItemDropComponent _itemDrop;
+    protected MonsterHealthBar _healthBar;
 
     protected bool _isDead;
     public bool IsDead => _isDead;

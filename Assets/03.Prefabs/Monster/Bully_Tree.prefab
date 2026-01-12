@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78e74d047ed87e4b983dc9d1545651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
+  _healthBar: {fileID: 3078142441620117157}
   _healthBarTransform: {fileID: 7761247663787651961}
   _gaugeImage: {fileID: 686597525973135360}
   _duration: 0.3

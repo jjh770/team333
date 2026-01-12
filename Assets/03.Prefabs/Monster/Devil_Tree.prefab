@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78e74d047ed87e4b983dc9d1545651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
+  _healthBar: {fileID: 3503025988817446538}
   _healthBarTransform: {fileID: 5347691736564998874}
   _gaugeImage: {fileID: 3964256262214646345}
   _duration: 0.3
@@ -546,6 +547,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174e184974e83994c80b94880513c04b, type: 3}
+--- !u!1 &3503025988817446538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5498259223504156599, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 8993831608420536637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3964256262214646345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
