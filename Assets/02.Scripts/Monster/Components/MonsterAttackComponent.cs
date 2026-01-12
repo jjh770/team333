@@ -62,7 +62,7 @@ public class MonsterAttackComponent : MonoBehaviour
 
         if (_targetDamageable != null)
         {
-            Damage damage = new Damage(_stat.GetAttackDamage(), transform.gameObject);
+            Damage damage = new Damage(_stat.GetAttackDamage(), transform.gameObject, false);
             _targetDamageable.TryTakeDamage(damage);
         }
 
