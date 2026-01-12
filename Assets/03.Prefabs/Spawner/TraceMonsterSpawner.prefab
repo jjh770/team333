@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e272fa3972a92b47be0893a9ad745fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterPool
+  _poolManager: {fileID: 0}
   _monsterPrefabs:
   - {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
   - {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
@@ -56,4 +57,7 @@ MonoBehaviour:
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
-  _poolManagerComponent: {fileID: 0}
+  - _groupName: 1
+    _spawnPoints:
+    - {fileID: 0}
+    - {fileID: 0}
