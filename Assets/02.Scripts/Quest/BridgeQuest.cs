@@ -1,11 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class BridgeQuestManager : MonoBehaviour
+public class BridgeQuest : MonoBehaviour
 {
     [SerializeField] private int _needBoardCount = 9;
     [SerializeField] private GameObject[] _plankObjects;
     [SerializeField] private PlankMonsterSpawner _plankMonsterSpawner;
+    [SerializeField] private FloraInteraction _floraInteraction;
     
     private int _boardCount = 0;
     public bool IsQuestCompleted { get; private set; }
@@ -19,11 +20,9 @@ public class BridgeQuestManager : MonoBehaviour
     }
     public void AddPlank()
     {
-        if (IsQuestCompleted)
-        {
-            return;
-        }
-        
+        if (IsQuestCompleted) return;
+        if (_boardCount >= _plankObjects.Length) return;
+
         _plankObjects[_boardCount].SetActive(true);
         _boardCount++;
 
@@ -37,7 +36,8 @@ public class BridgeQuestManager : MonoBehaviour
     {
         IsQuestCompleted = true;
         Debug.Log($"미션 완료!");
-        
+
         _plankMonsterSpawner.StopSpawning();
+        _floraInteraction.SetMoveLock(false);
     }
 }

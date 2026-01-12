@@ -16,10 +16,10 @@ public class Plank : ItemBase
         if (_isHeld) return;
         if (!other.CompareTag(QuestBridgeTag)) return;
 
-        BridgeQuestManager bridgeQuestManager = other.GetComponentInParent<BridgeQuestManager>();
-        if (bridgeQuestManager != null)
+        BridgeQuest bridgeQuest = other.GetComponentInParent<BridgeQuest>();
+        if (bridgeQuest != null)
         {
-            bridgeQuestManager.AddPlank();
+            bridgeQuest.AddPlank();
         }
 
         _itemFactory.Despawn(this.gameObject);
