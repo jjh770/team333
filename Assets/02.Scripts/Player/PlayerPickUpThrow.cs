@@ -16,6 +16,7 @@ public class PlayerPickUpThrow : MonoBehaviour
     private PlayerAnimatorController _animatorController;
     private PlayerMouseHelper _mouseHelper;
     private PlayerInteraction _playerInteraction;
+    private PlayerInputHandler _inputHandler;
 
     private IPickable _pendingPickable;
 
@@ -29,25 +30,26 @@ public class PlayerPickUpThrow : MonoBehaviour
         _animatorController = GetComponent<PlayerAnimatorController>();
         _mouseHelper = GetComponent<PlayerMouseHelper>();
         _playerInteraction = GetComponent<PlayerInteraction>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
     }
 
     private void OnEnable()
     {
         _playerInteraction.OnInteract += HandleInteract;
+        _inputHandler.OnThrowInput += HandleThrowInput;
     }
 
     private void OnDisable()
     {
         _playerInteraction.OnInteract -= HandleInteract;
+        _inputHandler.OnThrowInput -= HandleThrowInput;
     }
 
-    private void Update()
+    private void HandleThrowInput()
     {
-        // Throw 입력 처리 (마우스 좌클릭, PickUp 상태에서만)
-        if (Input.GetMouseButtonDown(0) && IsHoldingObject && CanDoThrow())
-        {
-            StartThrow();
-        }
+        if (!IsHoldingObject || !CanDoThrow()) return;
+
+        StartThrow();
     }
 
     private void HandleInteract(IInteractable interactable)

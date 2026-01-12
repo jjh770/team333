@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private KeyCode _interactKey = KeyCode.E;
     [SerializeField] private float _updateInterval = 0.1f;
 
     private List<IInteractable> _nearbyInteractables = new List<IInteractable>();
     private IInteractable _closestInteractable;
+    private PlayerInputHandler _inputHandler;
     private float _nextUpdateTime;
 
     // 우선순위: Move > SpeedUp > PickUp > Use
@@ -31,20 +31,32 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Awake()
     {
+        _inputHandler = GetComponent<PlayerInputHandler>();
         _priorityMap = new Dictionary<InteractionType, int>();
         for (int i = 0; i < _priorityOrder.Length; i++)
         {
             _priorityMap[_priorityOrder[i]] = i;
         }
     }
+
     private void OnEnable()
     {
         InteractionEvents.OnInteractableDestroyed += HandleInteractableDestroyed;
+        _inputHandler.OnInteractInput += HandleInteractInput;
     }
 
     private void OnDisable()
     {
         InteractionEvents.OnInteractableDestroyed -= HandleInteractableDestroyed;
+        _inputHandler.OnInteractInput -= HandleInteractInput;
+    }
+
+    private void HandleInteractInput()
+    {
+        if (_closestInteractable != null)
+        {
+            TryInteract();
+        }
     }
 
     private void HandleInteractableDestroyed(IInteractable interactable)
@@ -58,11 +70,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             UpdateClosestInteractable();
             _nextUpdateTime = Time.time + _updateInterval;
-        }
-
-        if (Input.GetKeyDown(_interactKey) && _closestInteractable != null)
-        {
-            TryInteract();
         }
     }
 

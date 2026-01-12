@@ -9,8 +9,8 @@ public class TraceMonsterSpawner : BaseMonsterSpawner, IMonsterSpawner
     [SerializeField] private int _preloadPerPrefab = 30;
 
     [Header("Spawn Settings")]
-    [SerializeField] private int _minSpawnCount = 5;
-    [SerializeField] private int _maxSpawnCount = 10;
+    [SerializeField] private int _defaultMinSpawnCount = 2;
+    [SerializeField] private int _defaultMaxSpawnCount = 5;
 
     [Header("Spawn Groups")]
     [SerializeField] private SpawnGroup[] _spawnGroups;
@@ -40,8 +40,8 @@ public class TraceMonsterSpawner : BaseMonsterSpawner, IMonsterSpawner
 
     private void SpawnRandomInGroup(SpawnGroup group)
     {
-        int spawnCount = UnityEngine.Random.Range(_minSpawnCount, _maxSpawnCount + 1);
-
+        int spawnCount = UnityEngine.Random.Range(_defaultMinSpawnCount, _defaultMaxSpawnCount + 1);
+        spawnCount += group.AddSpawnCount;
         for (int i = 0; i < spawnCount; i++)
         {
             Transform point = group.GetRandomSpawnPoint();
@@ -66,7 +66,9 @@ public class SpawnGroup
 {
     [SerializeField] private string _groupName;
     [SerializeField] private Transform[] _spawnPoints;
-
+    [SerializeField] private int _addSpawnCount = 0;
+    public int AddSpawnCount => _addSpawnCount;
+    
     public Transform GetRandomSpawnPoint()
     {
         if (_spawnPoints == null || _spawnPoints.Length == 0) return null;

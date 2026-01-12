@@ -94,8 +94,17 @@ public class BullyRabbyEncounter : MonoBehaviour
         _rabbyItemBase.SetLocked(false);
     }
 
+    private void Update()
+    {
+        if (_rabbyItemBase != null && _rabbyItemBase.IsHeld)
+        {
+            HideSpeechBubble();
+        }
+    }
+
     private void HideSpeechBubble()
     {
-        // Todo. 들렸을 때 말풍선 사라지도록.
+        _speechBubble.Hide();
+        enabled = false;
     }
 }

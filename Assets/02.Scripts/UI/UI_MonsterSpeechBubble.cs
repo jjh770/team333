@@ -1,25 +1,25 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_MonsterSpeechBubble : MonoBehaviour
 {
     [Header("SpeechBubble")]
     [SerializeField] private GameObject _speechBubble;
-    [SerializeField] private Image _iconImage;
+    [SerializeField] private TextMeshProUGUI _text;
 
-    [Header("Sprites")]
-    [SerializeField] private Sprite _sadSprite;
-    [SerializeField] private Sprite _happySprite;
-    private Sprite _currrentSprite;
+    [Header("text")]
+    [SerializeField] private string _happyText = "Take me";
+    [SerializeField] private string _sadText = "Help me";
+    private string _currrentText;
 
     [Header("Icon Animation")]
-    [SerializeField] private float _fadeDuration = 0.12f;
     [SerializeField] private float _popScale = 1.08f;
     [SerializeField] private float _popDuration = 0.12f;
 
     [Header("Floating Animation")]
-    [SerializeField] private float _floatDistance = 0.1f;
+    [SerializeField] private float _floatDistance = 0.5f;
     [SerializeField] private float _floatDuration = 1.5f;
 
     private Tween _floatTween;
@@ -42,18 +42,23 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
 
     public void SetSad()
     {
-        SetIcon(_sadSprite);
+        SetText(_sadText);
     }
 
     public void SetHappy()
     {
-        SetIcon(_happySprite);
+        SetText(_happyText);
     }
 
-    private void SetIcon(Sprite sprite)
+    public void Hide()
     {
-        _currrentSprite = sprite;
-        _iconImage.sprite = _currrentSprite;
+        _speechBubble.SetActive(false);
+    }
+
+    private void SetText(string newText)
+    {
+        _currrentText = newText;
+        _text.text = _currrentText;
 
         PlayPopAnimation();
     }
@@ -62,8 +67,8 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     {
         _iconTween?.Kill(true);
 
-        _iconImage.transform.localScale = Vector3.one;
-        _iconTween = _iconImage.transform.DOScale(_popScale, _popDuration)
+        _text.transform.localScale = Vector3.one;
+        _iconTween = _text.transform.DOScale(_popScale, _popDuration)
             .SetLoops(2, LoopType.Yoyo);
     }
 

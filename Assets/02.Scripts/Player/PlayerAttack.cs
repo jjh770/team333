@@ -13,12 +13,18 @@ public class PlayerAttack : MonoBehaviour
     [Header("Data")]
     [SerializeField] private PlayerAttackData _attackData;
 
+    [Header("Attack Movement")]
+    [SerializeField] private bool _enableAttackMovement = true;
+
     private PlayerMouseHelper _mouseHelper;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
     private PlayerAttackRange _attackRange;
     private PlayerMove _playerMove;
     private PlayerDash _playerDash;
+    private PlayerInputHandler _inputHandler;
+    private TweenMovement _tweenMovement;
+
     private bool _canAttack = true;
     [SerializeField] private int _comboIndex = 0;
     private float _lastAttackTime;
@@ -32,38 +38,39 @@ public class PlayerAttack : MonoBehaviour
         _mouseHelper = GetComponent<PlayerMouseHelper>();
         _playerMove = GetComponent<PlayerMove>();
         _playerDash = GetComponent<PlayerDash>();
+        _inputHandler = GetComponent<PlayerInputHandler>();
+        _tweenMovement = GetComponent<TweenMovement>();
+
         _stateManager.OnStateChanged += OnStateChanged;
         _playerDash.OnDashFinish += OnDashFinished;
         DisableAllSlashes();
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        if (_stateManager != null)
-        {
-            _stateManager.OnStateChanged -= OnStateChanged;
-        }
-        if (_playerDash != null)
-        {
-            _playerDash.OnDashFinish -= OnDashFinished;
-        }
+        _stateManager.OnStateChanged += OnStateChanged;
+        _playerDash.OnDashFinish += OnDashFinished;
+        _inputHandler.OnAttackInput += HandleAttackInput;
+    }
+
+    private void OnDisable()
+    {
+        _stateManager.OnStateChanged -= OnStateChanged;
+        _playerDash.OnDashFinish -= OnDashFinished;
+        _inputHandler.OnAttackInput -= HandleAttackInput;
     }
 
     private void OnStateChanged(PlayerState from, PlayerState to)
     {
-        // P2: 대시 캔슬 시 처리
         if (from == PlayerState.Attacking && to == PlayerState.Dashing)
         {
-            // 공격 이동 중단
-            _playerMove.StopAttackMovement();
+            StopAttackMovement();
 
-            // 연속 판정 중단
             if (_attackRange != null)
             {
                 _attackRange.StopAttack();
             }
 
-            // 대시 캔슬 시 콤보 유지 (다음 타로 진행)
             _comboIndex++;
             if (_comboIndex >= _attackData.MaxComboCount)
             {
@@ -75,7 +82,6 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         CheckComboTimeout();
-        HandleAttackInput();
     }
 
     private void CheckComboTimeout()
@@ -88,11 +94,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButton(0) && _canAttack && _stateManager.CanAttack)
-        {
-            _mouseHelper.RotateTowardsMouse();
-            StartAttack();
-        }
+        if (!_canAttack || !_stateManager.CanAttack) return;
+
+        _mouseHelper.RotateTowardsMouse();
+        StartAttack();
     }
 
     private void StartAttack()
@@ -112,7 +117,7 @@ public class PlayerAttack : MonoBehaviour
     private void FinishAttack()
     {
         _stateManager.ChangeState(PlayerState.Idle);
-        _playerMove.StopAttackMovement();
+        StopAttackMovement();
     }
 
     private void AttackAnimation()
@@ -120,19 +125,46 @@ public class PlayerAttack : MonoBehaviour
         _animatorController.AttackAnimation(_comboIndex);
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트: 공격 시작 (애니메이션 시작)
-    /// </summary>
-    public void OnAttackAnimationStart()
+    #region Attack Movement
+
+    private void StartAttackMovement(int comboIndex)
     {
-        // 공격 이동 시작
-        _playerMove.StartAttackMovement(_comboIndex);
+        if (!_enableAttackMovement) return;
+
+        if (comboIndex < 0 || comboIndex >= _attackData.AttackMoveDistance.Length ||
+            comboIndex >= _attackData.AttackMoveEase.Length)
+        {
+            Debug.LogError($"Invalid combo index: {comboIndex}");
+            return;
+        }
+
+        Vector3 direction = _playerMove.GetMovementDirection();
+        if (direction.magnitude < 0.1f) return;
+
+        float moveDuration = _animatorController.GetCurrentAnimationDuration();
+        _tweenMovement.StartLinearMovement(
+            transform.forward,
+            _attackData.AttackMoveDistance[comboIndex],
+            moveDuration,
+            _attackData.AttackMoveEase[comboIndex]);
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트: 공격 판정 (칼을 정확히 휘두르기 시작)
-    /// 연속 판정 시작 (움직이는 동안 계속 체크)
-    /// </summary>
+    private void StopAttackMovement()
+    {
+        _tweenMovement.Stop();
+    }
+
+    #endregion
+
+    #region Animation Events
+
+    public void OnAttackAnimationStart()
+    {
+        if (!_stateManager.IsState(PlayerState.Attacking)) return;
+
+        StartAttackMovement(_comboIndex);
+    }
+
     public void OnAttackHitStart()
     {
         if (_attackRange != null)
@@ -142,10 +174,6 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트: 공격 판정 끝 (칼을 모두 휘두름)
-    /// 연속 판정 종료
-    /// </summary>
     public void OnAttackHitFinish()
     {
         if (_attackRange != null)
@@ -154,11 +182,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트: 1, 2타 종료 (애니메이션 끝)
-    /// </summary>
     public void OnAttackAnimationEnd()
     {
+        if (!_stateManager.IsState(PlayerState.Attacking)) return;
+
         _canAttack = true;
         FinishAttack();
 
@@ -169,17 +196,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 애니메이션 이벤트: 3타 종료 (애니메이션 끝)
-    /// </summary>
     public void OnFinishAttackAnimationEnd()
     {
+        if (!_stateManager.IsState(PlayerState.Attacking)) return;
+
         _canAttack = true;
         FinishAttack();
         ResetCombo();
     }
 
-    // 대시 종료 이벤트
+    #endregion
+
     private void OnDashFinished()
     {
         _canAttack = true;

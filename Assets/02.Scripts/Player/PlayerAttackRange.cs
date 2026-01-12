@@ -87,7 +87,7 @@ public class PlayerAttackRange : MonoBehaviour
                 float damage = CalculateDamage(_currentComboIndex);
 
                 // 적에게 데미지 적용
-                ApplyDamage(col.gameObject, damage, _currentComboIndex);
+                ApplyDamage(col.gameObject, damage);
 
                 // 히트 기록 (같은 적을 다시 맞지 않도록)
                 _hitEnemiesThisAttack.Add(col);
@@ -108,7 +108,7 @@ public class PlayerAttackRange : MonoBehaviour
     /// <summary>
     /// 대상에게 데미지 적용
     /// </summary>
-    private void ApplyDamage(GameObject target, float damage, int comboIndex)
+    private void ApplyDamage(GameObject target, float damage)
     {
         Damage takeDamage = new Damage(damage, gameObject);
         if (target.TryGetComponent<IDamageable>(out var damageable))

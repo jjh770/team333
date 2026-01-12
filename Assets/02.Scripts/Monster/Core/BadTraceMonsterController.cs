@@ -31,6 +31,30 @@ public class BadTraceMonsterController : BadMonsterController
         _attack.SetTarget(chosen);
     }
 
+    public override bool TryTakeDamage(Damage damage)
+    {
+        if (damage.Value <= 0) return false;
+        if (_isDead) return false;
+        if (_stat == null) return false;
+
+        _stat.TakeDamage(damage.Value);
+        _damage.FlashWhite();
+        _damage.ApplyKnockback(damage.Attacker.transform.position);
+        _attack.InitCooltime();
+
+        if (!_damage.IsDamaged)
+        {
+            _damageRoutine = StartCoroutine(_damage.DamageCoroutine());
+        }
+
+        if (_stat.Health.IsEmpty)
+        {
+            Die();
+        }
+
+        return true;
+    }
+
     protected override MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;
@@ -57,7 +81,7 @@ public class BadTraceMonsterController : BadMonsterController
 
         _isDead = true;
         _move.Stop();
-
+        _itemDrop.DropItem();
         ApplyState(MonsterState.Die);
 
         _deathRoutine = StartCoroutine(DeathCoroutine());
