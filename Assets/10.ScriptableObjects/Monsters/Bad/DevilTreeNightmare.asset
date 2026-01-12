@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
   <MonsterName>k__BackingField: DevilTreeNightmare
   <MaxHealth>k__BackingField: 30
-  <AttackDamage>k__BackingField: 2
+  <AttackDamage>k__BackingField: 1
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
