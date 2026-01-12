@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAttackData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackData
   <AttackDamage>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
+  <AttackRange>k__BackingField: 2.5
   <AttackAngle>k__BackingField:
   - 210
   - 210
