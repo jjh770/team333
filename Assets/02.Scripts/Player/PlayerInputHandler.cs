@@ -26,6 +26,11 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         if (_stateManager.IsDead) return;
+        if (GameStateManager.Instance == null || !GameStateManager.Instance.IsPlaying)
+        {
+            MoveInput = Vector2.zero;
+            return;
+        }
 
         HandleMoveInput();
         HandleActionInput();

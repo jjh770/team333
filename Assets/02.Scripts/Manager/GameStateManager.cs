@@ -22,7 +22,8 @@ public class GameStateManager : MonoBehaviour
     private IFloraPath _floraPath;
     
     public GameState CurrentState => _currentState;
-    
+    public bool IsPlaying => _currentState == GameState.Playing;
+
     public event Action<GameState, GameState> OnStateChanged;
 
     private void Awake()
