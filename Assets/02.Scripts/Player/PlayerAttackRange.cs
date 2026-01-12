@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -111,7 +111,7 @@ public class PlayerAttackRange : MonoBehaviour
     /// </summary>
     private void ApplyDamage(GameObject target, float damage)
     {
-        Damage takeDamage = new Damage(damage, gameObject);
+        Damage takeDamage = new Damage(damage, gameObject, true);
         if (target.TryGetComponent<IDamageable>(out var damageable))
         {
             damageable.TryTakeDamage(takeDamage);

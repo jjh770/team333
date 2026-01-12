@@ -39,7 +39,11 @@ public class BadTraceMonsterController : BadMonsterController
 
         _stat.TakeDamage(damage.Value);
         _damage.FlashWhite();
-        _damage.ApplyKnockback(damage.Attacker.transform.position);
+        if (damage.IsKnockBack)
+        {
+            _damage.ApplyKnockback(damage.Attacker.transform.position);
+        }
+        
         _attack.InitCooltime();
 
         if (!_damage.IsDamaged)

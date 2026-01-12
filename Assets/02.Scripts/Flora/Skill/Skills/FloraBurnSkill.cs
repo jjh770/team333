@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +49,7 @@ public class FloraBurnSkill : FloraSkillBase
                 if (monster == null || !monster.gameObject.activeInHierarchy || monster.IsDead) 
                     continue;
                 
-                Damage damage = new Damage(_damageAmount, gameObject);
+                Damage damage = new Damage(_damageAmount, gameObject, false);
                 monster.TryTakeDamage(damage);
             }
         }

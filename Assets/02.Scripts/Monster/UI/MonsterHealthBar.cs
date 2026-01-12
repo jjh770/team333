@@ -5,7 +5,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(MonsterStat))]
 public class MonsterHealthBar : MonoBehaviour
 {
-    [Header("체력 게이지")]
+    [Header("체력 바")]
+    [SerializeField] private GameObject _healthBar;
     [SerializeField] private Transform _healthBarTransform;
     [SerializeField] private Image _gaugeImage;
     [SerializeField] private float _duration = 0.3f;
@@ -25,6 +26,7 @@ public class MonsterHealthBar : MonoBehaviour
     {
         _stat.OnHealthChanged += OnHealthChanged;
         _gaugeImage.fillAmount = 1f;
+        _healthBar.SetActive(false);
     }
 
     private void OnDisable()
@@ -40,9 +42,19 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void OnHealthChanged(float current, float max)
     {
+        if (!_healthBar.activeSelf)
+        {
+            Show();
+        }
+
         float targetFill = current / max;
 
         _tween?.Kill();
         _tween = _gaugeImage.DOFillAmount(targetFill, _duration).SetEase(_ease);
+    }
+
+    public void Show()
+    {
+        _healthBar.SetActive(true);
     }
 }

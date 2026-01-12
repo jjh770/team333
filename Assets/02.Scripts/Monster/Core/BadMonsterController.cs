@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(MonsterAttackComponent))]
 [RequireComponent(typeof(MonsterDamageComponent))]
 [RequireComponent(typeof(MonsterItemDropComponent))]
+[RequireComponent(typeof(MonsterHealthBar))]
+
 public abstract class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
@@ -139,6 +141,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
         _isDead = true;
         _itemDrop.DropItem();
+
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
     }

@@ -73,8 +73,9 @@ public class PoolManager : MonoBehaviour, IPoolManager
 
     private GameObject CreateNewObject(GameObject prefab)
     {
-        GameObject obj = Instantiate(prefab, transform);
+        GameObject obj = Instantiate(prefab);
         obj.SetActive(false);
+        obj.transform.SetParent(transform);
         _prefabLookup[obj] = prefab;
         return obj;
     }

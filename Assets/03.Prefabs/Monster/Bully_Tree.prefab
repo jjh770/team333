@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78e74d047ed87e4b983dc9d1545651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
+  _healthBar: {fileID: 3078142441620117157}
   _healthBarTransform: {fileID: 7761247663787651961}
   _gaugeImage: {fileID: 686597525973135360}
   _duration: 0.3
@@ -124,6 +125,9 @@ MonoBehaviour:
   _renderer: {fileID: 3849757761621457711}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
 --- !u!136 &4858222084999767126
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -174,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e882564aec30a8e4886ea01e076df91c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BullyMonsterController
-  _deathAnimationDuration: 0.19
+  _deathAnimationDuration: 0.4
   _playerNearDistance: 7
   _targetUpdateInterval: 0.3
   _bullyTarget: {fileID: 0}
@@ -190,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _itemFactory: {fileID: 0}
   _dropItem: {fileID: 6644677349506842761, guid: b98ed010eb0ed4445b48f7dee20051b4, type: 3}
+  _yOffset: 0.5
 --- !u!1 &2018052630478496335
 GameObject:
   m_ObjectHideFlags: 0

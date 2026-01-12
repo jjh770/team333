@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerDamageComponent : MonoBehaviour, IDamageable
@@ -31,7 +31,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Damage damage = new Damage(30f, null);
+            Damage damage = new Damage(30f, null, false);
             TryTakeDamage(damage);
         }
     }
