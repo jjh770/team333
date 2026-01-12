@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_MonsterSpeechBubble
   _speechBubble: {fileID: 6448378286007762498}
-  _text: {fileID: 0}
+  _text: {fileID: 776226913852355249}
   _happyText: Help me
   _sadText: Take me
   _popScale: 1.08
