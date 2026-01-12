@@ -25,7 +25,6 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     protected MonsterAttackComponent _attack;
     protected MonsterDamageComponent _damage;
     protected MonsterItemDropComponent _itemDrop;
-    protected MonsterHealthBar _healthBar;
 
     protected bool _isDead;
     public bool IsDead => _isDead;
