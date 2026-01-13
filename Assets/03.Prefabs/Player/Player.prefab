@@ -6783,8 +6783,6 @@ MonoBehaviour:
     m_Bits: 512
   _enableContinuousDetection: 1
   _checkInterval: 2
-  _showGizmos: 1
-  _gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
 --- !u!114 &6251575932655284957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7983,7 +7981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673136715986437682, guid: 80f8a4b0f2763294e9e9f51c7214bd81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7673136715986437682, guid: 80f8a4b0f2763294e9e9f51c7214bd81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8050,7 +8048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543004877147657530, guid: 929fd230f9494ad40b00db956f626cc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8543004877147657530, guid: 929fd230f9494ad40b00db956f626cc9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8274,7 +8272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8543004877147657530, guid: 929fd230f9494ad40b00db956f626cc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8543004877147657530, guid: 929fd230f9494ad40b00db956f626cc9, type: 3}
       propertyPath: m_LocalPosition.z
