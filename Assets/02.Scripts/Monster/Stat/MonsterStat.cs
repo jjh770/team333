@@ -20,6 +20,8 @@ public class MonsterStat : MonoBehaviour
         remove => Health.OnValueChanged -= value;
     }
 
+    public event Action<int> OnDamaged;
+
     private void OnEnable()
     {
         if (_data == null)
@@ -53,6 +55,7 @@ public class MonsterStat : MonoBehaviour
     public void TakeDamage(float amount)
     {
         Health.Decrease(amount);
+        OnDamaged?.Invoke((int)amount);
     }
 
 }
