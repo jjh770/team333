@@ -1,6 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct ProjectileConfig
+{
+    public Vector3 Direction;
+    public float Speed;
+    public float MaxDistance;
+    public float Width;
+    public float Height;
+    public float Depth;
+    public float Damage;
+    public GameObject Owner;
+    public LayerMask MonsterLayers;
+}
+
 public class SkillProjectile : MonoBehaviour
 {
     [Header("Settings")]
@@ -19,17 +32,17 @@ public class SkillProjectile : MonoBehaviour
     private HashSet<Collider> _hitEnemies = new HashSet<Collider>();
     private bool _isInitialized = false;
 
-    public void Initialize(Vector3 direction, float speed, float maxDistance, float width, float height, float depth, float damage, GameObject owner, LayerMask monsterLayers)
+    public void Initialize(ProjectileConfig config)
     {
-        _direction = direction.normalized;
-        _speed = speed;
-        _maxDistance = maxDistance;
-        _width = width;
-        _height = height;
-        _depth = depth;
-        _damage = damage;
-        _owner = owner;
-        _monsterLayers = monsterLayers;
+        _direction = config.Direction.normalized;
+        _speed = config.Speed;
+        _maxDistance = config.MaxDistance;
+        _width = config.Width;
+        _height = config.Height;
+        _depth = config.Depth;
+        _damage = config.Damage;
+        _owner = config.Owner;
+        _monsterLayers = config.MonsterLayers;
         _startPosition = transform.position;
         _isInitialized = true;
 
@@ -60,24 +73,15 @@ public class SkillProjectile : MonoBehaviour
             if (_hitEnemies.Contains(col))
                 continue;
 
-            ApplyDamage(col.gameObject);
+            DamageUtility.ApplyDamage(col.gameObject, _damage, _owner);
             _hitEnemies.Add(col);
-        }
-    }
-
-    private void ApplyDamage(GameObject target)
-    {
-        Damage takeDamage = new Damage(_damage, _owner, true);
-        if (target.TryGetComponent<IDamageable>(out var damageable))
-        {
-            damageable.TryTakeDamage(takeDamage);
         }
     }
 
     private void CheckMaxDistance()
     {
-        float distanceTraveled = Vector3.Distance(_startPosition, transform.position);
-        if (distanceTraveled >= _maxDistance)
+        float distanceTraveledSqr = (transform.position - _startPosition).sqrMagnitude;
+        if (distanceTraveledSqr >= _maxDistance * _maxDistance)
         {
             Destroy(gameObject);
         }

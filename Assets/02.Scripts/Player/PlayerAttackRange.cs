@@ -88,7 +88,7 @@ public class PlayerAttackRange : MonoBehaviour
                 float damage = CalculateDamage(_currentComboIndex);
 
                 // 적에게 데미지 적용
-                ApplyDamage(col.gameObject, damage);
+                DamageUtility.ApplyDamage(col.gameObject, damage, gameObject);
 
                 // 히트 기록 (같은 적을 다시 맞지 않도록)
                 _hitEnemiesThisAttack.Add(col);
@@ -104,18 +104,6 @@ public class PlayerAttackRange : MonoBehaviour
         // 콤보 인덱스가 배열 범위를 벗어나지 않도록 체크
         int safeIndex = Mathf.Clamp(comboIndex, 0, _attackData.ComboDamageMultipliers.Length - 1);
         return _attackData.AttackDamage * _attackData.ComboDamageMultipliers[safeIndex];
-    }
-
-    /// <summary>
-    /// 대상에게 데미지 적용
-    /// </summary>
-    private void ApplyDamage(GameObject target, float damage)
-    {
-        Damage takeDamage = new Damage(damage, gameObject, true);
-        if (target.TryGetComponent<IDamageable>(out var damageable))
-        {
-            damageable.TryTakeDamage(takeDamage);
-        }
     }
 
     /// <summary>

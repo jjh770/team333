@@ -7,7 +7,7 @@ public class SkillUnlocker : MonoBehaviour, IInteractable
     {
         get
         {
-            // ÀÌ¹Ì ÆÄ±«µÈ »óÅÂ¿¡¼­ ´©±º°¡ È£ÃâÇÒ °æ¿ì null ¹İÈ¯
+            // ì´ë¯¸ íŒŒê´´ëœ ìƒíƒœì—ì„œ ì ‘ê·¼ ì‹œ null ë°˜í™˜
             if (this == null) return null;
             return transform;
         }
@@ -19,9 +19,9 @@ public class SkillUnlocker : MonoBehaviour, IInteractable
     {
         if (interactor.TryGetComponent<PlayerSkillController>(out var controller))
         {
-            if (!controller.IsUnlocked)
+            if (controller.SkillLevel < controller.MaxSkillLevel)
             {
-                controller.UnlockSkill();
+                controller.UpgradeSkill();
                 Destroy(gameObject);
             }
         }

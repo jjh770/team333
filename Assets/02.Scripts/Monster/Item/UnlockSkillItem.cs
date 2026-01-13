@@ -23,18 +23,10 @@ public class UnlockSkillItem : MonoBehaviour, IInteractable
     public void Interact(GameObject interactor)
     {
         var playerSkill = interactor.GetComponent<PlayerSkillController>();
-        if (playerSkill != null)
+        if (playerSkill != null && playerSkill.SkillLevel < playerSkill.MaxSkillLevel)
         {
-            playerSkill.UnlockSkill();
+            playerSkill.UpgradeSkill();
             Destroy(gameObject);
-            if (_poolManager != null)
-            {
-                //_poolManager.Return(gameObject);
-            }
-            else
-            {
-                //Destroy(gameObject);
-            }
         }
     }
 }

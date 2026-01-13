@@ -22,26 +22,22 @@ public class PlayerSkillRange : MonoBehaviour
         CheckHitDetection();
     }
 
-    public void FireProjectile()
+    public void FireProjectile(bool isTriple = false)
     {
         if (_projectilePrefab == null) return;
 
         Transform spawnPoint = _projectileSpawnPoint != null ? _projectileSpawnPoint : transform;
         Vector3 spawnPosition = spawnPoint.position;
-        Vector3 direction = transform.forward;
+        Vector3 baseDirection = transform.forward;
 
-        SkillProjectile projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
-        projectile.Initialize(
-            direction,
-            _skillData.ProjectileSpeed,
-            _skillData.ProjectileRange,
-            _skillData.ProjectileWidth,
-            _skillData.ProjectileHeight,
-            _skillData.ProjectileDepth,
-            _skillData.SkillDamage,
-            gameObject,
-            _monsterLayers
-        );
+        float[] angles = isTriple ? _skillData.TripleProjectileAngles : _skillData.SingleProjectileAngles;
+
+        foreach (float angle in angles)
+        {
+            Vector3 direction = Quaternion.Euler(0f, angle, 0f) * baseDirection;
+            SkillProjectile projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
+            _skillData.SetupProjectile(projectile, direction, gameObject, _monsterLayers);
+        }
     }
 
     private void CheckHitDetection()
@@ -58,17 +54,8 @@ public class PlayerSkillRange : MonoBehaviour
             if (_hitEnemiesThisSkill.Contains(col))
                 continue;
 
-            ApplyDamage(col.gameObject, _skillData.SkillDamage);
+            DamageUtility.ApplyDamage(col.gameObject, _skillData.SkillDamage, gameObject);
             _hitEnemiesThisSkill.Add(col);
-        }
-    }
-
-    private void ApplyDamage(GameObject target, float damage)
-    {
-        Damage takeDamage = new Damage(damage, gameObject, true);
-        if (target.TryGetComponent<IDamageable>(out var damageable))
-        {
-            damageable.TryTakeDamage(takeDamage);
         }
     }
 
