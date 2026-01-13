@@ -36,8 +36,25 @@ public class PlayerSkillRange : MonoBehaviour
         {
             Vector3 direction = Quaternion.Euler(0f, angle, 0f) * baseDirection;
             SkillProjectile projectile = Instantiate(_projectilePrefab, spawnPosition, Quaternion.identity);
-            _skillData.SetupProjectile(projectile, direction, gameObject, _monsterLayers);
+            SetupProjectile(projectile, direction);
         }
+    }
+
+    private void SetupProjectile(SkillProjectile projectile, Vector3 direction)
+    {
+        var config = new ProjectileConfig
+        {
+            Direction = direction,
+            Speed = _skillData.ProjectileSpeed,
+            MaxDistance = _skillData.ProjectileRange,
+            Width = _skillData.ProjectileWidth,
+            Height = _skillData.ProjectileHeight,
+            Depth = _skillData.ProjectileDepth,
+            Damage = _skillData.SkillDamage,
+            Owner = gameObject,
+            MonsterLayers = _monsterLayers
+        };
+        projectile.Initialize(config);
     }
 
     private void CheckHitDetection()

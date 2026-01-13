@@ -28,21 +28,5 @@ public class PlayerSkillData : ScriptableObject
     [field: SerializeField] public float[] SingleProjectileAngles { get; private set; } = { 0f };
     [field: SerializeField] public float[] TripleProjectileAngles { get; private set; } = { -45f, 0f, 45f };
 
-    public void SetupProjectile(SkillProjectile projectile, Vector3 direction, GameObject owner, LayerMask monsterLayers)
-    {
-        var config = new ProjectileConfig
-        {
-            Direction = direction,
-            Speed = ProjectileSpeed,
-            MaxDistance = ProjectileRange,
-            Width = ProjectileWidth,
-            Height = ProjectileHeight,
-            Depth = ProjectileDepth,
-            Damage = SkillDamage,
-            Owner = owner,
-            MonsterLayers = monsterLayers
-        };
-        projectile.Initialize(config);
-    }
 }
 

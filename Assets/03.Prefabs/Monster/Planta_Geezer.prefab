@@ -402,9 +402,9 @@ GameObject:
   - component: {fileID: -7784199077030196020}
   - component: {fileID: -5844976591375165979}
   - component: {fileID: 7617584073615647830}
-  - component: {fileID: 5805447243124664336}
   - component: {fileID: 3864893003679247840}
   - component: {fileID: 6357812031215987240}
+  - component: {fileID: 8207427023077410601}
   m_Layer: 0
   m_Name: Planta_Geezer
   m_TagString: Untagged
@@ -492,18 +492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpeechBubble
   _speechBubbleTransform: {fileID: 3469936301014109797}
---- !u!114 &5805447243124664336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4997701455443942625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590300dc11bca6546bc581ab2d800029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SanSam
 --- !u!54 &3864893003679247840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -552,6 +540,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!114 &8207427023077410601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997701455443942625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43174639f73ad294f95b4810269b0cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillUnlocker
 --- !u!1 &8208273425991640513
 GameObject:
   m_ObjectHideFlags: 0
