@@ -30224,6 +30224,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5257822343667304417, guid: 849175e78ec1e934294269b8aacb767a, type: 3}
   m_PrefabInstance: {fileID: 764218348}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &738058879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1790983908737419883, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+  m_PrefabInstance: {fileID: 1662994549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6a1be07ffe1e548b3870b1d97003e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPickUpThrow
 --- !u!1001 &738450562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81781,6 +81792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flora
       objectReference: {fileID: 0}
+    - target: {fileID: 3726111711567129197, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+      propertyPath: _playerPickUpThrow
+      value: 
+      objectReference: {fileID: 738058879}
     - target: {fileID: 6064844537839148960, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 146.58089

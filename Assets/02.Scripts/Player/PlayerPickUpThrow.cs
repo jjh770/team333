@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class PlayerPickUpThrow : MonoBehaviour
     public bool IsHoldingObject => _heldObjects.Count > 0;
     public bool CanPickUp => _heldObjects.Count < _maxPickUpCount && _heldObjects.Count < _holdPoints.Length;
     public int HeldCount => _heldObjects.Count;
+
+    public event Action<bool> OnHoldingChanged;
 
     private void Awake()
     {
@@ -97,10 +100,17 @@ public class PlayerPickUpThrow : MonoBehaviour
             int holdIndex = _heldObjects.Count;
             if (holdIndex < _holdPoints.Length)
             {
+                bool wasEmpty = _heldObjects.Count == 0;
+
                 _pendingPickable.OnPickedUp(_holdPoints[holdIndex]);
                 _heldObjects.Add(_pendingPickable);
                 _playerInteraction.Remove(_pendingPickable);
                 _pendingPickable = null;
+
+                if (wasEmpty)
+                {
+                    OnHoldingChanged?.Invoke(true);
+                }
             }
         }
     }
@@ -161,6 +171,7 @@ public class PlayerPickUpThrow : MonoBehaviour
         {
             _stateManager.ChangeState(PlayerState.Idle);
             _animatorController.ThrowFinishAnimation();
+            OnHoldingChanged?.Invoke(false);
         }
     }
 }
