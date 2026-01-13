@@ -21,6 +21,6 @@ public class Board : ItemBase
             bridgeQuest.AddPlank();
         }
 
-        _itemFactory.Despawn(this.gameObject);
+        _itemFactory.ReturnItem(this.gameObject);
     }
 }

@@ -86,11 +86,7 @@ public class BadTraceMonsterController : BadMonsterController
         _isDead = true;
         _move.Stop();
         _itemDrop.DropItem();
-
-        if (_deathParticlePrefab != null)
-        {
-            Instantiate(_deathParticlePrefab, transform.position, Quaternion.identity);
-        }
+        MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
 
         ApplyState(MonsterState.Die);
 
