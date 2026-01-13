@@ -6,23 +6,26 @@ public class PlayerSkillController : MonoBehaviour
     [Header("Data")]
     [SerializeField] private PlayerSkillData _skillData;
 
-    [Header("Settings")]
-    [SerializeField] private float _cooldown = 3f;
-
     private PlayerStateManager _stateManager;
     private PlayerAnimatorController _animatorController;
     private PlayerMove _playerMove;
     private PlayerMouseHelper _mouseHelper;
     private PlayerInputHandler _inputHandler;
     private TweenMovement _tweenMovement;
+    private PlayerSkillRange _skillRange;
 
-    private bool _isUnlocked = false;
+    private int _skillLevel = 0;
     private float _lastUseTime = -999f;
 
-    public bool IsUnlocked => _isUnlocked;
-    public bool IsReady => Time.time >= _lastUseTime + _cooldown;
+    public int MaxSkillLevel => _skillData.MaxSkillLevel;
+    public int SkillLevel => _skillLevel;
+    public bool IsUnlocked => _skillLevel >= 1;
+    public bool HasProjectile => _skillLevel >= 2;
+    public bool HasTripleProjectile => _skillLevel >= 3;
+    public bool IsReady => Time.time >= _lastUseTime + _skillData.Cooldown;
 
     public event Action OnSkillUnlocked;
+    public event Action<int> OnSkillUpgraded;
     public event Action OnSkillUsed;
 
     private void Awake()
@@ -33,6 +36,7 @@ public class PlayerSkillController : MonoBehaviour
         _mouseHelper = GetComponent<PlayerMouseHelper>();
         _inputHandler = GetComponent<PlayerInputHandler>();
         _tweenMovement = GetComponent<TweenMovement>();
+        _skillRange = GetComponent<PlayerSkillRange>();
     }
 
     private void OnEnable()
@@ -54,15 +58,21 @@ public class PlayerSkillController : MonoBehaviour
 
     private bool CanUseSkill()
     {
-        return _isUnlocked && IsReady && _stateManager.CanSkill;
+        return IsUnlocked && IsReady && _stateManager.CanSkill;
     }
 
-    public void UnlockSkill()
+    public void UpgradeSkill()
     {
-        if (_isUnlocked) return;
+        if (_skillLevel >= MaxSkillLevel) return;
 
-        _isUnlocked = true;
-        OnSkillUnlocked?.Invoke();
+        _skillLevel++;
+
+        if (_skillLevel == 1)
+        {
+            OnSkillUnlocked?.Invoke();
+        }
+
+        OnSkillUpgraded?.Invoke(_skillLevel);
     }
 
     private void UseSkill()
@@ -107,6 +117,24 @@ public class PlayerSkillController : MonoBehaviour
     public void OnSkillAnimationStart()
     {
         StartSkillMovement();
+    }
+
+    public void OnSkillHit()
+    {
+        if (_skillRange != null)
+        {
+            _skillRange.ExecuteSkillHit();
+        }
+    }
+
+    public void OnSkillProjectile()
+    {
+        if (!HasProjectile) return;
+
+        if (_skillRange != null)
+        {
+            _skillRange.FireProjectile(HasTripleProjectile);
+        }
     }
 
     public void OnSkillAnimationEnd()

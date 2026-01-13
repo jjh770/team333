@@ -44,7 +44,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     protected virtual void PickUp(Transform holder)
     {
-        if (_rigidbody == null) return; // �ı� ���� ��� ����
+        if (_rigidbody == null) return; // 파괴된 경우 무시
 
         _isHeld = true;
 
