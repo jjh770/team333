@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 5208897952055008175}
   - component: {fileID: 4861701462829498376}
   - component: {fileID: 8590952865332236622}
+  - component: {fileID: 3278503524158745736}
+  - component: {fileID: 3726111711567129197}
   m_Layer: 7
   m_Name: Flora
   m_TagString: Flora
@@ -306,6 +308,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraSkillController
   _skillHolder: {fileID: 8255128165809274537}
   _effectPool: {fileID: 0}
+--- !u!114 &3278503524158745736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 2.519016, g: 2.0239823, b: 1.4852688, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &3726111711567129197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00536e3f858fe7a43b45b22dc0c976d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraOutlineController
+  _outline: {fileID: 3278503524158745736}
+  _playerPickUpThrow: {fileID: 0}
+  _targetWidth: 3
+  _animationDuration: 0.5
+  _easeType: 27
 --- !u!1 &5326104044287521027
 GameObject:
   m_ObjectHideFlags: 0
