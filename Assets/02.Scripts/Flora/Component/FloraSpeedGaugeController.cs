@@ -11,7 +11,7 @@ public class FloraSpeedGaugeController : MonoBehaviour
 
     [Header("Speed Rule")]
     [SerializeField] private float _minMultiplier = 1f;
-    [SerializeField] private float _maxMultiplier = 1.5f;
+    [SerializeField] private float _maxMultiplier = 2.5f;
 
     public event Action<float, float> GaugeChanged;
 

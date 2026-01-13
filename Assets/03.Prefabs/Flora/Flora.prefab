@@ -189,8 +189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraStats
   _moveSpeed:
     _minValue: 0
-    _maxValue: 1.4
-    _baseValue: 0.8
+    _maxValue: 1.8
+    _baseValue: 0.7
     _additive: 0
     _multiplier: 1
 --- !u!114 &4932798704078032628
@@ -247,9 +247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraSpeedUpController
   _gauge:
     _maxValue: 1
-    _drainRate: 0.04
+    _drainRate: 0.02
   _minMultiplier: 1
-  _maxMultiplier: 1.5
+  _maxMultiplier: 2.5
 --- !u!114 &7678525517629694115
 MonoBehaviour:
   m_ObjectHideFlags: 0
