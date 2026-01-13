@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework.Internal;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -46,6 +47,30 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         _attack = GetComponent<MonsterAttackComponent>();
         _damage = GetComponent<MonsterDamageComponent>();
         _itemDrop = GetComponent<MonsterItemDropComponent>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
+        }
+    }
+
+    private void HandleGameStateChanged(GameState oldState, GameState newState)
+    {
+        if (newState == GameState.Outro)
+        {
+            Kill();
+        }
     }
 
     public override void OnSpawn()
@@ -141,9 +166,15 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
         _isDead = true;
         _itemDrop.DropItem();
+        MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
 
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
+    }
+
+    public void Kill()
+    {
+        Die();
     }
 
     protected virtual IEnumerator DeathCoroutine()
