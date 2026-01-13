@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Plank : ItemBase
+public class Board : ItemBase
 {
     private const string QuestBridgeTag = "QuestBridge";
     private ItemFactory _itemFactory;
