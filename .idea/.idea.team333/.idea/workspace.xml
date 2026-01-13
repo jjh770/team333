@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d83fa83b-2006-411d-8097-148782f8530f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.team333/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.team333/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/03.Prefabs/Flora/Skill/FloraSlowSkill.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/03.Prefabs/Flora/Skill/FloraSlowSkill.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/01.Scenes/yj.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/01.Scenes/yj.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +39,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "yj/feature/flora-skill-effect",
+    "git-widget-placeholder": "develop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,6 +118,7 @@
       <workItem from="1767659805907" duration="3843000" />
       <workItem from="1767686929742" duration="7549000" />
       <workItem from="1767745133933" duration="2474000" />
+      <workItem from="1768263158380" duration="1081000" />
     </task>
     <servers />
   </component>
