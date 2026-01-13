@@ -36,6 +36,8 @@ public class PlayerSkillRange : MonoBehaviour
             _skillData.ProjectileSpeed,
             _skillData.ProjectileRange,
             _skillData.ProjectileWidth,
+            _skillData.ProjectileHeight,
+            _skillData.ProjectileDepth,
             _skillData.SkillDamage,
             gameObject,
             _monsterLayers
@@ -87,6 +89,6 @@ public class PlayerSkillRange : MonoBehaviour
         Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
         Vector3 endPoint = spawnPoint.position + transform.forward * _skillData.ProjectileRange;
         Gizmos.DrawLine(spawnPoint.position, endPoint);
-        Gizmos.DrawWireCube(endPoint, new Vector3(_skillData.ProjectileWidth, 1f, 0.5f));
+        Gizmos.DrawWireCube(endPoint, new Vector3(_skillData.ProjectileWidth, _skillData.ProjectileHeight, _skillData.ProjectileDepth));
     }
 }

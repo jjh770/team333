@@ -17,6 +17,8 @@ MonoBehaviour:
   <SkillMaxDistance>k__BackingField: 5
   <SkillJumpHeight>k__BackingField: 3
   <SkillMoveEase>k__BackingField: 34
-  <ProjectileSpeed>k__BackingField: 15
-  <ProjectileRange>k__BackingField: 10
-  <ProjectileWidth>k__BackingField: 1.5
+  <ProjectileSpeed>k__BackingField: 20
+  <ProjectileRange>k__BackingField: 15
+  <ProjectileWidth>k__BackingField: 3
+  <ProjectileHeight>k__BackingField: 10
+  <ProjectileDepth>k__BackingField: 0.5

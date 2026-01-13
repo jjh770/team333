@@ -17,4 +17,6 @@ public class PlayerSkillData : ScriptableObject
     [field: SerializeField] public float ProjectileSpeed { get; private set; } = 15f;
     [field: SerializeField] public float ProjectileRange { get; private set; } = 10f;
     [field: SerializeField] public float ProjectileWidth { get; private set; } = 1.5f;
+    [field: SerializeField] public float ProjectileHeight { get; private set; } = 1f;
+    [field: SerializeField] public float ProjectileDepth { get; private set; } = 0.5f;
 }

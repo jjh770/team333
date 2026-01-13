@@ -9,6 +9,8 @@ public class SkillProjectile : MonoBehaviour
     private float _speed;
     private float _maxDistance;
     private float _width;
+    private float _height;
+    private float _depth;
     private float _damage;
     private Vector3 _direction;
     private Vector3 _startPosition;
@@ -17,12 +19,14 @@ public class SkillProjectile : MonoBehaviour
     private HashSet<Collider> _hitEnemies = new HashSet<Collider>();
     private bool _isInitialized = false;
 
-    public void Initialize(Vector3 direction, float speed, float maxDistance, float width, float damage, GameObject owner, LayerMask monsterLayers)
+    public void Initialize(Vector3 direction, float speed, float maxDistance, float width, float height, float depth, float damage, GameObject owner, LayerMask monsterLayers)
     {
         _direction = direction.normalized;
         _speed = speed;
         _maxDistance = maxDistance;
         _width = width;
+        _height = height;
+        _depth = depth;
         _damage = damage;
         _owner = owner;
         _monsterLayers = monsterLayers;
@@ -48,7 +52,7 @@ public class SkillProjectile : MonoBehaviour
 
     private void CheckHit()
     {
-        Vector3 halfExtents = new Vector3(_width / 2f, 0.5f, 0.3f);
+        Vector3 halfExtents = new Vector3(_width / 2f, _height / 2f, _depth / 2f);
         Collider[] hitColliders = Physics.OverlapBox(transform.position, halfExtents, transform.rotation, _monsterLayers);
 
         foreach (Collider col in hitColliders)
@@ -85,6 +89,6 @@ public class SkillProjectile : MonoBehaviour
 
         Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, new Vector3(_width, 1f, 0.6f));
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(_width, _height, _depth));
     }
 }

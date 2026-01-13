@@ -230,18 +230,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _badMonsterCount: 70
   _playerSkillMonster: {fileID: 4997701455443942625, guid: 68d128a6c972f1a49b89ddf3990fd173, type: 3}
   _playerSkillMonsterPoints:
