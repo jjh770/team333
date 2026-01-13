@@ -25,11 +25,11 @@ public class FloraMovement : MonoBehaviour
 
     public event Action<float> OnProgressChanged;
 
-    public void Awake()
+    private void Start()
     {
         Initialize();
     }
-    
+
     private void Initialize()
     {
         _stats = GetComponent<FloraStats>();

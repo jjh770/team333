@@ -25,6 +25,12 @@ public class PlayerInputHandler : MonoBehaviour
     private void Start()
     {
         _stateManager.OnPlayStateChanged += HandleCanMove;
+
+        // 초기 상태 설정 - Playing 상태가 아니면 입력 비활성화
+        if (GameStateManager.Instance != null)
+        {
+            this.enabled = GameStateManager.Instance.IsPlaying;
+        }
     }
     private void OnDestroy()
     {
