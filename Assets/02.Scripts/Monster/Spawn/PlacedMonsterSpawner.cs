@@ -8,6 +8,11 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     [SerializeField] private Transform[] _badMonsterPoints;
     [SerializeField] private int _badMonsterCount;
 
+    [Header("Player Skill Monster")]
+    [SerializeField] private GameObject _playerSkillMonster;
+    [SerializeField] private Transform[] _playerSkillMonsterPoints;
+    [SerializeField] private int _playerSkillMonsterCount = 1;
+
     [Header("Flora Skill Monster")]
     [SerializeField] private GameObject[] _floraSkillMonster;
     [SerializeField] private Transform[] _floraSkillMonsterPoints;
@@ -15,6 +20,7 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     private void Start()
     {
         SpawnPlacedMonster();
+        SpawnPlayerSkillMonster();
         SpawnFloraSkillMonster();
     }
 
@@ -30,6 +36,24 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
         foreach (var point in spawnPoints)
         {
             GameObject instance = SpawnMonster(_badMonster, point.position, point.rotation);
+            if (instance != null)
+            {
+                instance.transform.SetParent(this.transform);
+            }
+        }
+    }
+
+    [ContextMenu("Spawn Placed Bad Monsters")]
+    private void SpawnPlayerSkillMonster()
+    {
+        if (_playerSkillMonster == null) return;
+        if (_playerSkillMonsterPoints == null || _playerSkillMonsterPoints.Length == 0) return;
+
+        var spawnPoints = PickUniquePoints(_playerSkillMonsterPoints, _playerSkillMonsterCount);
+
+        foreach (var point in spawnPoints)
+        {
+            GameObject instance = SpawnMonster(_playerSkillMonster, point.position, point.rotation);
             if (instance != null)
             {
                 instance.transform.SetParent(this.transform);
