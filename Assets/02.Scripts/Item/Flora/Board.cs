@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Plank : ItemBase
+public class Board : ItemBase
 {
     private const string QuestBridgeTag = "QuestBridge";
     private ItemFactory _itemFactory;
@@ -21,6 +21,6 @@ public class Plank : ItemBase
             bridgeQuest.AddPlank();
         }
 
-        _itemFactory.Despawn(this.gameObject);
+        _itemFactory.ReturnItem(this.gameObject);
     }
 }

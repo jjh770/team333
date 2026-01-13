@@ -60,6 +60,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4961958177543672994}
     m_Modifications:
+    - target: {fileID: 662590446910119658, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
+      propertyPath: _bullyTarget
+      value: 
+      objectReference: {fileID: 6234371962160271878}
     - target: {fileID: 1450748814917048331, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
       propertyPath: m_Name
       value: Bully_Tree (1)
@@ -127,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4961958177543672994}
     m_Modifications:
+    - target: {fileID: 662590446910119658, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
+      propertyPath: _bullyTarget
+      value: 
+      objectReference: {fileID: 6234371962160271878}
     - target: {fileID: 1450748814917048331, guid: a4fb1564892d7584084f8c2303f5a12c, type: 3}
       propertyPath: m_Name
       value: Bully_Tree

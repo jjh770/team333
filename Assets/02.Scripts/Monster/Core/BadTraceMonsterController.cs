@@ -86,6 +86,8 @@ public class BadTraceMonsterController : BadMonsterController
         _isDead = true;
         _move.Stop();
         _itemDrop.DropItem();
+        MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
+
         ApplyState(MonsterState.Die);
 
         _deathRoutine = StartCoroutine(DeathCoroutine());
