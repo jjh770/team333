@@ -8,9 +8,7 @@ public class ItemFactory : MonoBehaviour
     [SerializeField] private PoolManager _poolManager;
 
     [Header("items")]
-    [SerializeField] private GameObject _woodItemPrefab;
-    [SerializeField] private GameObject _boardItemPrefab;
-    [SerializeField] private GameObject _healthUpPrefab;
+    [SerializeField] private GameObject[] _itemPrefabs;
     [SerializeField] protected float _itemPrefabsDuration = 20;
 
     [Header("Settings")]
@@ -35,14 +33,11 @@ public class ItemFactory : MonoBehaviour
     {
         if (PoolManager.Instance == null) return;
 
-        if (_woodItemPrefab != null)
-            PoolManager.Instance.Preload(_woodItemPrefab, _preloadCount);
-
-        if (_boardItemPrefab != null)
-            PoolManager.Instance.Preload(_boardItemPrefab, _preloadCount);
-
-        if (_healthUpPrefab != null)
-            PoolManager.Instance.Preload(_healthUpPrefab, _preloadCount);
+        foreach (var item in _itemPrefabs)
+        {
+            if (item != null)
+                PoolManager.Instance.Preload(item, _preloadCount);
+        }
     }
 
     public GameObject Spawn(GameObject itemPrefab, Vector3 position, Quaternion rotation)
