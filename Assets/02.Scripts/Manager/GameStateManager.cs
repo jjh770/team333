@@ -104,7 +104,6 @@ public class GameStateManager : MonoBehaviour
 
             case GameState.Outro:
                 _cameraController.StartOutro();
-                KillAllMonsters();
                 break;
 
             case GameState.Paused:
@@ -130,14 +129,5 @@ public class GameStateManager : MonoBehaviour
     {
         Debug.Log("HandleOutroComplete called");
         // SceneManager.LoadScene("EndScene");
-    }
-
-    private void KillAllMonsters()
-    {
-        var monsters = FindObjectsByType<BadMonsterController>(FindObjectsSortMode.None);
-        foreach (var monster in monsters)
-        {
-            monster.Kill();
-        }
     }
 }

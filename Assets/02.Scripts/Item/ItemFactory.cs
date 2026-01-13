@@ -11,7 +11,7 @@ public class ItemFactory : MonoBehaviour
     [SerializeField] private GameObject _woodItemPrefab;
     [SerializeField] private GameObject _boardItemPrefab;
     [SerializeField] private GameObject _healthUpPrefab;
-    [SerializeField] protected float __itemPrefabsDuration = 20;
+    [SerializeField] protected float _itemPrefabsDuration = 20;
 
     [Header("Settings")]
     [SerializeField] private int _preloadCount = 20;
@@ -52,9 +52,9 @@ public class ItemFactory : MonoBehaviour
 
         GameObject item = PoolManager.Instance.Get(itemPrefab, position, rotation);
 
-        if (item != null && __itemPrefabsDuration > 0)
+        if (item != null && _itemPrefabsDuration > 0)
         {
-            StartCoroutine(ReturnAfterDelay(item, __itemPrefabsDuration));
+            StartCoroutine(ReturnAfterDelay(item, _itemPrefabsDuration));
         }
 
         return item;
