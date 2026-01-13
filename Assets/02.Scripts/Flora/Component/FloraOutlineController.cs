@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(FloraInteraction))]
 public class FloraOutlineController : MonoBehaviour
 {
     [Header("References")]
@@ -66,7 +67,7 @@ public class FloraOutlineController : MonoBehaviour
 
     private void HandleInteractableChanged(IInteractable interactable)
     {
-        _canTalkToFlora = interactable == _floraInteraction && _floraInteraction.CanInteract; 
+        _canTalkToFlora = interactable == _floraInteraction;
         UpdateOutline();
     }
 
