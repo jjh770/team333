@@ -20,6 +20,10 @@ public class FloraSpeedEffectController : MonoBehaviour
         {
             _particles = GetComponentsInChildren<ParticleSystem>(true);
         }
+        if (_gaugeController == null)
+        {
+            enabled = false;
+        }
     }
 
     private void Start()
@@ -48,9 +52,13 @@ public class FloraSpeedEffectController : MonoBehaviour
         _isActive = shouldActive;
 
         if (_isActive)
+        {
             PlayParticles();
+        }
         else
+        {
             StopParticlesSmooth();
+        }
     }
 
     private void PlayParticles()
@@ -60,7 +68,9 @@ public class FloraSpeedEffectController : MonoBehaviour
             if (ps == null) continue;
 
             if (!ps.isPlaying)
+            {
                 ps.Play();
+            }
         }
     }
 
