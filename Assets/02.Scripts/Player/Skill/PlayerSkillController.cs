@@ -15,6 +15,7 @@ public class PlayerSkillController : MonoBehaviour
     private PlayerMouseHelper _mouseHelper;
     private PlayerInputHandler _inputHandler;
     private TweenMovement _tweenMovement;
+    private PlayerSkillRange _skillRange;
 
     private bool _isUnlocked = false;
     private float _lastUseTime = -999f;
@@ -33,6 +34,7 @@ public class PlayerSkillController : MonoBehaviour
         _mouseHelper = GetComponent<PlayerMouseHelper>();
         _inputHandler = GetComponent<PlayerInputHandler>();
         _tweenMovement = GetComponent<TweenMovement>();
+        _skillRange = GetComponent<PlayerSkillRange>();
     }
 
     private void OnEnable()
@@ -107,6 +109,14 @@ public class PlayerSkillController : MonoBehaviour
     public void OnSkillAnimationStart()
     {
         StartSkillMovement();
+    }
+
+    public void OnSkillHit()
+    {
+        if (_skillRange != null)
+        {
+            _skillRange.ExecuteSkillHit();
+        }
     }
 
     public void OnSkillAnimationEnd()

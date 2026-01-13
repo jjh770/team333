@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSkillData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillData
   <SkillDamage>k__BackingField: 50
-  <SkillRange>k__BackingField: 5
+  <SkillRange>k__BackingField: 10
   <SkillMaxDistance>k__BackingField: 5
   <SkillJumpHeight>k__BackingField: 3
   <SkillMoveEase>k__BackingField: 34
