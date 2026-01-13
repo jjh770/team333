@@ -119,6 +119,14 @@ public class PlayerSkillController : MonoBehaviour
         }
     }
 
+    public void OnSkillProjectile()
+    {
+        if (_skillRange != null)
+        {
+            _skillRange.FireProjectile();
+        }
+    }
+
     public void OnSkillAnimationEnd()
     {
         _stateManager.ChangeState(PlayerState.Idle);

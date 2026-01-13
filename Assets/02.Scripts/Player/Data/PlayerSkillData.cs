@@ -12,4 +12,9 @@ public class PlayerSkillData : ScriptableObject
     [field: SerializeField] public float SkillMaxDistance { get; private set; } = 5f;
     [field: SerializeField] public float SkillJumpHeight { get; private set; } = 3f;
     [field: SerializeField] public Ease SkillMoveEase { get; private set; }
+
+    [Header("Projectile")]
+    [field: SerializeField] public float ProjectileSpeed { get; private set; } = 15f;
+    [field: SerializeField] public float ProjectileRange { get; private set; } = 10f;
+    [field: SerializeField] public float ProjectileWidth { get; private set; } = 1.5f;
 }
