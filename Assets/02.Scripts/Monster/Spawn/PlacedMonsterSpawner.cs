@@ -8,21 +8,14 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
     [SerializeField] private Transform[] _badMonsterPoints;
     [SerializeField] private int _badMonsterCount;
 
-    [Header("Bully")]
-    [SerializeField] private GameObject[] _bully;
-    [SerializeField] private Transform[] _bullyPoints;
-    [SerializeField] private int _bullyCount;
-
-    [Header("Skill Monster")]
-    [SerializeField] private GameObject _skillMonster;
-    [SerializeField] private Transform[] _skillMonsterPoints;
-    [SerializeField] private int _skillMonsterCount;
+    [Header("Flora Skill Monster")]
+    [SerializeField] private GameObject[] _floraSkillMonster;
+    [SerializeField] private Transform[] _floraSkillMonsterPoints;
 
     private void Start()
     {
         SpawnPlacedMonster();
-        SpawnBullyRabbyEncounter();
-        SpawnSkillMonster();
+        SpawnFloraSkillMonster();
     }
 
     [ContextMenu("Spawn Placed Bad Monsters")]
@@ -44,46 +37,22 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
         }
     }
 
-    [ContextMenu("Spawn Bully Monsters")]
-    private void SpawnBullyRabbyEncounter()
-    {
-        if (_bully == null || _bully.Length == 0) return;
-        if (_bullyPoints == null || _bullyPoints.Length == 0) return;
-
-        int totalSpawnCount = _bully.Length * _bullyCount;
-        totalSpawnCount = Mathf.Clamp(totalSpawnCount, 0, _bullyPoints.Length);
-
-        var allPoints = PickUniquePoints(_bullyPoints, totalSpawnCount);
-        int pointIndex = 0;
-
-        foreach (var bullyrabbyEncounterPrefab in _bully)
-        {
-            if (bullyrabbyEncounterPrefab == null) continue;
-
-            for (int i = 0; i < _bullyCount && pointIndex < allPoints.Count; i++)
-            {
-                var point = allPoints[pointIndex++];
-                GameObject instance = SpawnMonster(bullyrabbyEncounterPrefab, point.position, point.rotation);
-                if (instance != null)
-                {
-                    instance.transform.SetParent(this.transform);
-                }
-            }
-        }
-    }
-
     [ContextMenu("Spawn Placed Skill Monsters")]
-    private void SpawnSkillMonster()
+    private void SpawnFloraSkillMonster()
     {
-        if (_skillMonster == null) return;
-        if (_skillMonsterPoints == null || _skillMonsterPoints.Length == 0) return;
+        if (_floraSkillMonster == null || _floraSkillMonster.Length == 0) return;
+        if (_floraSkillMonsterPoints == null || _floraSkillMonsterPoints.Length == 0) return;
 
-        int spawnCount = Mathf.Clamp(_skillMonsterCount, 0, _skillMonsterPoints.Length);
-        var spawnPoints = PickUniquePoints(_skillMonsterPoints, spawnCount);
+        int spawnCount = _floraSkillMonster.Length;
+        var spawnPoints = PickUniquePoints(_floraSkillMonsterPoints, spawnCount);
 
-        foreach (var point in spawnPoints)
+        for (int i = 0; i < spawnCount && i < spawnPoints.Count; i++)
         {
-            GameObject instance = SpawnMonster(_skillMonster, point.position, point.rotation);
+            var monster = _floraSkillMonster[i];
+            if (monster == null) continue;
+
+            var point = spawnPoints[i];
+            GameObject instance = SpawnMonster(monster, point.position, point.rotation);
             if (instance != null)
             {
                 instance.transform.SetParent(this.transform);
