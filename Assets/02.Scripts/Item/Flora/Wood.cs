@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Wood : ItemBase
 {
@@ -22,6 +22,6 @@ public class Wood : ItemBase
         if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
         interaction.AddWood(_addWoodAmount);
-        _itemFactory.Despawn(this.gameObject);
+        _itemFactory.ReturnItem(this.gameObject);
     }
 }

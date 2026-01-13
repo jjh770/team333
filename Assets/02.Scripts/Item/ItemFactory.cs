@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class ItemFactory : MonoBehaviour
@@ -8,43 +9,63 @@ public class ItemFactory : MonoBehaviour
 
     [Header("items")]
     [SerializeField] private GameObject[] _itemPrefabs;
-    [SerializeField] private int _preloadPerPrefab = 30;
+    [SerializeField] protected float _itemPrefabsDuration = 20;
+
+    [Header("Settings")]
+    [SerializeField] private int _preloadCount = 20;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
     }
 
     private void Start()
     {
-        foreach (var prefab in _itemPrefabs)
+        PreloadAllItems();
+    }
+
+    private void PreloadAllItems()
+    {
+        if (PoolManager.Instance == null) return;
+
+        foreach (var item in _itemPrefabs)
         {
-            _poolManager.Preload(prefab, _preloadPerPrefab);
+            if (item != null)
+                PoolManager.Instance.Preload(item, _preloadCount);
         }
     }
 
     public GameObject Spawn(GameObject itemPrefab, Vector3 position, Quaternion rotation)
     {
         if (itemPrefab == null) return null;
-        if (_poolManager == null) return null;
+        if (PoolManager.Instance == null) return null;
 
-        return _poolManager.Get(itemPrefab, position, rotation);
+        GameObject item = PoolManager.Instance.Get(itemPrefab, position, rotation);
+
+        if (item != null && _itemPrefabsDuration > 0)
+        {
+            StartCoroutine(ReturnAfterDelay(item, _itemPrefabsDuration));
+        }
+
+        return item;
     }
 
-    public void Despawn(GameObject itemInstance)
+    private IEnumerator ReturnAfterDelay(GameObject effectObj, float delay)
     {
-        if (itemInstance == null) return;
-        if (_poolManager == null) return;
-
-        _poolManager.Return(itemInstance);
+        yield return new WaitForSeconds(delay);
+        ReturnItem(effectObj);
     }
 
-    public void Preload(GameObject itemPrefab, int count)
+    public void ReturnItem(GameObject effectObj)
     {
-        if (itemPrefab == null) return;
-        if (_poolManager == null) return;
-
-        _poolManager.Preload(itemPrefab, count);
+        if (PoolManager.Instance != null && effectObj != null)
+        {
+            PoolManager.Instance.Return(effectObj);
+        }
     }
 }
