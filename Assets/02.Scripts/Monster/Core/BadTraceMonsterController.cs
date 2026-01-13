@@ -86,6 +86,12 @@ public class BadTraceMonsterController : BadMonsterController
         _isDead = true;
         _move.Stop();
         _itemDrop.DropItem();
+
+        if (_deathParticlePrefab != null)
+        {
+            Instantiate(_deathParticlePrefab, transform.position, Quaternion.identity);
+        }
+
         ApplyState(MonsterState.Die);
 
         _deathRoutine = StartCoroutine(DeathCoroutine());
