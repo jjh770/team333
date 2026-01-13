@@ -86,6 +86,8 @@ public class CameraController : MonoBehaviour
     {
         if (_flora == null || _followCamera == null || _introTransform == null)
         {
+            Debug.LogWarning("CameraController: IntroTransition 참조가 null입니다. 즉시 Playing 상태로 전환합니다.");
+            OnIntroComplete?.Invoke();
             yield break;
         }
 

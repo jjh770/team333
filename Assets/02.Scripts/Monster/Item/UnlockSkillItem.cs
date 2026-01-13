@@ -26,14 +26,14 @@ public class UnlockSkillItem : MonoBehaviour, IInteractable
         if (playerSkill != null)
         {
             playerSkill.UnlockSkill();
-
+            Destroy(gameObject);
             if (_poolManager != null)
             {
-                _poolManager.Return(gameObject);
+                //_poolManager.Return(gameObject);
             }
             else
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
     }
