@@ -79,12 +79,4 @@ public class BeeMonsterController : BadMonsterController
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * _rotationLerpSpeed);
         }
     }
-
-    protected override void Die()
-    {
-        if (_isDead) return;
-
-        if (_manager != null) _manager.RemoveBee(this);
-        base.Die();
-    }
 }

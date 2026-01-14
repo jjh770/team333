@@ -19,5 +19,5 @@ MonoBehaviour:
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
   <MoveSpeed>k__BackingField: 4
-  <DropItem>k__BackingField: {fileID: 0}
+  <DropItem>k__BackingField: {fileID: 7608475907739635664, guid: 9b7f88b14e2c44644a4dab48c40591d0, type: 3}
   <Prefab>k__BackingField: {fileID: 4077332952225853184, guid: e3ebdbf444979fc4a8d742554b5bfa24, type: 3}
