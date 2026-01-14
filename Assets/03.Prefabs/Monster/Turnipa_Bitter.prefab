@@ -262,6 +262,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _updateInterval: 0.2
   _stoppingDistance: 1.8
 --- !u!114 &4456880592749316536
@@ -357,12 +360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthComponent
   _damageDuration: 0.09
-  _renderer: {fileID: 0}
+  _renderer: {fileID: 9027805059539703070}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!114 &1986554047727386058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 7667140203265973089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 8701945841258301498}
   - component: {fileID: 8052690821298281937}
   - component: {fileID: 4858222084999767126}
-  - component: {fileID: 6659818613876850983}
   - component: {fileID: 6627693968499777255}
   - component: {fileID: 5064948403858445294}
   - component: {fileID: 4237579833431501330}
   - component: {fileID: 3686397370653533704}
+  - component: {fileID: -4226026620041622667}
   m_Layer: 9
   m_Name: Bully_Tree
   m_TagString: Untagged
@@ -133,21 +133,6 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &6659818613876850983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450748814917048331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39e9c40dec1b5447bed6dfccbc9d46a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterBullyMoveComponent
-  _velocityThreshold: 0.1
-  _rotationSpeed: 5
-  _detectionRange: 10
 --- !u!114 &6627693968499777255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,12 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthComponent
   _damageDuration: 0.09
-  _renderer: {fileID: 0}
+  _renderer: {fileID: 3849757761621457711}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!114 &4237579833431501330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +192,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
   data: {fileID: 11400000, guid: cf427c794cfa17a48a33916e82d2bc80, type: 2}
+--- !u!114 &-4226026620041622667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e6660231ff4e141989769d40e7532a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterPlacedMoveComponent
+  _velocityThreshold: 0.1
+  _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
+  _detectionRange: 10
 --- !u!1 &2018052630478496335
 GameObject:
   m_ObjectHideFlags: 0

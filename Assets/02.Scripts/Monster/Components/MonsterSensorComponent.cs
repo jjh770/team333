@@ -36,6 +36,9 @@ public class MonsterSensorComponent : MonoBehaviour
             case MonsterTargetType.Flora:
                 foundObject = GameObject.FindGameObjectWithTag("Flora");
                 break;
+            case MonsterTargetType.Both:
+                //
+                break;
         }
 
         if (foundObject != null)

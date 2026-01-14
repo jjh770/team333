@@ -14,16 +14,9 @@ public class MonsterHealthComponent : MonoBehaviour
 
     private Material _material;
     private Tweener _flashTween;
-    private Tweener _knockbackTween;
-
-    private bool _isKnockbackStunned;
-    public bool IsKnockbackStunned => _isKnockbackStunned;
 
     private bool _isDamaged;
     public bool IsDamaged => _isDamaged;
-
-    protected bool _isStunned;
-    public bool IsStunned => _isStunned;
 
     private static readonly int s_emissionColor = Shader.PropertyToID("_Emissive_Color");
 
@@ -38,13 +31,11 @@ public class MonsterHealthComponent : MonoBehaviour
     private void OnEnable()
     {
         _isDamaged = false;
-        _isKnockbackStunned = false;
     }
 
     private void OnDisable()
     {
         _flashTween?.Kill();
-        _knockbackTween?.Kill();
 
         if (_material != null)
         {
@@ -67,6 +58,4 @@ public class MonsterHealthComponent : MonoBehaviour
         _material.SetColor(s_emissionColor, _flashColor);
         _flashTween = _material.DOColor(Color.black, s_emissionColor, _flashDuration);
     }
-
-
 }

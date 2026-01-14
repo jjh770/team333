@@ -528,6 +528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacedMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _detectionRange: 10
 --- !u!114 &1780633793686190866
 MonoBehaviour:
@@ -622,12 +625,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthComponent
   _damageDuration: 0.09
-  _renderer: {fileID: 0}
+  _renderer: {fileID: 3141990875462986981}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!114 &4080296060181816833
 MonoBehaviour:
   m_ObjectHideFlags: 0

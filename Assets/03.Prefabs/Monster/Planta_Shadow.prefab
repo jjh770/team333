@@ -779,6 +779,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _updateInterval: 0.2
   _stoppingDistance: 1.8
 --- !u!114 &4762377517291527843
@@ -874,12 +877,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthComponent
   _damageDuration: 0.09
-  _renderer: {fileID: 0}
+  _renderer: {fileID: 4976591450016639683}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!114 &5334694915051871641
 MonoBehaviour:
   m_ObjectHideFlags: 0
