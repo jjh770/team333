@@ -11,6 +11,9 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     protected bool _isHeld;
     public bool IsHeld => _isHeld;
 
+    protected bool _isThrown;
+    public bool IsThrown => _isThrown;
+
     private bool _isLocked;
     public bool IsLocked => _isLocked;
 
@@ -36,6 +39,13 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         _collider = GetComponent<Collider>();
     }
 
+    protected virtual void OnEnable()
+    {
+        // 풀링 대응: 상태 초기화
+        _isHeld = false;
+        _isThrown = false;
+    }
+
     protected virtual void OnDestroy()
     {
         InteractionEvents.NotifyDestroyed(this);
@@ -51,7 +61,13 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public void OnThrown(Vector3 direction, float force)
     {
         Drop();
+        _isThrown = true;
         _rigidbody?.AddForce(direction * force, ForceMode.Impulse);
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        _isThrown = false;
     }
 
     protected virtual void PickUp(Transform holder)
