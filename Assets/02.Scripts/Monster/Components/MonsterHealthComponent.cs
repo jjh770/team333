@@ -2,30 +2,21 @@
 using System.Collections;
 using UnityEngine;
 
-public class MonsterDamageComponent : MonoBehaviour
+public class MonsterHealthComponent : MonoBehaviour
 {
     [Header("Damage")]
     [SerializeField] private float _damageDuration = 0.09f;
-
-    private bool _isDamaged;
-    public bool IsDamaged => _isDamaged;
 
     [Header("Hit Effect")]
     [SerializeField] private SkinnedMeshRenderer _renderer;
     [SerializeField] private Color _flashColor = Color.white;
     [SerializeField] private float _flashDuration = 0.3f;
 
-    [Header("Knockback")]
-    [SerializeField] private float _knockbackForce = 2.0f;
-    [SerializeField] private float _knockbackDuration = 0.2f;
-    [SerializeField] private float _knockbackStunDuration = 0.3f;
-
     private Material _material;
     private Tweener _flashTween;
-    private Tweener _knockbackTween;
 
-    private bool _isKnockbackStunned;
-    public bool IsKnockbackStunned => _isKnockbackStunned;
+    private bool _isDamaged;
+    public bool IsDamaged => _isDamaged;
 
     private static readonly int s_emissionColor = Shader.PropertyToID("_Emissive_Color");
 
@@ -40,13 +31,11 @@ public class MonsterDamageComponent : MonoBehaviour
     private void OnEnable()
     {
         _isDamaged = false;
-        _isKnockbackStunned = false;
     }
 
     private void OnDisable()
     {
         _flashTween?.Kill();
-        _knockbackTween?.Kill();
 
         if (_material != null)
         {
@@ -68,26 +57,5 @@ public class MonsterDamageComponent : MonoBehaviour
         _flashTween?.Kill();
         _material.SetColor(s_emissionColor, _flashColor);
         _flashTween = _material.DOColor(Color.black, s_emissionColor, _flashDuration);
-    }
-
-    public void ApplyKnockback(Vector3 attackerPosition)
-    {
-        Vector3 direction = (transform.position - attackerPosition).normalized;
-        direction.y = 0;
-        Vector3 knockbackTarget = transform.position + (direction * _knockbackForce);
-
-        _knockbackTween?.Kill();
-        _isKnockbackStunned = true;
-
-        // 뒤로 밀려나기
-        _knockbackTween = transform.DOMove(knockbackTarget, _knockbackDuration)
-                    .SetEase(Ease.OutQuad)
-                    .OnComplete(() => StartCoroutine(KnockbackStunCoroutine()));
-    }
-
-    private IEnumerator KnockbackStunCoroutine()
-    {
-        yield return new WaitForSeconds(_knockbackStunDuration);
-        _isKnockbackStunned = false;
     }
 }

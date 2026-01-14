@@ -24,18 +24,8 @@ public class GoodMonsterController : BaseMonsterController
         return MonsterState.Idle;
     }
 
-    override protected void FindTarget()
-    {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject == null) return;
-
-        Transform player = playerObject.transform;
-        _move.SetTarget(player);
-    }
-
     override public void OnSpawn()
     {
-        FindTarget();
         ResetState();
     }
 

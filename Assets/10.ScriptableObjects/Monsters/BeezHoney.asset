@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a064921fef096dd41957d6f629a5678c, type: 3}
-  m_Name: DevilTreeNightmare
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
-  <MonsterName>k__BackingField: DevilTreeNightmare
-  <MaxHealth>k__BackingField: 30
-  <AttackDamage>k__BackingField: 2
+  m_Name: BeezHoney
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
+  <MonsterName>k__BackingField: BeezHoney
+  <MaxHealth>k__BackingField: 100
+  <AttackDamage>k__BackingField: 10
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
   <MoveSpeed>k__BackingField: 4
-  <Type>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 6060493489403216405, guid: f29645466055aac4d911e5a12516983d, type: 3}
+  <DropItem>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 4077332952225853184, guid: e3ebdbf444979fc4a8d742554b5bfa24, type: 3}

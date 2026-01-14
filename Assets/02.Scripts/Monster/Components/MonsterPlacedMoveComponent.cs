@@ -5,6 +5,8 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
     [Header("Detection")]
     [SerializeField] private float _detectionRange = 10f;
 
+    public override bool CanKnockback => false;
+
     protected void Awake()
     {
         _isMoving = false;
@@ -17,10 +19,7 @@ public class MonsterPlacedMoveComponent : MonsterMoveComponent
 
     private void TryLookAtTarget()
     {
-        if (_target == null)
-        {
-            return;
-        }
+        if (_target == null) return;
 
         float sqrDistance = (_target.position - transform.position).sqrMagnitude;
 

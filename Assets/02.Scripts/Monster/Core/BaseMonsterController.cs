@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(MonsterMoveComponent))]
@@ -22,7 +21,6 @@ public abstract class BaseMonsterController : MonoBehaviour, IPoolable
 
     abstract protected void ResetState();
     abstract protected void StopAllRoutines();
-    abstract protected void FindTarget();
     abstract public void OnSpawn();
     abstract public void OnDespawn();
     abstract protected void UpdateState();

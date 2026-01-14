@@ -1,13 +1,7 @@
 ﻿using UnityEngine;
-public enum MonsterType
-{
-    BadPlacedAttack,
-    BadTraceAttack,
-    GoodPlaced
-}
 
-[CreateAssetMenu(menuName = "Game/Monster/MonsterData")]
-public class MonsterData : ScriptableObject
+[CreateAssetMenu(menuName = "Game/Monster/MonsterDataSO")]
+public class MonsterDataSO : ScriptableObject
 {
     [Header("Identity")]
     [field: SerializeField] public string MonsterName { get; private set; }
@@ -20,8 +14,8 @@ public class MonsterData : ScriptableObject
     [field: SerializeField] public float AttackDuration { get; private set; } = 0.14f;
     [field: SerializeField] public float MoveSpeed { get; private set; } = 4f;
 
-    [Header("Type")]
-    [field: SerializeField] public MonsterType Type { get; private set; }
+    [Header("DropItem")]
+    [field: SerializeField] public GameObject DropItem { get; private set; }
 
     [Header("Prefab")]
     [field: SerializeField] public GameObject Prefab { get; private set; }
