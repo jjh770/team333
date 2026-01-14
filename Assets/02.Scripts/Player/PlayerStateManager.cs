@@ -20,7 +20,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public PlayerState CurrentState => _currentState;
 
-    public event Action<bool> OnPlayStateChanged;
+    public event Action<bool> OnPlayState;
     public event Action<PlayerState, PlayerState> OnStateChanged;
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
     public bool IsDead => _currentState == PlayerState.Die;
@@ -40,7 +40,7 @@ public class PlayerStateManager : MonoBehaviour
 
             // 초기 상태 수동 적용 (이벤트 구독 전에 상태가 변경되었을 수 있음)
             bool isPlaying = GameStateManager.Instance.IsPlaying;
-            OnPlayStateChanged?.Invoke(isPlaying);
+            OnPlayState?.Invoke(isPlaying);
         }
     }
     private void OnDestroy()
@@ -54,7 +54,7 @@ public class PlayerStateManager : MonoBehaviour
     private void HandleGameStateChanged(GameState oldState, GameState newState)
     {
         bool isPlaying = (newState == GameState.Playing);
-        OnPlayStateChanged?.Invoke(isPlaying);
+        OnPlayState?.Invoke(isPlaying);
     }
     public void ChangeState(PlayerState newState)
     {

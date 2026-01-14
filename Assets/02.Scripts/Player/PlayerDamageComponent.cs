@@ -15,7 +15,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     private PlayerStateManager _stateManager;
     private bool _isDamaged;
     private bool _isInvincible;
-    private Renderer[] _renderers;
+    private SkinnedMeshRenderer[] _renderers;
 
     public bool IsDamaged => _isDamaged;
     public bool IsInvincible => _isInvincible;
@@ -24,7 +24,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     {
         _playerStat = GetComponent<PlayerStat>();
         _stateManager = GetComponent<PlayerStateManager>();
-        _renderers = GetComponentsInChildren<Renderer>();
+        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     private void Update()
