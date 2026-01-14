@@ -5,6 +5,7 @@ using UnityEngine;
 public class FloraSpeedGaugeController : MonoBehaviour
 {
     private FloraStats _stats;
+    private FloraMovement _movement;
 
     [Header("Gauge")]
     [SerializeField] private FloraSpeedGauge _gauge;
@@ -19,6 +20,7 @@ public class FloraSpeedGaugeController : MonoBehaviour
 
     private void Awake()
     {
+        _movement = GetComponent<FloraMovement>();
         _stats = GetComponent<FloraStats>();
     }
 
@@ -26,11 +28,13 @@ public class FloraSpeedGaugeController : MonoBehaviour
     {
         _gauge.OnValueChanged += OnGaugeValueChanged;
         _gauge.Initialize();
+        _movement.OnStateChanged += OnStateChanged;
     }
 
     private void OnDisable()
     {
         _gauge.OnValueChanged -= OnGaugeValueChanged;
+        _movement.OnStateChanged -= OnStateChanged;
     }
 
     private void Update()
@@ -76,6 +80,18 @@ public class FloraSpeedGaugeController : MonoBehaviour
         float multiplier = Mathf.Lerp(_minMultiplier, _maxMultiplier, percent);
 
         _stats.SetSpeedMultiplier(multiplier);
+    }
+    
+    private void OnStateChanged(IFloraState state)
+    {
+        if (state is FloraWaitState)
+        {
+            LockDrain();
+        }
+        else
+        {
+            UnlockDrain();
+        }
     }
     
     public void LockDrain()
