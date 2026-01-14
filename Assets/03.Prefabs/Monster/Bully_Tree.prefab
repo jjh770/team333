@@ -13,11 +13,12 @@ GameObject:
   - component: {fileID: 3837921944087222539}
   - component: {fileID: 8701945841258301498}
   - component: {fileID: 8052690821298281937}
-  - component: {fileID: 8431350785123473436}
   - component: {fileID: 4858222084999767126}
   - component: {fileID: 6659818613876850983}
-  - component: {fileID: 662590446910119658}
   - component: {fileID: 6627693968499777255}
+  - component: {fileID: 5064948403858445294}
+  - component: {fileID: 4237579833431501330}
+  - component: {fileID: 3686397370653533704}
   m_Layer: 9
   m_Name: Bully_Tree
   m_TagString: Untagged
@@ -109,25 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttackComponent
   _attackDistance: 2.5
   _attackDuration: 0.14
---- !u!114 &8431350785123473436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450748814917048331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef379c0788e69e40b5814192f3f0fca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterDamageComponent
-  _damageDuration: 0.09
-  _renderer: {fileID: 3849757761621457711}
-  _flashColor: {r: 1, g: 1, b: 1, a: 1}
-  _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!136 &4858222084999767126
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -166,23 +148,6 @@ MonoBehaviour:
   _velocityThreshold: 0.1
   _rotationSpeed: 5
   _detectionRange: 10
---- !u!114 &662590446910119658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450748814917048331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e882564aec30a8e4886ea01e076df91c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BullyMonsterController
-  _deathAnimationDuration: 0.4
-  _deathParticlePrefab: {fileID: 6286510145479088550, guid: 053fac6996263b3419004907fb3e90b8, type: 3}
-  _playerNearDistance: 7
-  _targetUpdateInterval: 0.3
-  _bullyTarget: {fileID: 0}
 --- !u!114 &6627693968499777255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,8 +160,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _dropItem: {fileID: 190021702421149833, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
   _yOffset: 0.5
+--- !u!114 &5064948403858445294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978fdf5e60fbefa448f74ab3cb0e884f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthComponent
+  _damageDuration: 0.09
+  _renderer: {fileID: 0}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.3
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
+--- !u!114 &4237579833431501330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1acd70930028b94c8a0da35ced40687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
+  Target: 0
+  _playerNearDistance: 7
+  _targetUpdateInterval: 0.3
+  _targetUpdateTimer: 0.2
+--- !u!114 &3686397370653533704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 552a8e3a681538f42ba15aeefe9511a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
+  _deathAnimationDuration: 0.19
+  data: {fileID: 11400000, guid: cf427c794cfa17a48a33916e82d2bc80, type: 2}
 --- !u!1 &2018052630478496335
 GameObject:
   m_ObjectHideFlags: 0
