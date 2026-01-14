@@ -306,6 +306,8 @@ MonoBehaviour:
   _deathAnimationDuration: 0.19
   _separationDistance: 1
   _separationWeight: 3
+  _minVelocitySqrForRotation: 0.01
+  _rotationLerpSpeed: 10
 --- !u!136 &5867512941777268665
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -15,6 +15,10 @@ public class BeezPetItem : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interactor)
     {
-        // 펫 생기기
+        if (interactor.TryGetComponent<PlayerPet>(out var pet))
+        {
+            pet.TryAddPet();
+            Destroy(gameObject);
+        }
     }
 }

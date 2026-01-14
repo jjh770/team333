@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BeezDarkness
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
   <MonsterName>k__BackingField: BeezDarkness
-  <MaxHealth>k__BackingField: 25
+  <MaxHealth>k__BackingField: 10
   <AttackDamage>k__BackingField: 0.5
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5

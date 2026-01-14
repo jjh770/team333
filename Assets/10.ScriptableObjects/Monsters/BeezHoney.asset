@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BeezHoney
   m_EditorClassIdentifier: Assembly-CSharp::MonsterDataSO
   <MonsterName>k__BackingField: BeezHoney
-  <MaxHealth>k__BackingField: 50
+  <MaxHealth>k__BackingField: 30
   <AttackDamage>k__BackingField: 0.5
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
