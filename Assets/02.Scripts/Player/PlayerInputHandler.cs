@@ -24,7 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
     private void Start()
     {
-        _stateManager.OnPlayStateChanged += HandleCanMove;
+        _stateManager.OnPlayState += HandleCanMove;
 
         // 초기 상태 설정 - Playing 상태가 아니면 입력 비활성화
         if (GameStateManager.Instance != null)
@@ -34,7 +34,7 @@ public class PlayerInputHandler : MonoBehaviour
     }
     private void OnDestroy()
     {
-        _stateManager.OnPlayStateChanged -= HandleCanMove;
+        _stateManager.OnPlayState -= HandleCanMove;
     }
     private void HandleCanMove(bool canInput)
     {

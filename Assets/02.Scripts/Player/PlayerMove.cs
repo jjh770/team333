@@ -32,12 +32,12 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        _stateManager.OnPlayStateChanged += HandleCanMove;
+        _stateManager.OnPlayState += HandleCanMove;
     }
 
     private void OnDestroy()
     {
-        _stateManager.OnPlayStateChanged -= HandleCanMove;
+        _stateManager.OnPlayState -= HandleCanMove;
     }
     private void HandleCanMove(bool canMove)
     {
