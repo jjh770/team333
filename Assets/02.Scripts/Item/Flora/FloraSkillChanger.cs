@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FloraSkillChanger : ItemBase
+public class FloraSkillChanger : ItemBase, IAttractableByFlora
 {
     [Header("Skill Settings")]
     [SerializeField] private FloraSkillBase _skillPrefab;

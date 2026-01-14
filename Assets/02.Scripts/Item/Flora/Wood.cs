@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Wood : ItemBase
+public class Wood : ItemBase, IAttractableByFlora
 {
     [Header("Settings")]
     [SerializeField] private int _addWoodAmount = 1;

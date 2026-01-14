@@ -34,29 +34,29 @@ public class FloraMagnet : MonoBehaviour
         if (!collider.TryGetComponent<ItemBase>(out var item)) return;
         if (!item.IsThrown) return;
 
-        if (item is not Wood && item is not FloraSkillChanger) return;
+        if (item is not IAttractableByFlora) return;
 
-        var rb = collider.attachedRigidbody;
-        if (rb == null) return;
+        var rigidBody = collider.attachedRigidbody;
+        if (rigidBody == null) return;
 
-        if (_attractingItems.ContainsKey(rb)) return;
+        if (_attractingItems.ContainsKey(rigidBody)) return;
 
-        _attractingItems.Add(rb, item);
+        _attractingItems.Add(rigidBody, item);
     }
 
     private void TryRemoveItem(Collider collider)
     {
-        var rb = collider.attachedRigidbody;
-        if (rb == null) return;
+        var rigidBody = collider.attachedRigidbody;
+        if (rigidBody == null) return;
 
-        _attractingItems.Remove(rb);
+        _attractingItems.Remove(rigidBody);
     }
 
     private void AttractItems()
     {
         if (_attractingItems.Count == 0) return;
 
-        Vector3 targetPos = transform.position;
+        Vector3 targetPosition = transform.position;
 
         List<Rigidbody> removeList = null;
 
@@ -72,7 +72,7 @@ public class FloraMagnet : MonoBehaviour
                 continue;
             }
 
-            Vector3 direction = (targetPos - rigidBody.position).normalized;
+            Vector3 direction = (targetPosition - rigidBody.position).normalized;
             rigidBody.AddForce(direction * _magnetForce, ForceMode.Acceleration);
 
             if (rigidBody.linearVelocity.sqrMagnitude > _maxSpeed * _maxSpeed)
