@@ -14,8 +14,10 @@ public class Wood : ItemBase
         _itemFactory = ItemFactory.Instance;
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
+        base.OnCollisionEnter(other);
+        
         if (_isHeld) return;
 
         if (!other.gameObject.CompareTag(FloraTag)) return;

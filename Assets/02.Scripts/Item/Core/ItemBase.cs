@@ -27,6 +27,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public event Action<bool> OnLockChanged;
     public event Action OnHeld;
     public event Action OnDropped;
+    
+    private const string GroundTag = "Ground";
 
     // IInteractable
     public Transform Transform => transform;
@@ -67,6 +69,11 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        if (!collision.gameObject.CompareTag(GroundTag))
+        {
+            return;
+        }
+        
         _isThrown = false;
     }
 

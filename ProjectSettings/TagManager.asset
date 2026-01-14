@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Flora
   - QuestBridge
+  - Ground
   layers:
   - Default
   - TransparentFX

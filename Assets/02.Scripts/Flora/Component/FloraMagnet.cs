@@ -7,7 +7,7 @@ public class FloraMagnet : MonoBehaviour
     [SerializeField] private float _magnetForce = 10f;
     [SerializeField] private float _maxSpeed = 8f;
 
-    private readonly HashSet<Rigidbody> _attractingItems = new HashSet<Rigidbody>();
+    private readonly Dictionary<Rigidbody, ItemBase> _attractingItems = new();
 
     private void FixedUpdate()
     {
@@ -29,34 +29,27 @@ public class FloraMagnet : MonoBehaviour
         TryRemoveItem(other);
     }
 
-    private void TryAddItem(Collider col)
+    private void TryAddItem(Collider collider)
     {
-        if (!IsValidItem(col.gameObject)) return;
-
-        var rb = col.attachedRigidbody;
-        if (rb == null) return;
-
-        var item = col.GetComponent<ItemBase>();
-        if (item == null) return;
-
+        if (!collider.TryGetComponent<ItemBase>(out var item)) return;
         if (!item.IsThrown) return;
 
-        _attractingItems.Add(rb);
+        if (item is not Wood && item is not FloraSkillChanger) return;
+
+        var rb = collider.attachedRigidbody;
+        if (rb == null) return;
+
+        if (_attractingItems.ContainsKey(rb)) return;
+
+        _attractingItems.Add(rb, item);
     }
 
-    private void TryRemoveItem(Collider col)
+    private void TryRemoveItem(Collider collider)
     {
-        var rb = col.attachedRigidbody;
-        if (rb != null)
-        {
-            _attractingItems.Remove(rb);
-        }
-    }
+        var rb = collider.attachedRigidbody;
+        if (rb == null) return;
 
-    private bool IsValidItem(GameObject obj)
-    {
-        return obj.GetComponent<Wood>() != null ||
-               obj.GetComponent<FloraSkillChanger>() != null;
+        _attractingItems.Remove(rb);
     }
 
     private void AttractItems()
@@ -64,21 +57,35 @@ public class FloraMagnet : MonoBehaviour
         if (_attractingItems.Count == 0) return;
 
         Vector3 targetPos = transform.position;
-        _attractingItems.RemoveWhere(rigidBody => rigidBody == null);
 
-        foreach (var rigidBody in _attractingItems)
+        List<Rigidbody> removeList = null;
+
+        foreach (var pair in _attractingItems)
         {
-            var item = rigidBody.GetComponent<ItemBase>();
-            if (item == null) continue;
+            var rigidBody = pair.Key;
+            var item = pair.Value;
 
-            if (!item.IsThrown) continue;
+            if (rigidBody == null || item == null || !item.IsThrown)
+            {
+                removeList ??= new List<Rigidbody>();
+                removeList.Add(rigidBody);
+                continue;
+            }
 
             Vector3 direction = (targetPos - rigidBody.position).normalized;
             rigidBody.AddForce(direction * _magnetForce, ForceMode.Acceleration);
 
-            if (rigidBody.linearVelocity.magnitude > _maxSpeed)
+            if (rigidBody.linearVelocity.sqrMagnitude > _maxSpeed * _maxSpeed)
             {
                 rigidBody.linearVelocity = rigidBody.linearVelocity.normalized * _maxSpeed;
+            }
+        }
+
+        if (removeList != null)
+        {
+            foreach (var rigidBody in removeList)
+            {
+                _attractingItems.Remove(rigidBody);
             }
         }
     }
