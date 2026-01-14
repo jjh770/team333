@@ -74,6 +74,8 @@ GameObject:
   m_Component:
   - component: {fileID: 565831534005885094}
   - component: {fileID: 5508129905626140041}
+  - component: {fileID: 428491700708064780}
+  - component: {fileID: 6940505705953998879}
   m_Layer: 0
   m_Name: Planta_Geezer
   m_TagString: Untagged
@@ -165,6 +167,104 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000000014901161, y: 0.42712402, z: 0.07735601}
     m_Extent: {x: 0.47838008, y: 0.5336884, z: 0.28099772}
   m_DirtyAABB: 0
+--- !u!114 &428491700708064780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026877574176848410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bef7ba44855f14aade2f990c695881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemScanWave
+  _waveInterval: 3
+  _waveDuration: 0.6
+  _scanColor: {r: 1, g: 1, b: 1, a: 1}
+  _intensity: 0.8
+  _scanWidth: 0.1
+  _scanSoftness: 0.1
+  _scanStart: -1.5
+  _scanEnd: 1.5
+--- !u!114 &6940505705953998879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026877574176848410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 2.519016, g: 2.0239823, b: 1.4852688, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 1
+  bakeKeys:
+  - {fileID: 4300000, guid: b3c62796a4557324ab851b49df7f967b, type: 3}
+  bakeValues:
+  - data:
+    - {x: 0.73731315, y: 0.43307543, z: -0.5184737}
+    - {x: 0.90758765, y: -0.26531446, z: 0.32541192}
+    - {x: 0.7150026, y: -0.23108423, z: -0.65982676}
+    - {x: 0.90758765, y: -0.26531446, z: 0.32541192}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.80504745, y: 0.23386751, z: 0.5451647}
+    - {x: 0.73731315, y: 0.43307543, z: -0.5184737}
+    - {x: 0.17906283, y: 0.68376064, z: -0.7073952}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.17906283, y: 0.68376064, z: -0.7073952}
+    - {x: 0.34694016, y: 0.9032522, z: -0.25252315}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.90758765, y: -0.26531446, z: 0.32541192}
+    - {x: 0.73731315, y: 0.43307543, z: -0.5184737}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.34694016, y: 0.9032522, z: -0.25252315}
+    - {x: 0.58139825, y: 0.6876495, z: 0.43487272}
+    - {x: 0.88660383, y: 0.38758254, z: -0.2524153}
+    - {x: 0.58139825, y: 0.6876495, z: 0.43487272}
+    - {x: 0.80504745, y: 0.23386751, z: 0.5451647}
+    - {x: -0.6186344, y: 0.76356465, z: -0.18509601}
+    - {x: -0.23607965, y: 0.7712094, z: -0.5911873}
+    - {x: -0.68651026, y: 0.3474722, z: -0.6387227}
+    - {x: 0.34694016, y: 0.9032522, z: -0.25252315}
+    - {x: -0.00020885715, y: 0.9118948, z: 0.41042396}
+    - {x: 0.58139825, y: 0.6876495, z: 0.43487272}
+    - {x: 0.90758765, y: -0.26531446, z: 0.32541192}
+    - {x: -0.014941547, y: -0.67608464, z: -0.73667246}
+    - {x: 0.7150026, y: -0.23108423, z: -0.65982676}
+    - {x: 0.005701848, y: -0.7065346, z: 0.7076555}
+    - {x: -0.61468786, y: -0.5458403, z: -0.5694008}
+    - {x: -0.5878565, y: -0.57995933, z: 0.5639787}
+    - {x: 0.73731315, y: 0.43307543, z: -0.5184737}
+    - {x: 0.7150026, y: -0.23108423, z: -0.65982676}
+    - {x: -0.014941547, y: -0.67608464, z: -0.73667246}
+    - {x: 0.17906283, y: 0.68376064, z: -0.7073952}
+    - {x: -0.23607965, y: 0.7712094, z: -0.5911873}
+    - {x: -0.61468786, y: -0.5458403, z: -0.5694008}
+    - {x: -0.68651026, y: 0.3474722, z: -0.6387227}
+    - {x: 0.34694016, y: 0.9032522, z: -0.25252315}
+    - {x: 0.17906283, y: 0.68376064, z: -0.7073952}
+    - {x: -0.00020885715, y: 0.9118948, z: 0.41042396}
+    - {x: -0.5844208, y: 0.5835069, z: 0.5638901}
+    - {x: -0.23607965, y: 0.7712094, z: -0.5911873}
+    - {x: -0.6186344, y: 0.76356465, z: -0.18509601}
+    - {x: -0.5878565, y: -0.57995933, z: 0.5639787}
+    - {x: -0.00020885715, y: 0.9118948, z: 0.41042396}
+    - {x: -0.5844208, y: 0.5835069, z: 0.5638901}
+    - {x: 0.005701848, y: -0.7065346, z: 0.7076555}
+    - {x: 0.80504745, y: 0.23386751, z: 0.5451647}
+    - {x: 0.90758765, y: -0.26531446, z: 0.32541192}
+    - {x: 0.58139825, y: 0.6876495, z: 0.43487272}
+    - {x: -0.6186344, y: 0.76356465, z: -0.18509601}
+    - {x: -0.5878565, y: -0.57995933, z: 0.5639787}
+    - {x: -0.5844208, y: 0.5835069, z: 0.5638901}
+    - {x: -0.68651026, y: 0.3474722, z: -0.6387227}
+    - {x: -0.61468786, y: -0.5458403, z: -0.5694008}
 --- !u!1 &1058621793026884601
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +505,7 @@ GameObject:
   - component: {fileID: 3864893003679247840}
   - component: {fileID: 6357812031215987240}
   - component: {fileID: 8207427023077410601}
+  - component: {fileID: 3919794871906672050}
   m_Layer: 0
   m_Name: Planta_Geezer
   m_TagString: Untagged
@@ -552,6 +653,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43174639f73ad294f95b4810269b0cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillUnlocker
+--- !u!114 &3919794871906672050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997701455443942625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2a6873140e39d4aa7faed7d8c61977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableOutlineController
+  _outline: {fileID: 6940505705953998879}
+  _playerInteraction: {fileID: 0}
+  _targetWidth: 3
+  _animationDuration: 0.2
+  _showEase: 27
+  _hideEase: 26
+  _throwCooldown: 0.5
 --- !u!1 &8208273425991640513
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -11,7 +12,18 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public bool IsHeld => _isHeld;
 
     private bool _isLocked;
-    public void SetLocked(bool locked) => _isLocked = locked;
+    public bool IsLocked => _isLocked;
+
+    public void SetLocked(bool locked)
+    {
+        if (_isLocked == locked) return;
+        _isLocked = locked;
+        OnLockChanged?.Invoke(locked);
+    }
+
+    public event Action<bool> OnLockChanged;
+    public event Action OnHeld;
+    public event Action OnDropped;
 
     // IInteractable
     public Transform Transform => transform;
@@ -58,6 +70,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         transform.SetParent(holder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        OnHeld?.Invoke();
     }
 
     protected virtual void Drop()
@@ -68,5 +82,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
         _collider.enabled = true;
+
+        OnDropped?.Invoke();
     }
 }
