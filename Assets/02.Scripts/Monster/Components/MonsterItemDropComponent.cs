@@ -2,7 +2,6 @@
 
 public class MonsterItemDropComponent : MonoBehaviour
 {
-    [SerializeField] private GameObject _dropItem;
     [SerializeField] private float _yOffset = 0.5f;
 
     private Transform _spawnRoot;
@@ -18,15 +17,15 @@ public class MonsterItemDropComponent : MonoBehaviour
         _spawnRoot = GameObject.FindFirstObjectByType<PoolManager>().transform;
     }
 
-    public void DropItem()
+    public void DropItem(GameObject item)
     {
-        if (_dropItem == null) return;
+        if (item == null) return;
         if (ItemFactory.Instance == null) return;
 
         Vector3 offset = new Vector3(0f, _yOffset, 0f);
         Vector3 spawnPosition = transform.position + offset;
 
-        GameObject spawned = _itemFactory.Spawn(_dropItem, spawnPosition, Quaternion.identity);
+        GameObject spawned = _itemFactory.Spawn(item, spawnPosition, Quaternion.identity);
         if (spawned == null) return;
 
         if (_spawnRoot != null)

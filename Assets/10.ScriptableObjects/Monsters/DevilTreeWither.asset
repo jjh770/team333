@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a064921fef096dd41957d6f629a5678c, type: 3}
-  m_Name: TurnipaBitter
+  m_Name: DevilTreeWither
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
-  <MonsterName>k__BackingField: TurnipaBitter
+  <MonsterName>k__BackingField: DevilTreeWither
   <MaxHealth>k__BackingField: 30
   <AttackDamage>k__BackingField: 2
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
-  <MoveSpeed>k__BackingField: 3.5
-  <Type>k__BackingField: 1
-  <Prefab>k__BackingField: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
+  <MoveSpeed>k__BackingField: 4
+  <DropItem>k__BackingField: {fileID: 3321702756485340213, guid: f9409cd9a01bc714bae9928a7a1d3ed9, type: 3}
+  <Prefab>k__BackingField: {fileID: 5986010498025588172, guid: baec9c43983f25148932efa0c8aea09c, type: 3}
