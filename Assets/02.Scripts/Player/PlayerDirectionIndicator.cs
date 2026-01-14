@@ -13,9 +13,10 @@ public class PlayerDirectionIndicator : MonoBehaviour
     [SerializeField] private Ease _showEase;
 
     [Header("Rotation Settings")]
-    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _rotationSmoothTime = 0.1f;
 
     private PlayerStateManager _stateManager;
+    private float _rotationVelocity;
     private Tweener _showTween;
     private float _targetAngle;
     private float _currentAngle;
@@ -55,7 +56,7 @@ public class PlayerDirectionIndicator : MonoBehaviour
             _targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         }
 
-        _currentAngle = Mathf.LerpAngle(_currentAngle, _targetAngle, _rotationSpeed * Time.deltaTime);
+        _currentAngle = Mathf.SmoothDampAngle(_currentAngle, _targetAngle, ref _rotationVelocity, _rotationSmoothTime);
         _indicator.transform.rotation = Quaternion.Euler(0f, _currentAngle, 0f);
     }
 
