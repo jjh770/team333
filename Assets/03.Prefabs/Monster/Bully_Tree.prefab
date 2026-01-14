@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa53e6f9d3889cd49800e7ff87fe8bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
-  _data: {fileID: 11400000, guid: e39fef1fed728b14eaa1173a0177f54c, type: 2}
+  _data: {fileID: 11400000, guid: cf427c794cfa17a48a33916e82d2bc80, type: 2}
 --- !u!114 &8701945841258301498
 MonoBehaviour:
   m_ObjectHideFlags: 0

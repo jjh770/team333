@@ -24,7 +24,7 @@ public class MonsterSensorComponent : MonoBehaviour
         FindTarget();
     }
 
-    private void FindTarget()
+    public void FindTarget()
     {
         GameObject foundObject = null;
 
