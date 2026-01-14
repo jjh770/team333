@@ -95,8 +95,8 @@ public class ItemScanWave : MonoBehaviour
     {
         if (_scanMaterial == null) return;
 
-        // 들고 있으면 스캔 중지
-        if (_item != null && _item.IsHeld)
+        // 들고 있거나 잠겨있으면 스캔 중지
+        if (_item != null && (_item.IsHeld || _item.IsLocked))
         {
             if (_isScanning)
             {

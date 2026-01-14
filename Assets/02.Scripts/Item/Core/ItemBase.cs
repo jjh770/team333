@@ -12,8 +12,16 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public bool IsHeld => _isHeld;
 
     private bool _isLocked;
-    public void SetLocked(bool locked) => _isLocked = locked;
+    public bool IsLocked => _isLocked;
 
+    public void SetLocked(bool locked)
+    {
+        if (_isLocked == locked) return;
+        _isLocked = locked;
+        OnLockChanged?.Invoke(locked);
+    }
+
+    public event Action<bool> OnLockChanged;
     public event Action OnDropped;
 
     // IInteractable
