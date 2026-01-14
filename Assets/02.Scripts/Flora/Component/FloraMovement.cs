@@ -24,6 +24,7 @@ public class FloraMovement : MonoBehaviour
     public float Progress => _path.Progress;
 
     public event Action<float> OnProgressChanged;
+    public event Action<IFloraState> OnStateChanged;
 
     private void Start()
     {
@@ -90,9 +91,14 @@ public class FloraMovement : MonoBehaviour
 
     public void ChangeState(IFloraState newState)
     {
+        if (_currentState == newState)
+            return;
+        
         _currentState?.Exit();
         _currentState = newState;
         _currentState?.Enter();
+        
+        OnStateChanged?.Invoke(_currentState);
     }
 
     public bool HasNextDestination()

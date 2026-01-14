@@ -13,6 +13,8 @@ public class FloraSpeedGaugeController : MonoBehaviour
     [SerializeField] private float _minMultiplier = 1f;
     [SerializeField] private float _maxMultiplier = 2.5f;
 
+    private bool _isDrainLocked;
+    
     public event Action<float, float> GaugeChanged;
 
     private void Awake()
@@ -33,6 +35,9 @@ public class FloraSpeedGaugeController : MonoBehaviour
 
     private void Update()
     {
+        if (_isDrainLocked)
+            return;
+        
         _gauge.Drain(Time.deltaTime);
     }
 
@@ -71,5 +76,15 @@ public class FloraSpeedGaugeController : MonoBehaviour
         float multiplier = Mathf.Lerp(_minMultiplier, _maxMultiplier, percent);
 
         _stats.SetSpeedMultiplier(multiplier);
+    }
+    
+    public void LockDrain()
+    {
+        _isDrainLocked = true;
+    }
+
+    public void UnlockDrain()
+    {
+        _isDrainLocked = false;
     }
 }
