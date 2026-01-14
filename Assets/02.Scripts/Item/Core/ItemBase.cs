@@ -22,6 +22,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     }
 
     public event Action<bool> OnLockChanged;
+    public event Action OnHeld;
     public event Action OnDropped;
 
     // IInteractable
@@ -69,6 +70,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         transform.SetParent(holder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        OnHeld?.Invoke();
     }
 
     protected virtual void Drop()

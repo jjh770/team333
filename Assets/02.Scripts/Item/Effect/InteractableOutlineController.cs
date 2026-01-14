@@ -122,7 +122,7 @@ public class InteractableOutlineController : MonoBehaviour
     {
         if (_isOnCooldown) return;
 
-        bool shouldShow = interactable == _interactable;
+        bool shouldShow = ReferenceEquals(interactable, _interactable);
 
         if (shouldShow && !_isOutlineActive)
         {

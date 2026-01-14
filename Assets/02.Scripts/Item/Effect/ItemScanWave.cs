@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ItemScanWave : MonoBehaviour
@@ -19,19 +20,18 @@ public class ItemScanWave : MonoBehaviour
     private Renderer _renderer;
     private Material _scanMaterial;
     private ItemBase _item;
-    private float _timer;
-    private bool _isScanning;
-    private float _scanProgress;
+    private Coroutine _scanCoroutine;
+    private bool _isActive;
 
-    private static readonly int ScanColor = Shader.PropertyToID("_ScanColor");
-    private static readonly int ScanPosition = Shader.PropertyToID("_ScanPosition");
-    private static readonly int ScanWidth = Shader.PropertyToID("_ScanWidth");
-    private static readonly int ScanSoftness = Shader.PropertyToID("_ScanSoftness");
-    private static readonly int Intensity = Shader.PropertyToID("_Intensity");
+    private static readonly int ScanColorId = Shader.PropertyToID("_ScanColor");
+    private static readonly int ScanPositionId = Shader.PropertyToID("_ScanPosition");
+    private static readonly int ScanWidthId = Shader.PropertyToID("_ScanWidth");
+    private static readonly int ScanSoftnessId = Shader.PropertyToID("_ScanSoftness");
+    private static readonly int IntensityId = Shader.PropertyToID("_Intensity");
 
     private static Shader _scanShader;
 
-    void Awake()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         if (_renderer == null)
@@ -48,11 +48,137 @@ public class ItemScanWave : MonoBehaviour
         SetupScanMaterial();
     }
 
-    void SetupScanMaterial()
+    private void OnEnable()
+    {
+        if (_item != null)
+        {
+            _item.OnHeld += HandleHeld;
+            _item.OnDropped += HandleDropped;
+            _item.OnLockChanged += HandleLockChanged;
+
+            // 초기 상태 확인
+            if (!_item.IsHeld && !_item.IsLocked)
+            {
+                StartScanning();
+            }
+        }
+        else
+        {
+            // ItemBase가 없으면 항상 스캔
+            StartScanning();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_item != null)
+        {
+            _item.OnHeld -= HandleHeld;
+            _item.OnDropped -= HandleDropped;
+            _item.OnLockChanged -= HandleLockChanged;
+        }
+
+        StopScanning();
+
+        if (_scanMaterial != null)
+        {
+            _scanMaterial.SetFloat(IntensityId, 0f);
+        }
+    }
+
+    private void HandleHeld()
+    {
+        StopScanning();
+    }
+
+    private void HandleDropped()
+    {
+        if (_item == null || !_item.IsLocked)
+        {
+            StartScanning();
+        }
+    }
+
+    private void HandleLockChanged(bool isLocked)
+    {
+        if (isLocked)
+        {
+            StopScanning();
+        }
+        else if (_item == null || !_item.IsHeld)
+        {
+            StartScanning();
+        }
+    }
+
+    private void StartScanning()
+    {
+        if (_isActive || _scanMaterial == null) return;
+
+        _isActive = true;
+        _scanCoroutine = StartCoroutine(ScanRoutine());
+    }
+
+    private void StopScanning()
+    {
+        if (!_isActive) return;
+
+        _isActive = false;
+
+        if (_scanCoroutine != null)
+        {
+            StopCoroutine(_scanCoroutine);
+            _scanCoroutine = null;
+        }
+
+        if (_scanMaterial != null)
+        {
+            _scanMaterial.SetFloat(IntensityId, 0f);
+        }
+    }
+
+    private IEnumerator ScanRoutine()
+    {
+        while (_isActive)
+        {
+            // 인터벌 대기
+            yield return new WaitForSeconds(_waveInterval);
+
+            if (!_isActive) yield break;
+
+            // 스캔 애니메이션
+            float progress = 0f;
+            while (progress < 1f && _isActive)
+            {
+                progress += Time.deltaTime / _waveDuration;
+
+                float currentPos = Mathf.Lerp(_scanStart, _scanEnd, progress);
+                _scanMaterial.SetFloat(ScanPositionId, currentPos);
+
+                // 페이드 인/아웃
+                float fadeMultiplier = 1f;
+                if (progress < 0.1f)
+                {
+                    fadeMultiplier = progress / 0.1f;
+                }
+                else if (progress > 0.9f)
+                {
+                    fadeMultiplier = (1f - progress) / 0.1f;
+                }
+
+                _scanMaterial.SetFloat(IntensityId, _intensity * fadeMultiplier);
+
+                yield return null;
+            }
+
+            _scanMaterial.SetFloat(IntensityId, 0f);
+        }
+    }
+
+    private void SetupScanMaterial()
     {
         if (_renderer == null) return;
 
-        // 쉐이더 캐싱
         if (_scanShader == null)
         {
             _scanShader = Shader.Find("Custom/ItemScanWave");
@@ -64,18 +190,16 @@ public class ItemScanWave : MonoBehaviour
             return;
         }
 
-        // 스캔 머티리얼 생성
         _scanMaterial = new Material(_scanShader);
-        _scanMaterial.SetColor(ScanColor, _scanColor);
-        _scanMaterial.SetFloat(ScanWidth, _scanWidth);
-        _scanMaterial.SetFloat(ScanSoftness, _scanSoftness);
-        _scanMaterial.SetFloat(Intensity, 0f); // 시작은 안보이게
+        _scanMaterial.SetColor(ScanColorId, _scanColor);
+        _scanMaterial.SetFloat(ScanWidthId, _scanWidth);
+        _scanMaterial.SetFloat(ScanSoftnessId, _scanSoftness);
+        _scanMaterial.SetFloat(IntensityId, 0f);
 
-        // 기존 머티리얼에 스캔 머티리얼 추가
         AddOverlayMaterial();
     }
 
-    void AddOverlayMaterial()
+    private void AddOverlayMaterial()
     {
         if (_renderer == null || _scanMaterial == null) return;
 
@@ -91,79 +215,7 @@ public class ItemScanWave : MonoBehaviour
         _renderer.materials = newMaterials;
     }
 
-    void Update()
-    {
-        if (_scanMaterial == null) return;
-
-        // 들고 있거나 잠겨있으면 스캔 중지
-        if (_item != null && (_item.IsHeld || _item.IsLocked))
-        {
-            if (_isScanning)
-            {
-                StopScan();
-            }
-            _timer = 0f;
-            return;
-        }
-
-        _timer += Time.deltaTime;
-
-        if (!_isScanning && _timer >= _waveInterval)
-        {
-            StartScan();
-        }
-
-        if (_isScanning)
-        {
-            _scanProgress += Time.deltaTime / _waveDuration;
-
-            if (_scanProgress >= 1f)
-            {
-                StopScan();
-            }
-            else
-            {
-                UpdateScan();
-            }
-        }
-    }
-
-    void StartScan()
-    {
-        _isScanning = true;
-        _scanProgress = 0f;
-        _timer = 0f;
-        _scanMaterial.SetFloat(Intensity, _intensity);
-    }
-
-    void UpdateScan()
-    {
-        // 스캔 위치 계산 (왼쪽 위 → 오른쪽 아래 대각선)
-        float currentPos = Mathf.Lerp(_scanStart, _scanEnd, _scanProgress);
-        _scanMaterial.SetFloat(ScanPosition, currentPos);
-
-        // 시작과 끝에서 페이드 인/아웃
-        float fadeMultiplier = 1f;
-        if (_scanProgress < 0.1f)
-        {
-            fadeMultiplier = _scanProgress / 0.1f;
-        }
-        else if (_scanProgress > 0.9f)
-        {
-            fadeMultiplier = (1f - _scanProgress) / 0.1f;
-        }
-
-        _scanMaterial.SetFloat(Intensity, _intensity * fadeMultiplier);
-    }
-
-    void StopScan()
-    {
-        _isScanning = false;
-        _scanProgress = 0f;
-        _scanMaterial.SetFloat(Intensity, 0f);
-    }
-
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (_scanMaterial != null)
         {
@@ -171,32 +223,21 @@ public class ItemScanWave : MonoBehaviour
         }
     }
 
-    void OnDisable()
+    private void OnValidate()
     {
         if (_scanMaterial != null)
         {
-            _scanMaterial.SetFloat(Intensity, 0f);
+            _scanMaterial.SetColor(ScanColorId, _scanColor);
+            _scanMaterial.SetFloat(ScanWidthId, _scanWidth);
+            _scanMaterial.SetFloat(ScanSoftnessId, _scanSoftness);
         }
     }
 
-    // 에디터에서 값 변경 시 실시간 반영
-    void OnValidate()
-    {
-        if (_scanMaterial != null)
-        {
-            _scanMaterial.SetColor(ScanColor, _scanColor);
-            _scanMaterial.SetFloat(ScanWidth, _scanWidth);
-            _scanMaterial.SetFloat(ScanSoftness, _scanSoftness);
-        }
-    }
-
-    // 외부에서 스캔 범위 자동 계산 요청 시
     public void AutoCalculateBounds()
     {
         if (_renderer != null)
         {
             var bounds = _renderer.localBounds;
-            // 3D 대각선 범위: X - Y + Z
             _scanStart = bounds.min.x - bounds.max.y + bounds.min.z;
             _scanEnd = bounds.max.x - bounds.min.y + bounds.max.z;
         }

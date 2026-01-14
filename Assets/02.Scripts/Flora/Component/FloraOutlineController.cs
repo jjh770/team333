@@ -67,7 +67,7 @@ public class FloraOutlineController : MonoBehaviour
 
     private void HandleInteractableChanged(IInteractable interactable)
     {
-        _canTalkToFlora = interactable == _floraInteraction;
+        _canTalkToFlora = ReferenceEquals(interactable, _floraInteraction);
         UpdateOutline();
     }
 
