@@ -84,23 +84,6 @@ public class FloraSpeedGaugeController : MonoBehaviour
     
     private void OnStateChanged(IFloraState state)
     {
-        if (state is FloraWaitState)
-        {
-            LockDrain();
-        }
-        else
-        {
-            UnlockDrain();
-        }
-    }
-    
-    public void LockDrain()
-    {
-        _isDrainLocked = true;
-    }
-
-    public void UnlockDrain()
-    {
-        _isDrainLocked = false;
+        _isDrainLocked = state is FloraWaitState;
     }
 }
