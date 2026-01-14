@@ -1,37 +1,31 @@
-﻿using NUnit.Framework.Internal;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(MonsterStat))]
 [RequireComponent(typeof(MonsterAttackComponent))]
-[RequireComponent(typeof(MonsterDamageComponent))]
+[RequireComponent(typeof(MonsterHealthComponent))]
 [RequireComponent(typeof(MonsterItemDropComponent))]
 [RequireComponent(typeof(MonsterHealthBar))]
+[RequireComponent(typeof(MonsterSensorComponent))]
 
-public abstract class BadMonsterController : BaseMonsterController, IDamageable
+public class BadMonsterController : BaseMonsterController, IDamageable
 {
     [Header("Death")]
     [SerializeField] protected float _deathAnimationDuration = 0.19f;
 
-    [Header("Target")]
-    [SerializeField] protected float _playerNearDistance = 7f;
-    [SerializeField] protected float _targetUpdateInterval = 0.3f;
+    [Header("Settings")]
+    public MonsterDataSO data;
 
-    protected Transform _player;
-    protected Transform _flora;
-    protected float _targetUpdateTimer;
-
+    [Header("Components")]
     protected MonsterStat _stat;
     protected MonsterAttackComponent _attack;
-    protected MonsterDamageComponent _damage;
+    protected MonsterHealthComponent _health;
     protected MonsterItemDropComponent _itemDrop;
+    protected MonsterSensorComponent _sensor;
 
-    protected bool _isDead;
-    public bool IsDead => _isDead;
-
-    protected bool _isStunned;
-    public bool IsStunned => _isStunned;
+    // BT에서 참조할 현재 타겟
+    public Transform CurrentTarget { get; set; }
 
     public event Action<BadMonsterController> OnDie;
 
@@ -39,14 +33,18 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
     protected Coroutine _damageRoutine;
     protected Coroutine _stunRoutine;
 
+    protected bool _isDead;
+    public bool IsDead => _isDead;
+
     protected override void Awake()
     {
         base.Awake();
 
         _stat = GetComponent<MonsterStat>();
         _attack = GetComponent<MonsterAttackComponent>();
-        _damage = GetComponent<MonsterDamageComponent>();
+        _health = GetComponent<MonsterHealthComponent>();
         _itemDrop = GetComponent<MonsterItemDropComponent>();
+        _sensor = GetComponent<MonsterSensorComponent>();
     }
 
     protected virtual void OnEnable()
@@ -67,27 +65,35 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
     private void HandleGameStateChanged(GameState oldState, GameState newState)
     {
+        // 게임이 끝날 때 한 방에 죽이기
         if (newState == GameState.Outro)
         {
             Kill();
         }
     }
 
+    public void Kill()
+    {
+        Die();
+    }
+
     public override void OnSpawn()
     {
-        FindTarget();
+        SetupTarget();
         ResetState();
     }
 
-    protected Transform ChooseTargetByDistance(Transform player, Transform flora)
+    protected void SetupTarget()
     {
-        if (player == null) return flora;
-        if (flora == null) return player;
-
-        float sqrNear = _playerNearDistance * _playerNearDistance;
-        float playerSqr = (player.position - this.transform.position).sqrMagnitude;
-
-        return playerSqr <= sqrNear ? player : flora;
+        Transform target = _sensor.GetCurrentTarget();
+        _move.SetTarget(target);
+        _attack.SetTarget(target);
+        CurrentTarget = target;
+    }
+    public override void OnDespawn()
+    {
+        StopAllRoutines();
+        _move.Disable();
     }
 
     protected override void StopAllRoutines()
@@ -106,7 +112,7 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         {
             StopCoroutine(_stunRoutine);
             _stunRoutine = null;
-            _isStunned = false;
+            // _isStunned = false;
         }
     }
     protected virtual void Update()
@@ -115,23 +121,12 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
 
         UpdateState();
 
-        if (_isStunned) return;
-        if (_damage.IsDamaged) return;
+        // if (_isStunned) return;
+        if (_health.IsDamaged) return;
 
-        UpdateTargetPeriodically();
         OnUpdate();
     }
 
-    // 일정 시간마다 타겟 업데이트
-    private void UpdateTargetPeriodically()
-    {
-        _targetUpdateTimer -= Time.deltaTime;
-        if (_targetUpdateTimer <= 0f)
-        {
-            FindTarget();
-            _targetUpdateTimer = _targetUpdateInterval;
-        }
-    }
 
     protected virtual void OnUpdate()
     {
@@ -152,6 +147,25 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
             ApplyState(newState);
         }
     }
+    protected override MonsterState GetCurrentState()
+    {
+        if (_isDead) return MonsterState.Die;
+        // if (_isStunned) return MonsterState.Idle;
+        if (_health.IsDamaged) return MonsterState.Damage;
+        if (_attack.IsAttacking) return MonsterState.Attack;
+        if (_move.IsMoving) return MonsterState.Move;
+        return MonsterState.Idle;
+    }
+
+    protected override void ResetState()
+    {
+        _move.ResetMove();
+        _move.SetSpeed(_stat.GetMoveSpeed());
+        _isDead = false;
+        // _isStunned = false;
+
+        ApplyState(MonsterState.Idle);
+    }
 
     protected override void ApplyState(MonsterState newState)
     {
@@ -159,22 +173,16 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         _animator.SetInteger(s_animationHash, (int)_currentState);
     }
 
-
     protected virtual void Die()
     {
         if (_isDead) return;
-
         _isDead = true;
-        _itemDrop.DropItem();
-        MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
 
+        _move.Stop();
+        _itemDrop.DropItem(data.DropItem);
+        
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
-    }
-
-    public void Kill()
-    {
-        Die();
     }
 
     protected virtual IEnumerator DeathCoroutine()
@@ -182,8 +190,11 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         yield return new WaitForSeconds(_deathAnimationDuration);
         _deathRoutine = null;
         OnDie?.Invoke(this);
+
+        MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
     }
 
+    // ====== 외부에서 호출 ======
     public void SetMoveSpeed(float value)
     {
         _stat.SetMoveSpeed(value);
@@ -204,18 +215,34 @@ public abstract class BadMonsterController : BaseMonsterController, IDamageable
         {
             StopCoroutine(_stunRoutine);
         }
-        _stunRoutine = StartCoroutine(StunCoroutine(duration));
+        _stunRoutine = StartCoroutine(_move.StunCoroutine(duration));
     }
 
-    protected virtual IEnumerator StunCoroutine(float duration)
+    public bool TryTakeDamage(Damage damage)
     {
-        _isStunned = true;
+        if (damage.Value <= 0) return false;
+        if (_isDead) return false;
+        if (_stat == null) return false;
 
-        yield return new WaitForSeconds(duration);
+        _stat.TakeDamage(damage.Value);
+        _health.FlashWhite();
+        _attack.InitCooltime();
 
-        _isStunned = false;
-        _stunRoutine = null;
+        if (damage.IsKnockBack)
+        {
+            _move.ApplyKnockback(damage.Attacker.transform.position);
+        }
+
+        if (!_health.IsDamaged)
+        {
+            _damageRoutine = StartCoroutine(_health.DamageCoroutine());
+        }
+
+        if (_stat.Health.IsEmpty)
+        {
+            Die();
+        }
+
+        return true;
     }
-
-    abstract public bool TryTakeDamage(Damage damage);
 }

@@ -4,21 +4,19 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class MonsterTraceMoveComponent : MonsterMoveComponent
 {
-    [Header("Movement")]
+    [Header("Target Update")]
     [SerializeField] private float _updateInterval = 0.2f;
+    private float _updateTimer;
+
+    [Header("Movement Stop")]
     [SerializeField] private float _stoppingDistance = 1.8f;
 
-    private MonsterDamageComponent _damage;
-
     private NavMeshAgent _agent;
-    private float _updateTimer;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.stoppingDistance = _stoppingDistance;
-
-        _damage = GetComponent<MonsterDamageComponent>();
     }
 
     public override void Enable()
@@ -57,7 +55,7 @@ public class MonsterTraceMoveComponent : MonsterMoveComponent
 
     public override void UpdateMove()
     {
-        if (_damage != null && _damage.IsKnockbackStunned)
+        if (IsKnockbackStunned)
         {
             _agent.isStopped = true;
             _isMoving = false;

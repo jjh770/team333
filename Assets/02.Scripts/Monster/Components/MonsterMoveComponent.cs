@@ -1,3 +1,5 @@
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public abstract class MonsterMoveComponent : MonoBehaviour
@@ -8,10 +10,24 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     private const float MinLookDirectionSqrMagnitude = 1e-6f;
 
+    [Header("Knockback")]
+    [SerializeField] private float _knockbackForce = 2f;
+    [SerializeField] private float _knockbackDuration = 0.2f;
+    [SerializeField] private float _knockbackStunDuration = 0.3f;
+    private Tweener _knockbackTween;
+
     protected Transform _target;
 
     protected bool _isMoving;
     public bool IsMoving => _isMoving;
+
+    protected bool _isKnockbackStunned;
+    public bool IsKnockbackStunned => _isKnockbackStunned;
+
+    protected bool _isStunned;
+    public bool IsStunned => _isStunned;
+
+    public virtual bool CanKnockback => true;
 
     public void SetTarget(Transform target)
     {
@@ -19,6 +35,12 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     }
 
     public abstract void UpdateMove();
+
+    protected virtual void OnDisable()
+    {
+        _knockbackTween?.Kill();
+        _isKnockbackStunned = false;
+    }
 
     public virtual void Enable() { }
     public virtual void Disable() { }
@@ -52,5 +74,43 @@ public abstract class MonsterMoveComponent : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(direction);
         }
+    }
+
+    public IEnumerator StunCoroutine(float duration)
+    {
+        _isStunned = true;
+
+        yield return new WaitForSeconds(duration);
+
+        _isStunned = false;
+    }
+
+    public void ApplyKnockback(Vector3 attackerPosition)
+    {
+        if (!CanKnockback) return;
+
+        Vector3 direction = (transform.position - attackerPosition).normalized;
+        direction.y = 0;
+        Vector3 knockbackTarget = transform.position + (direction * _knockbackForce);
+
+        _knockbackTween?.Kill();
+        _isKnockbackStunned = true;
+
+        // 뒤로 밀려나기
+        _knockbackTween = transform.DOMove(knockbackTarget, _knockbackDuration)
+                    .SetEase(Ease.OutQuad)
+                    .OnComplete(() =>
+                    {
+                        if (gameObject.activeInHierarchy)
+                        {
+                            StartCoroutine(KnockbackStunCoroutine());
+                        }
+                    });
+    }
+
+    private IEnumerator KnockbackStunCoroutine()
+    {
+        yield return new WaitForSeconds(_knockbackStunDuration);
+        _isKnockbackStunned = false;
     }
 }
