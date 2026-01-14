@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Wood : ItemBase
+public class Wood : ItemBase, IAttractableByFlora
 {
     [Header("Settings")]
     [SerializeField] private int _addWoodAmount = 1;
@@ -14,8 +14,10 @@ public class Wood : ItemBase
         _itemFactory = ItemFactory.Instance;
     }
 
-    private void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
+        base.OnCollisionEnter(other);
+        
         if (_isHeld) return;
 
         if (!other.gameObject.CompareTag(FloraTag)) return;

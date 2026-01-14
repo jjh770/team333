@@ -11,6 +11,9 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     protected bool _isHeld;
     public bool IsHeld => _isHeld;
 
+    protected bool _isThrown;
+    public bool IsThrown => _isThrown;
+
     private bool _isLocked;
     public bool IsLocked => _isLocked;
 
@@ -24,6 +27,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public event Action<bool> OnLockChanged;
     public event Action OnHeld;
     public event Action OnDropped;
+    
+    private const string GroundTag = "Ground";
 
     // IInteractable
     public Transform Transform => transform;
@@ -34,6 +39,13 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        // 풀링 대응: 상태 초기화
+        _isHeld = false;
+        _isThrown = false;
     }
 
     protected virtual void OnDestroy()
@@ -51,7 +63,18 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public void OnThrown(Vector3 direction, float force)
     {
         Drop();
+        _isThrown = true;
         _rigidbody?.AddForce(direction * force, ForceMode.Impulse);
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.gameObject.CompareTag(GroundTag))
+        {
+            return;
+        }
+        
+        _isThrown = false;
     }
 
     protected virtual void PickUp(Transform holder)

@@ -1,14 +1,16 @@
 using UnityEngine;
 
-public class FloraSkillChanger : ItemBase
+public class FloraSkillChanger : ItemBase, IAttractableByFlora
 {
     [Header("Skill Settings")]
     [SerializeField] private FloraSkillBase _skillPrefab;
 
     private const string FloraTag = "Flora";
 
-    private void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)
     {
+        base.OnCollisionEnter(other);
+        
         if (_isHeld) return;
 
         if (!other.gameObject.CompareTag(FloraTag)) return;
