@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+[System.Serializable]
+public class SkillEffect
+{
+    public GameObject SkillEffectObject;
+}
 public class PlayerSkillController : MonoBehaviour
 {
     [Header("Data")]
@@ -28,6 +33,8 @@ public class PlayerSkillController : MonoBehaviour
     public event Action<int> OnSkillUpgraded;
     public event Action OnSkillUsed;
 
+    [SerializeField] private SkillEffect _skillEffect;
+
     private void Awake()
     {
         _stateManager = GetComponent<PlayerStateManager>();
@@ -42,6 +49,7 @@ public class PlayerSkillController : MonoBehaviour
     private void OnEnable()
     {
         _inputHandler.OnSkillInput += HandleSkillInput;
+        DisableSkillEffect();
     }
 
     private void OnDisable()
@@ -123,6 +131,7 @@ public class PlayerSkillController : MonoBehaviour
     {
         if (_skillRange != null)
         {
+            SkillEffectStart();
             _skillRange.ExecuteSkillHit();
         }
     }
@@ -143,4 +152,15 @@ public class PlayerSkillController : MonoBehaviour
     }
 
     #endregion
+
+    private void DisableSkillEffect()
+    {
+        _skillEffect.SkillEffectObject.SetActive(false);
+    }
+
+    private void SkillEffectStart()
+    {
+        DisableSkillEffect();
+        _skillEffect.SkillEffectObject.SetActive(true);
+    }
 }

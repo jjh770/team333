@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6533791141529276596}
   - component: {fileID: 6694968718597095554}
   m_Layer: 0
-  m_Name: Vfx_SkillSlash
+  m_Name: VFX_SkillSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ ParticleSystem:
   m_GameObject: {fileID: 4703412727267983256}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 0.61
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -165,7 +165,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.65
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1733,7 +1733,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
+          value: 0.0000010728836
           inSlope: 0
           outSlope: 0
           tangentMode: 0
