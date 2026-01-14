@@ -5,6 +5,22 @@ using UnityEngine;
 public class SkillEffect
 {
     public GameObject SkillEffectObject;
+
+    public void Enable()
+    {
+        if (SkillEffectObject != null)
+        {
+            SkillEffectObject.SetActive(true);
+        }
+    }
+
+    public void Disable()
+    {
+        if (SkillEffectObject != null)
+        {
+            SkillEffectObject.SetActive(false);
+        }
+    }
 }
 public class PlayerSkillController : MonoBehaviour
 {
@@ -155,12 +171,12 @@ public class PlayerSkillController : MonoBehaviour
 
     private void DisableSkillEffect()
     {
-        _skillEffect.SkillEffectObject.SetActive(false);
+        _skillEffect?.Disable();
     }
 
     private void SkillEffectStart()
     {
-        DisableSkillEffect();
-        _skillEffect.SkillEffectObject.SetActive(true);
+        _skillEffect?.Disable();
+        _skillEffect?.Enable();
     }
 }
