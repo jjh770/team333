@@ -4,12 +4,12 @@ public class ItemScanWave : MonoBehaviour
 {
     [Header("Wave Settings")]
     [SerializeField] private float _waveInterval = 3f;
-    [SerializeField] private float _waveDuration = 0.6f;
+    [SerializeField] private float _waveDuration = 0.3f;
     [SerializeField] private Color _scanColor = Color.white;
     [SerializeField] private float _intensity = 0.8f;
 
     [Header("Scan Band Settings")]
-    [SerializeField] private float _scanWidth = 0.15f;
+    [SerializeField] private float _scanWidth = 0.1f;
     [SerializeField] private float _scanSoftness = 0.1f;
 
     [Header("Position Range (3D Diagonal)")]
@@ -18,6 +18,7 @@ public class ItemScanWave : MonoBehaviour
 
     private Renderer _renderer;
     private Material _scanMaterial;
+    private ItemBase _item;
     private float _timer;
     private bool _isScanning;
     private float _scanProgress;
@@ -36,6 +37,12 @@ public class ItemScanWave : MonoBehaviour
         if (_renderer == null)
         {
             _renderer = GetComponentInChildren<Renderer>();
+        }
+
+        _item = GetComponent<ItemBase>();
+        if (_item == null)
+        {
+            _item = GetComponentInParent<ItemBase>();
         }
 
         SetupScanMaterial();
@@ -87,6 +94,17 @@ public class ItemScanWave : MonoBehaviour
     void Update()
     {
         if (_scanMaterial == null) return;
+
+        // 들고 있으면 스캔 중지
+        if (_item != null && _item.IsHeld)
+        {
+            if (_isScanning)
+            {
+                StopScan();
+            }
+            _timer = 0f;
+            return;
+        }
 
         _timer += Time.deltaTime;
 

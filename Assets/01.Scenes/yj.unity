@@ -60502,14 +60502,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2bef7ba44855f14aade2f990c695881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemScanWave
-  _waveInterval: 4
+  _waveInterval: 3
   _waveDuration: 0.3
   _scanColor: {r: 1, g: 1, b: 1, a: 1}
   _intensity: 0.8
   _scanWidth: 0.1
   _scanSoftness: 0.1
-  _scanStart: -1
-  _scanEnd: 1
+  _scanStart: -1.5
+  _scanEnd: 1.5
+--- !u!114 &1626978459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626978450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 2.519016, g: 2.0239823, b: 1.4852688, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1626978460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626978450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafccbc83712b1249b6cb227f0ef7575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemOutlineController
+  _outline: {fileID: 1626978459}
+  _playerInteraction: {fileID: 738058885}
+  _targetWidth: 3
+  _animationDuration: 0.3
+  _showEase: 27
+  _hideEase: 26
+  _throwCooldown: 0.5
 --- !u!1001 &1627101701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77066,6 +77103,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 190021702421149833, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1626978458}
+    - targetCorrespondingSourceObject: {fileID: 190021702421149833, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1626978459}
+    - targetCorrespondingSourceObject: {fileID: 190021702421149833, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1626978460}
   m_SourcePrefab: {fileID: 100100000, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
 --- !u!1001 &2010206152
 PrefabInstance:
