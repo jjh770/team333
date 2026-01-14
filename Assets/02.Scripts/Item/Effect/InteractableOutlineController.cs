@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(ItemBase))]
-public class ItemOutlineController : MonoBehaviour
+public class InteractableOutlineController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Outline _outline;
@@ -11,32 +10,29 @@ public class ItemOutlineController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float _targetWidth = 3f;
-    [SerializeField] private float _animationDuration = 0.3f;
+    [SerializeField] private float _animationDuration = 0.2f;
     [SerializeField] private Ease _showEase = Ease.OutBack;
     [SerializeField] private Ease _hideEase = Ease.InBack;
+
+    [Header("Throw Cooldown (ItemBase only)")]
     [SerializeField] private float _throwCooldown = 0.5f;
 
+    private IInteractable _interactable;
     private ItemBase _item;
     private Tweener _widthTween;
     private bool _isOutlineActive;
     private bool _isOnCooldown;
+    private Coroutine _cooldownCoroutine;
 
     private void Awake()
     {
+        // 컴포넌트 참조 캐싱 (한 번만)
+        _interactable = GetComponent<IInteractable>();
         _item = GetComponent<ItemBase>();
 
         if (_outline == null)
         {
             _outline = GetComponentInChildren<Outline>();
-        }
-    }
-
-    private void Start()
-    {
-        if (_outline != null)
-        {
-            _outline.OutlineWidth = 0f;
-            _outline.enabled = false;
         }
 
         if (_playerInteraction == null)
@@ -47,56 +43,86 @@ public class ItemOutlineController : MonoBehaviour
                 _playerInteraction = player.GetComponentInChildren<PlayerInteraction>();
             }
         }
-
-        if (_playerInteraction != null)
-        {
-            _playerInteraction.OnInteractableChanged += HandleInteractableChanged;
-        }
     }
 
     private void OnEnable()
     {
-        StartCoroutine(WatchHeldState());
-    }
+        // 상태 초기화
+        _isOutlineActive = false;
+        _isOnCooldown = false;
+        _cooldownCoroutine = null;
 
-    private IEnumerator WatchHeldState()
-    {
-        while (true)
+        if (_outline != null)
         {
-            // 들릴 때까지 대기
-            yield return new WaitUntil(() => _item.IsHeld);
+            _outline.OutlineWidth = 0f;
+            _outline.enabled = false;
+        }
 
-            // 놓을 때까지 대기
-            yield return new WaitUntil(() => !_item.IsHeld);
+        // 이벤트 구독
+        if (_playerInteraction != null)
+        {
+            _playerInteraction.OnInteractableChanged += HandleInteractableChanged;
+        }
 
-            // 던졌으므로 쿨다운 시작
-            _isOnCooldown = true;
-            if (_isOutlineActive)
-            {
-                HideOutline();
-            }
-
-            yield return new WaitForSeconds(_throwCooldown);
-            _isOnCooldown = false;
+        if (_item != null)
+        {
+            _item.OnDropped += HandleDropped;
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
+        // 이벤트 해제
         if (_playerInteraction != null)
         {
             _playerInteraction.OnInteractableChanged -= HandleInteractableChanged;
         }
 
+        if (_item != null)
+        {
+            _item.OnDropped -= HandleDropped;
+        }
+
+        // 정리
         _widthTween?.Kill();
+        _widthTween = null;
+
+        if (_cooldownCoroutine != null)
+        {
+            StopCoroutine(_cooldownCoroutine);
+            _cooldownCoroutine = null;
+        }
+    }
+
+    private void HandleDropped()
+    {
+        if (_cooldownCoroutine != null)
+        {
+            StopCoroutine(_cooldownCoroutine);
+        }
+        _cooldownCoroutine = StartCoroutine(CooldownRoutine());
+    }
+
+    private IEnumerator CooldownRoutine()
+    {
+        _isOnCooldown = true;
+
+        if (_isOutlineActive)
+        {
+            HideOutline();
+        }
+
+        yield return new WaitForSeconds(_throwCooldown);
+
+        _isOnCooldown = false;
+        _cooldownCoroutine = null;
     }
 
     private void HandleInteractableChanged(IInteractable interactable)
     {
-        // 쿨다운 중이면 무시
         if (_isOnCooldown) return;
 
-        bool shouldShow = interactable == _item as IInteractable;
+        bool shouldShow = interactable == _interactable;
 
         if (shouldShow && !_isOutlineActive)
         {

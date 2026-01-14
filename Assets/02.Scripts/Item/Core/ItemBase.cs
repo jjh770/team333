@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -12,6 +13,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     private bool _isLocked;
     public void SetLocked(bool locked) => _isLocked = locked;
+
+    public event Action OnDropped;
 
     // IInteractable
     public Transform Transform => transform;
@@ -68,5 +71,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         _rigidbody.isKinematic = false;
         _rigidbody.useGravity = true;
         _collider.enabled = true;
+
+        OnDropped?.Invoke();
     }
 }
