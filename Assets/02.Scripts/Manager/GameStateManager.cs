@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -61,11 +62,16 @@ public class GameStateManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+
         if (_floraPath != null)
         {
             _floraPath.OnPathCompleted -= HandlePathCompleted;
         }
-        
+
         if (_cameraController != null)
         {
             _cameraController.OnIntroComplete -= HandleIntroComplete;
@@ -128,6 +134,6 @@ public class GameStateManager : MonoBehaviour
     private void HandleOutroComplete()
     {
         Debug.Log("HandleOutroComplete called");
-        // SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene("EndScene");
     }
 }
