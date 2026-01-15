@@ -25,7 +25,7 @@ public class FloraOutlineController : MonoBehaviour
     private bool _isOutlineActive;
 
     private bool FirstItemHidesOutline => _heldItemsHideOutline.Count > 0 && _heldItemsHideOutline[0];
-    private bool ShouldShowOutline => (_isPlayerHolding && !FirstItemHidesOutline) || _canTalkToFlora;
+    private bool ShouldShowOutline => (_isPlayerHolding && _heldItemsHideOutline.Count > 0 && !FirstItemHidesOutline) || _canTalkToFlora;
 
     private void Start()
     {
@@ -89,11 +89,6 @@ public class FloraOutlineController : MonoBehaviour
         if (_heldItemsHideOutline.Count > 0)
         {
             _heldItemsHideOutline.RemoveAt(0);
-        }
-
-        if (_playerPickUpThrow.HeldCount == 0)
-        {
-            _isPlayerHolding = false;
         }
 
         UpdateOutline();

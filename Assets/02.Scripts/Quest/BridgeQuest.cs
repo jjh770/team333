@@ -29,8 +29,8 @@ public class BridgeQuest : MonoBehaviour
     
     public void AddPlank()
     {
-        if (IsQuestCompleted) return;
-        if (_currentPlankCount >= _plankObjects.Length) return;
+        if (IsQuestCompleted) return;  
+        if (_currentPlankCount >= _plankObjects.Length || _currentPlankCount >= _plankOutlineObjects.Length) return;
 
         _plankObjects[_currentPlankCount].SetActive(true);
         _plankOutlineObjects[_currentPlankCount].SetActive(false);
