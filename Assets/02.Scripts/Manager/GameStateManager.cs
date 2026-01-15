@@ -18,6 +18,9 @@ public class GameStateManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private FloraInteraction _floraInteraction;
     [SerializeField] private CameraController _cameraController;
+    
+    [Header("Settings")]
+    [SerializeField] private string _endSceneName = "EndScene";
 
     private GameState _currentState;
     private IFloraPath _floraPath;
@@ -134,6 +137,6 @@ public class GameStateManager : MonoBehaviour
     private void HandleOutroComplete()
     {
         Debug.Log("HandleOutroComplete called");
-        SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene(_endSceneName);
     }
 }
