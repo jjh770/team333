@@ -8,7 +8,7 @@ public class FloraSkillChanger : ItemBase, IAttractableByFlora
 
     private const string FloraTag = "Flora";
 
-    [SerializeField] private float _heldSizeMultifiler = 0.7f;
+    [SerializeField] private float _heldSizeMultiplier = 0.7f;
     [SerializeField] private float _sizeChangeDuration = 0.5f;
     [SerializeField] private Ease _sizeChangeEase;
     [SerializeField] private IconType _iconType;
@@ -19,7 +19,7 @@ public class FloraSkillChanger : ItemBase, IAttractableByFlora
     protected override void PickUp(Transform holder)
     {
         base.PickUp(holder);
-        AnimateSize(Vector3.one * _heldSizeMultifiler);
+        AnimateSize(Vector3.one * _heldSizeMultiplier);
     }
 
     protected override void Drop()

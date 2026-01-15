@@ -266,13 +266,4 @@ public class UI_InteractableIcon : MonoBehaviour
             iconImage.gameObject.SetActive(false);
         }
     }
-
-    private bool IsDestroyed(object obj)
-    {
-        if (obj is Object unityObj)
-        {
-            return unityObj == null;
-        }
-        return obj == null;
-    }
 }
