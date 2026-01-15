@@ -4,6 +4,7 @@ using System;
 public class MonsterStat : MonoBehaviour
 {
     [SerializeField] private MonsterDataSO _data;
+    public MonsterDataSO Data => _data;
 
     public ConsumableStat Health { get; private set; } = new();
     public ValueStat AttackDamage { get; private set; } = new();
