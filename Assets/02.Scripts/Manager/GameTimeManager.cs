@@ -80,7 +80,6 @@ public class GameTimeManager : MonoBehaviour
         _isRunning = true;
         _hasStarted = true;
 
-        Debug.Log("[GameTimeManager] Timer started");
         OnTimerStarted?.Invoke();
     }
 

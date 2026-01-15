@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -24,10 +25,8 @@ public class UI_Timer : MonoBehaviour
 
     private string FormatTime(float time)
     {
-        int minutes = Mathf.FloorToInt(time / 60f);
-        int seconds = Mathf.FloorToInt(time % 60f);
-        int milliseconds = Mathf.FloorToInt((time * 100f) % 100f);
-
-        return $"{minutes:00}:{seconds:00}.{milliseconds:00}";
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        
+        return $"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}.{timeSpan.Milliseconds / 10:00}";
     }
 }
