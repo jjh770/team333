@@ -6,21 +6,43 @@ public class PlayerEffectHandler
 {
     public GameObject EffectObject;
 
+    private ParticleSystem _particleSystem;
+    private bool _isCached;
+
     public void Play()
     {
-        if (EffectObject != null)
+        if (EffectObject == null) return;
+
+        EffectObject.SetActive(true);
+        CacheParticleSystem();
+
+        if (_particleSystem != null)
         {
-            EffectObject.SetActive(false);
-            EffectObject.SetActive(true);
+            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            _particleSystem.Play(true);
         }
     }
 
     public void Stop()
     {
-        if (EffectObject != null)
+        if (EffectObject == null) return;
+
+        CacheParticleSystem();
+
+        if (_particleSystem != null)
         {
-            EffectObject.SetActive(false);
+            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+
+        EffectObject.SetActive(false);
+    }
+
+    private void CacheParticleSystem()
+    {
+        if (_isCached) return;
+
+        _particleSystem = EffectObject.GetComponent<ParticleSystem>();
+        _isCached = true;
     }
 }
 
@@ -43,10 +65,7 @@ public class PlayerEffectController : MonoBehaviour
 
     public void StopAllEffects()
     {
-        foreach (var effect in _slashEffects)
-        {
-            effect?.Stop();
-        }
+        StopAllSlashes();
         _skillEffect?.Stop();
         _healEffect?.Stop();
         _skillBoostEffect?.Stop();
