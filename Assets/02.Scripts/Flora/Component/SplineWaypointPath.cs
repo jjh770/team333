@@ -22,6 +22,8 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     
     private void Awake()
     {
+        _currentIndex = 0;
+        _isCompleted = false;
         GenerateSplinePoints();
     }
 

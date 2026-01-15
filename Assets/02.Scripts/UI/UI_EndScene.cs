@@ -27,6 +27,7 @@ public class UI_EndScene : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private string _gameSceneName = "yj";
     [SerializeField] private string _mainMenuSceneName = "MainMenu";
+    [SerializeField] private int _maxDisplayEntries = 5;
 
     private float _clearTime;
     private bool _hasSubmitted;
@@ -126,8 +127,9 @@ public class UI_EndScene : MonoBehaviour
         }
 
         var entries = LeaderboardManager.Instance.Entries;
+        int displayCount = Mathf.Min(entries.Count, _maxDisplayEntries);
 
-        for (int i = 0; i < entries.Count; i++)
+        for (int i = 0; i < displayCount; i++)
         {
             var entry = entries[i];
             var entryObject = Instantiate(_entryPrefab, _leaderboardContainer);

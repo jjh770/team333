@@ -27,7 +27,7 @@ public class LeaderboardManager : MonoBehaviour
     public static LeaderboardManager Instance { get; private set; }
 
     private const string SaveKey = "Leaderboard";
-    private const int MaxEntries = 5;
+    private const int MaxEntries = 50;
 
     private LeaderboardData _data;
 

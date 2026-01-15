@@ -125,7 +125,19 @@ public class FloraFollowCamera : MonoBehaviour
     {
         return _localOffset;
     }
-    
+
+    public void SnapToTarget()
+    {
+        if (_target == null) return;
+
+        _currentLookAhead = Vector3.zero;
+        _lastTargetPosition = _target.position;
+
+        Vector3 worldOffset = _target.TransformDirection(_localOffset);
+        transform.position = _target.position + worldOffset;
+        transform.LookAt(_target);
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
