@@ -5,12 +5,14 @@ public class PlayerPet : MonoBehaviour
 {
     [Header("Pet Settings")]
     [SerializeField] private GameObject _petPrefab;
-    [SerializeField] private int _maxCount = 1;
 
-    [Header("Spawn Effect")]
+    [Header("Spawn position")]
     [SerializeField] private float _spawnDuration = 0.5f;
     [SerializeField] private float _spawnHeight = 2f;
     [SerializeField] private Ease _spawnEase = Ease.OutBack;
+
+    [Header("Spawn Effect")]
+    [SerializeField] private GameObject _spawnEffectPrefab;
 
     private int _currentCount = 0;
 
@@ -19,7 +21,6 @@ public class PlayerPet : MonoBehaviour
     public void TryAddPet()
     {
         if (_petPrefab == null) return;
-        if (HasMaxPet()) return;
 
         SpawnPet();
     }
@@ -49,11 +50,8 @@ public class PlayerPet : MonoBehaviour
                     _currentPet.Initialize(transform);
                 }
             });
-    }
 
-    public bool HasMaxPet()
-    {
-        return _currentCount == _maxCount;
+        Instantiate(_spawnEffectPrefab, spawnPosition, Quaternion.identity);
     }
 
     public bool HasPet()

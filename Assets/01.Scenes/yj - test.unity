@@ -36496,10 +36496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPet
   _petPrefab: {fileID: 7341058901414291950, guid: 46c8ad858083b9d48a7e18e0579b7a4d, type: 3}
-  _maxCount: 1
   _spawnDuration: 0.5
   _spawnHeight: 2
   _spawnEase: 27
+  _spawnEffectPrefab: {fileID: 100018, guid: 413fd812c4cd8f047bbb521642447135, type: 3}
 --- !u!1 &945758359
 GameObject:
   m_ObjectHideFlags: 0
