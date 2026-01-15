@@ -19,10 +19,11 @@ public class FloraOutlineController : MonoBehaviour
     private Tweener _widthTween;
 
     private bool _isPlayerHolding;
+    private bool _isHoldingPlank;
     private bool _canTalkToFlora;
     private bool _isOutlineActive;
 
-    private bool ShouldShowOutline => _isPlayerHolding || _canTalkToFlora;
+    private bool ShouldShowOutline => (_isPlayerHolding && !_isHoldingPlank) || _canTalkToFlora;
 
     private void Start()
     {
@@ -47,6 +48,7 @@ public class FloraOutlineController : MonoBehaviour
         if (_playerPickUpThrow != null)
         {
             _playerPickUpThrow.OnHoldingChanged += HandleHoldingChanged;
+            _playerPickUpThrow.OnPickedUpItem += HandlePickedUpItem;
         }
     }
 
@@ -60,6 +62,7 @@ public class FloraOutlineController : MonoBehaviour
         if (_playerPickUpThrow != null)
         {
             _playerPickUpThrow.OnHoldingChanged -= HandleHoldingChanged;
+            _playerPickUpThrow.OnPickedUpItem -= HandlePickedUpItem;
         }
 
         _widthTween?.Kill();
@@ -71,9 +74,22 @@ public class FloraOutlineController : MonoBehaviour
         UpdateOutline();
     }
 
+    private void HandlePickedUpItem(IPickable pickable)
+    {
+        if (pickable is Board)
+        {
+            _isHoldingPlank = true;
+            UpdateOutline();
+        }
+    }
+
     private void HandleHoldingChanged(bool isHolding)
     {
         _isPlayerHolding = isHolding;
+        if (!isHolding)
+        {
+            _isHoldingPlank = false;
+        }
         UpdateOutline();
     }
 

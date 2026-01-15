@@ -26,6 +26,7 @@ public class PlayerPickUpThrow : MonoBehaviour
     public int HeldCount => _heldObjects.Count;
 
     public event Action<bool> OnHoldingChanged;
+    public event Action<IPickable> OnPickedUpItem;
 
     private void Awake()
     {
@@ -102,10 +103,13 @@ public class PlayerPickUpThrow : MonoBehaviour
             {
                 bool wasEmpty = _heldObjects.Count == 0;
 
+                IPickable pickedUp = _pendingPickable;
                 _pendingPickable.OnPickedUp(_holdPoints[holdIndex]);
                 _heldObjects.Add(_pendingPickable);
                 _playerInteraction.Remove(_pendingPickable);
                 _pendingPickable = null;
+
+                OnPickedUpItem?.Invoke(pickedUp);
 
                 if (wasEmpty)
                 {
