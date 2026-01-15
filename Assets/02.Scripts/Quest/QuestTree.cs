@@ -4,6 +4,7 @@ using UnityEngine;
 public class QuestTree : MonoBehaviour, IDamageable
 {
     [SerializeField] private ConsumableStat _health;
+    [SerializeField] private Transform _center;
 
     public event Action OnTreeDestroyed;
 
@@ -23,6 +24,8 @@ public class QuestTree : MonoBehaviour, IDamageable
         if (damage.Value <= 0) return false;
         
         _health.Decrease(damage.Value);
+        MonsterEffectPool.Instance.PlayHitEffect(_center.position);
+        MonsterEffectPool.Instance.PlaySmokeEffect(_center.position);
 
         if (_health.IsEmpty)
         {

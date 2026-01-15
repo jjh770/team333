@@ -36499,7 +36499,6 @@ MonoBehaviour:
   _spawnDuration: 0.5
   _spawnHeight: 2
   _spawnEase: 27
-  _spawnEffectPrefab: {fileID: 100018, guid: 413fd812c4cd8f047bbb521642447135, type: 3}
 --- !u!1 &945758359
 GameObject:
   m_ObjectHideFlags: 0
@@ -80863,6 +80862,18 @@ PrefabInstance:
     - target: {fileID: 1532286501812208461, guid: 369b6f2f886ccb94abaeb2f11d402db0, type: 3}
       propertyPath: m_Name
       value: MonsterEffectPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771728476696452156, guid: 369b6f2f886ccb94abaeb2f11d402db0, type: 3}
+      propertyPath: _hitParticlePrefab
+      value: 
+      objectReference: {fileID: 5880797563127281583, guid: 2759e1e74b4b839429be7036bc2357a1, type: 3}
+    - target: {fileID: 3771728476696452156, guid: 369b6f2f886ccb94abaeb2f11d402db0, type: 3}
+      propertyPath: _hitParticleDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771728476696452156, guid: 369b6f2f886ccb94abaeb2f11d402db0, type: 3}
+      propertyPath: _deathParticleDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7771350587075776247, guid: 369b6f2f886ccb94abaeb2f11d402db0, type: 3}
       propertyPath: m_LocalPosition.x
