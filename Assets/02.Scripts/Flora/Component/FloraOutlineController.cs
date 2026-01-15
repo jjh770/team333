@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -19,11 +20,12 @@ public class FloraOutlineController : MonoBehaviour
     private Tweener _widthTween;
 
     private bool _isPlayerHolding;
-    private bool _isHoldingPlank;
+    private List<bool> _heldItemsHideOutline = new List<bool>();
     private bool _canTalkToFlora;
     private bool _isOutlineActive;
 
-    private bool ShouldShowOutline => (_isPlayerHolding && !_isHoldingPlank) || _canTalkToFlora;
+    private bool FirstItemHidesOutline => _heldItemsHideOutline.Count > 0 && _heldItemsHideOutline[0];
+    private bool ShouldShowOutline => (_isPlayerHolding && !FirstItemHidesOutline) || _canTalkToFlora;
 
     private void Start()
     {
@@ -49,6 +51,7 @@ public class FloraOutlineController : MonoBehaviour
         {
             _playerPickUpThrow.OnHoldingChanged += HandleHoldingChanged;
             _playerPickUpThrow.OnPickedUpItem += HandlePickedUpItem;
+            _playerPickUpThrow.OnThrownItem += HandleThrownItem;
         }
     }
 
@@ -63,6 +66,7 @@ public class FloraOutlineController : MonoBehaviour
         {
             _playerPickUpThrow.OnHoldingChanged -= HandleHoldingChanged;
             _playerPickUpThrow.OnPickedUpItem -= HandlePickedUpItem;
+            _playerPickUpThrow.OnThrownItem -= HandleThrownItem;
         }
 
         _widthTween?.Kill();
@@ -76,11 +80,23 @@ public class FloraOutlineController : MonoBehaviour
 
     private void HandlePickedUpItem(IPickable pickable)
     {
-        if (pickable.HidesFloraOutline)
+        _heldItemsHideOutline.Add(pickable.HidesFloraOutline);
+        UpdateOutline();
+    }
+
+    private void HandleThrownItem(IPickable pickable)
+    {
+        if (_heldItemsHideOutline.Count > 0)
         {
-            _isHoldingPlank = true;
-            UpdateOutline();
+            _heldItemsHideOutline.RemoveAt(0);
         }
+
+        if (_playerPickUpThrow.HeldCount == 0)
+        {
+            _isPlayerHolding = false;
+        }
+
+        UpdateOutline();
     }
 
     private void HandleHoldingChanged(bool isHolding)
@@ -88,7 +104,7 @@ public class FloraOutlineController : MonoBehaviour
         _isPlayerHolding = isHolding;
         if (!isHolding)
         {
-            _isHoldingPlank = false;
+            _heldItemsHideOutline.Clear();
         }
         UpdateOutline();
     }
