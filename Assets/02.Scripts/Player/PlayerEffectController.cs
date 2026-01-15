@@ -84,9 +84,10 @@ public class PlayerEffectController : MonoBehaviour
     public void StopAllEffects()
     {
         StopAllSlashes();
-        _skillEffect?.Stop();
-        _healEffect?.Stop();
-        _skillBoostEffect?.Stop();
+        foreach (var handler in _effects.Values)
+        {
+            handler?.Stop();
+        }
     }
 
     public void PlayEffect(PlayerEffectType type)

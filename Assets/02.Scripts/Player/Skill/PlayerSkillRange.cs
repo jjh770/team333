@@ -12,6 +12,7 @@ public class PlayerSkillRange : MonoBehaviour
 
     [Header("Projectile")]
     [SerializeField] private Transform _projectileSpawnPoint;
+    [SerializeField] private PlayerProjectilePool _projectilePool;
 
     private HashSet<Collider> _hitEnemiesThisSkill = new HashSet<Collider>();
 
@@ -23,7 +24,7 @@ public class PlayerSkillRange : MonoBehaviour
 
     public void FireProjectile(bool isTriple = false)
     {
-        if (PlayerEffectPool.Instance == null) return;
+        if (_projectilePool == null) return;
 
         Transform spawnPoint = _projectileSpawnPoint != null ? _projectileSpawnPoint : transform;
         Vector3 spawnPosition = spawnPoint.position;
@@ -34,7 +35,7 @@ public class PlayerSkillRange : MonoBehaviour
         foreach (float angle in angles)
         {
             Vector3 direction = Quaternion.Euler(0f, angle, 0f) * baseDirection;
-            SkillProjectile projectile = PlayerEffectPool.Instance.GetSkillProjectile(spawnPosition, Quaternion.identity);
+            SkillProjectile projectile = _projectilePool.GetSkillProjectile(spawnPosition, Quaternion.identity);
             if (projectile != null)
             {
                 SetupProjectile(projectile, direction);
@@ -54,7 +55,8 @@ public class PlayerSkillRange : MonoBehaviour
             Depth = _skillData.ProjectileDepth,
             Damage = _skillData.SkillDamage,
             Owner = gameObject,
-            MonsterLayers = _monsterLayers
+            MonsterLayers = _monsterLayers,
+            OnReturn = _projectilePool.ReturnSkillProjectile
         };
         projectile.Initialize(config);
     }

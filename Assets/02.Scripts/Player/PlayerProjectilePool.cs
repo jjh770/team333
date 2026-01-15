@@ -1,31 +1,19 @@
 using UnityEngine;
 
-public class PlayerEffectPool : MonoBehaviour
+public class PlayerProjectilePool : MonoBehaviour
 {
-    public static PlayerEffectPool Instance { get; private set; }
-
     [Header("Skill Projectile")]
     [SerializeField] private GameObject _skillProjectilePrefab;
 
     [Header("Settings")]
     [SerializeField] private int _preloadCount = 5;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
     private void Start()
     {
-        PreloadAllEffects();
+        PreloadProjectiles();
     }
 
-    private void PreloadAllEffects()
+    private void PreloadProjectiles()
     {
         if (_skillProjectilePrefab != null && PoolManager.Instance != null)
         {

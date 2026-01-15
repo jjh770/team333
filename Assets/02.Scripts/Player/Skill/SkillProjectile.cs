@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public struct ProjectileConfig
     public float Damage;
     public GameObject Owner;
     public LayerMask MonsterLayers;
+    public Action<GameObject> OnReturn;
 }
 
 public class SkillProjectile : MonoBehaviour, IPoolable
@@ -28,6 +30,7 @@ public class SkillProjectile : MonoBehaviour, IPoolable
     private Vector3 _direction;
     private Vector3 _startPosition;
     private GameObject _owner;
+    private Action<GameObject> _onReturn;
 
     private HashSet<Collider> _hitEnemies = new HashSet<Collider>();
     private bool _isInitialized = false;
@@ -54,6 +57,7 @@ public class SkillProjectile : MonoBehaviour, IPoolable
         _damage = config.Damage;
         _owner = config.Owner;
         _monsterLayers = config.MonsterLayers;
+        _onReturn = config.OnReturn;
         _startPosition = transform.position;
         _isInitialized = true;
 
@@ -94,7 +98,7 @@ public class SkillProjectile : MonoBehaviour, IPoolable
         float distanceTraveledSqr = (transform.position - _startPosition).sqrMagnitude;
         if (distanceTraveledSqr >= _maxDistance * _maxDistance)
         {
-            PlayerEffectPool.Instance?.ReturnSkillProjectile(gameObject);
+            _onReturn?.Invoke(gameObject);
         }
     }
 
