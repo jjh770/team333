@@ -1,24 +1,23 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class PlayerPet : MonoBehaviour
+public class PlayerPet : MonoBehaviour, IPetOwnership
 {
     [Header("Pet Settings")]
     [SerializeField] private GameObject _petPrefab;
-    [SerializeField] private int _maxCount = 1;
 
-    [Header("Spawn Effect")]
+    [Header("Spawn position")]
     [SerializeField] private float _spawnDuration = 0.5f;
     [SerializeField] private float _spawnHeight = 2f;
     [SerializeField] private Ease _spawnEase = Ease.OutBack;
 
     private int _currentCount = 0;
+
     private PetController _currentPet;
 
     public void TryAddPet()
     {
         if (_petPrefab == null) return;
-        if (_currentCount >= _maxCount) return;
 
         SpawnPet();
     }
@@ -48,5 +47,10 @@ public class PlayerPet : MonoBehaviour
                     _currentPet.Initialize(transform);
                 }
             });
+    }
+
+    public bool HasPet()
+    {
+        return _currentCount > 0;
     }
 }
