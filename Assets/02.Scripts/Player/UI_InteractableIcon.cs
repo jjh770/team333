@@ -6,6 +6,7 @@ public class UI_InteractableIcon : MonoBehaviour
 {
     [SerializeField] private PlayerInteraction _playerInteraction;
     [SerializeField] private IconData _iconData;
+    [SerializeField] private Image _iconContainer;
     [SerializeField] private Image _iconImage;
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private Vector3 _offset = new Vector3(0f, 2f, 0f);
@@ -40,16 +41,16 @@ public class UI_InteractableIcon : MonoBehaviour
         if (interactable == null || interactable.IconType == IconType.None)
         {
             _iconChangeTween?.Kill();
-            _iconChangeTween = _iconImage.gameObject.transform.DOScale(Vector3.zero, _iconChangeDuration).SetEase(_iconHideEase)
-                .OnComplete(() => _iconImage.gameObject.SetActive(false));
+            _iconChangeTween = _iconContainer.gameObject.transform.DOScale(Vector3.zero, _iconChangeDuration).SetEase(_iconHideEase)
+                .OnComplete(() => _iconContainer.gameObject.SetActive(false));
             _showIcon = false;
             return;
         }
 
         _showIcon = true;
-        _iconImage.gameObject.SetActive(true);
+        _iconContainer.gameObject.SetActive(true);
         _iconImage.sprite = _iconData.GetIcon(interactable.IconType);
         _iconChangeTween?.Kill();
-        _iconChangeTween = _iconImage.gameObject.transform.DOScale(Vector3.one, _iconChangeDuration).SetEase(_iconShowEase);
+        _iconChangeTween = _iconContainer.gameObject.transform.DOScale(Vector3.one, _iconChangeDuration).SetEase(_iconShowEase);
     }
 }
