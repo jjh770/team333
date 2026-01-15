@@ -9935,8 +9935,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   _resolution: 10
-  _waitPointIndexes: 0000000005000000
+  _waitPointIndexes: 00000000050000000a000000
 --- !u!114 &5231732310342022929
 MonoBehaviour:
   m_ObjectHideFlags: 0
