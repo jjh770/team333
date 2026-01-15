@@ -11,6 +11,7 @@ public class BeeMonsterController : BadMonsterController
     [SerializeField] private float _minVelocitySqrForRotation = 0.01f;
     [SerializeField] private float _rotationLerpSpeed = 10f;
 
+    private PlayerPet _playerPet;
     private BeeSwarmManager _manager;
     private NavMeshAgent _agent;
 
@@ -18,6 +19,7 @@ public class BeeMonsterController : BadMonsterController
     {
         _manager = manager;
         _agent = GetComponent<NavMeshAgent>();
+        _playerPet = FindFirstObjectByType<PlayerPet>();
 
         if (_agent)
         {
@@ -78,5 +80,21 @@ public class BeeMonsterController : BadMonsterController
             Quaternion targetRot = Quaternion.LookRotation(finalVelocity);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * _rotationLerpSpeed);
         }
+    }
+
+    protected override void Die()
+    {
+        if (_isDead) return;
+        _isDead = true;
+
+        _move.Stop();
+
+        if (_playerPet != null && _playerPet.HasPet() == false)
+        {
+            _itemDrop.DropItem(_stat.Data.DropItem);
+        }
+
+        ApplyState(MonsterState.Die);
+        _deathRoutine = StartCoroutine(DeathCoroutine());
     }
 }

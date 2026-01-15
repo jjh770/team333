@@ -13,12 +13,13 @@ public class PlayerPet : MonoBehaviour
     [SerializeField] private Ease _spawnEase = Ease.OutBack;
 
     private int _currentCount = 0;
+
     private PetController _currentPet;
 
     public void TryAddPet()
     {
         if (_petPrefab == null) return;
-        if (_currentCount >= _maxCount) return;
+        if (HasMaxPet()) return;
 
         SpawnPet();
     }
@@ -48,5 +49,15 @@ public class PlayerPet : MonoBehaviour
                     _currentPet.Initialize(transform);
                 }
             });
+    }
+
+    public bool HasMaxPet()
+    {
+        return _currentCount == _maxCount;
+    }
+
+    public bool HasPet()
+    {
+        return _currentCount > 0;
     }
 }
