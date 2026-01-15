@@ -65,6 +65,7 @@ public class CameraController : MonoBehaviour
 
         if (_followCamera != null)
         {
+            _followCamera.SnapToTarget();
             _followCamera.enabled = true;
         }
     }

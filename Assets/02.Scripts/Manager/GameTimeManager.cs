@@ -13,6 +13,8 @@ public class GameTimeManager : MonoBehaviour
     private bool _isRunning;
     private bool _hasStarted;
 
+    public static float LastElapsedTime { get; private set; }
+
     public float ElapsedTime => _isRunning ? Time.time - _startTime : _endTime - _startTime;
     public bool IsRunning => _isRunning;
     public bool HasStarted => _hasStarted;
@@ -45,6 +47,11 @@ public class GameTimeManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+
         if (_floraMovement != null)
         {
             _floraMovement.OnResumed -= HandleFirstResume;
@@ -89,6 +96,7 @@ public class GameTimeManager : MonoBehaviour
 
         _endTime = Time.time;
         _isRunning = false;
+        LastElapsedTime = ElapsedTime;
 
         Debug.Log($"[GameTimeManager] Timer stopped - Elapsed: {ElapsedTime:F2}s");
         OnTimerStopped?.Invoke(ElapsedTime);

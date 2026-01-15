@@ -126,6 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacedMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _detectionRange: 10
 --- !u!114 &7727827936778733840
 MonoBehaviour:
@@ -152,6 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraSkillChanger
   _skillPrefab: {fileID: 8056032187317225895, guid: cda137beb3edac44b9e78c158559e845, type: 3}
+  _heldSizeMultifiler: 0.7
+  _sizeChangeDuration: 0.5
+  _sizeChangeEase: 27
+  _iconType: 4
 --- !u!114 &2868071074072681121
 MonoBehaviour:
   m_ObjectHideFlags: 0
