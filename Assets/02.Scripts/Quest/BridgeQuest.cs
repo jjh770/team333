@@ -23,6 +23,7 @@ public class BridgeQuest : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        
         _plankOutlineObjects[_currentPlankCount].SetActive(true);
     }
     

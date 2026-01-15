@@ -76,7 +76,7 @@ public class FloraOutlineController : MonoBehaviour
 
     private void HandlePickedUpItem(IPickable pickable)
     {
-        if (pickable is Board)
+        if (pickable.HidesFloraOutline)
         {
             _isHoldingPlank = true;
             UpdateOutline();
