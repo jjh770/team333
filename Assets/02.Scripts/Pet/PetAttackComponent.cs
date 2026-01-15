@@ -7,6 +7,7 @@ public class PetAttackComponent : MonoBehaviour
     [SerializeField] private float _attackDamage = 5f;
     [SerializeField] private float _coolTime = 2f;
     [SerializeField] private float _attackDuration = 0.14f;
+    [SerializeField] private float _questTreeDamageMultiplier = 10f;
 
     [Header("Projectile")]
     [SerializeField] private GameObject _projectilePrefab;
@@ -50,8 +51,19 @@ public class PetAttackComponent : MonoBehaviour
 
         if (projectileObj.TryGetComponent<PetProjectile>(out var projectile))
         {
-            Damage damage = new Damage(_attackDamage, gameObject, false);
+            float finalDamage = CalculateDamage(target);
+            Damage damage = new Damage(finalDamage, gameObject, false);
             projectile.Initialize(target, _hitEffectPrefab, damage);
         }
+    }
+
+    private float CalculateDamage(Transform target)
+    {
+        if (target.TryGetComponent<QuestTree>(out _))
+        {
+            return _attackDamage * _questTreeDamageMultiplier;
+        }
+
+        return _attackDamage;
     }
 }
