@@ -9,7 +9,6 @@ public class PetMovementComponent : MonoBehaviour
     private Transform _playerTransform;
     private bool _isInitialized;
 
-    private Vector3 _lastPosition;
     private float _movingSqrThreshold = 0.0001f;
     private float _lookDirectionSqrThreshold = 0.01f;
 
@@ -25,10 +24,11 @@ public class PetMovementComponent : MonoBehaviour
     {
         Vector3 targetPosition = _playerTransform.position + _followOffset;
 
+        Vector3 previousPosition = transform.position;
         transform.position = Vector3.Lerp(transform.position, targetPosition, dt);
 
-        IsMoving = (transform.position - _lastPosition).sqrMagnitude > _movingSqrThreshold;
-        _lastPosition = transform.position;
+        Vector3 delta = transform.position - previousPosition;
+        IsMoving = delta.sqrMagnitude > _movingSqrThreshold;
     }
 
     public void LookPlayer()

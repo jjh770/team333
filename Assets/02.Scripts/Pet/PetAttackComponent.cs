@@ -45,7 +45,7 @@ public class PetAttackComponent : MonoBehaviour
     {
         if (_projectilePrefab == null) return;
 
-        Vector3 spawnPosition = _firePoint != null ? _firePoint.position : transform.position;
+        Vector3 spawnPosition = _firePoint.position;
         GameObject projectileObj = PoolManager.Instance.Get(_projectilePrefab, spawnPosition, Quaternion.identity);
 
         if (projectileObj.TryGetComponent<PetProjectile>(out var projectile))
