@@ -8,6 +8,9 @@ public class PetController : MonoBehaviour
 {
     private static readonly int s_animationHash = Animator.StringToHash("animation");
 
+    [Header("Spawn Effect")]
+    [SerializeField] private GameObject _spawnEffectPrefab;
+
     [SerializeField] private float _lookTargetSpeed = 10f;
     [SerializeField] private float _lookDirectionSqrThreshold = 0.01f;
 
@@ -25,6 +28,11 @@ public class PetController : MonoBehaviour
         _attack = GetComponent<PetAttackComponent>();
         _sensor = GetComponent<PetSensorComponent>();
         _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        Instantiate(_spawnEffectPrefab, transform.position, Quaternion.identity);
     }
 
     public void Initialize(Transform player)

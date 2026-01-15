@@ -11,9 +11,6 @@ public class PlayerPet : MonoBehaviour
     [SerializeField] private float _spawnHeight = 2f;
     [SerializeField] private Ease _spawnEase = Ease.OutBack;
 
-    [Header("Spawn Effect")]
-    [SerializeField] private GameObject _spawnEffectPrefab;
-
     private int _currentCount = 0;
 
     private PetController _currentPet;
@@ -50,8 +47,6 @@ public class PlayerPet : MonoBehaviour
                     _currentPet.Initialize(transform);
                 }
             });
-
-        Instantiate(_spawnEffectPrefab, spawnPosition, Quaternion.identity);
     }
 
     public bool HasPet()

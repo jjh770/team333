@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea9aeba34f028548838d918fb4e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetController
+  _spawnEffectPrefab: {fileID: 100018, guid: 413fd812c4cd8f047bbb521642447135, type: 3}
   _lookTargetSpeed: 10
   _lookDirectionSqrThreshold: 0.01
 --- !u!114 &4985665145596855316
@@ -479,6 +480,7 @@ MonoBehaviour:
   _attackDamage: 5
   _coolTime: 2
   _attackDuration: 0.14
+  _questTreeDamageMultiplier: 10
   _projectilePrefab: {fileID: 5912344974454636654, guid: 97007329094f22e489e4bb6cda4b41bc, type: 3}
   _hitEffectPrefab: {fileID: 4186470608034871016, guid: 79500b6c6d32431449ee8f26abda109f, type: 3}
   _firePoint: {fileID: 4092881574741548660}

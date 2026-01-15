@@ -9,6 +9,7 @@ public class MonsterEffectPool : MonoBehaviour
     [SerializeField] protected GameObject _deathParticlePrefab;
     [SerializeField] protected float _deathParticleDuration = 5;
 
+
     [Header("Settings")]
     [SerializeField] private int _preloadCount = 10;
 
