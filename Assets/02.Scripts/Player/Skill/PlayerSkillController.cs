@@ -44,8 +44,8 @@ public class PlayerSkillController : MonoBehaviour
     private void OnEnable()
     {
         _inputHandler.OnSkillInput += HandleSkillInput;
-        DisableSkillEffect();
-        DisableSkillUpEffect();
+        StopSkillEffect();
+        StopSkillUpEffect();
     }
 
     private void OnDisable()
@@ -77,7 +77,7 @@ public class PlayerSkillController : MonoBehaviour
         }
 
         OnSkillUpgraded?.Invoke(_skillLevel);
-        EnableSkillUpEffect();
+        PlaySkillUpEffect();
     }
 
     private void UseSkill()
@@ -129,7 +129,7 @@ public class PlayerSkillController : MonoBehaviour
         if (_skillRange != null)
         {
             _skillRange.ExecuteSkillHit();
-            EnableSkillEffect();
+            PlaySkillEffect();
         }
     }
 
@@ -150,22 +150,22 @@ public class PlayerSkillController : MonoBehaviour
 
     #endregion
 
-    private void DisableSkillEffect()
+    private void StopSkillEffect()
     {
-        _effectController?.StopSkill();
+        _effectController?.StopEffect(PlayerEffectType.Skill);
     }
 
-    private void EnableSkillEffect()
+    private void PlaySkillEffect()
     {
-        _effectController?.PlaySkill();
+        _effectController?.PlayEffect(PlayerEffectType.Skill);
     }
 
-    private void DisableSkillUpEffect()
+    private void StopSkillUpEffect()
     {
-        _effectController?.StopSkillUp();
+        _effectController?.StopEffect(PlayerEffectType.SkillUp);
     }
-    private void EnableSkillUpEffect()
+    private void PlaySkillUpEffect()
     {
-        _effectController?.PlaySkillUp();
+        _effectController?.PlayEffect(PlayerEffectType.SkillUp);
     }
 }

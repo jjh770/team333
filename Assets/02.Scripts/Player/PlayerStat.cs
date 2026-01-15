@@ -27,13 +27,13 @@ public class PlayerStat : MonoBehaviour, IHealable
         }
 
         Health.Initialize(_data.Stats.MaxHealth);
-        DisableHealthEffect();
+        StopHealthEffect();
     }
 
     public void IncreaseHealth(float amount)
     {
         Health.Increase(amount);
-        EnableHealthEffect();
+        PlayHealthEffect();
     }
 
     public void DecreaseHealth(float amount)
@@ -46,13 +46,13 @@ public class PlayerStat : MonoBehaviour, IHealable
         }
     }
 
-    private void DisableHealthEffect()
+    private void StopHealthEffect()
     {
-        _effectController?.StopHeal();
+        _effectController?.StopEffect(PlayerEffectType.Heal);
     }
 
-    private void EnableHealthEffect()
+    private void PlayHealthEffect()
     {
-        _effectController?.PlayHeal();
+        _effectController?.PlayEffect(PlayerEffectType.Heal);
     }
 }

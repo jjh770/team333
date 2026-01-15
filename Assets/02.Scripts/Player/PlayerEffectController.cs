@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerEffectType
+{
+    Skill,
+    Heal,
+    SkillUp
+}
+
 [System.Serializable]
 public class PlayerEffectHandler
 {
@@ -58,6 +65,17 @@ public class PlayerEffectController : MonoBehaviour
     [SerializeField] private PlayerEffectHandler _healEffect;
     [SerializeField] private PlayerEffectHandler _skillBoostEffect;
 
+    private Dictionary<PlayerEffectType, PlayerEffectHandler> _effects;
+
+    private void Awake()
+    {
+        _effects = new Dictionary<PlayerEffectType, PlayerEffectHandler>
+        {
+            [PlayerEffectType.Skill] = _skillEffect,
+            [PlayerEffectType.Heal] = _healEffect,
+            [PlayerEffectType.SkillUp] = _skillBoostEffect
+        };
+    }
     private void OnEnable()
     {
         StopAllEffects();
@@ -69,6 +87,22 @@ public class PlayerEffectController : MonoBehaviour
         _skillEffect?.Stop();
         _healEffect?.Stop();
         _skillBoostEffect?.Stop();
+    }
+
+    public void PlayEffect(PlayerEffectType type)
+    {
+        if (_effects.TryGetValue(type, out var handler))
+        {
+            handler?.Play();
+        }
+    }
+
+    public void StopEffect(PlayerEffectType type)
+    {
+        if (_effects.TryGetValue(type, out var handler))
+        {
+            handler?.Stop();
+        }
     }
 
     #region Attack Effects
@@ -88,44 +122,6 @@ public class PlayerEffectController : MonoBehaviour
         {
             effect?.Stop();
         }
-    }
-
-    #endregion
-
-    #region Skill Effects
-
-    public void PlaySkill()
-    {
-        _skillEffect?.Play();
-    }
-
-    public void StopSkill()
-    {
-        _skillEffect?.Stop();
-    }
-
-    #endregion
-
-    #region Item Effects
-
-    public void PlayHeal()
-    {
-        _healEffect?.Play();
-    }
-
-    public void StopHeal()
-    {
-        _healEffect?.Stop();
-    }
-
-    public void PlaySkillUp()
-    {
-        _skillBoostEffect?.Play();
-    }
-
-    public void StopSkillUp()
-    {
-        _skillBoostEffect?.Stop();
     }
 
     #endregion

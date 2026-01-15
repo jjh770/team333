@@ -14,7 +14,7 @@ public struct ProjectileConfig
     public LayerMask MonsterLayers;
 }
 
-public class SkillProjectile : MonoBehaviour
+public class SkillProjectile : MonoBehaviour, IPoolable
 {
     [Header("Settings")]
     [SerializeField] private LayerMask _monsterLayers;
@@ -31,6 +31,17 @@ public class SkillProjectile : MonoBehaviour
 
     private HashSet<Collider> _hitEnemies = new HashSet<Collider>();
     private bool _isInitialized = false;
+
+    public void OnSpawn()
+    {
+        _hitEnemies.Clear();
+        _isInitialized = false;
+    }
+
+    public void OnDespawn()
+    {
+        _isInitialized = false;
+    }
 
     public void Initialize(ProjectileConfig config)
     {
@@ -83,7 +94,7 @@ public class SkillProjectile : MonoBehaviour
         float distanceTraveledSqr = (transform.position - _startPosition).sqrMagnitude;
         if (distanceTraveledSqr >= _maxDistance * _maxDistance)
         {
-            Destroy(gameObject);
+            PlayerEffectPool.Instance?.ReturnSkillProjectile(gameObject);
         }
     }
 
