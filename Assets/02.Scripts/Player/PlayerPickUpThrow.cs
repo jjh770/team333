@@ -26,6 +26,8 @@ public class PlayerPickUpThrow : MonoBehaviour
     public int HeldCount => _heldObjects.Count;
 
     public event Action<bool> OnHoldingChanged;
+    public event Action<IPickable> OnPickedUpItem;
+    public event Action<IPickable> OnThrownItem;
 
     private void Awake()
     {
@@ -102,10 +104,13 @@ public class PlayerPickUpThrow : MonoBehaviour
             {
                 bool wasEmpty = _heldObjects.Count == 0;
 
+                IPickable pickedUp = _pendingPickable;
                 _pendingPickable.OnPickedUp(_holdPoints[holdIndex]);
                 _heldObjects.Add(_pendingPickable);
                 _playerInteraction.Remove(_pendingPickable);
                 _pendingPickable = null;
+
+                OnPickedUpItem?.Invoke(pickedUp);
 
                 if (wasEmpty)
                 {
@@ -136,6 +141,8 @@ public class PlayerPickUpThrow : MonoBehaviour
 
             Vector3 throwDirection = (transform.forward + Vector3.up * _throwUpwardAngle).normalized;
             pickable.OnThrown(throwDirection, _throwForce);
+
+            OnThrownItem?.Invoke(pickable);
 
             // 남은 오브젝트 위치 재정렬
             RearrangeHeldObjects();

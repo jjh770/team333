@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -19,10 +20,12 @@ public class FloraOutlineController : MonoBehaviour
     private Tweener _widthTween;
 
     private bool _isPlayerHolding;
+    private List<bool> _heldItemsHideOutline = new List<bool>();
     private bool _canTalkToFlora;
     private bool _isOutlineActive;
 
-    private bool ShouldShowOutline => _isPlayerHolding || _canTalkToFlora;
+    private bool FirstItemHidesOutline => _heldItemsHideOutline.Count > 0 && _heldItemsHideOutline[0];
+    private bool ShouldShowOutline => (_isPlayerHolding && _heldItemsHideOutline.Count > 0 && !FirstItemHidesOutline) || _canTalkToFlora;
 
     private void Start()
     {
@@ -47,6 +50,8 @@ public class FloraOutlineController : MonoBehaviour
         if (_playerPickUpThrow != null)
         {
             _playerPickUpThrow.OnHoldingChanged += HandleHoldingChanged;
+            _playerPickUpThrow.OnPickedUpItem += HandlePickedUpItem;
+            _playerPickUpThrow.OnThrownItem += HandleThrownItem;
         }
     }
 
@@ -60,6 +65,8 @@ public class FloraOutlineController : MonoBehaviour
         if (_playerPickUpThrow != null)
         {
             _playerPickUpThrow.OnHoldingChanged -= HandleHoldingChanged;
+            _playerPickUpThrow.OnPickedUpItem -= HandlePickedUpItem;
+            _playerPickUpThrow.OnThrownItem -= HandleThrownItem;
         }
 
         _widthTween?.Kill();
@@ -71,9 +78,29 @@ public class FloraOutlineController : MonoBehaviour
         UpdateOutline();
     }
 
+    private void HandlePickedUpItem(IPickable pickable)
+    {
+        _heldItemsHideOutline.Add(pickable.HidesFloraOutline);
+        UpdateOutline();
+    }
+
+    private void HandleThrownItem(IPickable pickable)
+    {
+        if (_heldItemsHideOutline.Count > 0)
+        {
+            _heldItemsHideOutline.RemoveAt(0);
+        }
+
+        UpdateOutline();
+    }
+
     private void HandleHoldingChanged(bool isHolding)
     {
         _isPlayerHolding = isHolding;
+        if (!isHolding)
+        {
+            _heldItemsHideOutline.Clear();
+        }
         UpdateOutline();
     }
 
