@@ -14,9 +14,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     [Header("Death")]
     [SerializeField] protected float _deathAnimationDuration = 0.19f;
 
-    [Header("Settings")]
-    public MonsterDataSO data;
-
     [Header("Components")]
     protected MonsterStat _stat;
     protected MonsterAttackComponent _attack;
@@ -112,7 +109,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         {
             StopCoroutine(_stunRoutine);
             _stunRoutine = null;
-            // _isStunned = false;
         }
     }
     protected virtual void Update()
@@ -121,7 +117,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
         UpdateState();
 
-        // if (_isStunned) return;
         if (_health.IsDamaged) return;
 
         OnUpdate();
@@ -150,7 +145,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     protected override MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;
-        // if (_isStunned) return MonsterState.Idle;
         if (_health.IsDamaged) return MonsterState.Damage;
         if (_attack.IsAttacking) return MonsterState.Attack;
         if (_move.IsMoving) return MonsterState.Move;
@@ -162,7 +156,6 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _move.ResetMove();
         _move.SetSpeed(_stat.GetMoveSpeed());
         _isDead = false;
-        // _isStunned = false;
 
         ApplyState(MonsterState.Idle);
     }
@@ -179,7 +172,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _isDead = true;
 
         _move.Stop();
-        _itemDrop.DropItem(data.DropItem);
+        _itemDrop.DropItem(_stat.Data.DropItem);
         
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
