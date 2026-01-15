@@ -4,7 +4,8 @@ public class Board : ItemBase
 {
     private const string QuestBridgeTag = "QuestBridge";
     private ItemFactory _itemFactory;
-
+    public override bool HidesFloraOutline => true;
+    
     override protected void Awake()
     {
         base.Awake();

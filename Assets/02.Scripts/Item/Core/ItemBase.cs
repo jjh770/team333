@@ -17,6 +17,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     private bool _isLocked;
     public bool IsLocked => _isLocked;
 
+    public virtual bool HidesFloraOutline { get; }
+
     public void SetLocked(bool locked)
     {
         if (_isLocked == locked) return;
