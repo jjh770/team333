@@ -17,7 +17,12 @@ public class IconData : ScriptableObject
 
     private Dictionary<IconType, Sprite> _iconMap;
 
-    public void Initialize()
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         _iconMap = new Dictionary<IconType, Sprite>();
         foreach (var entry in _iconEntries)
@@ -28,11 +33,6 @@ public class IconData : ScriptableObject
 
     public Sprite GetIcon(IconType type)
     {
-        if (_iconMap == null)
-        {
-            Initialize();
-        }
-
         return _iconMap.TryGetValue(type, out var icon) ? icon : null;
     }
 }

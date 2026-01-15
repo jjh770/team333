@@ -19,15 +19,19 @@ public class FloraSkillChanger : ItemBase, IAttractableByFlora
     protected override void PickUp(Transform holder)
     {
         base.PickUp(holder);
-        _changeSizeTween?.Kill();
-        _changeSizeTween = transform.DOScale(Vector3.one * _heldSizeMultifiler, _sizeChangeDuration).SetEase(_sizeChangeEase);
+        AnimateSize(Vector3.one * _heldSizeMultifiler);
     }
 
     protected override void Drop()
     {
         base.Drop();
+        AnimateSize(Vector3.one);
+    }
+
+    private void AnimateSize(Vector3 targetScale)
+    {
         _changeSizeTween?.Kill();
-        _changeSizeTween = transform.DOScale(Vector3.one, _sizeChangeDuration).SetEase(_sizeChangeEase);
+        _changeSizeTween = transform.DOScale(targetScale, _sizeChangeDuration).SetEase(_sizeChangeEase);
     }
 
     protected override void OnCollisionEnter(Collision other)

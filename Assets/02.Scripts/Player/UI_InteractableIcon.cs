@@ -116,7 +116,7 @@ public class UI_InteractableIcon : MonoBehaviour
 
     private void UpdateInteractableIcon()
     {
-        if (_currentInteractable != null && !IsDestroyed(_currentInteractable) && _currentInteractable.IconType != IconType.None)
+        if (_currentInteractable != null && _currentInteractable.IconType != IconType.None)
         {
             ShowInteractableIcon(_currentInteractable.IconType);
         }
@@ -129,7 +129,7 @@ public class UI_InteractableIcon : MonoBehaviour
     private void UpdatePickUpIcons()
     {
         // 파괴된 아이템 제거
-        _heldItems.RemoveAll(item => item == null || IsDestroyed(item));
+        _heldItems.RemoveAll(item => item == null);
 
         bool hasAnyItem = false;
 
