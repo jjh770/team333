@@ -336,7 +336,9 @@ GameObject:
   - component: {fileID: 7089712221719970994}
   - component: {fileID: 8144042713761702356}
   - component: {fileID: 2978518733247326282}
-  m_Layer: 9
+  - component: {fileID: 4985665145596855316}
+  - component: {fileID: 3617874857163293165}
+  m_Layer: 0
   m_Name: Beez_Pet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,6 +460,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea9aeba34f028548838d918fb4e1991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetController
+--- !u!114 &4985665145596855316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341058901414291950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9874ebb8b2b6f454ba6b0cb2f02bd598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PetAttackComponent
+  _attackDamage: 5
+  _coolTime: 2
+  _attackDuration: 0.14
+--- !u!114 &3617874857163293165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7341058901414291950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef285671f233924cae6a8bbb7f16b1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PetSensorComponent
+  _detectRange: 5
 --- !u!1 &7483380951414800386
 GameObject:
   m_ObjectHideFlags: 0
