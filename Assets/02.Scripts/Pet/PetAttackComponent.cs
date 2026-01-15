@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class PetAttackComponent : MonoBehaviour
 {
+    [Header("Attack")]
     [SerializeField] private float _attackDamage = 5f;
     [SerializeField] private float _coolTime = 2f;
     [SerializeField] private float _attackDuration = 0.14f;
+
+    [Header("Projectile")]
+    [SerializeField] private GameObject _projectilePrefab;
+    [SerializeField] private GameObject _hitEffectPrefab;
+    [SerializeField] private Transform _firePoint;
 
     private float _lastAttackTime;
 
@@ -18,24 +24,34 @@ public class PetAttackComponent : MonoBehaviour
     {
         if (target == null) return false;
         if (!CanAttack) return false;
+        if (!target.TryGetComponent<IDamageable>(out _)) return false;
 
-        if (target.TryGetComponent<IDamageable>(out var damageable))
-        {
-            Damage damage = new Damage(_attackDamage, gameObject, false);
-            damageable.TryTakeDamage(damage);
-            _lastAttackTime = Time.time;
-
-            StartCoroutine(AttackRoutine());
-            return true;
-        }
-
-        return false;
+        _lastAttackTime = Time.time;
+        StartCoroutine(AttackRoutine(target));
+        return true;
     }
 
-    private IEnumerator AttackRoutine()
+    private IEnumerator AttackRoutine(Transform target)
     {
         _isAttacking = true;
         yield return new WaitForSeconds(_attackDuration);
+
+        FireProjectile(target);
+
         _isAttacking = false;
+    }
+
+    private void FireProjectile(Transform target)
+    {
+        if (_projectilePrefab == null) return;
+
+        Vector3 spawnPosition = _firePoint != null ? _firePoint.position : transform.position;
+        GameObject projectileObj = PoolManager.Instance.Get(_projectilePrefab, spawnPosition, Quaternion.identity);
+
+        if (projectileObj.TryGetComponent<PetProjectile>(out var projectile))
+        {
+            Damage damage = new Damage(_attackDamage, gameObject, false);
+            projectile.Initialize(target, _hitEffectPrefab, damage);
+        }
     }
 }

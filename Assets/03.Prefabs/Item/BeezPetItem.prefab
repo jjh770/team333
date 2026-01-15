@@ -466,6 +466,9 @@ GameObject:
   - component: {fileID: 4598888919102808679}
   - component: {fileID: -1672737191932288221}
   - component: {fileID: -4153948819288909264}
+  - component: {fileID: 5293716902929971039}
+  - component: {fileID: -2330460664291649295}
+  - component: {fileID: -8978354849504552747}
   m_Layer: 0
   m_Name: BeezPetItem
   m_TagString: Untagged
@@ -574,6 +577,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5293716902929971039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608475907739635664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2bef7ba44855f14aade2f990c695881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemScanWave
+  _waveInterval: 3
+  _waveDuration: 0.3
+  _scanColor: {r: 1, g: 1, b: 1, a: 1}
+  _intensity: 0.8
+  _scanWidth: 0.1
+  _scanSoftness: 0.1
+  _scanStart: -1.5
+  _scanEnd: 1.5
+--- !u!114 &-2330460664291649295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608475907739635664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &-8978354849504552747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608475907739635664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2a6873140e39d4aa7faed7d8c61977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableOutlineController
+  _outline: {fileID: 0}
+  _playerInteraction: {fileID: 0}
+  _targetWidth: 3
+  _animationDuration: 0.2
+  _showEase: 27
+  _hideEase: 26
+  _throwCooldown: 0.5
 --- !u!1 &8430032061372616362
 GameObject:
   m_ObjectHideFlags: 0
