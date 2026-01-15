@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,9 +13,10 @@ public struct ProjectileConfig
     public float Damage;
     public GameObject Owner;
     public LayerMask MonsterLayers;
+    public Action<GameObject> OnReturn;
 }
 
-public class SkillProjectile : MonoBehaviour
+public class SkillProjectile : MonoBehaviour, IPoolable
 {
     [Header("Settings")]
     [SerializeField] private LayerMask _monsterLayers;
@@ -28,9 +30,21 @@ public class SkillProjectile : MonoBehaviour
     private Vector3 _direction;
     private Vector3 _startPosition;
     private GameObject _owner;
+    private Action<GameObject> _onReturn;
 
     private HashSet<Collider> _hitEnemies = new HashSet<Collider>();
     private bool _isInitialized = false;
+
+    public void OnSpawn()
+    {
+        _hitEnemies.Clear();
+        _isInitialized = false;
+    }
+
+    public void OnDespawn()
+    {
+        _isInitialized = false;
+    }
 
     public void Initialize(ProjectileConfig config)
     {
@@ -43,6 +57,7 @@ public class SkillProjectile : MonoBehaviour
         _damage = config.Damage;
         _owner = config.Owner;
         _monsterLayers = config.MonsterLayers;
+        _onReturn = config.OnReturn;
         _startPosition = transform.position;
         _isInitialized = true;
 
@@ -83,7 +98,7 @@ public class SkillProjectile : MonoBehaviour
         float distanceTraveledSqr = (transform.position - _startPosition).sqrMagnitude;
         if (distanceTraveledSqr >= _maxDistance * _maxDistance)
         {
-            Destroy(gameObject);
+            _onReturn?.Invoke(gameObject);
         }
     }
 
