@@ -11,19 +11,19 @@ public class BeeMonsterController : BadMonsterController
     [SerializeField] private float _minVelocitySqrForRotation = 0.01f;
     [SerializeField] private float _rotationLerpSpeed = 10f;
 
-    private PlayerPet _playerPet;
     private BeeSwarmManager _manager;
+    private IPetOwnership _petOwner;
     private NavMeshAgent _agent;
 
-    public void InitSwarm(BeeSwarmManager manager)
+
+    public void InitSwarm(BeeSwarmManager manager, IPetOwnership petOwner)
     {
         _manager = manager;
-        _agent = GetComponent<NavMeshAgent>();
-        _playerPet = FindFirstObjectByType<PlayerPet>();
+        _petOwner = petOwner;
 
-        if (_agent)
+        if (_agent != null)
         {
-            _agent.updateRotation = false; // 아래에서 직접 회전 처리하려고
+            _agent.updateRotation = false;
             _agent.updateUpAxis = false;
         }
     }
@@ -89,7 +89,7 @@ public class BeeMonsterController : BadMonsterController
 
         _move.Stop();
 
-        if (_playerPet != null && _playerPet.HasPet() == false)
+        if (_petOwner != null && _petOwner.HasPet() == false)
         {
             _itemDrop.DropItem(_stat.Data.DropItem);
         }

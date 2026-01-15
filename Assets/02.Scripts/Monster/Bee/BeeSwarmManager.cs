@@ -14,11 +14,14 @@ public class BeeSwarmManager : MonoBehaviour, IPoolable
     [SerializeField] private int _maxCount = 15;
     [SerializeField] private float _spawnRadius = 3f;
 
+    private IPetOwnership _petOwner;
+
     // 활성화된 벌 목록
     public List<BeeMonsterController> ActiveBees { get; private set; } = new List<BeeMonsterController>();
 
     public void OnSpawn()
     {
+        _petOwner = FindFirstObjectByType<PlayerPet>();
         SpawnSwarm();
     }
 
@@ -53,7 +56,7 @@ public class BeeSwarmManager : MonoBehaviour, IPoolable
             if (bee != null)
             {
                 bee.OnSpawn();
-                bee.InitSwarm(this);
+                bee.InitSwarm(this, _petOwner);
                 bee.OnDie += HandleBeeDie;
                 ActiveBees.Add(bee);
             }

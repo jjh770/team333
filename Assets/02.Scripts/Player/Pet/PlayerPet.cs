@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class PlayerPet : MonoBehaviour
+public class PlayerPet : MonoBehaviour, IPetOwnership
 {
     [Header("Pet Settings")]
     [SerializeField] private GameObject _petPrefab;
