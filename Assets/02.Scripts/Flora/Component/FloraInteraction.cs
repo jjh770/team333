@@ -29,6 +29,15 @@ public class FloraInteraction : MonoBehaviour, IInteractable
             return InteractionType.TalkToMove;
         }
     }
+    public IconType IconType
+    {
+        get
+        {
+            if (CanMove) return IconType.TalkToMoveFlora;
+            if (CanSpeedUp) return IconType.TalkToSpeedUpFlora;
+            return IconType.TalkToMoveFlora;
+        }
+    }
 
     public Transform Transform => transform;
 

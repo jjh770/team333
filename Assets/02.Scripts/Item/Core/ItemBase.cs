@@ -29,13 +29,15 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public event Action<bool> OnLockChanged;
     public event Action OnHeld;
     public event Action OnDropped;
-    
+
     private const string GroundTag = "Ground";
 
     // IInteractable
     public Transform Transform => transform;
     public virtual InteractionType Type => InteractionType.PickUp;
+    public virtual IconType IconType => IconType.None;
     public virtual bool CanInteract => !_isHeld && !_isLocked;
+
     public virtual void Interact(GameObject interactor) { }
     protected virtual void Awake()
     {
@@ -75,7 +77,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         {
             return;
         }
-        
+
         _isThrown = false;
     }
 

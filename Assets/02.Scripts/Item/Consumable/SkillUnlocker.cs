@@ -3,6 +3,7 @@ using UnityEngine;
 public class SkillUnlocker : MonoBehaviour, IInteractable
 {
     public InteractionType Type => InteractionType.Use;
+    public IconType IconType => IconType.Geezer;
     public Transform Transform
     {
         get
