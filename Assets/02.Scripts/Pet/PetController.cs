@@ -32,7 +32,10 @@ public class PetController : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(_spawnEffectPrefab, transform.position, Quaternion.identity);
+        if (_spawnEffectPrefab != null)
+        {
+            Instantiate(_spawnEffectPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     public void Initialize(Transform player)
