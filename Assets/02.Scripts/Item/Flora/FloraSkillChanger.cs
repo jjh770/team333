@@ -11,8 +11,10 @@ public class FloraSkillChanger : ItemBase, IAttractableByFlora
     [SerializeField] private float _heldSizeMultifiler = 0.7f;
     [SerializeField] private float _sizeChangeDuration = 0.5f;
     [SerializeField] private Ease _sizeChangeEase;
-
+    [SerializeField] private IconType _iconType;
     private Tween _changeSizeTween;
+
+    public override IconType IconType => _iconType;
 
     protected override void PickUp(Transform holder)
     {

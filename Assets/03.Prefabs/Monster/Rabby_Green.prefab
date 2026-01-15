@@ -236,6 +236,7 @@ MonoBehaviour:
   _heldSizeMultifiler: 0.7
   _sizeChangeDuration: 0.5
   _sizeChangeEase: 27
+  _iconType: 5
 --- !u!114 &-5519083522194297610
 MonoBehaviour:
   m_ObjectHideFlags: 0

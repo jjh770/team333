@@ -5,6 +5,8 @@ public class HealthUpItem : MonoBehaviour, IInteractable
     [SerializeField] private float _healthUpAmount;
 
     public InteractionType Type => InteractionType.Use;
+    public IconType IconType => IconType.Potion;
+
     public Transform Transform
     {
         get

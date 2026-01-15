@@ -3,6 +3,7 @@
 public class BeezPetItem : MonoBehaviour, IInteractable
 {
     public InteractionType Type => InteractionType.Use;
+    public IconType IconType => IconType.Beez;
     public Transform Transform
     {
         get

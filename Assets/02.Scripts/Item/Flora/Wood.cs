@@ -8,6 +8,8 @@ public class Wood : ItemBase, IAttractableByFlora
     private const string FloraTag = "Flora";
     private ItemFactory _itemFactory;
 
+    public override IconType IconType => IconType.Wood;
+
     override protected void Awake()
     {
         base.Awake();
@@ -17,7 +19,7 @@ public class Wood : ItemBase, IAttractableByFlora
     protected override void OnCollisionEnter(Collision other)
     {
         base.OnCollisionEnter(other);
-        
+
         if (_isHeld) return;
 
         if (!other.gameObject.CompareTag(FloraTag)) return;
