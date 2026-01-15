@@ -4836,8 +4836,8 @@ MonoBehaviour:
   _interactableIconImage: {fileID: 3484054850956554992}
   _pickUpIconContainer: {fileID: 646761537232177034}
   _pickUpIconImages:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2931028384739961972}
+  - {fileID: 7406467130099349960}
   _playerTransform: {fileID: 6570789493408278362}
   _offset: {x: 0, y: 1, z: 0}
   _iconChangeDuration: 0.1
