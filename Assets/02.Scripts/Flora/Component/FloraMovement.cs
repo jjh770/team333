@@ -25,6 +25,7 @@ public class FloraMovement : MonoBehaviour
 
     public event Action<float> OnProgressChanged;
     public event Action<IFloraState> OnStateChanged;
+    public event Action OnResumed;
 
     private void Start()
     {
@@ -65,6 +66,7 @@ public class FloraMovement : MonoBehaviour
         {
             _path.MoveNext();
             ChangeState(MoveState);
+            OnResumed?.Invoke();
             return true;
         }
 
