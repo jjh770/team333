@@ -25,6 +25,10 @@ public class PlayerData : ScriptableObject
     [Tooltip("이동 관련 데이터 (속도, 회전 등)")]
     public PlayerMoveData Move { get; private set; }
 
+    [field: SerializeField]
+    [Tooltip("사운드 관련 데이터")]
+    public PlayerSoundData Sound { get; private set; }
+
     [Header("Prefab")]
     [field: SerializeField]
     [Tooltip("플레이어 프리팹 참조")]
@@ -44,6 +48,9 @@ public class PlayerData : ScriptableObject
 
         if (Move == null)
             Debug.LogWarning($"{name}: Move 데이터가 할당되지 않았습니다!", this);
+
+        if (Sound == null)
+            Debug.LogWarning($"{name}: Sound 데이터가 할당되지 않았습니다!", this);
 
         if (Prefab == null)
             Debug.LogWarning($"{name}: Prefab이 할당되지 않았습니다!", this);

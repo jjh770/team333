@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerInputHandler _inputHandler;
     private TweenMovement _tweenMovement;
     private PlayerEffectController _effectController;
+    private PlayerSound _playerSound;
 
     private bool _canAttack = true;
     [SerializeField] private int _comboIndex = 0;
@@ -32,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
         _inputHandler = GetComponent<PlayerInputHandler>();
         _tweenMovement = GetComponent<TweenMovement>();
         _effectController = GetComponent<PlayerEffectController>();
+        _playerSound = GetComponent<PlayerSound>();
     }
 
     private void OnEnable()
@@ -160,6 +162,8 @@ public class PlayerAttack : MonoBehaviour
             SlashStart();
             _attackRange.StartAttack(_comboIndex);
         }
+
+        _playerSound?.PlayAttack(_comboIndex);
     }
 
     public void OnAttackHitFinish()
