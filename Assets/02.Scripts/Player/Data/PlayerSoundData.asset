@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f47d3a88d6809f43b0a4eb1389a33e1, type: 3}
   m_Name: PlayerSoundData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundData
-  <AttackSounds>k__BackingField: []
+  <AttackSounds>k__BackingField:
+  - {fileID: 8300000, guid: b783cd768fa88d64a90cdb0549d76e2f, type: 3}
+  - {fileID: 8300000, guid: 5e52aed6739fb56429d0b5a8773822f9, type: 3}
+  - {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
+  <AttackSoundStartTimes>k__BackingField:
+  - 0.4
+  - 5.9
+  - 0
   <HitSounds>k__BackingField: []
   <DeathSFX>k__BackingField: {fileID: 0}
   <FootstepSounds>k__BackingField: []
