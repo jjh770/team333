@@ -24,6 +24,13 @@ public class PlayerAttackRange : MonoBehaviour
     private int _currentComboIndex = 0;
     private int _frameCounter = 0;
 
+    private PlayerStat _playerStat;
+
+    private void Awake()
+    {
+        _playerStat = GetComponent<PlayerStat>();
+    }
+
     private void Update()
     {
         if (_enableContinuousDetection && _isAttacking)
@@ -89,6 +96,7 @@ public class PlayerAttackRange : MonoBehaviour
 
                 // 적에게 데미지 적용
                 DamageUtility.ApplyDamage(col.gameObject, damage, gameObject);
+                Debug.Log(damage);
 
                 // 히트 기록 (같은 적을 다시 맞지 않도록)
                 _hitEnemiesThisAttack.Add(col);
@@ -103,7 +111,9 @@ public class PlayerAttackRange : MonoBehaviour
     {
         // 콤보 인덱스가 배열 범위를 벗어나지 않도록 체크
         int safeIndex = Mathf.Clamp(comboIndex, 0, _attackData.ComboDamageMultipliers.Length - 1);
-        return _attackData.AttackDamage * _attackData.ComboDamageMultipliers[safeIndex];
+        float baseDamage = _attackData.AttackDamage;
+        float bonusDamage = _playerStat != null ? _playerStat.BonusDamage : 0f;
+        return (baseDamage + bonusDamage) * _attackData.ComboDamageMultipliers[safeIndex];
     }
 
     /// <summary>

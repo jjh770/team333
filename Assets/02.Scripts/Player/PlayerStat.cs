@@ -6,6 +6,7 @@ public class PlayerStat : MonoBehaviour, IHealable
     [SerializeField] private PlayerData _data;
     private PlayerEffectController _effectController;
     public ConsumableStat Health { get; private set; } = new();
+    public float BonusDamage { get; private set; } = 0f;
 
     public event Action<float, float> OnHealthChanged
     {
@@ -54,5 +55,16 @@ public class PlayerStat : MonoBehaviour, IHealable
     private void PlayHealthEffect()
     {
         _effectController?.PlayEffect(PlayerEffectType.Heal);
+    }
+
+    public void IncreaseDamage(float amount)
+    {
+        BonusDamage += amount;
+        PlayDamageUpEffect();
+    }
+
+    private void PlayDamageUpEffect()
+    {
+        _effectController?.PlayEffect(PlayerEffectType.SkillUp);
     }
 }
