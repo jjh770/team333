@@ -3,19 +3,13 @@
 public enum MonsterTargetType
 {
     Player,
-    Flora,
-    Both
+    Flora
 }
 
 public class MonsterSensorComponent : MonoBehaviour
 {
     [Header("Settings")]
     public MonsterTargetType Target = MonsterTargetType.Player;
-
-    [Header("Target")]
-    [SerializeField] private float _playerNearDistance = 7f;
-    [SerializeField] private float _targetUpdateInterval = 0.3f;
-    [SerializeField] private float _targetUpdateTimer = 0.2f;
 
     private Transform _currentTargetTransform;
 
@@ -35,9 +29,6 @@ public class MonsterSensorComponent : MonoBehaviour
                 break;
             case MonsterTargetType.Flora:
                 foundObject = GameObject.FindGameObjectWithTag("Flora");
-                break;
-            case MonsterTargetType.Both:
-                //
                 break;
         }
 

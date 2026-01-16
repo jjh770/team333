@@ -2,6 +2,8 @@
 
 public class GoodMonsterController : BaseMonsterController
 {
+    private Transform _playerTransform;
+
     private void Update()
     {
         UpdateState();
@@ -27,6 +29,17 @@ public class GoodMonsterController : BaseMonsterController
     override public void OnSpawn()
     {
         ResetState();
+        FindPlayer();
+        _move.SetTarget(_playerTransform);
+    }
+
+    private void FindPlayer()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _playerTransform = player.transform;
+        }
     }
 
     override public void OnDespawn()

@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 6042458324824495107}
   - component: {fileID: 2794415891174157171}
   - component: {fileID: 5334694915051871641}
-  - component: {fileID: 6661742140466123808}
+  - component: {fileID: 7087864781188510689}
   m_Layer: 9
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -814,8 +814,6 @@ MonoBehaviour:
   _gaugeImage: {fileID: 4610090846043402856}
   _duration: 0.3
   _ease: 6
-  _monsterTransform: {fileID: 0}
-  _offset: {x: 0, y: 1, z: 0}
 --- !u!114 &4482467526755238119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,10 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
   Target: 1
-  _playerNearDistance: 7
-  _targetUpdateInterval: 0.3
-  _targetUpdateTimer: 0.2
---- !u!114 &6661742140466123808
+--- !u!114 &7087864781188510689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,10 +902,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8656837306392291822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552a8e3a681538f42ba15aeefe9511a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 762414ac23b8d4541bf674ed65749536, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
+  m_EditorClassIdentifier: Assembly-CSharp::SansamController
   _deathAnimationDuration: 0.19
+  _playerDetectRange: 3
+  _playerSafeRange: 5
+  _fleeSpeedMultiplier: 2
+  _avoidDistance: 3
+  _detectionInterval: 0.2
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

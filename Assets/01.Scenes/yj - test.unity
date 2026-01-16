@@ -24691,15 +24691,19 @@ PrefabInstance:
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_monsterPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
+      objectReference: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_monsterPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
+      objectReference: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: '_monsterPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 532693156242202316, guid: d9961b7c2c78886469fff59fbda00ffd, type: 3}
+    - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
+      propertyPath: '_monsterPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6060493489403216405, guid: f29645466055aac4d911e5a12516983d, type: 3}
     - target: {fileID: 3563033049080075564, guid: 4564dcff3a466834caa71a2c76f48ae9, type: 3}
       propertyPath: _spawnGroups.Array.data[1]._groupName
       value: 2
@@ -31259,6 +31263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
   _floraInteraction: {fileID: 215770150}
   _cameraController: {fileID: 2032723201}
+  _endSceneName: EndScene
 --- !u!4 &790425791
 Transform:
   m_ObjectHideFlags: 0
