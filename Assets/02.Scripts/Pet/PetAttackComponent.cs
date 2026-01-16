@@ -37,7 +37,10 @@ public class PetAttackComponent : MonoBehaviour
         _isAttacking = true;
         yield return new WaitForSeconds(_attackDuration);
 
-        FireProjectile(target);
+        if (target != null)
+        {
+            FireProjectile(target);
+        }
 
         _isAttacking = false;
     }
@@ -45,6 +48,7 @@ public class PetAttackComponent : MonoBehaviour
     private void FireProjectile(Transform target)
     {
         if (_projectilePrefab == null) return;
+        if (target == null) return;
 
         Vector3 spawnPosition = _firePoint.position;
         GameObject projectileObj = PoolManager.Instance.Get(_projectilePrefab, spawnPosition, Quaternion.identity);
@@ -59,6 +63,8 @@ public class PetAttackComponent : MonoBehaviour
 
     private float CalculateDamage(Transform target)
     {
+        if (target == null) return _attackDamage;
+
         if (target.TryGetComponent<QuestTree>(out _))
         {
             return _attackDamage * _questTreeDamageMultiplier;
