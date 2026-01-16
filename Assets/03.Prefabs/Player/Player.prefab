@@ -7362,7 +7362,6 @@ GameObject:
   - component: {fileID: 6254991337863408666}
   - component: {fileID: 8554205317058724542}
   - component: {fileID: 6251575932655284957}
-  - component: {fileID: 1574357458763293867}
   - component: {fileID: 1790983908737419883}
   - component: {fileID: 6229917204903142099}
   - component: {fileID: 7814041808843602986}
@@ -7594,22 +7593,6 @@ MonoBehaviour:
   _invincibilityDuration: 1
   _enableFlashing: 1
   _flashInterval: 0.1
---- !u!114 &1574357458763293867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199843730985661094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f732854ec24348640a6182f4f2385537, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthBar
-  _healthBarTransform: {fileID: 7546441251396680098}
-  _gaugeImage: {fileID: 1553556096626336049}
-  _duration: 0.3
-  _ease: 6
 --- !u!114 &1790983908737419883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9418,17 +9401,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174e184974e83994c80b94880513c04b, type: 3}
---- !u!114 &1553556096626336049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
-  m_PrefabInstance: {fileID: 6799321814594210373}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &7546441251396680098 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
