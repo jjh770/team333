@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurnipaMonsterController : BadMonsterController
 {
@@ -7,6 +6,9 @@ public class TurnipaMonsterController : BadMonsterController
     [SerializeField] private GameObject _splitMonsterPrefab;
     [SerializeField] private int _splitCount = 3;
     [SerializeField] private float _splitOffset = 1f;
+
+    [Header("Item Drop")]
+    [SerializeField, Range(0f, 1f)] private float _dropChance = 0.1f;
 
     private IPoolManager _poolManager;
 
@@ -19,9 +21,19 @@ public class TurnipaMonsterController : BadMonsterController
     protected override void Die()
     {
         if (_isDead) return;
+        _isDead = true;
 
         Split();
-        base.Die();
+
+        _move.Stop();
+
+        if (Random.value <= _dropChance)
+        {
+            _itemDrop.DropItem(_stat.Data.DropItem);
+        }
+
+        ApplyState(MonsterState.Die);
+        _deathRoutine = StartCoroutine(DeathCoroutine());
     }
 
     private void Split()

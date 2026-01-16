@@ -96,7 +96,6 @@ public class PlayerAttackRange : MonoBehaviour
 
                 // 적에게 데미지 적용
                 DamageUtility.ApplyDamage(col.gameObject, damage, gameObject);
-                Debug.Log(damage);
 
                 // 히트 기록 (같은 적을 다시 맞지 않도록)
                 _hitEnemiesThisAttack.Add(col);
