@@ -133,10 +133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
   _healthBar: {fileID: 3503025988817446538}
-  _healthBarTransform: {fileID: 5347691736564998874}
-  _gaugeImage: {fileID: 3964256262214646345}
+  _healthBarTransform: {fileID: 8261968103473201243}
+  _gaugeImage: {fileID: 8952020973273767719}
   _duration: 0.3
   _ease: 6
+  _offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &-3330791188068036982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: cf427c794cfa17a48a33916e82d2bc80, type: 2}
 --- !u!1 &3088349397053344750
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,9 +567,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5498259223504156599, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 8993831608420536637}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3964256262214646345 stripped
+--- !u!224 &5347691736564998874 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 8993831608420536637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8261968103473201243 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 8993831608420536637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8952020973273767719 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 66275912945126938, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 8993831608420536637}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -578,8 +588,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!224 &5347691736564998874 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
-  m_PrefabInstance: {fileID: 8993831608420536637}
-  m_PrefabAsset: {fileID: 0}
