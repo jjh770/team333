@@ -22,6 +22,7 @@ public class QuestTreeHealthBar : MonoBehaviour
     private void Awake()
     {
         _tree = GetComponent<QuestTree>();
+        _treeTransform = transform;
         _cameraTransform = Camera.main.transform;
     }
 

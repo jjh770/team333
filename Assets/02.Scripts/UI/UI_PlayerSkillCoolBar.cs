@@ -18,6 +18,10 @@ public class UI_PlayerSkillCoolBar : MonoBehaviour
     [Header("페이드 애니메이션")]
     [SerializeField] private List<UIFadeAnimation> _fadeAnimations;
 
+    [Header("Key Icon Colors")]
+    [SerializeField] private Color _readyColor = Color.white;
+    [SerializeField] private Color _cooldownColor = Color.black;
+
     private void Awake()
     {
         foreach (var anim in _positionAnimations)
@@ -31,7 +35,7 @@ public class UI_PlayerSkillCoolBar : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (_skillController != null)
         {
@@ -39,7 +43,7 @@ public class UI_PlayerSkillCoolBar : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_skillController != null)
         {
@@ -78,13 +82,6 @@ public class UI_PlayerSkillCoolBar : MonoBehaviour
 
     private void UpdateKeyIconText()
     {
-        if (_skillController.IsReady)
-        {
-            _keyIconText.color = Color.white;
-        }
-        else
-        {
-            _keyIconText.color = Color.black;
-        }
+        _keyIconText.color = _skillController.IsReady ? _readyColor : _cooldownColor;
     }
 }

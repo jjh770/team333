@@ -24,9 +24,8 @@ public class PlayerSkillController : MonoBehaviour
     public bool HasProjectile => _skillLevel >= 2;
     public bool HasTripleProjectile => _skillLevel >= 3;
     public bool IsReady => Time.time >= _lastUseTime + _skillData.Cooldown;
-    public float Cooldown => _skillData.Cooldown;
-    public float RemainingCooldown => Mathf.Max(0f, (_lastUseTime + _skillData.Cooldown) - Time.time);
-    public float CooldownProgress => IsReady ? 1f : 1f - (RemainingCooldown / _skillData.Cooldown);
+    public float CooldownProgress => Mathf.Clamp01((Time.time - _lastUseTime) / _skillData.Cooldown);
+
 
     public event Action OnSkillUnlocked;
     public event Action<int> OnSkillUpgraded;

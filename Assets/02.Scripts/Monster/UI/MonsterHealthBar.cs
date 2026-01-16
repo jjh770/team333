@@ -23,7 +23,7 @@ public class MonsterHealthBar : MonoBehaviour
     private void Awake()
     {
         _stat = GetComponent<MonsterStat>();
-        _monsterTransform = GetComponent<Transform>();
+        _monsterTransform = transform;
         _cameraTransform = Camera.main.transform;
     }
 
