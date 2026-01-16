@@ -31,7 +31,8 @@ public class PlayerSound : MonoBehaviour
     {
         if (_soundData == null) return;
 
-        SoundManager.Instance.PlaySFX(_soundData.DeathSFX);
+        var info = _soundData.DeathSFX;
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     #endregion
@@ -50,7 +51,8 @@ public class PlayerSound : MonoBehaviour
     {
         if (_soundData == null) return;
 
-        SoundManager.Instance.PlaySFX(_soundData.DashSFX);
+        var info = _soundData.DashSFX;
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     #endregion
@@ -62,7 +64,8 @@ public class PlayerSound : MonoBehaviour
         if (_soundData == null || _soundData.SkillSounds == null || _soundData.SkillSounds.Length == 0) return;
 
         int index = Mathf.Clamp(skillIndex, 0, _soundData.SkillSounds.Length - 1);
-        SoundManager.Instance.PlaySFX(_soundData.SkillSounds[index]);
+        var info = _soundData.SkillSounds[index];
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     #endregion
