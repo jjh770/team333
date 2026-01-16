@@ -9,18 +9,11 @@ public class TurnipaMonsterController : BadMonsterController
     [SerializeField] private float _splitOffset = 1f;
 
     private IPoolManager _poolManager;
-    private readonly List<BadMonsterController> _splitMonsters = new();
 
     protected override void Awake()
     {
         base.Awake();
         _poolManager = PoolManager.Instance;
-    }
-
-    public override void OnDespawn()
-    {
-        CleanupSplitMonsters();
-        base.OnDespawn();
     }
 
     protected override void Die()
@@ -39,33 +32,23 @@ public class TurnipaMonsterController : BadMonsterController
         for (int i = 0; i < _splitCount; i++)
         {
             Vector3 spawnPosition = GetSplitPosition(i);
-            GameObject splitMonster = _poolManager.Get(_splitMonsterPrefab, spawnPosition, Quaternion.identity);
 
+            GameObject splitMonster = _poolManager.Get(_splitMonsterPrefab, spawnPosition, Quaternion.identity);
+            
+            // 자식 스스로 풀로 돌아가는 로직을 람다로 주입
             if (splitMonster.TryGetComponent<BadMonsterController>(out var controller))
             {
-                controller.OnDie += HandleSplitMonsterDie;
-                _splitMonsters.Add(controller);
+                System.Action<BadMonsterController> returnToPoolAction = null;
+
+                returnToPoolAction = (deadMonster) =>
+                {
+                    deadMonster.OnDie -= returnToPoolAction;
+                    PoolManager.Instance.Return(deadMonster.gameObject);
+                };
+
+                controller.OnDie += returnToPoolAction;
             }
         }
-    }
-
-    private void HandleSplitMonsterDie(BadMonsterController controller)
-    {
-        controller.OnDie -= HandleSplitMonsterDie;
-        _splitMonsters.Remove(controller);
-        _poolManager?.Return(controller.gameObject);
-    }
-
-    private void CleanupSplitMonsters()
-    {
-        foreach (var monster in _splitMonsters)
-        {
-            if (monster != null)
-            {
-                monster.OnDie -= HandleSplitMonsterDie;
-            }
-        }
-        _splitMonsters.Clear();
     }
 
     private Vector3 GetSplitPosition(int index)
