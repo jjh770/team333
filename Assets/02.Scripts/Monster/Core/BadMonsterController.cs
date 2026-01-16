@@ -142,6 +142,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
             ApplyState(newState);
         }
     }
+
     protected override MonsterState GetCurrentState()
     {
         if (_isDead) return MonsterState.Die;

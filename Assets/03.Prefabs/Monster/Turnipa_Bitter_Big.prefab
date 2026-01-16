@@ -178,9 +178,8 @@ GameObject:
   - component: {fileID: 1762204574321019548}
   - component: {fileID: 1808812177353179082}
   - component: {fileID: 1986554047727386058}
-  - component: {fileID: 6754753927167731642}
   m_Layer: 9
-  m_Name: Turnipa_Bitter
+  m_Name: Turnipa_Bitter_Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,20 +378,6 @@ MonoBehaviour:
   _playerNearDistance: 7
   _targetUpdateInterval: 0.3
   _targetUpdateTimer: 0.2
---- !u!114 &6754753927167731642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2834583176937093337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552a8e3a681538f42ba15aeefe9511a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
-  _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: 24c3ad6073aac6e49b75eac86757394c, type: 2}
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
