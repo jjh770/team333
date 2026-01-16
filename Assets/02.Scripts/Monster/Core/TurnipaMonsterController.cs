@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TurnipaMonsterController : BadMonsterController
 {
@@ -6,6 +7,21 @@ public class TurnipaMonsterController : BadMonsterController
     [SerializeField] private GameObject _splitMonsterPrefab;
     [SerializeField] private int _splitCount = 3;
     [SerializeField] private float _splitOffset = 1f;
+
+    private IPoolManager _poolManager;
+    private readonly List<BadMonsterController> _splitMonsters = new();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _poolManager = PoolManager.Instance;
+    }
+
+    public override void OnDespawn()
+    {
+        CleanupSplitMonsters();
+        base.OnDespawn();
+    }
 
     protected override void Die()
     {
@@ -18,25 +34,38 @@ public class TurnipaMonsterController : BadMonsterController
     private void Split()
     {
         if (_splitMonsterPrefab == null) return;
-        if (PoolManager.Instance == null) return;
+        if (_poolManager == null) return;
 
         for (int i = 0; i < _splitCount; i++)
         {
             Vector3 spawnPosition = GetSplitPosition(i);
-            GameObject splitMonster = PoolManager.Instance.Get(_splitMonsterPrefab, spawnPosition, Quaternion.identity);
+            GameObject splitMonster = _poolManager.Get(_splitMonsterPrefab, spawnPosition, Quaternion.identity);
 
             if (splitMonster.TryGetComponent<BadMonsterController>(out var controller))
             {
                 controller.OnDie += HandleSplitMonsterDie;
+                _splitMonsters.Add(controller);
             }
         }
     }
 
-    // 미니 몬스터들을 위한 풀 반환
     private void HandleSplitMonsterDie(BadMonsterController controller)
     {
         controller.OnDie -= HandleSplitMonsterDie;
-        PoolManager.Instance?.Return(controller.gameObject);
+        _splitMonsters.Remove(controller);
+        _poolManager?.Return(controller.gameObject);
+    }
+
+    private void CleanupSplitMonsters()
+    {
+        foreach (var monster in _splitMonsters)
+        {
+            if (monster != null)
+            {
+                monster.OnDie -= HandleSplitMonsterDie;
+            }
+        }
+        _splitMonsters.Clear();
     }
 
     private Vector3 GetSplitPosition(int index)

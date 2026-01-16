@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class SanSamMonsterController : BadMonsterController
+public class SansamController : BadMonsterController
 {
     private enum SansamBehavior
     {
