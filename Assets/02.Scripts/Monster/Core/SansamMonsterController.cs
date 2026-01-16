@@ -24,6 +24,8 @@ public class SansamMonsterController : BadMonsterController
     private float _detectionTimer;
     private float _baseSpeed;
 
+    private float _agentMovingVelocitySqrThreshold = 0.01f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -184,7 +186,7 @@ public class SansamMonsterController : BadMonsterController
 
         if (_behavior == SansamBehavior.AvoidPlayerToFlora)
         {
-            if (_agent != null && _agent.velocity.sqrMagnitude > 0.01f)
+            if (IsAgentMoving())
             {
                 return MonsterState.Move;
             }
@@ -192,6 +194,11 @@ public class SansamMonsterController : BadMonsterController
 
         if (_move.IsMoving) return MonsterState.Move;
         return MonsterState.Idle;
+    }
+
+    private bool IsAgentMoving()
+    {
+        return _agent != null && _agent.velocity.sqrMagnitude > _agentMovingVelocitySqrThreshold;
     }
 
     private void OnDrawGizmosSelected()
