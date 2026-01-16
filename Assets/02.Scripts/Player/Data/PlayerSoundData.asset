@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: PlayerSoundData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundData
   <AttackSounds>k__BackingField:
-  - {fileID: 8300000, guid: b783cd768fa88d64a90cdb0549d76e2f, type: 3}
-  - {fileID: 8300000, guid: 5e52aed6739fb56429d0b5a8773822f9, type: 3}
-  - {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
-  <AttackSoundStartTimes>k__BackingField:
-  - 0.4
-  - 5.9
-  - 0
-  <HitSounds>k__BackingField: []
-  <DeathSFX>k__BackingField: {fileID: 0}
+  - Clip: {fileID: 8300000, guid: b783cd768fa88d64a90cdb0549d76e2f, type: 3}
+    StartTime: 0.4
+  - Clip: {fileID: 8300000, guid: 5e52aed6739fb56429d0b5a8773822f9, type: 3}
+    StartTime: 5.8
+  - Clip: {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
+    StartTime: 0.13
+  <HitSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 1bb41d5f8f3a93044ac5aabe48380579, type: 3}
+    StartTime: 0.12
+  <DeathSFX>k__BackingField:
+    Clip: {fileID: 0}
+    StartTime: 0
   <FootstepSounds>k__BackingField: []
-  <DashSFX>k__BackingField: {fileID: 0}
+  <DashSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 45893a289801e234093e3b1871fbe462, type: 3}
+    StartTime: 0.75
   <SkillSounds>k__BackingField: []
