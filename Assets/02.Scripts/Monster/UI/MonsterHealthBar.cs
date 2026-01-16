@@ -12,6 +12,10 @@ public class MonsterHealthBar : MonoBehaviour
     [SerializeField] private float _duration = 0.3f;
     [SerializeField] private Ease _ease = Ease.OutQuad;
 
+    [Header("Position")]
+    [SerializeField] private Transform _monsterTransform;
+    [SerializeField] private Vector3 _offset = new Vector3(0f, 1f, 0f);
+
     private MonsterStat _stat;
     private Transform _cameraTransform;
     private Tweener _tween;
@@ -19,6 +23,7 @@ public class MonsterHealthBar : MonoBehaviour
     private void Awake()
     {
         _stat = GetComponent<MonsterStat>();
+        _monsterTransform = GetComponent<Transform>();
         _cameraTransform = Camera.main.transform;
     }
 
@@ -37,9 +42,9 @@ public class MonsterHealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        _healthBarTransform.forward = _cameraTransform.forward;
+        _healthBarTransform.position = _monsterTransform.position + _offset;
+        _healthBarTransform.rotation = _cameraTransform.rotation;
     }
-
     private void OnHealthChanged(float current, float max)
     {
         if (!_healthBar.activeSelf)

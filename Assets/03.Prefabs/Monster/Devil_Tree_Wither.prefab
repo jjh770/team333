@@ -614,6 +614,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _updateInterval: 0.2
   _stoppingDistance: 1.8
 --- !u!114 &8237467816518253206
@@ -646,6 +649,8 @@ MonoBehaviour:
   _gaugeImage: {fileID: 648867845161993570}
   _duration: 0.3
   _ease: 6
+  _monsterTransform: {fileID: 0}
+  _offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &1691357191710163181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,9 +717,6 @@ MonoBehaviour:
   _renderer: {fileID: 7087891614945725617}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.3
-  _knockbackForce: 2
-  _knockbackDuration: 0.2
-  _knockbackStunDuration: 0.3
 --- !u!114 &7429925657092110577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: cdba3980e585d7741a36090f1045cf21, type: 2}
 --- !u!1 &9097755878706329246
 GameObject:
   m_ObjectHideFlags: 0

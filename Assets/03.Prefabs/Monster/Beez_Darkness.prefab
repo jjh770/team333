@@ -406,10 +406,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
   _healthBar: {fileID: 5759728275409881080}
-  _healthBarTransform: {fileID: 3838549604061086632}
+  _healthBarTransform: {fileID: 998671007438364969}
   _gaugeImage: {fileID: 5219755373016341307}
   _duration: 0.3
   _ease: 6
+  _monsterTransform: {fileID: 0}
+  _offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &7789694426040448421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +443,8 @@ MonoBehaviour:
   _deathAnimationDuration: 0.19
   _separationDistance: 1
   _separationWeight: 3
+  _minVelocitySqrForRotation: 0.01
+  _rotationLerpSpeed: 10
 --- !u!136 &-1958163404555417837
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -818,6 +822,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174e184974e83994c80b94880513c04b, type: 3}
+--- !u!224 &998671007438364969 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 262079558737375311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3838549604061086632 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
