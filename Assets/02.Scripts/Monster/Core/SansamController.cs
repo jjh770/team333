@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class SansamMonsterController : BadMonsterController
+public class SansamController : BadMonsterController
 {
     private enum SansamBehavior
     {
@@ -10,10 +10,10 @@ public class SansamMonsterController : BadMonsterController
     }
 
     [Header("Sansam Settings")]
-    [SerializeField] private float _playerDetectRange = 6f;
-    [SerializeField] private float _playerSafeRange = 10f;
-    [SerializeField] private float _fleeSpeedMultiplier = 1.5f;
-    [SerializeField] private float _avoidDistance = 5f;
+    [SerializeField] private float _playerDetectRange = 3f;
+    [SerializeField] private float _playerSafeRange = 5f;
+    [SerializeField] private float _fleeSpeedMultiplier = 2f;
+    [SerializeField] private float _avoidDistance = 3f;
     [SerializeField] private float _detectionInterval = 0.2f;
 
     private Transform _floraTransform;

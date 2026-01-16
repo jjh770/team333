@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78e74d047ed87e4b983dc9d1545651b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
-  _healthBar: {fileID: 0}
+  _healthBar: {fileID: 2484807394640000684}
   _healthBarTransform: {fileID: 6939651810865696893}
   _gaugeImage: {fileID: 2730640063615527535}
   _duration: 0.3
@@ -641,9 +641,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
   Target: 0
-  _playerNearDistance: 7
-  _targetUpdateInterval: 0.3
-  _targetUpdateTimer: 0.2
 --- !u!114 &3116323574720759781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: e39fef1fed728b14eaa1173a0177f54c, type: 2}
 --- !u!1 &7191071975125149397
 GameObject:
   m_ObjectHideFlags: 0

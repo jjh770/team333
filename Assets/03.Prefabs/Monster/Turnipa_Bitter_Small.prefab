@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 1762204574321019548}
   - component: {fileID: 1808812177353179082}
   - component: {fileID: 1986554047727386058}
+  - component: {fileID: -5788571425474162206}
   m_Layer: 9
   m_Name: Turnipa_Bitter_Small
   m_TagString: Untagged
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa53e6f9d3889cd49800e7ff87fe8bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterStat
-  _data: {fileID: 11400000, guid: 24c3ad6073aac6e49b75eac86757394c, type: 2}
+  _data: {fileID: 11400000, guid: 8511511b8111a194db09576bf31fa3bb, type: 2}
 --- !u!114 &3768543114877331655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.33
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
@@ -375,9 +376,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
   Target: 0
-  _playerNearDistance: 7
-  _targetUpdateInterval: 0.3
-  _targetUpdateTimer: 0.2
+--- !u!114 &-5788571425474162206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834583176937093337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1808046fea9f31546a10fec80fbbc899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnipaMonsterController
+  _deathAnimationDuration: 0.19
+  _splitMonsterPrefab: {fileID: 0}
+  _splitCount: 3
+  _splitOffset: 0.5
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
