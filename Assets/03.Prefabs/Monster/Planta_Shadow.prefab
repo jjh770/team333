@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 6042458324824495107}
   - component: {fileID: 2794415891174157171}
   - component: {fileID: 5334694915051871641}
-  - component: {fileID: 6648184215526698273}
+  - component: {fileID: 7087864781188510689}
   m_Layer: 9
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
   Target: 1
---- !u!114 &6648184215526698273
+--- !u!114 &7087864781188510689
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -902,14 +902,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8656837306392291822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3baab5e769e46894599e28e5eac8f482, type: 3}
+  m_Script: {fileID: 11500000, guid: 762414ac23b8d4541bf674ed65749536, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SansamMonsterController
+  m_EditorClassIdentifier: Assembly-CSharp::SansamController
   _deathAnimationDuration: 0.19
-  _playerDetectRange: 4
+  _playerDetectRange: 3
   _playerSafeRange: 5
   _fleeSpeedMultiplier: 2
-  _avoidDistance: 2
+  _avoidDistance: 3
   _detectionInterval: 0.2
 --- !u!1 &8788060930047226639
 GameObject:
