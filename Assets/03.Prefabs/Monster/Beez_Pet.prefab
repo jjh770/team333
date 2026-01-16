@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9874ebb8b2b6f454ba6b0cb2f02bd598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetAttackComponent
-  _attackDamage: 5
+  _attackDamage: 15
   _coolTime: 2
   _attackDuration: 0.14
   _questTreeDamageMultiplier: 10
