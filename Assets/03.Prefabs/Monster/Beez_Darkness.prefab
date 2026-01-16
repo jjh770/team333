@@ -407,10 +407,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
   _healthBar: {fileID: 5759728275409881080}
   _healthBarTransform: {fileID: 998671007438364969}
-  _gaugeImage: {fileID: 5219755373016341307}
+  _gaugeImage: {fileID: 236547209874439765}
   _duration: 0.3
   _ease: 6
-  _monsterTransform: {fileID: 0}
   _offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &7789694426040448421
 MonoBehaviour:
@@ -822,6 +821,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174e184974e83994c80b94880513c04b, type: 3}
+--- !u!114 &236547209874439765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66275912945126938, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 262079558737375311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &998671007438364969 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
@@ -832,17 +842,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 262079558737375311}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5219755373016341307 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
-  m_PrefabInstance: {fileID: 262079558737375311}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &5759728275409881080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5498259223504156599, guid: 174e184974e83994c80b94880513c04b, type: 3}

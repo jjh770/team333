@@ -293,10 +293,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterHealthBar
   _healthBar: {fileID: 1761924059915919780}
-  _healthBarTransform: {fileID: 7122568457015780852}
-  _gaugeImage: {fileID: 2300632536973819239}
+  _healthBarTransform: {fileID: 6505110171009451893}
+  _gaugeImage: {fileID: 6112885177459415049}
   _duration: 0.3
   _ease: 6
+  _offset: {x: 0, y: 1, z: 0}
 --- !u!114 &2115344407468010350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: 24c3ad6073aac6e49b75eac86757394c, type: 2}
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,10 +812,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_HealthBarCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5961206969952555292, guid: 174e184974e83994c80b94880513c04b, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -826,9 +822,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5498259223504156599, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 6070325876631426579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2300632536973819239 stripped
+--- !u!114 &6112885177459415049 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 66275912945126938, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 6070325876631426579}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -837,6 +833,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!224 &6505110171009451893 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 6070325876631426579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7122568457015780852 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}

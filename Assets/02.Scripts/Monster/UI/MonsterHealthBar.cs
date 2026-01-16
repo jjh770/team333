@@ -13,8 +13,8 @@ public class MonsterHealthBar : MonoBehaviour
     [SerializeField] private Ease _ease = Ease.OutQuad;
 
     [Header("Position")]
-    [SerializeField] private Transform _monsterTransform;
     [SerializeField] private Vector3 _offset = new Vector3(0f, 1f, 0f);
+    private Transform _monsterTransform;
 
     private MonsterStat _stat;
     private Transform _cameraTransform;

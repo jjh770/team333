@@ -814,6 +814,8 @@ MonoBehaviour:
   _gaugeImage: {fileID: 4610090846043402856}
   _duration: 0.3
   _ease: 6
+  _monsterTransform: {fileID: 0}
+  _offset: {x: 0, y: 1, z: 0}
 --- !u!114 &4482467526755238119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,7 +911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
-  data: {fileID: 11400000, guid: f5676dfef2331d54ba35a23dc406a93d, type: 2}
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

@@ -192,10 +192,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuestTreeHealthBar
   _healthBar: {fileID: 7368061871643755089}
-  _healthBarTransform: {fileID: 2083886670012106241}
-  _gaugeImage: {fileID: 7052211224610217618}
+  _healthBarTransform: {fileID: 2627228715467220096}
+  _gaugeImage: {fileID: 3091251698054052860}
   _duration: 0.3
   _ease: 6
+  _offset: {x: 0, y: 1.5, z: 0}
 --- !u!1001 &3030113987092542950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,9 +327,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3955941129155359719, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 3030113987092542950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7052211224610217618 stripped
+--- !u!224 &2627228715467220096 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1042840621682184550, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_PrefabInstance: {fileID: 3030113987092542950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3091251698054052860 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5463812080177900404, guid: 174e184974e83994c80b94880513c04b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 66275912945126938, guid: 174e184974e83994c80b94880513c04b, type: 3}
   m_PrefabInstance: {fileID: 3030113987092542950}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
