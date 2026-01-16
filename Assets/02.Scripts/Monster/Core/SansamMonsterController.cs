@@ -149,16 +149,18 @@ public class SansamMonsterController : BadMonsterController
     {
         if (_floraTransform == null || _playerTransform == null || _agent == null) return;
 
+        // 산삼 -> 플레이어 벡터
         Vector3 toPlayer = _playerTransform.position - transform.position;
         toPlayer.y = 0f;
 
+        // 산삼 -> 플로라 벡터
         Vector3 toFlora = _floraTransform.position - transform.position;
         toFlora.y = 0f;
 
-        // 플레이어 방향과 수직인 방향 계산. 좌우 중 플로라에 가까운 쪽
+        // 플레이어 방향에 수직인 방향 구하기 (즉, 플레이어의 좌우)
         Vector3 perpendicular = Vector3.Cross(toPlayer.normalized, Vector3.up);
 
-        // 두 수직 방향 중 플로라 방향에 더 가까운 쪽 선택
+        // 왼쪽, 오른쪽 중 어디가 플로라랑 더 가까운지
         float dotRight = Vector3.Dot(perpendicular, toFlora.normalized);
         if (dotRight < 0)
         {
