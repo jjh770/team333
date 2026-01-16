@@ -14143,7 +14143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3676946225234429852, guid: 6621f90ba3852f341bedcfdd297da8c5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7737152498802080484, guid: 6621f90ba3852f341bedcfdd297da8c5, type: 3}
       propertyPath: m_Enabled
@@ -67441,13 +67441,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 49141249975387608, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8352125643281245142, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: 149.21317
       objectReference: {fileID: 0}
     - target: {fileID: 8352125643281245142, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.034722306
+      value: 0.338
       objectReference: {fileID: 0}
     - target: {fileID: 8352125643281245142, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67488,6 +67492,10 @@ PrefabInstance:
     - target: {fileID: 8692904586044111212, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
       propertyPath: m_Name
       value: DamageUpPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692904586044111212, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
