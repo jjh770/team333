@@ -3,22 +3,30 @@ using UnityEngine.UI;
 
 public class UI_SpeedGauge : MonoBehaviour
 {
-    private const float LOW_THRESHOLD = 0.3f;
-    private const float HIGH_THRESHOLD = 0.7f;
+    private enum SpeedState { Low, Mid, High }
 
     [SerializeField] private FloraSpeedGaugeController _controller;
     [SerializeField] private Slider _speedGaugeSlider;
 
-    [Header("Icon Settings")]
-    [SerializeField] private RectTransform _iconTransform;
-    [SerializeField] private Image _iconImage;
+    [Header("Thresholds")]
+    [SerializeField] private float _highThreshold = 0.66f;
+    [SerializeField] private float _lowThreshold = 0.33f;
 
-    [Header("Icon Sprites")]
+    [Header("Icons")]
+    [SerializeField] private Image _iconImage;
     [SerializeField] private Sprite _iconLow;
     [SerializeField] private Sprite _iconMid;
     [SerializeField] private Sprite _iconHigh;
 
-    private int _currentState = -1;
+    private SpeedState? _currentState;
+    private RectTransform _iconRectTransform;
+    private RectTransform _sliderRectTransform;
+
+    private void Awake()
+    {
+        _iconRectTransform = _iconImage.GetComponent<RectTransform>();
+        _sliderRectTransform = _speedGaugeSlider.GetComponent<RectTransform>();
+    }
 
     private void OnEnable()
     {
@@ -35,21 +43,30 @@ public class UI_SpeedGauge : MonoBehaviour
         float value = max > 0f ? current / max : 0f;
         _speedGaugeSlider.value = value;
 
-        if (_iconTransform == null) return;
+        UpdateIconPosition(value);
+        UpdateIconSprite(value);
+    }
 
-        // Slider value로 anchor 직접 설정
-        _iconTransform.anchorMin = new Vector2(value, 0.5f);
-        _iconTransform.anchorMax = new Vector2(value, 0.5f);
+    private void UpdateIconPosition(float value)
+    {
+        float sliderWidth = _sliderRectTransform.rect.width;
+        float xPos = sliderWidth * value;
+        _iconRectTransform.anchoredPosition = new Vector2(xPos, _iconRectTransform.anchoredPosition.y);
+    }
 
-        // 상태 변경 시에만 스프라이트 교체
-        int newState = value >= HIGH_THRESHOLD ? 2 : (value >= LOW_THRESHOLD ? 1 : 0);
+    private void UpdateIconSprite(float value)
+    {
+        var newState = value >= _highThreshold ? SpeedState.High
+                     : value >= _lowThreshold ? SpeedState.Mid
+                     : SpeedState.Low;
+
         if (_currentState != newState)
         {
             _currentState = newState;
             _iconImage.sprite = newState switch
             {
-                2 => _iconHigh,
-                1 => _iconMid,
+                SpeedState.High => _iconHigh,
+                SpeedState.Mid => _iconMid,
                 _ => _iconLow
             };
         }
