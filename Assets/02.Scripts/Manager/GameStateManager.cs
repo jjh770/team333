@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -19,16 +18,16 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private FloraInteraction _floraInteraction;
     [SerializeField] private CameraController _cameraController;
     
-    [Header("Settings")]
-    [SerializeField] private string _endSceneName = "EndScene";
 
     private GameState _currentState;
+    private GameState _previousState;
     private IFloraPath _floraPath;
-    
+
     public GameState CurrentState => _currentState;
     public bool IsPlaying => _currentState == GameState.Playing;
+    public bool IsPaused => _currentState == GameState.Paused;
 
-    public event Action<GameState, GameState> OnStateChanged;
+    public static event Action<GameState, GameState> OnGameStateChanged;
 
     private void Awake()
     {
@@ -47,19 +46,22 @@ public class GameStateManager : MonoBehaviour
         if (_floraInteraction != null)
         {
             _floraPath = _floraInteraction.FloraPath;
-            
+
             if (_floraPath != null)
             {
                 _floraPath.OnPathCompleted += HandlePathCompleted;
             }
         }
-        
+
         if (_cameraController != null)
         {
             _cameraController.OnIntroComplete += HandleIntroComplete;
             _cameraController.OnOutroComplete += HandleOutroComplete;
         }
-      
+
+        PauseInputHandler.OnPauseToggleRequested += TogglePause;
+        UI_PauseMenu.OnResumeRequested += ResumeGame;
+
         ChangeState(GameState.Intro);
     }
 
@@ -80,6 +82,9 @@ public class GameStateManager : MonoBehaviour
             _cameraController.OnIntroComplete -= HandleIntroComplete;
             _cameraController.OnOutroComplete -= HandleOutroComplete;
         }
+
+        PauseInputHandler.OnPauseToggleRequested -= TogglePause;
+        UI_PauseMenu.OnResumeRequested -= ResumeGame;
     }
 
     public void ChangeState(GameState newState)
@@ -94,7 +99,7 @@ public class GameStateManager : MonoBehaviour
 
         Debug.Log($"Game State: {oldState} → {newState}");
 
-        OnStateChanged?.Invoke(oldState, newState);
+        OnGameStateChanged?.Invoke(oldState, newState);
 
         HandleStateEnter(newState);
     }
@@ -108,6 +113,7 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.Playing:
+                Time.timeScale = 1f;
                 _cameraController.StartPlaying();
                 break;
 
@@ -116,9 +122,36 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.Paused:
-                //Time.timeScale = 0f;
+                Time.timeScale = 0f;
                 break;
         }
+    }
+
+    public void TogglePause()
+    {
+        if (_currentState == GameState.Paused)
+        {
+            ResumeGame();
+        }
+        else if (_currentState == GameState.Playing)
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (_currentState != GameState.Playing) return;
+
+        _previousState = _currentState;
+        ChangeState(GameState.Paused);
+    }
+
+    public void ResumeGame()
+    {
+        if (_currentState != GameState.Paused) return;
+
+        ChangeState(_previousState);
     }
 
     private void HandlePathCompleted()
@@ -137,6 +170,6 @@ public class GameStateManager : MonoBehaviour
     private void HandleOutroComplete()
     {
         Debug.Log("HandleOutroComplete called");
-        SceneManager.LoadScene(_endSceneName);
+        SceneLoader.Instance.LoadEndScene();
     }
 }
