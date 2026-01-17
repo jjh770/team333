@@ -43,26 +43,28 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLobby()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(_lobbySceneName);
+        LoadSceneByName(_lobbySceneName);
     }
 
     public void LoadGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(_gameSceneName);
+        LoadSceneByName(_gameSceneName);
     }
 
     public void LoadEndScene()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(_endSceneName);
+        LoadSceneByName(_endSceneName);
     }
 
     public void ReloadCurrentScene()
     {
+        LoadSceneByName(SceneManager.GetActiveScene().name);
+    }
+
+    private void LoadSceneByName(string sceneName)
+    {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
