@@ -20,6 +20,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public event System.Action OnPlayerDeath;
+
     private PlayerStat _stat;
     private PlayerAnimatorController _animatorController;
     private PlayerStateManager _stateManager;
@@ -51,5 +53,7 @@ public class Player : MonoBehaviour
 
         _stateManager.ChangeState(PlayerState.Die);
         _animatorController.DieAnimation();
+
+        OnPlayerDeath?.Invoke();
     }
 }

@@ -10,5 +10,6 @@ public enum IconType
     Geezer,
     Beez,
     TalkToMoveFlora,
-    TalkToSpeedUpFlora
+    TalkToSpeedUpFlora,
+    DamageUpPotion,
 }
