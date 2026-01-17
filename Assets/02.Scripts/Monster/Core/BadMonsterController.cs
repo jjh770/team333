@@ -46,18 +46,12 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
     protected virtual void OnEnable()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
-        }
+        GameStateManager.OnGameStateChanged += HandleGameStateChanged;
     }
 
     protected virtual void OnDisable()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
-        }
+        GameStateManager.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     private void HandleGameStateChanged(GameState oldState, GameState newState)

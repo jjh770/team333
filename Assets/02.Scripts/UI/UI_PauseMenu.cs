@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,13 @@ public class UI_PauseMenu : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _lobbyButton;
 
+    public static event Action OnResumeRequested;
+    public static event Action OnRestartRequested;
+    public static event Action OnLobbyRequested;
+
     private void Start()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged += HandleStateChanged;
-        }
+        GameStateManager.OnGameStateChanged += HandleStateChanged;
 
         _resumeButton.onClick.AddListener(OnResumeClicked);
         _restartButton.onClick.AddListener(OnRestartClicked);
@@ -27,10 +29,7 @@ public class UI_PauseMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged -= HandleStateChanged;
-        }
+        GameStateManager.OnGameStateChanged -= HandleStateChanged;
 
         _resumeButton.onClick.RemoveListener(OnResumeClicked);
         _restartButton.onClick.RemoveListener(OnRestartClicked);
@@ -44,16 +43,16 @@ public class UI_PauseMenu : MonoBehaviour
 
     private void OnResumeClicked()
     {
-        GameStateManager.Instance.ResumeGame();
+        OnResumeRequested?.Invoke();
     }
 
     private void OnRestartClicked()
     {
-        GameStateManager.Instance.RestartScene();
+        OnRestartRequested?.Invoke();
     }
 
     private void OnLobbyClicked()
     {
-        GameStateManager.Instance.GoToLobby();
+        OnLobbyRequested?.Invoke();
     }
 }

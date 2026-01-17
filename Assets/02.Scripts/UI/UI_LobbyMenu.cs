@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_LobbyMenu : MonoBehaviour
@@ -8,9 +7,6 @@ public class UI_LobbyMenu : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private Button _quitButton;
-
-    [Header("Settings")]
-    [SerializeField] private string _gameSceneName = "GameScene";
 
     private void Start()
     {
@@ -28,7 +24,7 @@ public class UI_LobbyMenu : MonoBehaviour
 
     private void OnStartClicked()
     {
-        SceneManager.LoadScene(_gameSceneName);
+        SceneLoader.Instance.LoadGame();
     }
 
     private void OnLeaderboardClicked()
@@ -39,10 +35,6 @@ public class UI_LobbyMenu : MonoBehaviour
 
     private void OnQuitClicked()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneLoader.Instance.QuitGame();
     }
 }

@@ -36,7 +36,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (GameStateManager.Instance != null)
         {
-            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
+            GameStateManager.OnGameStateChanged += HandleGameStateChanged;
 
             // 초기 상태 수동 적용 (이벤트 구독 전에 상태가 변경되었을 수 있음)
             bool isPlaying = GameStateManager.Instance.IsPlaying;
@@ -45,10 +45,7 @@ public class PlayerStateManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
-        }
+        GameStateManager.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     private void HandleGameStateChanged(GameState oldState, GameState newState)
