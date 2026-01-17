@@ -21,12 +21,15 @@ public class GameStateManager : MonoBehaviour
     
     [Header("Settings")]
     [SerializeField] private string _endSceneName = "EndScene";
+    [SerializeField] private string _lobbySceneName = "MainLobby";
 
     private GameState _currentState;
+    private GameState _previousState;
     private IFloraPath _floraPath;
-    
+
     public GameState CurrentState => _currentState;
     public bool IsPlaying => _currentState == GameState.Playing;
+    public bool IsPaused => _currentState == GameState.Paused;
 
     public event Action<GameState, GameState> OnStateChanged;
 
@@ -108,6 +111,7 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.Playing:
+                Time.timeScale = 1f;
                 _cameraController.StartPlaying();
                 break;
 
@@ -116,9 +120,48 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.Paused:
-                //Time.timeScale = 0f;
+                Time.timeScale = 0f;
                 break;
         }
+    }
+
+    public void TogglePause()
+    {
+        if (_currentState == GameState.Paused)
+        {
+            ResumeGame();
+        }
+        else if (_currentState == GameState.Playing)
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (_currentState != GameState.Playing) return;
+
+        _previousState = _currentState;
+        ChangeState(GameState.Paused);
+    }
+
+    public void ResumeGame()
+    {
+        if (_currentState != GameState.Paused) return;
+
+        ChangeState(_previousState);
+    }
+
+    public void RestartScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GoToLobby()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(_lobbySceneName);
     }
 
     private void HandlePathCompleted()
