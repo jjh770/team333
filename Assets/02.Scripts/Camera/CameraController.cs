@@ -17,14 +17,22 @@ public class CameraController : MonoBehaviour
 
     [Header("Outro Settings")]
     [SerializeField] private Transform _outroTransform;
-    [SerializeField] private float _outroMoveDuration = 2f; 
-    [SerializeField] private float _outroHoldDuration = 3f; 
+    [SerializeField] private float _outroMoveDuration = 2f;
+    [SerializeField] private float _outroHoldDuration = 3f;
     [SerializeField] private AnimationCurve _outroEaseCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+    [Header("Death Settings")]
+    [SerializeField] private Transform _player;
+    [SerializeField] private float _deathMoveDuration = 1.5f;
+    [SerializeField] private float _deathHoldDuration = 1f;
+    [SerializeField] private float _deathOffsetMultiplier = 0.5f;
+    [SerializeField] private AnimationCurve _deathEaseCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     private Coroutine _transitionCoroutine;
 
     public event Action OnIntroComplete;
     public event Action OnOutroComplete;
+    public event Action OnDeathTransitionComplete;
 
     private void Awake()
     {
@@ -81,6 +89,19 @@ public class CameraController : MonoBehaviour
         }
 
         _transitionCoroutine = StartCoroutine(OutroTransition());
+    }
+
+    public void StartDeath()
+    {
+        if (_transitionCoroutine != null)
+            StopCoroutine(_transitionCoroutine);
+
+        if (_followCamera != null)
+        {
+            _followCamera.enabled = false;
+        }
+
+        _transitionCoroutine = StartCoroutine(DeathTransition());
     }
 
     private IEnumerator IntroTransition()
@@ -152,5 +173,42 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(_outroHoldDuration);
 
         OnOutroComplete?.Invoke();
+    }
+
+    private IEnumerator DeathTransition()
+    {
+        if (_player == null || _followCamera == null)
+        {
+            OnDeathTransitionComplete?.Invoke();
+            yield break;
+        }
+
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+        Vector3 closerOffset = _followCamera.GetLocalOffset() * _deathOffsetMultiplier;
+
+        float elapsed = 0f;
+        while (elapsed < _deathMoveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = _deathEaseCurve.Evaluate(elapsed / _deathMoveDuration);
+
+            Vector3 targetPos = _player.position + _player.TransformDirection(closerOffset);
+            Quaternion targetRot = Quaternion.LookRotation(_player.position - targetPos);
+
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            transform.rotation = Quaternion.Slerp(startRot, targetRot, t);
+
+            yield return null;
+        }
+
+        Vector3 finalPos = _player.position + _player.TransformDirection(closerOffset);
+        Quaternion finalRot = Quaternion.LookRotation(_player.position - finalPos);
+        transform.position = finalPos;
+        transform.rotation = finalRot;
+
+        yield return new WaitForSeconds(_deathHoldDuration);
+
+        OnDeathTransitionComplete?.Invoke();
     }
 }
