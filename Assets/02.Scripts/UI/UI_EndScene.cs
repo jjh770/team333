@@ -29,6 +29,9 @@ public class UI_EndScene : MonoBehaviour
     [SerializeField] private string _mainMenuSceneName = "MainMenu";
     [SerializeField] private int _maxDisplayEntries = 5;
 
+    [Header("Animation")]
+    [SerializeField] private UI_EndSceneAnimator _animator;
+
     private float _clearTime;
     private bool _hasSubmitted;
 
@@ -56,14 +59,11 @@ public class UI_EndScene : MonoBehaviour
             _rankText.text = $"{rank}";
         }
 
-        if (_inputPanel != null)
+        // Animator가 없을 때만 직접 제어
+        if (_animator == null)
         {
-            _inputPanel.SetActive(true);
-        }
-
-        if (_leaderboardPanel != null)
-        {
-            _leaderboardPanel.SetActive(false);
+            if (_inputPanel != null) _inputPanel.SetActive(true);
+            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(false);
         }
     }
 
@@ -103,17 +103,18 @@ public class UI_EndScene : MonoBehaviour
 
         _hasSubmitted = true;
 
-        if (_inputPanel != null)
-        {
-            _inputPanel.SetActive(false);
-        }
-
-        if (_leaderboardPanel != null)
-        {
-            _leaderboardPanel.SetActive(true);
-        }
-
         UpdateLeaderboardDisplay();
+
+        if (_animator != null)
+        {
+            _animator.HidePanel("InputPanel");
+            _animator.PlayPanel("LeaderboardPanel");
+        }
+        else
+        {
+            if (_inputPanel != null) _inputPanel.SetActive(false);
+            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(true);
+        }
     }
 
     private void UpdateLeaderboardDisplay()
