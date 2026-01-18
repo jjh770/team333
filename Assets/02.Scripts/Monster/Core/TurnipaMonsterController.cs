@@ -21,19 +21,17 @@ public class TurnipaMonsterController : BadMonsterController
     protected override void Die()
     {
         if (_isDead) return;
-        _isDead = true;
 
         Split();
+        base.Die();
+    }
 
-        _move.Stop();
-
+    protected override void HandleItemDrop()
+    {
         if (Random.value <= _dropChance)
         {
-            _itemDrop.DropItem(_stat.Data.DropItem);
+            _itemDrop.DropItem(_stat.GetDropItem());
         }
-
-        ApplyState(MonsterState.Die);
-        _deathRoutine = StartCoroutine(DeathCoroutine());
     }
 
     private void Split()
