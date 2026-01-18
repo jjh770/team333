@@ -20,5 +20,10 @@ public class DamageUpItem : MonoBehaviour, IInteractable
     public void Interact(GameObject interactor)
     {
         // 공격력 올려주기
+        if (interactor.TryGetComponent(out PlayerStat playerStat))
+        {
+            playerStat.IncreaseDamage(_DamageUpAmount);
+            Destroy(gameObject);
+        }
     }
 }
