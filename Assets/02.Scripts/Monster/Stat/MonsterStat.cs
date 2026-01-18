@@ -59,4 +59,8 @@ public class MonsterStat : MonoBehaviour
         OnDamaged?.Invoke((int)amount);
     }
 
+    public GameObject GetDropItem()
+    {
+        return _data.DropItem;
+    }
 }

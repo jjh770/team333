@@ -167,10 +167,15 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _isDead = true;
 
         _move.Stop();
-        _itemDrop.DropItem(_stat.Data.DropItem);
-        
+        HandleItemDrop();
+
         ApplyState(MonsterState.Die);
         _deathRoutine = StartCoroutine(DeathCoroutine());
+    }
+
+    protected virtual void HandleItemDrop()
+    {
+        _itemDrop.DropItem(_stat.GetDropItem());
     }
 
     protected virtual IEnumerator DeathCoroutine()
