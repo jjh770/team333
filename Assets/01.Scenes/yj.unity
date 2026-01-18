@@ -32779,8 +32779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
   _floraInteraction: {fileID: 215770150}
   _cameraController: {fileID: 2032723201}
-  _endSceneName: EndScene
-  _lobbySceneName: MainLobby
 --- !u!4 &790425791
 Transform:
   m_ObjectHideFlags: 0
