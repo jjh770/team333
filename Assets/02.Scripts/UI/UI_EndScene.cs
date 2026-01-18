@@ -107,8 +107,8 @@ public class UI_EndScene : MonoBehaviour
 
         if (_animator != null)
         {
-            _animator.HidePanel("InputPanel");
-            _animator.PlayPanel("LeaderboardPanel");
+            _animator.HidePanel(UI_EndSceneAnimator.InputPanelName);
+            _animator.PlayPanel(UI_EndSceneAnimator.LeaderboardPanelName);
         }
         else
         {

@@ -7,24 +7,24 @@ public class UI_EndSceneAnimator : MonoBehaviour
     [Serializable]
     public class PanelAnimation
     {
-        public string name;
-        public RectTransform target;
-        public bool playOnStart = true;
+        public string Name;
+        public RectTransform Target;
+        public bool PlayOnStart = true;
         [Header("Animation Settings")]
-        public AnimationType type = AnimationType.DropFade;
-        public float duration = 0.5f;
-        public float delay = 0f;
-        public Ease ease = Ease.OutQuad;
+        public AnimationType Type = AnimationType.DropFade;
+        public float Duration = 0.5f;
+        public float Delay = 0f;
+        public Ease Ease = Ease.OutQuad;
         [Header("Drop Settings")]
-        public float startYOffset = 300f;
-        public float startScale = 0.3f;
-        public float fadeDuration = 0.25f;
+        public float StartYOffset = 300f;
+        public float StartScale = 0.3f;
+        public float FadeDuration = 0.25f;
         [Header("Slide Settings")]
-        public Vector2 slideDirection = Vector2.up;
+        public Vector2 SlideDirection = Vector2.up;
 
-        [HideInInspector] public Vector2 originalPosition;
-        [HideInInspector] public CanvasGroup canvasGroup;
-        [HideInInspector] public Tween currentTween;
+        [HideInInspector] public Vector2 OriginalPosition;
+        [HideInInspector] public CanvasGroup CanvasGroup;
+        [HideInInspector] public Tween CurrentTween;
     }
 
     public enum AnimationType
@@ -43,6 +43,9 @@ public class UI_EndSceneAnimator : MonoBehaviour
     [SerializeField] private float _globalDelay = 0f;
 
     private Sequence _masterSequence;
+
+    public const string InputPanelName = "InputPanel";
+    public const string LeaderboardPanelName = "LeaderboardPanel";
 
     private void Awake()
     {
@@ -65,15 +68,15 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
         foreach (var panel in _panels)
         {
-            if (panel.target == null) continue;
+            if (panel.Target == null) continue;
 
-            if (panel.playOnStart)
+            if (panel.PlayOnStart)
             {
                 PlayPanel(panel);
             }
             else
             {
-                panel.target.gameObject.SetActive(false);
+                panel.Target.gameObject.SetActive(false);
             }
         }
     }
@@ -87,13 +90,13 @@ public class UI_EndSceneAnimator : MonoBehaviour
     {
         foreach (var panel in _panels)
         {
-            if (panel.target == null) continue;
+            if (panel.Target == null) continue;
 
-            panel.originalPosition = panel.target.anchoredPosition;
-            panel.canvasGroup = panel.target.GetComponent<CanvasGroup>();
-            if (panel.canvasGroup == null)
+            panel.OriginalPosition = panel.Target.anchoredPosition;
+            panel.CanvasGroup = panel.Target.GetComponent<CanvasGroup>();
+            if (panel.CanvasGroup == null)
             {
-                panel.canvasGroup = panel.target.gameObject.AddComponent<CanvasGroup>();
+                panel.CanvasGroup = panel.Target.gameObject.AddComponent<CanvasGroup>();
             }
         }
     }
@@ -106,7 +109,7 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
         foreach (var panel in _panels)
         {
-            if (panel.target == null) continue;
+            if (panel.Target == null) continue;
             PlayPanel(panel);
         }
     }
@@ -130,13 +133,13 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
     private void PlayPanel(PanelAnimation panel)
     {
-        panel.currentTween?.Kill();
-        panel.target.gameObject.SetActive(true);
+        panel.CurrentTween?.Kill();
+        panel.Target.gameObject.SetActive(true);
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(panel.delay);
+        seq.AppendInterval(panel.Delay);
 
-        switch (panel.type)
+        switch (panel.Type)
         {
             case AnimationType.DropFade:
                 SetupDropFade(panel, seq);
@@ -152,44 +155,44 @@ public class UI_EndSceneAnimator : MonoBehaviour
                 break;
         }
 
-        panel.currentTween = seq;
+        panel.CurrentTween = seq;
     }
 
     private void SetupDropFade(PanelAnimation panel, Sequence seq)
     {
-        panel.target.anchoredPosition = new Vector2(panel.originalPosition.x, panel.originalPosition.y + panel.startYOffset);
-        panel.target.localScale = Vector3.one * panel.startScale;
-        panel.canvasGroup.alpha = 0f;
+        panel.Target.anchoredPosition = new Vector2(panel.OriginalPosition.x, panel.OriginalPosition.y + panel.StartYOffset);
+        panel.Target.localScale = Vector3.one * panel.StartScale;
+        panel.CanvasGroup.alpha = 0f;
 
-        seq.Append(panel.target.DOAnchorPosY(panel.originalPosition.y, panel.duration).SetEase(panel.ease));
-        seq.Join(panel.target.DOScale(Vector3.one, panel.duration).SetEase(Ease.OutBack));
-        seq.Join(panel.canvasGroup.DOFade(1f, panel.fadeDuration));
+        seq.Append(panel.Target.DOAnchorPosY(panel.OriginalPosition.y, panel.Duration).SetEase(panel.Ease));
+        seq.Join(panel.Target.DOScale(Vector3.one, panel.Duration).SetEase(Ease.OutBack));
+        seq.Join(panel.CanvasGroup.DOFade(1f, panel.FadeDuration));
     }
 
     private void SetupSlideIn(PanelAnimation panel, Sequence seq)
     {
-        Vector2 startPos = panel.originalPosition + panel.slideDirection * panel.startYOffset;
-        panel.target.anchoredPosition = startPos;
-        panel.canvasGroup.alpha = 0f;
+        Vector2 startPos = panel.OriginalPosition + panel.SlideDirection * panel.StartYOffset;
+        panel.Target.anchoredPosition = startPos;
+        panel.CanvasGroup.alpha = 0f;
 
-        seq.Append(panel.target.DOAnchorPos(panel.originalPosition, panel.duration).SetEase(panel.ease));
-        seq.Join(panel.canvasGroup.DOFade(1f, panel.fadeDuration));
+        seq.Append(panel.Target.DOAnchorPos(panel.OriginalPosition, panel.Duration).SetEase(panel.Ease));
+        seq.Join(panel.CanvasGroup.DOFade(1f, panel.FadeDuration));
     }
 
     private void SetupScalePop(PanelAnimation panel, Sequence seq)
     {
-        panel.target.localScale = Vector3.zero;
-        panel.canvasGroup.alpha = 1f;
+        panel.Target.localScale = Vector3.zero;
+        panel.CanvasGroup.alpha = 1f;
 
-        seq.Append(panel.target.DOScale(Vector3.one, panel.duration).SetEase(Ease.OutBack));
+        seq.Append(panel.Target.DOScale(Vector3.one, panel.Duration).SetEase(Ease.OutBack));
     }
 
     private void SetupFadeOnly(PanelAnimation panel, Sequence seq)
     {
-        panel.canvasGroup.alpha = 0f;
-        panel.target.localScale = Vector3.one;
+        panel.CanvasGroup.alpha = 0f;
+        panel.Target.localScale = Vector3.one;
 
-        seq.Append(panel.canvasGroup.DOFade(1f, panel.duration).SetEase(panel.ease));
+        seq.Append(panel.CanvasGroup.DOFade(1f, panel.Duration).SetEase(panel.Ease));
     }
 
     public void HidePanel(string panelName, float duration = 0.3f)
@@ -211,14 +214,14 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
     private void HidePanel(PanelAnimation panel, float duration)
     {
-        panel.currentTween?.Kill();
+        panel.CurrentTween?.Kill();
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(panel.canvasGroup.DOFade(0f, duration));
-        seq.Join(panel.target.DOScale(Vector3.one * 0.8f, duration).SetEase(Ease.InBack));
-        seq.OnComplete(() => panel.target.gameObject.SetActive(false));
+        seq.Append(panel.CanvasGroup.DOFade(0f, duration));
+        seq.Join(panel.Target.DOScale(Vector3.one * 0.8f, duration).SetEase(Ease.InBack));
+        seq.OnComplete(() => panel.Target.gameObject.SetActive(false));
 
-        panel.currentTween = seq;
+        panel.CurrentTween = seq;
     }
 
     public void ResetPanel(string panelName)
@@ -232,10 +235,10 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
     private void ResetPanel(PanelAnimation panel)
     {
-        panel.currentTween?.Kill();
-        panel.target.anchoredPosition = panel.originalPosition;
-        panel.target.localScale = Vector3.one;
-        panel.canvasGroup.alpha = 1f;
+        panel.CurrentTween?.Kill();
+        panel.Target.anchoredPosition = panel.OriginalPosition;
+        panel.Target.localScale = Vector3.one;
+        panel.CanvasGroup.alpha = 1f;
     }
 
     public void ResetAll()
@@ -243,7 +246,7 @@ public class UI_EndSceneAnimator : MonoBehaviour
         KillAll();
         foreach (var panel in _panels)
         {
-            if (panel.target == null) continue;
+            if (panel.Target == null) continue;
             ResetPanel(panel);
         }
     }
@@ -253,7 +256,7 @@ public class UI_EndSceneAnimator : MonoBehaviour
         _masterSequence?.Kill();
         foreach (var panel in _panels)
         {
-            panel.currentTween?.Kill();
+            panel.CurrentTween?.Kill();
         }
     }
 
@@ -261,7 +264,7 @@ public class UI_EndSceneAnimator : MonoBehaviour
     {
         foreach (var panel in _panels)
         {
-            if (panel.name == panelName) return panel;
+            if (panel.Name == panelName) return panel;
         }
         Debug.LogWarning($"Panel '{panelName}' not found.");
         return null;
