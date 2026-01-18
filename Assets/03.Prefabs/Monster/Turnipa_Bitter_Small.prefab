@@ -393,6 +393,7 @@ MonoBehaviour:
   _splitMonsterPrefab: {fileID: 0}
   _splitCount: 3
   _splitOffset: 0.5
+  _dropChance: 0.05
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
