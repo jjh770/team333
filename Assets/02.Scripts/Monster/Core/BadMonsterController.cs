@@ -21,6 +21,9 @@ public class BadMonsterController : BaseMonsterController, IDamageable
     protected MonsterItemDropComponent _itemDrop;
     protected MonsterSensorComponent _sensor;
 
+    [Header("Sound")]
+    [SerializeField] protected MonsterSound _monsterSound;
+
     // BT에서 참조할 현재 타겟
     public Transform CurrentTarget { get; set; }
 
@@ -220,7 +223,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _stat.TakeDamage(damage.Value);
         _health.FlashWhite();
         _attack.InitCooltime();
-        MonsterSound.Instance.Hit();
+        _monsterSound?.Hit();
 
         if (damage.IsKnockBack)
         {

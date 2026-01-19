@@ -424,9 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSensorComponent
   Target: 0
-  _playerNearDistance: 7
-  _targetUpdateInterval: 0.3
-  _targetUpdateTimer: 0.2
 --- !u!114 &-4426105785761420350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeeMonsterController
   _deathAnimationDuration: 0.19
+  _monsterSound: {fileID: 4178061326575622916, guid: 8edd0766b0973f94f8d611e2342ba844, type: 3}
   _separationDistance: 1
   _separationWeight: 3
   _minVelocitySqrForRotation: 0.01

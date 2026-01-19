@@ -2,27 +2,7 @@
 
 public class MonsterSound : MonoBehaviour
 {
-    public static MonsterSound Instance { get; private set; }
-
     [SerializeField] private MonsterSoundData _soundData;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    private void OnDestroy()
-    {
-        if (Instance == this)
-        {
-            Instance = null;
-        }
-    }
 
     public void Hit()
     {
