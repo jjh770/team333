@@ -15,6 +15,14 @@ public class FloraSoundData : ScriptableObject
     [Tooltip("겟 아이템 사운드")]
     public SoundInfo GetItemSound { get; private set; }
 
+    [field: SerializeField]
+    [Tooltip("판자 퀘스트 사운드")]
+    public SoundInfo BridgeQuestSound { get; private set; }
+
+    [field: SerializeField]
+    [Tooltip("퀘스트 완료 사운드")]
+    public SoundInfo QuestCompleteSound { get; private set; }
+
     public SoundInfo GetRandomInteractionSound()
     {
         if (InteractionSounds == null || InteractionSounds.Length == 0) return default;

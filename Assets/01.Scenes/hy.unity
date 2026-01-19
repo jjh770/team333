@@ -14850,6 +14850,7 @@ MonoBehaviour:
   - {fileID: 471764466}
   _plankMonsterSpawner: {fileID: 4407074175118380590}
   _floraInteraction: {fileID: 215770150}
+  _floraSound: {fileID: 2095465960}
 --- !u!65 &354122879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74303,6 +74304,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1361554184085608642, guid: 37889ce05810bec4394296ec05bfacdf, type: 3}
+      propertyPath: _floraSound
+      value: 
+      objectReference: {fileID: 2095465960}
+    - target: {fileID: 1361554184085608642, guid: 37889ce05810bec4394296ec05bfacdf, type: 3}
       propertyPath: _endingSequence
       value: 
       objectReference: {fileID: 813633525}
@@ -82512,6 +82517,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c50f6ccf855d644fad78441e5ef9d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SplineWaypointPath
+--- !u!114 &2095465960 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3152193458412356002, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+  m_PrefabInstance: {fileID: 6667338798674275833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ec83c60f146af4a870f33f18d83f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraSound
 --- !u!4 &2097382959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8049028408614135377, guid: 849175e78ec1e934294269b8aacb767a, type: 3}

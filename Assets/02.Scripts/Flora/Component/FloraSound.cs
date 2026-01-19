@@ -22,6 +22,18 @@ public class FloraSound : MonoBehaviour
         PlaySoundInfo(_soundData.GetItemSound);
     }
 
+    public void PlayBridgeQuestSound()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.BridgeQuestSound);
+    }
+
+    public void PlayQuestComplete()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.QuestCompleteSound);
+    }
+
     private void PlaySoundInfo(SoundInfo info)
     {
         if (info.Clip == null) return;

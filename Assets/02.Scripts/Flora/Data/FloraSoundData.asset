@@ -25,3 +25,9 @@ MonoBehaviour:
   <GetItemSound>k__BackingField:
     Clip: {fileID: 8300000, guid: 40db7d427d704974a943db1bc4afd4e2, type: 3}
     StartTime: 0
+  <BridgeQuestSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 9c1fd01e19b9f884494b5c1b6a9bf2ab, type: 3}
+    StartTime: 0
+  <QuestCompleteSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 86a134a5875b1c24d972c267e3fa7145, type: 3}
+    StartTime: 0
