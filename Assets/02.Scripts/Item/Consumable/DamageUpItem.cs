@@ -1,29 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class DamageUpItem : MonoBehaviour, IInteractable
+public class DamageUpItem : ConsumableItemBase
 {
-    [SerializeField] private float _DamageUpAmount;
+    [SerializeField] private float _damageUpAmount;
 
-    public InteractionType Type => InteractionType.Use;
-    public IconType IconType => IconType.Potion;
+    public override IconType IconType => IconType.Potion;
 
-    public Transform Transform
+    protected override bool OnConsume(GameObject interactor)
     {
-        get
-        {
-            if (this == null) return null;
-            return transform;
-        }
-    }
-    public bool CanInteract => true;
-
-    public void Interact(GameObject interactor)
-    {
-        // 공격력 올려주기
         if (interactor.TryGetComponent(out PlayerStat playerStat))
         {
-            playerStat.IncreaseDamage(_DamageUpAmount);
-            Destroy(gameObject);
+            playerStat.IncreaseDamage(_damageUpAmount);
+            return true;
         }
+        return false;
     }
 }

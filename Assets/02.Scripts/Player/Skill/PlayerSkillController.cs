@@ -14,6 +14,7 @@ public class PlayerSkillController : MonoBehaviour
     private TweenMovement _tweenMovement;
     private PlayerSkillRange _skillRange;
     private PlayerEffectController _effectController;
+    private PlayerSound _playerSound;
 
     private int _skillLevel = 0;
     private float _lastUseTime = -999f;
@@ -41,6 +42,7 @@ public class PlayerSkillController : MonoBehaviour
         _tweenMovement = GetComponent<TweenMovement>();
         _skillRange = GetComponent<PlayerSkillRange>();
         _effectController = GetComponent<PlayerEffectController>();
+        _playerSound = GetComponent<PlayerSound>();
     }
 
     private void OnEnable()
@@ -132,6 +134,7 @@ public class PlayerSkillController : MonoBehaviour
         {
             _skillRange.ExecuteSkillHit();
             PlaySkillEffect();
+            _playerSound?.PlaySkill(_skillLevel - 1);
         }
     }
 

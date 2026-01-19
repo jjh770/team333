@@ -12,6 +12,7 @@ public class PlayerDash : MonoBehaviour
     private PlayerStateManager _stateManager;
     private PlayerInputHandler _inputHandler;
     private TweenMovement _tweenMovement;
+    private PlayerSound _playerSound;
     private float _dashCooldownTimer;
 
     public event Action<float> OnDashStart;
@@ -24,6 +25,7 @@ public class PlayerDash : MonoBehaviour
         _stateManager = GetComponent<PlayerStateManager>();
         _inputHandler = GetComponent<PlayerInputHandler>();
         _tweenMovement = GetComponent<TweenMovement>();
+        _playerSound = GetComponent<PlayerSound>();
     }
 
     private void OnEnable()
@@ -61,6 +63,7 @@ public class PlayerDash : MonoBehaviour
         _stateManager.ChangeState(PlayerState.Dashing);
         _dashCooldownTimer = _dashData.DashCoolDown;
         _animatorController.DashAnimation();
+        _playerSound?.PlayDash();
 
         transform.rotation = Quaternion.LookRotation(direction);
 

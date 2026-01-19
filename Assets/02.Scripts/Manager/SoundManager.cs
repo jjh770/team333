@@ -1,10 +1,6 @@
 using UnityEngine;
 using MoreMountains.Tools;
 
-/// <summary>
-/// 사운드 재생 로직 담당
-/// 실제 사운드 데이터는 각 SoundData SO에서 관리
-/// </summary>
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -91,17 +87,11 @@ public class SoundManager : MonoBehaviour
 
     #region SFX
 
-    /// <summary>
-    /// SFX 재생
-    /// </summary>
     public void PlaySFX(AudioClip clip, float volumeMultiplier = 1f)
     {
         PlaySFX(clip, 0f, volumeMultiplier);
     }
 
-    /// <summary>
-    /// SFX 재생 (시작 시간 지정)
-    /// </summary>
     public void PlaySFX(AudioClip clip, float startTime, float volumeMultiplier)
     {
         if (clip == null) return;
@@ -115,9 +105,6 @@ public class SoundManager : MonoBehaviour
         MMSoundManagerSoundPlayEvent.Trigger(clip, options);
     }
 
-    /// <summary>
-    /// 랜덤 SFX 재생 (배열 중 하나)
-    /// </summary>
     public void PlayRandomSFX(AudioClip[] clips, float volumeMultiplier = 1f)
     {
         if (clips == null || clips.Length == 0) return;
@@ -130,9 +117,6 @@ public class SoundManager : MonoBehaviour
 
     #region Volume Control
 
-    /// <summary>
-    /// BGM 볼륨 설정
-    /// </summary>
     public void SetBGMVolume(float volume)
     {
         _bgmVolume = Mathf.Clamp01(volume);
@@ -143,9 +127,6 @@ public class SoundManager : MonoBehaviour
         );
     }
 
-    /// <summary>
-    /// SFX 볼륨 설정
-    /// </summary>
     public void SetSFXVolume(float volume)
     {
         _sfxVolume = Mathf.Clamp01(volume);
@@ -155,10 +136,7 @@ public class SoundManager : MonoBehaviour
             _sfxVolume
         );
     }
-
-    /// <summary>
-    /// 전체 음소거
-    /// </summary>
+    
     public void MuteAll(bool mute)
     {
         MMSoundManagerTrackEvent.Trigger(

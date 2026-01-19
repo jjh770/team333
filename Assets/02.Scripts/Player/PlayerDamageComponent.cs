@@ -13,6 +13,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
 
     private PlayerStat _playerStat;
     private PlayerStateManager _stateManager;
+    private PlayerSound _playerSound;
     private bool _isDamaged;
     private bool _isInvincible;
     private SkinnedMeshRenderer[] _renderers;
@@ -24,6 +25,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
     {
         _playerStat = GetComponent<PlayerStat>();
         _stateManager = GetComponent<PlayerStateManager>();
+        _playerSound = GetComponent<PlayerSound>();
         _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
@@ -49,6 +51,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
             return false;
 
         _playerStat.DecreaseHealth(damage.Value);
+        _playerSound?.PlayHit();
 
         if (!_isDamaged)
         {

@@ -13,15 +13,41 @@ MonoBehaviour:
   m_Name: PlayerSoundData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSoundData
   <AttackSounds>k__BackingField:
-  - {fileID: 8300000, guid: b783cd768fa88d64a90cdb0549d76e2f, type: 3}
-  - {fileID: 8300000, guid: 5e52aed6739fb56429d0b5a8773822f9, type: 3}
-  - {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
-  <AttackSoundStartTimes>k__BackingField:
-  - 0.4
-  - 5.9
-  - 0
-  <HitSounds>k__BackingField: []
-  <DeathSFX>k__BackingField: {fileID: 0}
-  <FootstepSounds>k__BackingField: []
-  <DashSFX>k__BackingField: {fileID: 0}
-  <SkillSounds>k__BackingField: []
+  - Clip: {fileID: 8300000, guid: b783cd768fa88d64a90cdb0549d76e2f, type: 3}
+    StartTime: 0.4
+  - Clip: {fileID: 8300000, guid: 5e52aed6739fb56429d0b5a8773822f9, type: 3}
+    StartTime: 5.8
+  - Clip: {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
+    StartTime: 0.15
+  <HitSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 6728b73a6269d674d849a2aad5e155aa, type: 3}
+    StartTime: 0.1
+  <DeathSFX>k__BackingField:
+    Clip: {fileID: 0}
+    StartTime: 0
+  <FootstepSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 557e5ff81b995d94f83dc038a3bc3b35, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 111cd549a8d378441b4792def72a0f53, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 5965882e82c95a04fa51b1b759ab88cb, type: 3}
+    StartTime: 0
+  <DashSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 45893a289801e234093e3b1871fbe462, type: 3}
+    StartTime: 0.75
+  <SkillSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 3320309d2e6e8ec499fc2005a1a4945f, type: 3}
+    StartTime: 0.05
+  - Clip: {fileID: 8300000, guid: e793f8645c53702448b6143ea93b18f9, type: 3}
+    StartTime: 0.15
+  - Clip: {fileID: 8300000, guid: f83698d9d88f82a4186bc67df95f7e56, type: 3}
+    StartTime: 0.12
+  <ItemConsumeSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 04bb549b6b8e3514f96c83af20a588fc, type: 3}
+    StartTime: 0
+  <ItemHoldSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 34a4fdf6bbd5fe24e8f4d53604a6b735, type: 3}
+    StartTime: 0.15
+  <ItemThrowSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 2adf66e079195bc4185bfec5381e9c15, type: 3}
+    StartTime: 0

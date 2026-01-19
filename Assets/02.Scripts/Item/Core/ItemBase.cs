@@ -31,6 +31,7 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     public event Action OnDropped;
 
     private const string GroundTag = "Ground";
+    private PlayerSound _holderSound;
 
     // IInteractable
     public Transform Transform => transform;
@@ -66,6 +67,8 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
     public void OnThrown(Vector3 direction, float force)
     {
+        _holderSound?.PlayItemThrow();
+
         Drop();
         _isThrown = true;
         _rigidbody?.AddForce(direction * force, ForceMode.Impulse);
@@ -97,6 +100,10 @@ public abstract class ItemBase : MonoBehaviour, IPickable
         transform.SetParent(holder);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        // 아이템 집기 사운드
+        _holderSound = holder.GetComponentInParent<PlayerSound>();
+        _holderSound?.PlayItemHold();
 
         OnHeld?.Invoke();
     }

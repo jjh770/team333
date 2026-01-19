@@ -39,27 +39,34 @@ public class PlayerSoundData : ScriptableObject
     [Tooltip("스킬 사용 사운드")]
     public AttackSoundInfo[] SkillSounds { get; private set; }
 
-    public AudioClip GetAttackSound(int comboIndex)
+    [Header("Item")]
+    [field: SerializeField]
+    [Tooltip("소비 아이템 획득 사운드")]
+    public AttackSoundInfo ItemConsumeSFX { get; private set; }
+
+    [field: SerializeField]
+    [Tooltip("아이템 집기 사운드")]
+    public AttackSoundInfo ItemHoldSFX { get; private set; }
+
+    [field: SerializeField]
+    [Tooltip("아이템 던지기 사운드")]
+    public AttackSoundInfo ItemThrowSFX { get; private set; }
+
+    public AttackSoundInfo GetAttackSound(int comboIndex)
     {
-        if (AttackSounds == null || AttackSounds.Length == 0) return null;
-        return AttackSounds[Mathf.Clamp(comboIndex, 0, AttackSounds.Length - 1)].Clip;
+        if (AttackSounds == null || AttackSounds.Length == 0) return default;
+        return AttackSounds[Mathf.Clamp(comboIndex, 0, AttackSounds.Length - 1)];
     }
 
-    public float GetAttackSoundStartTime(int comboIndex)
+    public AttackSoundInfo GetRandomHitSound()
     {
-        if (AttackSounds == null || AttackSounds.Length == 0) return 0f;
-        return AttackSounds[Mathf.Clamp(comboIndex, 0, AttackSounds.Length - 1)].StartTime;
+        if (HitSounds == null || HitSounds.Length == 0) return default;
+        return HitSounds[Random.Range(0, HitSounds.Length)];
     }
 
-    public AudioClip GetRandomHitSound()
+    public AttackSoundInfo GetRandomFootstepSound()
     {
-        if (HitSounds == null || HitSounds.Length == 0) return null;
-        return HitSounds[Random.Range(0, HitSounds.Length)].Clip;
-    }
-
-    public AudioClip GetRandomFootstepSound()
-    {
-        if (FootstepSounds == null || FootstepSounds.Length == 0) return null;
-        return FootstepSounds[Random.Range(0, FootstepSounds.Length)].Clip;
+        if (FootstepSounds == null || FootstepSounds.Length == 0) return default;
+        return FootstepSounds[Random.Range(0, FootstepSounds.Length)];
     }
 }
