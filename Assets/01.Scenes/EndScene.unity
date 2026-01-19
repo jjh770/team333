@@ -402,7 +402,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &175204894
 Canvas:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ Canvas:
   m_GameObject: {fileID: 175204891}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 2117677986}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -434,25 +434,25 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175204891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 224792064}
   - {fileID: 1066294163}
+  - {fileID: 670858531}
   - {fileID: 1044969982}
   - {fileID: 1906853542}
   - {fileID: 2054509419}
-  - {fileID: 1237202300}
-  - {fileID: 1497528365}
+  - {fileID: 1688824385}
   - {fileID: 2077180669}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920.2772, y: 1079.8441}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &224792063
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +509,7 @@ MonoBehaviour:
   _leaderboardPanel: {fileID: 2054509418}
   _leaderboardContainer: {fileID: 605899389}
   _entryPrefab: {fileID: 5487143942854711481, guid: 561841b6838bbf946b5c236758399078, type: 3}
+  _buttonPanel: {fileID: 1688824384}
   _retryButton: {fileID: 1237202301}
   _mainMenuButton: {fileID: 1497528366}
   _gameSceneName: yj
@@ -1273,11 +1274,11 @@ RectTransform:
   - {fileID: 1851232073}
   - {fileID: 2024506170}
   - {fileID: 807587290}
-  m_Father: {fileID: 1066294163}
+  m_Father: {fileID: 175204895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 539.92206}
+  m_AnchoredPosition: {x: 0, y: 540}
   m_SizeDelta: {x: 1792, y: 1079.8441}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &670858532
@@ -2318,8 +2319,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 670858531}
+  m_Children: []
   m_Father: {fileID: 175204895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2391,17 +2391,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237202299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 2.7755576e-17, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0000122014035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1637171773}
-  m_Father: {fileID: 175204895}
+  m_Father: {fileID: 1688824385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -371, y: -413}
+  m_AnchoredPosition: {x: -370, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237202301
@@ -2885,17 +2885,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497528364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 2.7755576e-17, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 262562472}
-  m_Father: {fileID: 175204895}
+  m_Father: {fileID: 1688824385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 370, y: -413}
+  m_AnchoredPosition: {x: 370, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1497528366
@@ -3460,6 +3460,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685239945}
   m_CullTransparentMesh: 1
+--- !u!1 &1688824384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1688824385}
+  m_Layer: 5
+  m_Name: ButtonPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1688824385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688824384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1237202300}
+  - {fileID: 1497528365}
+  m_Father: {fileID: 175204895}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -410}
+  m_SizeDelta: {x: 890, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1712298677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4496,81 +4533,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054509418}
   m_CullTransparentMesh: 1
---- !u!1 &2073376471
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2073376472}
-  - component: {fileID: 2073376474}
-  - component: {fileID: 2073376473}
-  m_Layer: 5
-  m_Name: BGMask2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2073376472
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073376471}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2077180669}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2073376473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073376471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5529412}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a56455959d798744b0a56d5de747f0a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &2073376474
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2073376471}
-  m_CullTransparentMesh: 1
 --- !u!1 &2076324565
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,10 +4599,9 @@ RectTransform:
   m_GameObject: {fileID: 2077180668}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2073376472}
+  m_Children: []
   m_Father: {fileID: 175204895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4748,7 +4709,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 539.922
   m_Depth: -1
   m_CullingMask:
@@ -4923,44 +4884,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_EndSceneAnimator
   _panels:
+  - Name: BGMask
+    Target: {fileID: 2077180669}
+    PlayOnStart: 1
+    Type: 3
+    Duration: 0.5
+    Delay: 0
+    Ease: 18
+    StartPosition: {x: 0, y: 0}
+    EndPosition: {x: 0, y: 0}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    StartScale: 1.5
+    FadeDuration: 0
+    CanvasGroup: {fileID: 0}
   - Name: LeaderboardWoodImage
     Target: {fileID: 670858531}
     PlayOnStart: 1
     Type: 0
     Duration: 1
     Delay: 0
-    Ease: 6
-    StartYOffset: 800
-    StartScale: 0.3
-    FadeDuration: 0.5
-    SlideDirection: {x: 500, y: 0}
-    OriginalPosition: {x: 0, y: 539.9222}
+    Ease: 27
+    StartPosition: {x: 0, y: 1080}
+    EndPosition: {x: 0, y: 540}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    StartScale: 1
+    FadeDuration: 0
     CanvasGroup: {fileID: 0}
   - Name: ResultPanel
     Target: {fileID: 1044969982}
     PlayOnStart: 1
     Type: 0
-    Duration: 0.5
+    Duration: 1
     Delay: 1
-    Ease: 6
-    StartYOffset: 300
-    StartScale: 0
-    FadeDuration: 0.25
-    SlideDirection: {x: 0, y: -1}
-    OriginalPosition: {x: 0, y: 258.00018}
+    Ease: 18
+    StartPosition: {x: -100, y: 260}
+    EndPosition: {x: 0, y: 260}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    StartScale: 1
+    FadeDuration: 1
     CanvasGroup: {fileID: 0}
   - Name: InputPanel
     Target: {fileID: 1906853542}
     PlayOnStart: 1
     Type: 0
-    Duration: 0.5
-    Delay: 1.5
-    Ease: 6
-    StartYOffset: 300
-    StartScale: 0
-    FadeDuration: 0.25
-    SlideDirection: {x: 0, y: -1}
-    OriginalPosition: {x: 0, y: -130}
+    Duration: 1
+    Delay: 1
+    Ease: 18
+    StartPosition: {x: -100, y: -130}
+    EndPosition: {x: 0, y: -130}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    StartScale: 1
+    FadeDuration: 1
     CanvasGroup: {fileID: 0}
   - Name: LeaderboardPanel
     Target: {fileID: 2054509419}
@@ -4968,12 +4946,27 @@ MonoBehaviour:
     Type: 0
     Duration: 0.5
     Delay: 0
-    Ease: 6
-    StartYOffset: 300
+    Ease: 18
+    StartPosition: {x: 0, y: 80}
+    EndPosition: {x: 0, y: -80}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
     StartScale: 0
     FadeDuration: 0.25
-    SlideDirection: {x: 0, y: -1}
-    OriginalPosition: {x: 0, y: -130}
+    CanvasGroup: {fileID: 0}
+  - Name: ButtonPanel
+    Target: {fileID: 1688824385}
+    PlayOnStart: 0
+    Type: 0
+    Duration: 1
+    Delay: 0
+    Ease: 18
+    StartPosition: {x: -50, y: -410}
+    EndPosition: {x: 0, y: -410}
+    StartRotation: {x: 0, y: 0, z: 0}
+    EndRotation: {x: 0, y: 0, z: 0}
+    StartScale: 1
+    FadeDuration: 1
     CanvasGroup: {fileID: 0}
   _playOnStart: 1
   _globalDelay: 0

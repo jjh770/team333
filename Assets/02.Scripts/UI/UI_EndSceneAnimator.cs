@@ -1,5 +1,5 @@
-using System;
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class UI_EndSceneAnimator : MonoBehaviour
@@ -10,19 +10,27 @@ public class UI_EndSceneAnimator : MonoBehaviour
         public string Name;
         public RectTransform Target;
         public bool PlayOnStart = true;
+
         [Header("Animation Settings")]
         public AnimationType Type = AnimationType.DropFade;
         public float Duration = 0.5f;
         public float Delay = 0f;
         public Ease Ease = Ease.OutQuad;
-        [Header("Drop Settings")]
-        public float StartYOffset = 300f;
-        public float StartScale = 0.3f;
-        public float FadeDuration = 0.25f;
-        [Header("Slide Settings")]
-        public Vector2 SlideDirection = Vector2.up;
 
-        [HideInInspector] public Vector2 OriginalPosition;
+        [Header("Position Settings")]
+        public Vector2 StartPosition;
+        public Vector2 EndPosition;
+
+        [Header("Rotation Settings")]
+        public Vector3 StartRotation;
+        public Vector3 EndRotation;
+
+        [Header("Scale Settings")]
+        public float StartScale = 0.3f;
+
+        [Header("Fade Settings")]
+        public float FadeDuration = 0.25f;
+
         [HideInInspector] public CanvasGroup CanvasGroup;
         [HideInInspector] public Tween CurrentTween;
     }
@@ -46,6 +54,7 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
     public const string InputPanelName = "InputPanel";
     public const string LeaderboardPanelName = "LeaderboardPanel";
+    public const string ButtonPanelName = "ButtonPanel";
 
     private void Awake()
     {
@@ -92,7 +101,6 @@ public class UI_EndSceneAnimator : MonoBehaviour
         {
             if (panel.Target == null) continue;
 
-            panel.OriginalPosition = panel.Target.anchoredPosition;
             panel.CanvasGroup = panel.Target.GetComponent<CanvasGroup>();
             if (panel.CanvasGroup == null)
             {
@@ -160,22 +168,25 @@ public class UI_EndSceneAnimator : MonoBehaviour
 
     private void SetupDropFade(PanelAnimation panel, Sequence seq)
     {
-        panel.Target.anchoredPosition = new Vector2(panel.OriginalPosition.x, panel.OriginalPosition.y + panel.StartYOffset);
+        panel.Target.anchoredPosition = panel.StartPosition;
+        panel.Target.localEulerAngles = panel.StartRotation;
         panel.Target.localScale = Vector3.one * panel.StartScale;
         panel.CanvasGroup.alpha = 0f;
 
-        seq.Append(panel.Target.DOAnchorPosY(panel.OriginalPosition.y, panel.Duration).SetEase(panel.Ease));
+        seq.Append(panel.Target.DOAnchorPos(panel.EndPosition, panel.Duration).SetEase(panel.Ease));
+        seq.Join(panel.Target.DOLocalRotate(panel.EndRotation, panel.Duration).SetEase(panel.Ease));
         seq.Join(panel.Target.DOScale(Vector3.one, panel.Duration).SetEase(Ease.OutBack));
         seq.Join(panel.CanvasGroup.DOFade(1f, panel.FadeDuration));
     }
 
     private void SetupSlideIn(PanelAnimation panel, Sequence seq)
     {
-        Vector2 startPos = panel.OriginalPosition + panel.SlideDirection * panel.StartYOffset;
-        panel.Target.anchoredPosition = startPos;
+        panel.Target.anchoredPosition = panel.StartPosition;
+        panel.Target.localEulerAngles = panel.StartRotation;
         panel.CanvasGroup.alpha = 0f;
 
-        seq.Append(panel.Target.DOAnchorPos(panel.OriginalPosition, panel.Duration).SetEase(panel.Ease));
+        seq.Append(panel.Target.DOAnchorPos(panel.EndPosition, panel.Duration).SetEase(panel.Ease));
+        seq.Join(panel.Target.DOLocalRotate(panel.EndRotation, panel.Duration).SetEase(panel.Ease));
         seq.Join(panel.CanvasGroup.DOFade(1f, panel.FadeDuration));
     }
 
@@ -236,7 +247,8 @@ public class UI_EndSceneAnimator : MonoBehaviour
     private void ResetPanel(PanelAnimation panel)
     {
         panel.CurrentTween?.Kill();
-        panel.Target.anchoredPosition = panel.OriginalPosition;
+        panel.Target.anchoredPosition = panel.EndPosition;
+        panel.Target.localEulerAngles = panel.EndRotation;
         panel.Target.localScale = Vector3.one;
         panel.CanvasGroup.alpha = 1f;
     }
@@ -281,41 +293,6 @@ public class UI_EndSceneAnimator : MonoBehaviour
         }
         InitializePanels();
         PlayAll();
-    }
-
-    [ContextMenu("Reset All Animations")]
-    private void TestResetAll()
-    {
-        if (!Application.isPlaying)
-        {
-            Debug.LogWarning("Play 모드에서만 테스트 가능합니다.");
-            return;
-        }
-        ResetAll();
-    }
-
-    [ContextMenu("Play Panel 0")]
-    private void TestPlayPanel0() => TestPlayPanelAt(0);
-
-    [ContextMenu("Play Panel 1")]
-    private void TestPlayPanel1() => TestPlayPanelAt(1);
-
-    [ContextMenu("Play Panel 2")]
-    private void TestPlayPanel2() => TestPlayPanelAt(2);
-
-    private void TestPlayPanelAt(int index)
-    {
-        if (!Application.isPlaying)
-        {
-            Debug.LogWarning("Play 모드에서만 테스트 가능합니다.");
-            return;
-        }
-        if (index < _panels.Length)
-        {
-            InitializePanels();
-            ResetPanel(_panels[index]);
-            PlayPanel(index);
-        }
     }
 #endif
 }

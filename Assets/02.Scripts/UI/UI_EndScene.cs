@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI_EndScene : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class UI_EndScene : MonoBehaviour
     [SerializeField] private GameObject _entryPrefab;
 
     [Header("Buttons")]
+    [SerializeField] private GameObject _buttonPanel;
     [SerializeField] private Button _retryButton;
     [SerializeField] private Button _mainMenuButton;
 
@@ -57,13 +58,6 @@ public class UI_EndScene : MonoBehaviour
                 ? LeaderboardManager.Instance.GetRank(_clearTime)
                 : 1;
             _rankText.text = $"{rank}";
-        }
-
-        // Animator가 없을 때만 직접 제어
-        if (_animator == null)
-        {
-            if (_inputPanel != null) _inputPanel.SetActive(true);
-            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(false);
         }
     }
 
@@ -109,11 +103,7 @@ public class UI_EndScene : MonoBehaviour
         {
             _animator.HidePanel(UI_EndSceneAnimator.InputPanelName);
             _animator.PlayPanel(UI_EndSceneAnimator.LeaderboardPanelName);
-        }
-        else
-        {
-            if (_inputPanel != null) _inputPanel.SetActive(false);
-            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(true);
+            _animator.PlayPanel(UI_EndSceneAnimator.ButtonPanelName);
         }
     }
 
