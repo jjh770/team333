@@ -15,3 +15,10 @@ MonoBehaviour:
   <SpeedUpSFX>k__BackingField:
     Clip: {fileID: 8300000, guid: 4caefc123fcd8194d804c1294244780a, type: 3}
     StartTime: 0
+  <InteractionSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 2c6868cf44d6e5a4b81a54a9ff70cc9e, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: c0e8dcf339359fb4eacd44893435c03e, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 6913af9db8d08104db1e275a86df9bd1, type: 3}
+    StartTime: 0

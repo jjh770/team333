@@ -85078,10 +85078,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: _waypoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: '_waypoints.Array.data[0]'
       value: 
       objectReference: {fileID: 295952774}
@@ -85097,50 +85093,6 @@ PrefabInstance:
       propertyPath: '_waypoints.Array.data[3]'
       value: 
       objectReference: {fileID: 1591327895}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1677512900}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[5]'
-      value: 
-      objectReference: {fileID: 259051317}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[6]'
-      value: 
-      objectReference: {fileID: 331220912}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[7]'
-      value: 
-      objectReference: {fileID: 1241350923}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[8]'
-      value: 
-      objectReference: {fileID: 1389872872}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[9]'
-      value: 
-      objectReference: {fileID: 823507189}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[10]'
-      value: 
-      objectReference: {fileID: 2050190918}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[11]'
-      value: 
-      objectReference: {fileID: 1303189793}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[12]'
-      value: 
-      objectReference: {fileID: 1033098483}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[13]'
-      value: 
-      objectReference: {fileID: 289685436}
-    - target: {fileID: 8368052510557095813, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
-      propertyPath: '_waypoints.Array.data[14]'
-      value: 
-      objectReference: {fileID: 1420851334}
     - target: {fileID: 8590952865332236622, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: _effectPool
       value: 
