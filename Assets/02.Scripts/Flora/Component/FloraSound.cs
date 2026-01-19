@@ -10,6 +10,12 @@ public class FloraSound : MonoBehaviour
         PlaySoundInfo(_soundData.SpeedUpSFX);
     }
 
+    public void PlayInteraction()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.GetRandomInteractionSound());
+    }
+
     private void PlaySoundInfo(SoundInfo info)
     {
         if (info.Clip == null) return;
