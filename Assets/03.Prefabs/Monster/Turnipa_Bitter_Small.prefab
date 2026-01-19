@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnipaMonsterController
   _deathAnimationDuration: 0.19
+  _monsterSound: {fileID: 4178061326575622916, guid: 8edd0766b0973f94f8d611e2342ba844, type: 3}
   _splitMonsterPrefab: {fileID: 0}
   _splitCount: 3
   _splitOffset: 0.5

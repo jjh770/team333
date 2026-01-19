@@ -12,6 +12,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     private FloraSpeedGaugeController _gaugeController;
     private FloraMovement _movement;
     private FloraSkillController _skillController;
+    private FloraSound _floraSound;
     private IFloraPath _floraPath;
     public IFloraPath FloraPath => _floraPath;
 
@@ -49,12 +50,14 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         _gaugeController = GetComponent<FloraSpeedGaugeController>();
         _movement = GetComponent<FloraMovement>();
         _skillController = GetComponent<FloraSkillController>();
+        _floraSound = GetComponent<FloraSound>();
         _floraPath = GetComponent<IFloraPath>();
     }
 
     public void AddWood(int woodAmount)
     {
         _inventory.AddWood(woodAmount);
+        _floraSound?.PlayGetItem();
     }
 
     public bool TryFeedWood()
@@ -69,6 +72,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         }
 
         _gaugeController.TryAddGauge(_gaugeAmount);
+        _floraSound?.PlayInteraction();
 
         return true;
     }
@@ -76,11 +80,17 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     public void AddBoard(int boardAmount)
     {
         _inventory.AddBoard(boardAmount);
+        _floraSound?.PlayGetItem();
     }
 
     public bool TryResume()
     {
-        return _movement.Resume();
+        bool success = _movement.Resume();
+        if (success)
+        {
+            _floraSound?.PlayInteraction();
+        }
+        return success;
     }
 
     public void SetSkill(FloraSkillBase skill)

@@ -5,6 +5,7 @@ public class PlayerPet : MonoBehaviour, IPetOwnership
 {
     [Header("Pet Settings")]
     [SerializeField] private GameObject _petPrefab;
+    [SerializeField] private MonsterSound _monsterSound;
 
     [Header("Spawn position")]
     [SerializeField] private float _spawnDuration = 0.5f;
@@ -26,6 +27,7 @@ public class PlayerPet : MonoBehaviour, IPetOwnership
     private void SpawnPet()
     {
         _currentCount++;
+        _monsterSound?.PetAppear();
 
         // 플레이어 뒤쪽에 스폰
         Vector3 spawnPosition = transform.position - transform.forward * 1.5f;

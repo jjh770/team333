@@ -4,6 +4,7 @@ public class PetProjectile : MonoBehaviour, IPoolable
 {
     [SerializeField] private float _speed = 15f;
     [SerializeField] private float _hitDistance = 0.5f;
+    [SerializeField] private MonsterSound _monsterSound;
 
     private Transform _target;
     private GameObject _hitEffectPrefab;
@@ -43,6 +44,7 @@ public class PetProjectile : MonoBehaviour, IPoolable
     {
         if (_target.TryGetComponent<IDamageable>(out var damageable))
         {
+            _monsterSound?.PetAttack();
             damageable.TryTakeDamage(_damage);
         }
 

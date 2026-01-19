@@ -68,6 +68,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraSlowAuraSkill
   _radius: 4
+  _skillDuration: 15
+  _scaleInDuration: 0.3
+  _scaleOutDuration: 0.3
+  _skillSound:
+    Clip: {fileID: 8300000, guid: 715f9e0b2c872e149bf22cd842d3ae23, type: 3}
+    StartTime: 0
   _slowAmount: 1.5
 --- !u!1001 &177710925645358818
 PrefabInstance:

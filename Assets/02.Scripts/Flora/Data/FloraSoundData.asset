@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f666b76d56e4cfe469f1d02e0cb6e12a, type: 3}
+  m_Name: FloraSoundData
+  m_EditorClassIdentifier: Assembly-CSharp::FloraSoundData
+  <SpeedUpSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 4caefc123fcd8194d804c1294244780a, type: 3}
+    StartTime: 0
+  <InteractionSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 2c6868cf44d6e5a4b81a54a9ff70cc9e, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: c0e8dcf339359fb4eacd44893435c03e, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 6913af9db8d08104db1e275a86df9bd1, type: 3}
+    StartTime: 0
+  <GetItemSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 40db7d427d704974a943db1bc4afd4e2, type: 3}
+    StartTime: 0
+  <BridgeQuestSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 9c1fd01e19b9f884494b5c1b6a9bf2ab, type: 3}
+    StartTime: 0
+  <QuestCompleteSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 86a134a5875b1c24d972c267e3fa7145, type: 3}
+    StartTime: 0
