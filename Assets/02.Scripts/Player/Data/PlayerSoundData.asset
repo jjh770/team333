@@ -20,8 +20,16 @@ MonoBehaviour:
   - Clip: {fileID: 8300000, guid: 31f4d3770626db84ba7e8ae125d0065d, type: 3}
     StartTime: 0.15
   <HitSounds>k__BackingField:
-  - Clip: {fileID: 8300000, guid: 6728b73a6269d674d849a2aad5e155aa, type: 3}
-    StartTime: 0.1
+  - Clip: {fileID: 8300000, guid: 1fc0f64724d930e47947eed786c16833, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: d5a46de95fd0e334bb24b1b64ff1abdd, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: e033f644cc694dc46afcbdc35c8735d6, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: e70f3acc48bda9c479fc3720e4fc40e7, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: ad3d5c9b9c3355348aeedabe5506e80d, type: 3}
+    StartTime: 0
   <DeathSFX>k__BackingField:
     Clip: {fileID: 0}
     StartTime: 0

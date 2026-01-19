@@ -21,6 +21,8 @@ MonoBehaviour:
     StartTime: 0
   - Clip: {fileID: 8300000, guid: 5f9cb174836f74a4eb546207e2e60df2, type: 3}
     StartTime: 0
+  - Clip: {fileID: 8300000, guid: cfebdf7d8ee44e542b5e444abd2432f5, type: 3}
+    StartTime: 0
   <PetAppearSFX>k__BackingField:
     Clip: {fileID: 8300000, guid: 6c9499b20cfd1a947be452bc66a54aed, type: 3}
     StartTime: 0

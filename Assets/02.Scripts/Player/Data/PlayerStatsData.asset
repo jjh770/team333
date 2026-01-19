@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf72b55783e7f0e418a27f28a38c982c, type: 3}
   m_Name: PlayerStatsData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsData
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 1000
