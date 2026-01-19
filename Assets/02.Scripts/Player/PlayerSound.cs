@@ -91,6 +91,7 @@ public class PlayerSound : MonoBehaviour
         if (_soundData == null) return;
         PlaySoundInfo(_soundData.ItemThrowSFX);
     }
+    #endregion
 
     public void PlayHeartBeat()
     {
