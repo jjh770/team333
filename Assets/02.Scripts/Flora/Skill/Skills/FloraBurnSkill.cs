@@ -12,8 +12,9 @@ public class FloraBurnSkill : FloraSkillBase
     private readonly List<BadMonsterController> _monsterCache = new();
     private Coroutine _burnRoutine;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _burnRoutine = StartCoroutine(DotDamageRoutine());
     }
 
