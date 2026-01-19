@@ -9958,6 +9958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4911d5d619db1ca4faf5ca42d3603bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraDamageReceiver
+  _renderer: {fileID: 8316821339999037277}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.3
 --- !u!114 &5208897952055008175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11136,6 +11139,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2219046864301678197}
   m_SourcePrefab: {fileID: 100100000, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
+--- !u!137 &8316821339999037277 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2266157265117598653, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
+  m_PrefabInstance: {fileID: 7789057980649354464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8316821340012213869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2266157265114776205, guid: 2eb3f370fbc1c324abd3d85f109a0e09, type: 3}
