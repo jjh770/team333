@@ -844,9 +844,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61848e2dc406d54fa2a6c1a51e3a608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  _lobbySceneName: MainLobby
-  _gameSceneName: GameScene
+  _lobbySceneName: LobbyScene
+  _gameSceneName: yj
   _endSceneName: EndScene
+  _useLoadingScene: 1
 --- !u!224 &430706740
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4154,32 +4155,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_EndSceneAnimator
   _panels:
-  - name: InputPanel
-    target: {fileID: 1906853542}
-    playOnStart: 1
-    type: 0
-    duration: 1
-    delay: 0
-    ease: 19
-    startYOffset: 300
-    startScale: 0.2
-    fadeDuration: 0.25
-    slideDirection: {x: 0, y: 0}
-    originalPosition: {x: 0, y: 0}
-    canvasGroup: {fileID: 0}
-  - name: LeaderboardPanel
-    target: {fileID: 2054509419}
-    playOnStart: 0
-    type: 0
-    duration: 2
-    delay: 0
-    ease: 28
-    startYOffset: 300
-    startScale: 0.2
-    fadeDuration: 0.25
-    slideDirection: {x: 0, y: 0}
-    originalPosition: {x: 0, y: 0}
-    canvasGroup: {fileID: 0}
+  - Name: 
+    Target: {fileID: 0}
+    PlayOnStart: 1
+    Type: 0
+    Duration: 0.5
+    Delay: 0
+    Ease: 6
+    StartYOffset: 300
+    StartScale: 0.3
+    FadeDuration: 0.25
+    SlideDirection: {x: 0, y: 1}
+    OriginalPosition: {x: 0, y: 0}
+    CanvasGroup: {fileID: 0}
+  - Name: 
+    Target: {fileID: 0}
+    PlayOnStart: 1
+    Type: 0
+    Duration: 0.5
+    Delay: 0
+    Ease: 6
+    StartYOffset: 300
+    StartScale: 0.3
+    FadeDuration: 0.25
+    SlideDirection: {x: 0, y: 1}
+    OriginalPosition: {x: 0, y: 0}
+    CanvasGroup: {fileID: 0}
   _playOnStart: 1
   _globalDelay: 0
 --- !u!224 &1988527689

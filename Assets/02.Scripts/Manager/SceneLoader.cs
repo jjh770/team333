@@ -6,9 +6,12 @@ public class SceneLoader : MonoBehaviour
     public static SceneLoader Instance { get; private set; }
 
     [Header("Scene Names")]
-    [SerializeField] private string _lobbySceneName = "MainLobby";
+    [SerializeField] private string _lobbySceneName = "LobbyScene";
     [SerializeField] private string _gameSceneName = "GameScene";
     [SerializeField] private string _endSceneName = "EndScene";
+
+    [Header("Loading")]
+    [SerializeField] private bool _useLoadingScene = true;
 
     private void Awake()
     {
@@ -48,7 +51,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadGame()
     {
-        LoadSceneByName(_gameSceneName);
+        if (_useLoadingScene)
+        {
+            LoadSceneWithLoading(_gameSceneName);
+        }
+        else
+        {
+            LoadSceneByName(_gameSceneName);
+        }
     }
 
     public void LoadEndScene()
@@ -65,6 +75,12 @@ public class SceneLoader : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void LoadSceneWithLoading(string sceneName)
+    {
+        Time.timeScale = 1f;
+        LoadingSceneController.LoadScene(sceneName);
     }
 
     public void QuitGame()

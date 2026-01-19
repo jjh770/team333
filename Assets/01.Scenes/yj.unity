@@ -32322,9 +32322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61848e2dc406d54fa2a6c1a51e3a608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  _lobbySceneName: MainLobby
+  _lobbySceneName: LobbyScene
   _gameSceneName: yj
   _endSceneName: EndScene
+  _useLoadingScene: 1
 --- !u!4 &763227800
 Transform:
   m_ObjectHideFlags: 0
