@@ -43,6 +43,7 @@ public class PetProjectile : MonoBehaviour, IPoolable
     {
         if (_target.TryGetComponent<IDamageable>(out var damageable))
         {
+            MonsterSound.Instance.PetAttack();
             damageable.TryTakeDamage(_damage);
         }
 

@@ -220,6 +220,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         _stat.TakeDamage(damage.Value);
         _health.FlashWhite();
         _attack.InitCooltime();
+        MonsterSound.Instance.Hit();
 
         if (damage.IsKnockBack)
         {

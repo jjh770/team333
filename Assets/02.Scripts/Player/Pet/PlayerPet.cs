@@ -26,6 +26,7 @@ public class PlayerPet : MonoBehaviour, IPetOwnership
     private void SpawnPet()
     {
         _currentCount++;
+        MonsterSound.Instance.PetAppear();
 
         // 플레이어 뒤쪽에 스폰
         Vector3 spawnPosition = transform.position - transform.forward * 1.5f;
