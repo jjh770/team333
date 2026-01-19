@@ -28,7 +28,7 @@ public class FloraDamageReceiver : MonoBehaviour, IDamageable
 
     private void OnDisable()
     {
-        _flashTween?.Kill();
+        _flashTween?.Kill(true);
 
         if (_material != null)
         {
