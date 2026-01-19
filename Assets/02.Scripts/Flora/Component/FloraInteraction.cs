@@ -83,12 +83,12 @@ public class FloraInteraction : MonoBehaviour, IInteractable
 
     public bool TryResume()
     {
-        if (_movement.Resume())
+        bool success = _movement.Resume();
+        if (success)
         {
             _floraSound?.PlayInteraction();
-            return true;
         }
-        return false;
+        return success;
     }
 
     public void SetSkill(FloraSkillBase skill)
