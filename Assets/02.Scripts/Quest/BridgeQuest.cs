@@ -57,5 +57,6 @@ public class BridgeQuest : MonoBehaviour
 
         _plankMonsterSpawner.StopSpawning();
         _floraInteraction.SetMoveLock(false);
+        _floraSound?.PlayQuestComplete();
     }
 }
