@@ -57,6 +57,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     public void AddWood(int woodAmount)
     {
         _inventory.AddWood(woodAmount);
+        _floraSound?.PlayGetItem();
     }
 
     public bool TryFeedWood()
@@ -79,6 +80,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     public void AddBoard(int boardAmount)
     {
         _inventory.AddBoard(boardAmount);
+        _floraSound?.PlayGetItem();
     }
 
     public bool TryResume()

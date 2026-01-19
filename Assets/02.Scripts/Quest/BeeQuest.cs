@@ -4,6 +4,7 @@ public class BeeQuest : MonoBehaviour
 {
     //[SerializeField] private BeeSpawner _beeMonsterSpawner;
     [SerializeField] private FloraInteraction _floraInteraction;
+    [SerializeField] private FloraSound _floraSound;
     private QuestTree _questTree;
 
     public bool IsQuestCompleted { get; private set; }
@@ -30,6 +31,7 @@ public class BeeQuest : MonoBehaviour
         IsQuestCompleted = true;
         Debug.Log($"미션 완료!");
 
+        _floraSound?.PlayQuestComplete();
         //_beeMonsterSpawner.StopSpawning();
         _floraInteraction.SetMoveLock(false);
     }

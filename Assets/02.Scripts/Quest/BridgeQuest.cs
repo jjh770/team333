@@ -8,6 +8,7 @@ public class BridgeQuest : MonoBehaviour
     [SerializeField] private GameObject[] _plankOutlineObjects;
     [SerializeField] private PlankMonsterSpawner _plankMonsterSpawner;
     [SerializeField] private FloraInteraction _floraInteraction;
+    [SerializeField] private FloraSound _floraSound;
     
     private int _currentPlankCount = 0;
     public bool IsQuestCompleted { get; private set; }
@@ -29,12 +30,13 @@ public class BridgeQuest : MonoBehaviour
     
     public void AddPlank()
     {
-        if (IsQuestCompleted) return;  
+        if (IsQuestCompleted) return;
         if (_currentPlankCount >= _plankObjects.Length || _currentPlankCount >= _plankOutlineObjects.Length) return;
 
         _plankObjects[_currentPlankCount].SetActive(true);
         _plankOutlineObjects[_currentPlankCount].SetActive(false);
-        
+        _floraSound?.PlayBridgeQuestSound();
+
         _currentPlankCount++;
 
         if (_currentPlankCount < _plankOutlineObjects.Length)
@@ -55,5 +57,6 @@ public class BridgeQuest : MonoBehaviour
 
         _plankMonsterSpawner.StopSpawning();
         _floraInteraction.SetMoveLock(false);
+        _floraSound?.PlayQuestComplete();
     }
 }
