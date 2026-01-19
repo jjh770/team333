@@ -22,3 +22,6 @@ MonoBehaviour:
     StartTime: 0
   - Clip: {fileID: 8300000, guid: 6913af9db8d08104db1e275a86df9bd1, type: 3}
     StartTime: 0
+  <GetItemSound>k__BackingField:
+    Clip: {fileID: 8300000, guid: 40db7d427d704974a943db1bc4afd4e2, type: 3}
+    StartTime: 0

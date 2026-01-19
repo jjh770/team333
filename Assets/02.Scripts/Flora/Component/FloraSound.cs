@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FloraSound : MonoBehaviour
 {
@@ -14,6 +14,12 @@ public class FloraSound : MonoBehaviour
     {
         if (_soundData == null) return;
         PlaySoundInfo(_soundData.GetRandomInteractionSound());
+    }
+
+    public void PlayGetItem()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.GetItemSound);
     }
 
     private void PlaySoundInfo(SoundInfo info)
