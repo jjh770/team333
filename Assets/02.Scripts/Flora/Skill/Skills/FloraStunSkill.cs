@@ -10,11 +10,15 @@ public class FloraStunSkill : FloraSkillBase
 
     [Header("Lightning Effect Timing")]
     [SerializeField] private float _lightningStrikeDelay = 0.1f;
-    
+
+    [Header("Sound")]
+    [SerializeField] private SoundInfo _strikeSound;
+
     private Coroutine _stunRoutine;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _stunRoutine = StartCoroutine(StunRoutine());
     }
 
@@ -44,16 +48,21 @@ public class FloraStunSkill : FloraSkillBase
             }
             
             yield return new WaitForSeconds(_lightningStrikeDelay);
-            
+
+            if (monsters.Count > 0)
+            {
+                PlayStrikeSound();
+            }
+
             foreach (var monster in monsters)
             {
                 if (monster == null || !monster.gameObject.activeInHierarchy) continue;
-                
+
                 Vector3 position = monster.transform.position;
                 monster.ApplyStun(_stunDuration);
-                
+
                 GameObject hitEffect = _effectPool.PlayLightningHit(position, _stunDuration);
-                
+
                 if (hitEffect != null)
                 {
                     hitEffect.transform.SetParent(monster.transform);
@@ -66,6 +75,12 @@ public class FloraStunSkill : FloraSkillBase
     protected override void OnMonsterEnter(BadMonsterController monster) { }
 
     protected override void OnMonsterExit(BadMonsterController monster) { }
+
+    private void PlayStrikeSound()
+    {
+        if (_strikeSound.Clip == null) return;
+        SoundManager.Instance.PlaySFX(_strikeSound.Clip, _strikeSound.StartTime, 1f);
+    }
 
     
 #if UNITY_EDITOR

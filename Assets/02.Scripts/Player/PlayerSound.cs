@@ -94,7 +94,7 @@ public class PlayerSound : MonoBehaviour
 
     #endregion
 
-    private void PlaySoundInfo(AttackSoundInfo info)
+    private void PlaySoundInfo(SoundInfo info)
     {
         if (info.Clip == null) return;
         SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);

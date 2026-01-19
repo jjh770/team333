@@ -32453,7 +32453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
   _floraInteraction: {fileID: 215770150}
   _cameraController: {fileID: 2032723201}
-  _endSceneName: EndScene
+  _player: {fileID: 0}
 --- !u!4 &790425791
 Transform:
   m_ObjectHideFlags: 0
@@ -78635,6 +78635,34 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _player: {fileID: 0}
+  _deathMoveDuration: 1.5
+  _deathHoldDuration: 1
+  _deathOffsetMultiplier: 0.5
+  _deathEaseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &2035467974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8826354705480527198, guid: 3628f02c0f1792349af9cf27ebd68154, type: 3}
@@ -81772,6 +81800,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8826354705480527198, guid: 11a8891e8a0172a42859fb2c9cb4aae8, type: 3}
   m_PrefabInstance: {fileID: 1030187388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2134725477
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2842330599658161774, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_Name
+      value: Rabby_Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.23946
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0030481778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.234967
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778694416634462506, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
 --- !u!1001 &2135082741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83194,6 +83279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_SpeedGauge
   _controller: {fileID: 215770153}
   _speedGaugeSlider: {fileID: 4122480259802510053}
+  _highThreshold: 0.66
+  _lowThreshold: 0.33
+  _iconImage: {fileID: 0}
+  _iconLow: {fileID: 0}
+  _iconMid: {fileID: 0}
+  _iconHigh: {fileID: 0}
 --- !u!114 &2243647444238993460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86039,3 +86130,4 @@ SceneRoots:
   - {fileID: 701965760}
   - {fileID: 1340243412}
   - {fileID: 750199648}
+  - {fileID: 2134725477}
