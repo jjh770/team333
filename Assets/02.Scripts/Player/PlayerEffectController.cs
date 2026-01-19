@@ -84,6 +84,8 @@ public class PlayerEffectController : MonoBehaviour
     public void StopAllEffects()
     {
         StopAllSlashes();
+        if (_effects == null) return;
+
         foreach (var handler in _effects.Values)
         {
             handler?.Stop();
@@ -92,6 +94,8 @@ public class PlayerEffectController : MonoBehaviour
 
     public void PlayEffect(PlayerEffectType type)
     {
+        if (_effects == null) return;
+
         if (_effects.TryGetValue(type, out var handler))
         {
             handler?.Play();
@@ -100,6 +104,8 @@ public class PlayerEffectController : MonoBehaviour
 
     public void StopEffect(PlayerEffectType type)
     {
+        if (_effects == null) return;
+
         if (_effects.TryGetValue(type, out var handler))
         {
             handler?.Stop();
