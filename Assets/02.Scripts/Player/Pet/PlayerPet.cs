@@ -18,6 +18,7 @@ public class PlayerPet : MonoBehaviour, IPetOwnership
     public void TryAddPet()
     {
         if (_petPrefab == null) return;
+        if (HasPet()) return;
 
         SpawnPet();
     }

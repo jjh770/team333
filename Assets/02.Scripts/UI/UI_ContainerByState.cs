@@ -33,18 +33,12 @@ public class UI_ContainerByState : MonoBehaviour
 
     private void Start()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged += HandleGameStateChanged;
-        }
+        GameStateManager.OnGameStateChanged += HandleGameStateChanged;
     }
 
     private void OnDestroy()
     {
-        if (GameStateManager.Instance != null)
-        {
-            GameStateManager.Instance.OnStateChanged -= HandleGameStateChanged;
-        }
+        GameStateManager.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     private void HandleGameStateChanged(GameState oldState, GameState newState)

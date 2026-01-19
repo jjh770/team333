@@ -8,7 +8,11 @@ public class DamageUpItem : ConsumableItemBase
 
     protected override bool OnConsume(GameObject interactor)
     {
-        // TODO: 공격력 올려주기
-        return true;
+        if (interactor.TryGetComponent(out PlayerStat playerStat))
+        {
+            playerStat.IncreaseDamage(_damageUpAmount);
+            return true;
+        }
+        return false;
     }
 }
