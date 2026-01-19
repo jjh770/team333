@@ -179,6 +179,7 @@ MonoBehaviour:
     _reganValue: 0
     _reganSpeed: 0
   _center: {fileID: 4939481408329475976}
+  _endingSequence: {fileID: 660287962796336189, guid: 744854b7082b0a0499b6c34b8b1ccbbe, type: 3}
 --- !u!114 &2313257500104367836
 MonoBehaviour:
   m_ObjectHideFlags: 0

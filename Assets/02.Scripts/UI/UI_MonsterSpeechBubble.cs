@@ -57,6 +57,8 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
 
     private void SetText(string newText)
     {
+        if (_text == null) return;
+
         _currrentText = newText;
         _text.text = _currrentText;
 
@@ -65,6 +67,8 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
 
     private void PlayPopAnimation()
     {
+        if (_text == null) return;
+
         _iconTween?.Kill(true);
 
         _text.transform.localScale = Vector3.one;

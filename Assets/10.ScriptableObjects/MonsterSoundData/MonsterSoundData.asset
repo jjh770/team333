@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15137096dd566b4587ac9d2f36b00a6, type: 3}
+  m_Name: MonsterSoundData
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterSoundData
+  <HitSounds>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 93a9555d9f95f2241a639686f7360844, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 21641f72b7b7685408bc236df6fd36aa, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 77dbdbc772b035444aa335130508c885, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 5f9cb174836f74a4eb546207e2e60df2, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: cfebdf7d8ee44e542b5e444abd2432f5, type: 3}
+    StartTime: 0
+  <PetAppearSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 6c9499b20cfd1a947be452bc66a54aed, type: 3}
+    StartTime: 0
+  <PetAttackSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 4e450660583fed44f882ef679ff2a556, type: 3}
+    StartTime: 0

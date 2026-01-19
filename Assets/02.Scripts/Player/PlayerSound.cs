@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
@@ -92,7 +92,11 @@ public class PlayerSound : MonoBehaviour
         PlaySoundInfo(_soundData.ItemThrowSFX);
     }
 
-    #endregion
+    public void PlayHeartBeat()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.HearBeatSFX);
+    }
 
     private void PlaySoundInfo(SoundInfo info)
     {

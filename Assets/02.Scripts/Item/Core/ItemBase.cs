@@ -90,8 +90,11 @@ public abstract class ItemBase : MonoBehaviour, IPickable
 
         _isHeld = true;
 
-        _rigidbody.linearVelocity = Vector3.zero;
-        _rigidbody.angularVelocity = Vector3.zero;
+        if (!_rigidbody.isKinematic)
+        {
+            _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
+        }
 
         _rigidbody.isKinematic = true;
         _rigidbody.useGravity = false;
