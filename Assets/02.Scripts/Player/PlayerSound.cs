@@ -4,15 +4,21 @@ public class PlayerSound : MonoBehaviour
 {
     [SerializeField] private PlayerSoundData _soundData;
 
+    private PlayerStateManager _stateManager;
+
+    private void Awake()
+    {
+        _stateManager = GetComponent<PlayerStateManager>();
+    }
+
     #region Attack
 
     public void PlayAttack(int comboIndex)
     {
         if (_soundData == null) return;
 
-        var clip = _soundData.GetAttackSound(comboIndex);
-        float startTime = _soundData.GetAttackSoundStartTime(comboIndex);
-        SoundManager.Instance.PlaySFX(clip, startTime, 1f);
+        var info = _soundData.GetAttackSound(comboIndex);
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     #endregion
@@ -23,8 +29,8 @@ public class PlayerSound : MonoBehaviour
     {
         if (_soundData == null) return;
 
-        var clip = _soundData.GetRandomHitSound();
-        SoundManager.Instance.PlaySFX(clip);
+        var info = _soundData.GetRandomHitSound();
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     public void PlayDeath()
@@ -39,12 +45,20 @@ public class PlayerSound : MonoBehaviour
 
     #region Movement
 
+    // 애니메이션 이벤트용
+    public void OnFootstep()
+    {
+        if (_stateManager != null && !_stateManager.IsState(PlayerState.Moving)) return;
+
+        PlayFootstep();
+    }
+
     public void PlayFootstep()
     {
         if (_soundData == null) return;
 
-        var clip = _soundData.GetRandomFootstepSound();
-        SoundManager.Instance.PlaySFX(clip);
+        var info = _soundData.GetRandomFootstepSound();
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 
     public void PlayDash()
@@ -65,6 +79,34 @@ public class PlayerSound : MonoBehaviour
 
         int index = Mathf.Clamp(skillIndex, 0, _soundData.SkillSounds.Length - 1);
         var info = _soundData.SkillSounds[index];
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
+    }
+
+    #endregion
+
+    #region Item
+
+    public void PlayItemConsume()
+    {
+        if (_soundData == null) return;
+
+        var info = _soundData.ItemConsumeSFX;
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
+    }
+
+    public void PlayItemHold()
+    {
+        if (_soundData == null) return;
+
+        var info = _soundData.ItemHoldSFX;
+        SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
+    }
+
+    public void PlayItemThrow()
+    {
+        if (_soundData == null) return;
+
+        var info = _soundData.ItemThrowSFX;
         SoundManager.Instance.PlaySFX(info.Clip, info.StartTime, 1f);
     }
 

@@ -1,25 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class BeezPetItem : MonoBehaviour, IInteractable
+public class BeezPetItem : ConsumableItemBase
 {
-    public InteractionType Type => InteractionType.Use;
-    public IconType IconType => IconType.Beez;
-    public Transform Transform
-    {
-        get
-        {
-            if (this == null) return null;
-            return transform;
-        }
-    }
-    public bool CanInteract => true;
+    public override IconType IconType => IconType.Beez;
 
-    public void Interact(GameObject interactor)
+    protected override bool OnConsume(GameObject interactor)
     {
         if (interactor.TryGetComponent<PlayerPet>(out var pet))
         {
             pet.TryAddPet();
-            Destroy(gameObject);
+            return true;
         }
+        return false;
     }
 }

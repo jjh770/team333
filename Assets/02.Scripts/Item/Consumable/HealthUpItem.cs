@@ -1,29 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class HealthUpItem : MonoBehaviour, IInteractable
+public class HealthUpItem : ConsumableItemBase
 {
     [SerializeField] private float _healthUpAmount;
 
-    public InteractionType Type => InteractionType.Use;
-    public IconType IconType => IconType.Potion;
+    public override IconType IconType => IconType.Potion;
 
-    public Transform Transform
+    protected override bool OnConsume(GameObject interactor)
     {
-        get
-        {
-            if (this == null) return null;
-            return transform;
-        }
-    }
-    public bool CanInteract => true;
-
-    public void Interact(GameObject interactor)
-    {
-        // 체력 올려주기
         if (interactor.TryGetComponent(out IHealable healable))
         {
             healable.IncreaseHealth(_healthUpAmount);
-            Destroy(gameObject);
+            return true;
         }
+        return false;
     }
 }
