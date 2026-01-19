@@ -4851,6 +4851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraSpeedEffectController
   _gaugeController: {fileID: 5231732310342022929}
+  _floraSound: {fileID: 3152193458412356002}
   _particles:
   - {fileID: 5703933724873540817}
   - {fileID: 8534218763632573767}
@@ -9723,6 +9724,7 @@ GameObject:
   - component: {fileID: 4861701462829498376}
   - component: {fileID: 8590952865332236622}
   - component: {fileID: 3726111711567129197}
+  - component: {fileID: 3152193458412356002}
   m_Layer: 7
   m_Name: Flora
   m_TagString: Flora
@@ -9925,17 +9927,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _resolution: 10
   _waitPointIndexes: 00000000050000000a000000
 --- !u!114 &5231732310342022929
@@ -10030,6 +10021,19 @@ MonoBehaviour:
   _animationDuration: 0.5
   _showEase: 27
   _hideEase: 26
+--- !u!114 &3152193458412356002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2488718046737351127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ec83c60f146af4a870f33f18d83f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloraSound
+  _soundData: {fileID: 11400000, guid: 830d6186f5121124087d2bfb0a108e15, type: 2}
 --- !u!1 &5326104044287521027
 GameObject:
   m_ObjectHideFlags: 0

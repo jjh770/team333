@@ -13,6 +13,9 @@ public abstract class FloraSkillBase : MonoBehaviour
     [SerializeField] private float _scaleInDuration = 0.3f;
     [SerializeField] private float _scaleOutDuration = 0.3f;
 
+    [Header("Sound")]
+    [SerializeField] private SoundInfo _skillSound;
+
     protected FloraEffectPool _effectPool;
     private SphereCollider _triggerCollider;
     protected readonly HashSet<BadMonsterController> MonstersInRange =  new ();
@@ -24,6 +27,17 @@ public abstract class FloraSkillBase : MonoBehaviour
         _triggerCollider = GetComponent<SphereCollider>();
         _triggerCollider.isTrigger = true;
         _triggerCollider.radius = _radius;
+    }
+
+    protected virtual void OnEnable()
+    {
+        PlaySkillSound();
+    }
+
+    private void PlaySkillSound()
+    {
+        if (_skillSound.Clip == null) return;
+        SoundManager.Instance.PlaySFX(_skillSound.Clip, _skillSound.StartTime, 1f);
     }
 
     public virtual void Initialize(FloraEffectPool effectPool)

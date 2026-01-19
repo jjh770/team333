@@ -4,6 +4,7 @@ public class FloraSpeedEffectController : MonoBehaviour
 {
      [Header("Reference")]
     [SerializeField] private FloraSpeedGaugeController _gaugeController;
+    [SerializeField] private FloraSound _floraSound;
 
     [Header("Particles (Children)")]
     [SerializeField] private ParticleSystem[] _particles;
@@ -63,6 +64,8 @@ public class FloraSpeedEffectController : MonoBehaviour
 
     private void PlayParticles()
     {
+        _floraSound?.PlaySpeedUp();
+
         foreach (var ps in _particles)
         {
             if (ps == null) continue;
