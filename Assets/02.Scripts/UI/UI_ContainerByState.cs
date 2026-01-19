@@ -60,7 +60,7 @@ public class UI_ContainerByState : MonoBehaviour
                 fade.AnimateToVisible();
             }
         }
-        else if (oldState == GameState.Playing && newState == GameState.Outro)
+        else if ((oldState == GameState.Playing && newState == GameState.Outro) || newState == GameState.Dead)
         {
             foreach (var anim in _immediatePositionAnimations)
             {
