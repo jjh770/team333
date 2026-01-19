@@ -68,8 +68,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraStunSkill
   _radius: 4
+  _skillDuration: 15
+  _scaleInDuration: 0.3
+  _scaleOutDuration: 0.3
+  _skillSound:
+    Clip: {fileID: 8300000, guid: 065883495da2bd34ca16de5d57176c27, type: 3}
+    StartTime: 0
   _stunInterval: 2
   _stunDuration: 0.5
+  _lightningStrikeDelay: 0.1
+  _strikeSound:
+    Clip: {fileID: 8300000, guid: a575c8096b472f740b9c5f398390afc5, type: 3}
+    StartTime: 0.1
 --- !u!1001 &6222667172505354053
 PrefabInstance:
   m_ObjectHideFlags: 0
