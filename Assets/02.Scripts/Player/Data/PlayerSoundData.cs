@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public struct AttackSoundInfo
@@ -51,6 +51,10 @@ public class PlayerSoundData : ScriptableObject
     [field: SerializeField]
     [Tooltip("아이템 던지기 사운드")]
     public AttackSoundInfo ItemThrowSFX { get; private set; }
+
+    [field: SerializeField]
+    [Tooltip("하트비트 사운드")]
+    public AttackSoundInfo HearBeatSFX { get; private set; }
 
     public AttackSoundInfo GetAttackSound(int comboIndex)
     {

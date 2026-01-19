@@ -31025,6 +31025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VignetteEffect
   _volume: {fileID: 685748512}
   _playerStat: {fileID: 738058953}
+  _playerSound: {fileID: 738058934}
   _healthThreshold: 0.3
   _vignetteIntensity: 0.4
   _pulseDuration: 0.8

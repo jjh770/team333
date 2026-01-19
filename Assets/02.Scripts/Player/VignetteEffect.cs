@@ -7,6 +7,7 @@ public class VignetteEffect : MonoBehaviour
 {
     [SerializeField] private Volume _volume;
     [SerializeField] private PlayerStat _playerStat;
+    [SerializeField] private PlayerSound _playerSound;
     [SerializeField, Range(0f, 1f)] private float _healthThreshold = 0.2f;
     [SerializeField] private float _vignetteIntensity = 0.4f;
     [SerializeField] private float _pulseDuration = 0.8f;
@@ -70,6 +71,8 @@ public class VignetteEffect : MonoBehaviour
 
         if (_vignette == null) return;
 
+        PlayHeartBeat();
+
         _pulseTween = DOTween.To(
             () => _vignette.intensity.value,
             x => _vignette.intensity.value = x,
@@ -77,7 +80,13 @@ public class VignetteEffect : MonoBehaviour
             _pulseDuration
         )
         .SetEase(Ease.InOutSine)
-        .SetLoops(-1, LoopType.Yoyo);
+        .SetLoops(-1, LoopType.Yoyo)
+        .OnStepComplete(PlayHeartBeat);
+    }
+
+    private void PlayHeartBeat()
+    {
+        _playerSound?.PlayHeartBeat();
     }
 
     private void StopPulse()
