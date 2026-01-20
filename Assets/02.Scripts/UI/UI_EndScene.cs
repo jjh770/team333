@@ -1,14 +1,24 @@
+using DG.Tweening;
 using System;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI_EndScene : MonoBehaviour
 {
     [Header("Result Display")]
     [SerializeField] private TMP_Text _clearTimeText;
     [SerializeField] private TMP_Text _rankText;
+
+    [Header("ResultPanel")]
+    [SerializeField] private GameObject _resultPanel;
+    [SerializeField] private GameObject _resultNameGroup;
+    [SerializeField] private TMP_Text _resultNameText;
+    [SerializeField] private ParticleSystem _rankParticle;
+    [SerializeField] private ParticleSystem _rankShowParticle;
 
     [Header("Name Input")]
     [SerializeField] private TMP_InputField _nameInputField;
@@ -21,6 +31,7 @@ public class UI_EndScene : MonoBehaviour
     [SerializeField] private GameObject _entryPrefab;
 
     [Header("Buttons")]
+    [SerializeField] private GameObject _buttonPanel;
     [SerializeField] private Button _retryButton;
     [SerializeField] private Button _mainMenuButton;
 
@@ -32,12 +43,52 @@ public class UI_EndScene : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private UI_EndSceneAnimator _animator;
 
+    [Header("Counting Animation")]
+    [SerializeField] private float _timeCountDelay = 0.3f;
+    [SerializeField] private float _timeCountDuration = 1.5f;
+    [SerializeField] private float _rankCountDelay = 0.5f;
+    [SerializeField] private float _rankCountDuration = 1f;
+
+    [Header("Rank Animation Settings")]
+    [SerializeField] private Vector3 _rankDisplayPosition = new Vector3(220, 0, -700);
+    [SerializeField] private float _rankDisplayMoveDuration = 2f;
+    [SerializeField] private float _layoutWaitTime = 0.1f;
+    [SerializeField] private Vector3 _outOfRankPosition = new Vector3(0, -260, 0);
+    [SerializeField] private float _leaderboardMoveDuration = 0.5f;
+
+    [Header("Vignette Pulse (Heartbeat)")]
+    [SerializeField] private float _vignetteIntensity = 1f;
+    [SerializeField] private float _vignetteDuration = 2f;
+    [SerializeField] private float _pulseMinIntensity = 0.3f;
+    [SerializeField] private float _pulseMaxIntensity = 0.6f;
+    [SerializeField] private float _pulseDuration = 0.4f;
+    [SerializeField] private int _pulseCount = 4;
+
     private float _clearTime;
     private bool _hasSubmitted;
+    private Volume _cameraVolume;
+    private Vignette _cameraVignette;
+    private Tween _vignettePulseTween;
+    private int _rank;
+    private string _currentNameText;
+    private RectTransform _targetEntryPosition;
+
+    private void Awake()
+    {
+        _cameraVolume = Camera.main.GetComponent<Volume>();
+
+        if (_cameraVolume.profile.TryGet(out Vignette vignetteEffect))
+        {
+            _cameraVignette = vignetteEffect;
+        }
+
+        InitializeParticle();
+    }
 
     private void Start()
     {
         _clearTime = GameTimeManager.LastElapsedTime;
+        _resultNameGroup.SetActive(false);
 
         SetupUI();
         SetupButtons();
@@ -48,7 +99,11 @@ public class UI_EndScene : MonoBehaviour
     {
         if (_clearTimeText != null)
         {
-            _clearTimeText.text = FormatTime(_clearTime);
+            NumberCountingAnimator.CountToTimeWithDelay(
+                _clearTimeText,
+                _clearTime,
+                _timeCountDelay,
+                _timeCountDuration);
         }
 
         if (_rankText != null)
@@ -56,14 +111,7 @@ public class UI_EndScene : MonoBehaviour
             int rank = LeaderboardManager.Instance != null
                 ? LeaderboardManager.Instance.GetRank(_clearTime)
                 : 1;
-            _rankText.text = $"{rank}";
-        }
-
-        // Animator가 없을 때만 직접 제어
-        if (_animator == null)
-        {
-            if (_inputPanel != null) _inputPanel.SetActive(true);
-            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(false);
+            _rank = rank;
         }
     }
 
@@ -99,25 +147,20 @@ public class UI_EndScene : MonoBehaviour
         if (LeaderboardManager.Instance != null)
         {
             LeaderboardManager.Instance.AddEntry(playerName, _clearTime);
+            _currentNameText = playerName;
         }
 
         _hasSubmitted = true;
 
-        UpdateLeaderboardDisplay();
+        ShowRankAnimation();
 
         if (_animator != null)
         {
             _animator.HidePanel(UI_EndSceneAnimator.InputPanelName);
-            _animator.PlayPanel(UI_EndSceneAnimator.LeaderboardPanelName);
-        }
-        else
-        {
-            if (_inputPanel != null) _inputPanel.SetActive(false);
-            if (_leaderboardPanel != null) _leaderboardPanel.SetActive(true);
         }
     }
 
-    private void UpdateLeaderboardDisplay()
+    private void UpdateLeaderboardDisplay(bool reservePlayerSlot = false)
     {
         if (_leaderboardContainer == null || _entryPrefab == null) return;
         if (LeaderboardManager.Instance == null) return;
@@ -132,15 +175,150 @@ public class UI_EndScene : MonoBehaviour
 
         for (int i = 0; i < displayCount; i++)
         {
+            int displayRank = i + 1;
+
+            // 현재 플레이어 등수 자리는 비워두고 위치만 저장
+            if (reservePlayerSlot && displayRank == _rank)
+            {
+                var placeholder = Instantiate(_entryPrefab, _leaderboardContainer);
+                _targetEntryPosition = placeholder.GetComponent<RectTransform>();
+
+                // placeholder는 투명하게 처리 (자리만 차지)
+                var canvasGroup = placeholder.GetComponent<CanvasGroup>();
+                if (canvasGroup == null)
+                    canvasGroup = placeholder.AddComponent<CanvasGroup>();
+                canvasGroup.alpha = 0f;
+
+                continue;
+            }
+
             var entry = entries[i];
             var entryObject = Instantiate(_entryPrefab, _leaderboardContainer);
 
             var entryUI = entryObject.GetComponent<UI_LeaderboardEntry>();
             if (entryUI != null)
             {
-                entryUI.Setup(i + 1, entry.Name, entry.Time);
+                entryUI.Setup(displayRank, entry.Name, entry.Time);
             }
         }
+    }
+
+    private void ShowRankAnimation()
+    {
+        Sequence rankSequence = DOTween.Sequence();
+
+        rankSequence
+            .Append(_resultPanel.transform.DOLocalMove(_rankDisplayPosition, _rankDisplayMoveDuration))
+            .Join(DOTween.To(
+                () => _cameraVignette.intensity.value,
+                x => _cameraVignette.intensity.value = x,
+                _vignetteIntensity,
+                _vignetteDuration).SetEase(Ease.OutQuad))
+            .AppendCallback(() =>
+            {
+                NumberTextAnimation();
+                StartVignettePulse();
+            })
+            .AppendInterval(_rankCountDelay + _rankCountDuration)
+            .AppendCallback(() => StopVignettePulse())
+            .Append(DOTween.To(
+                () => _cameraVignette.intensity.value,
+                x => _cameraVignette.intensity.value = x,
+                0f,
+                _vignetteDuration).SetEase(Ease.OutQuad))
+            .AppendCallback(() =>
+            {
+                // 리더보드 표시 (플레이어 자리 예약)
+                if (_rank == 1)
+                {
+                    FirstRanking(false);
+                }
+                UpdateLeaderboardDisplay(true);
+                _animator.PlayPanel(UI_EndSceneAnimator.LeaderboardPanelName);
+                _animator.PlayPanel(UI_EndSceneAnimator.ButtonPanelName);
+            })
+            .AppendInterval(_layoutWaitTime)
+            .AppendCallback(() =>
+            {
+                ShowNamePanel();
+                MoveResultPanelToLeaderboard();
+            });
+    }
+
+    private void ShowNamePanel()
+    {
+        _resultNameGroup.SetActive(true);
+        _resultNameText.text = _currentNameText;
+    }
+
+    private void MoveResultPanelToLeaderboard()
+    {
+        RectTransform resultRect = _resultPanel.GetComponent<RectTransform>();
+
+        // 5위 밖이면 _outOfRankPosition 위치로 이동
+        if (_targetEntryPosition == null)
+        {
+            resultRect.DOLocalMove(_outOfRankPosition, _leaderboardMoveDuration).SetEase(Ease.OutQuad);
+            return;
+        }
+
+        // placeholder의 월드 위치를 resultPanel의 부모 로컬 좌표로 변환
+        Vector3 targetWorldPos = _targetEntryPosition.position;
+        Transform resultParent = resultRect.parent;
+
+        Vector3 targetLocalPos;
+        if (resultParent != null)
+        {
+            targetLocalPos = resultParent.InverseTransformPoint(targetWorldPos);
+        }
+        else
+        {
+            targetLocalPos = targetWorldPos;
+        }
+
+        // resultPanel을 해당 위치로 이동
+        resultRect.DOLocalMove(targetLocalPos, _leaderboardMoveDuration).SetEase(Ease.OutQuad);
+    }
+
+    private void NumberTextAnimation()
+    {
+        NumberCountingAnimator.CountToWithDelay(
+            _rankText,
+            _rank,
+            _rankCountDelay,
+            _rankCountDuration,
+            onComplete: () =>
+            {
+                if (_rank == 1)
+                {
+                    FirstRanking(true);
+                }
+            });
+    }
+
+    private void StartVignettePulse()
+    {
+        _vignettePulseTween?.Kill();
+
+        // 심장 박동 느낌: 빠르게 올라갔다가 천천히 내려오는 패턴
+        _vignettePulseTween = DOTween.Sequence()
+            .Append(DOTween.To(
+                () => _cameraVignette.intensity.value,
+                x => _cameraVignette.intensity.value = x,
+                _pulseMaxIntensity,
+                _pulseDuration * 0.3f).SetEase(Ease.OutQuad))
+            .Append(DOTween.To(
+                () => _cameraVignette.intensity.value,
+                x => _cameraVignette.intensity.value = x,
+                _pulseMinIntensity,
+                _pulseDuration * 0.7f).SetEase(Ease.OutQuad))
+            .SetLoops(_pulseCount, LoopType.Yoyo);
+    }
+
+    private void StopVignettePulse()
+    {
+        _vignettePulseTween?.Kill();
+        _vignettePulseTween = null;
     }
 
     private void OnRetryClicked()
@@ -153,6 +331,25 @@ public class UI_EndScene : MonoBehaviour
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 
+    private void InitializeParticle()
+    {
+        _rankParticle.Stop();
+        _rankShowParticle.Stop();
+    }
+
+    private void FirstRanking(bool isShow)
+    {
+        if (isShow)
+        {
+            _rankParticle.Stop();
+            _rankShowParticle.Play();
+        }
+        else
+        {
+            _rankParticle.Play();
+            _rankShowParticle.Stop();
+        }
+    }
     private string FormatTime(float time)
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(time);

@@ -1,3 +1,4 @@
+using GameUI.Animations;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,9 @@ public class UI_PauseMenu : MonoBehaviour
 {
     [Header("UI Panel")]
     [SerializeField] private GameObject _pausePanel;
+
+    [SerializeField] private UIFadeAnimation _backgroundFade;
+    [SerializeField] private UIElementDelayAnimation _delayedPanelAnimation;
 
     [Header("Buttons")]
     [SerializeField] private Button _resumeButton;
@@ -16,6 +20,13 @@ public class UI_PauseMenu : MonoBehaviour
     public static event Action OnRestartRequested;
     public static event Action OnLobbyRequested;
 
+    private void Awake()
+    {
+        _pausePanel.SetActive(false);
+        _backgroundFade.SetToHidden();
+        _delayedPanelAnimation.SetToHidden();
+    }
+
     private void Start()
     {
         GameStateManager.OnGameStateChanged += HandleStateChanged;
@@ -23,8 +34,6 @@ public class UI_PauseMenu : MonoBehaviour
         _resumeButton.onClick.AddListener(OnResumeClicked);
         _restartButton.onClick.AddListener(OnRestartClicked);
         _lobbyButton.onClick.AddListener(OnLobbyClicked);
-
-        _pausePanel.SetActive(false);
     }
 
     private void OnDestroy()
@@ -38,7 +47,7 @@ public class UI_PauseMenu : MonoBehaviour
 
     private void HandleStateChanged(GameState oldState, GameState newState)
     {
-        _pausePanel.SetActive(newState == GameState.Paused);
+        PanelAnimation(newState == GameState.Paused);
     }
 
     private void OnResumeClicked()
@@ -54,5 +63,20 @@ public class UI_PauseMenu : MonoBehaviour
     private void OnLobbyClicked()
     {
         OnLobbyRequested?.Invoke();
+    }
+
+    private void PanelAnimation(bool isActive)
+    {
+        if (isActive)
+        {
+            _pausePanel.SetActive(true);
+            _backgroundFade.AnimateToVisible();
+            _delayedPanelAnimation.AnimateToVisible();
+        }
+        else
+        {
+            _backgroundFade.AnimateToHidden();
+            _delayedPanelAnimation.AnimateToHidden(() => _pausePanel.SetActive(false));
+        }
     }
 }

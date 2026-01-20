@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace GameUI.Animations
         public Vector2 visiblePosition;
         [Tooltip("애니메이션 지속 시간")]
         public float duration = 1f;
+        public Ease ease = Ease.OutQuad;
 
         public void SetToHidden()
         {
@@ -25,7 +27,7 @@ namespace GameUI.Animations
         {
             if (element != null)
             {
-                element.DOAnchorPos(visiblePosition, duration);
+                element.DOAnchorPos(visiblePosition, duration).SetEase(ease).SetUpdate(true);
             }
         }
 
@@ -33,7 +35,7 @@ namespace GameUI.Animations
         {
             if (element != null)
             {
-                element.DOAnchorPos(hiddenPosition, duration);
+                element.DOAnchorPos(hiddenPosition, duration).SetEase(ease).SetUpdate(true);
             }
         }
     }
@@ -46,6 +48,7 @@ namespace GameUI.Animations
         public float visibleAlpha = 1f;
         [Tooltip("애니메이션 지속 시간")]
         public float duration = 1f;
+        public Ease ease = Ease.OutQuad;
 
         public void SetToHidden()
         {
@@ -61,7 +64,7 @@ namespace GameUI.Animations
         {
             if (graphic != null)
             {
-                graphic.DOFade(visibleAlpha, duration);
+                graphic.DOFade(visibleAlpha, duration).SetEase(ease).SetUpdate(true);
             }
         }
 
@@ -69,7 +72,15 @@ namespace GameUI.Animations
         {
             if (graphic != null)
             {
-                graphic.DOFade(hiddenAlpha, duration);
+                graphic.DOFade(hiddenAlpha, duration).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToHidden(Action onComplete)
+        {
+            if (graphic != null)
+            {
+                graphic.DOFade(hiddenAlpha, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
             }
         }
     }
@@ -84,6 +95,7 @@ namespace GameUI.Animations
         public float delay = 0f;
         [Tooltip("애니메이션 지속 시간")]
         public float duration = 1f;
+        public Ease ease = Ease.OutQuad;
 
         public void SetToHidden()
         {
@@ -97,7 +109,15 @@ namespace GameUI.Animations
         {
             if (element != null)
             {
-                element.DOAnchorPos(visiblePosition, duration).SetDelay(delay);
+                element.DOAnchorPos(visiblePosition, duration).SetDelay(delay).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToVisible(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOAnchorPos(visiblePosition, duration).SetDelay(delay).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
             }
         }
 
@@ -105,7 +125,15 @@ namespace GameUI.Animations
         {
             if (element != null)
             {
-                element.DOAnchorPos(hiddenPosition, duration).SetDelay(delay);
+                element.DOAnchorPos(hiddenPosition, duration).SetDelay(delay).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToHidden(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOAnchorPos(hiddenPosition, duration).SetDelay(delay).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
             }
         }
     }
