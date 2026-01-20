@@ -72,6 +72,8 @@ public class UI_EndScene : MonoBehaviour
     private void OnDestroy()
     {
         DOTween.Kill(_resultPanel.transform);
+        DOTween.Kill(_clearTimeText);
+        DOTween.Kill(_rankText);
     }
 
     private void Start()
