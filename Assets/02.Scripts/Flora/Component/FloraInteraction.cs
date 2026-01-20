@@ -103,6 +103,12 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         _isMoveLocked = isLocked;
     }
 
+    public void ResetForTutorialEnd()
+    {
+        _inventory.ResetWood();
+        _gaugeController.SetGauge(0);
+    }
+
     public void Interact(GameObject interactor)
     {
         if (CanMove)

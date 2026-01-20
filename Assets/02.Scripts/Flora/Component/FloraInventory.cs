@@ -29,6 +29,11 @@ public class FloraInventory : MonoBehaviour
         _wood.Increase(amount);
     }
 
+    public void ResetWood()
+    {
+        _wood.SetValue(0);
+    }
+
     public bool TryUseWood(int amount)
     {
         if (_wood.Value < amount) return false;

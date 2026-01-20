@@ -47,6 +47,11 @@ public class PlayerStat : MonoBehaviour, IHealable
         }
     }
 
+    public void FullHeal()
+    {
+        Health.Fill();
+    }
+
     private void StopHealthEffect()
     {
         _effectController?.StopEffect(PlayerEffectType.Heal);
