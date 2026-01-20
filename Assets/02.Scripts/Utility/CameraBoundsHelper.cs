@@ -39,6 +39,30 @@ public static class CameraBoundsHelper
     }
 
     /// <summary>
+    /// 오브젝트 위치를 카메라 뷰포트 범위 내로 클램핑 (일반 GameObject용)
+    /// </summary>
+    /// <param name="transform">대상 Transform</param>
+    /// <param name="camera">기준 카메라</param>
+    /// <param name="viewportMargin">뷰포트 경계 마진 (0.0 ~ 1.0)</param>
+    public static void ClampPositionToCameraBounds(Transform transform, Camera camera, float viewportMargin)
+    {
+        Vector3 viewportPos = camera.WorldToViewportPoint(transform.position);
+
+        bool isOutOfBounds = viewportPos.x < viewportMargin || viewportPos.x > 1f - viewportMargin ||
+                             viewportPos.y < viewportMargin || viewportPos.y > 1f - viewportMargin ||
+                             viewportPos.z <= 0;
+
+        if (isOutOfBounds)
+        {
+            viewportPos.x = Mathf.Clamp(viewportPos.x, viewportMargin, 1f - viewportMargin);
+            viewportPos.y = Mathf.Clamp(viewportPos.y, viewportMargin, 1f - viewportMargin);
+
+            Vector3 clampedWorldPos = camera.ViewportToWorldPoint(viewportPos);
+            transform.position = new Vector3(clampedWorldPos.x, transform.position.y, clampedWorldPos.z);
+        }
+    }
+
+    /// <summary>
     /// 이동 벡터를 카메라 경계 내로 제한
     /// </summary>
     /// <param name="currentPosition">현재 위치</param>
