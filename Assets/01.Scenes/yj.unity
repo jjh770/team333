@@ -15196,6 +15196,7 @@ MonoBehaviour:
   - {fileID: 471764466}
   _plankMonsterSpawner: {fileID: 4407074175118380590}
   _floraInteraction: {fileID: 215770150}
+  _floraSound: {fileID: 0}
 --- !u!65 &354122879
 BoxCollider:
   m_ObjectHideFlags: 0

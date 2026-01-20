@@ -1,9 +1,6 @@
 using DG.Tweening;
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -56,33 +53,25 @@ public class UI_EndScene : MonoBehaviour
     [SerializeField] private Vector3 _outOfRankPosition = new Vector3(0, -260, 0);
     [SerializeField] private float _leaderboardMoveDuration = 0.5f;
 
-    [Header("Vignette Pulse (Heartbeat)")]
+    [Header("Vignette")]
+    [SerializeField] private VignetteEffector _vignetteEffector;
     [SerializeField] private float _vignetteIntensity = 1f;
     [SerializeField] private float _vignetteDuration = 2f;
-    [SerializeField] private float _pulseMinIntensity = 0.3f;
-    [SerializeField] private float _pulseMaxIntensity = 0.6f;
-    [SerializeField] private float _pulseDuration = 0.4f;
-    [SerializeField] private int _pulseCount = 4;
 
     private float _clearTime;
     private bool _hasSubmitted;
-    private Volume _cameraVolume;
-    private Vignette _cameraVignette;
-    private Tween _vignettePulseTween;
     private int _rank;
     private string _currentNameText;
     private RectTransform _targetEntryPosition;
 
     private void Awake()
     {
-        _cameraVolume = Camera.main.GetComponent<Volume>();
-
-        if (_cameraVolume.profile.TryGet(out Vignette vignetteEffect))
-        {
-            _cameraVignette = vignetteEffect;
-        }
-
         InitializeParticle();
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(_resultPanel.transform);
     }
 
     private void Start()
@@ -208,24 +197,28 @@ public class UI_EndScene : MonoBehaviour
         Sequence rankSequence = DOTween.Sequence();
 
         rankSequence
-            .Append(_resultPanel.transform.DOLocalMove(_rankDisplayPosition, _rankDisplayMoveDuration))
-            .Join(DOTween.To(
-                () => _cameraVignette.intensity.value,
-                x => _cameraVignette.intensity.value = x,
-                _vignetteIntensity,
-                _vignetteDuration).SetEase(Ease.OutQuad))
+            .Append(_resultPanel.transform.DOLocalMove(_rankDisplayPosition, _rankDisplayMoveDuration));
+
+        if (_vignetteEffector != null && _vignetteEffector.IsAvailable)
+        {
+            rankSequence.Join(_vignetteEffector.FadeTo(_vignetteIntensity, _vignetteDuration));
+        }
+
+        rankSequence
             .AppendCallback(() =>
             {
                 NumberTextAnimation();
-                StartVignettePulse();
+                _vignetteEffector?.StartPulse();
             })
             .AppendInterval(_rankCountDelay + _rankCountDuration)
-            .AppendCallback(() => StopVignettePulse())
-            .Append(DOTween.To(
-                () => _cameraVignette.intensity.value,
-                x => _cameraVignette.intensity.value = x,
-                0f,
-                _vignetteDuration).SetEase(Ease.OutQuad))
+            .AppendCallback(() => _vignetteEffector?.StopPulse());
+
+        if (_vignetteEffector != null && _vignetteEffector.IsAvailable)
+        {
+            rankSequence.Append(_vignetteEffector.FadeTo(0f, _vignetteDuration));
+        }
+
+        rankSequence
             .AppendCallback(() =>
             {
                 // 리더보드 표시 (플레이어 자리 예약)
@@ -296,31 +289,6 @@ public class UI_EndScene : MonoBehaviour
             });
     }
 
-    private void StartVignettePulse()
-    {
-        _vignettePulseTween?.Kill();
-
-        // 심장 박동 느낌: 빠르게 올라갔다가 천천히 내려오는 패턴
-        _vignettePulseTween = DOTween.Sequence()
-            .Append(DOTween.To(
-                () => _cameraVignette.intensity.value,
-                x => _cameraVignette.intensity.value = x,
-                _pulseMaxIntensity,
-                _pulseDuration * 0.3f).SetEase(Ease.OutQuad))
-            .Append(DOTween.To(
-                () => _cameraVignette.intensity.value,
-                x => _cameraVignette.intensity.value = x,
-                _pulseMinIntensity,
-                _pulseDuration * 0.7f).SetEase(Ease.OutQuad))
-            .SetLoops(_pulseCount, LoopType.Yoyo);
-    }
-
-    private void StopVignettePulse()
-    {
-        _vignettePulseTween?.Kill();
-        _vignettePulseTween = null;
-    }
-
     private void OnRetryClicked()
     {
         SceneManager.LoadScene(_gameSceneName);
@@ -349,10 +317,5 @@ public class UI_EndScene : MonoBehaviour
             _rankParticle.Play();
             _rankShowParticle.Stop();
         }
-    }
-    private string FormatTime(float time)
-    {
-        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-        return $"{timeSpan.Minutes:00}:{timeSpan.Seconds:00}.{timeSpan.Milliseconds / 10:00}";
     }
 }
