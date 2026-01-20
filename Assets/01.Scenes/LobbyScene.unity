@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
   _lobbySceneName: LobbyScene
-  _gameSceneName: yj
+  _gameSceneName: yj - test1
   _endSceneName: EndScene
   _useLoadingScene: 1
 --- !u!4 &213694995
@@ -1193,6 +1193,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &912776585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912776587}
+  - component: {fileID: 912776586}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &912776586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912776585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fd63634ef5b7a41938d6027b404483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  _bgm1Volume: 0.3
+  _bgm2Volume: 0.5
+  _sfxVolume: 1
+  _startBGM1: {fileID: 8300000, guid: 3a671c89063d43b4e880e7414efc781f, type: 3}
+  _startBGM2: {fileID: 8300000, guid: 0cddbf7f0bd33b44dbb7607fe1cbedf1, type: 3}
+--- !u!4 &912776587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912776585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 144.62848, y: 0, z: 34.69497}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &914219451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2984,7 @@ SceneRoots:
   - {fileID: 867342237}
   - {fileID: 534217993}
   - {fileID: 213694995}
+  - {fileID: 912776587}
   - {fileID: 786531114}
   - {fileID: 897688520271944319}
   - {fileID: 1988364728}

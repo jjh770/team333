@@ -50507,8 +50507,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fd63634ef5b7a41938d6027b404483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  _bgmVolume: 0.5
+  _bgm1Volume: 0.3
+  _bgm2Volume: 0.5
   _sfxVolume: 1
+  _startBGM1: {fileID: 8300000, guid: 6cb6078032766474fa4bb3126b38c491, type: 3}
+  _startBGM2: {fileID: 8300000, guid: 9a5072edaa0a6fa4cb691d80b48ce05e, type: 3}
 --- !u!4 &1268877993
 Transform:
   m_ObjectHideFlags: 0
