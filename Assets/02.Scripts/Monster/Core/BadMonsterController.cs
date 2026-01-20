@@ -114,6 +114,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
         UpdateState();
 
+        if (_move.IsStunned) return;
         if (_health.IsDamaged) return;
 
         OnUpdate();
@@ -211,6 +212,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
         {
             StopCoroutine(_stunRoutine);
         }
+        _attack.InitCooltime();
         _stunRoutine = StartCoroutine(_move.StunCoroutine(duration));
     }
 

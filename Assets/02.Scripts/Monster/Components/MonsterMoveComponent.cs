@@ -80,9 +80,12 @@ public abstract class MonsterMoveComponent : MonoBehaviour
     {
         _isStunned = true;
 
+        Stop();
+
         yield return new WaitForSeconds(duration);
 
         _isStunned = false;
+        Resume();
     }
 
     public void ApplyKnockback(Vector3 attackerPosition)

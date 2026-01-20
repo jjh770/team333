@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloraSkillChanger
   _skillPrefab: {fileID: 8056032187317225895, guid: cda137beb3edac44b9e78c158559e845, type: 3}
-  _heldSizeMultifiler: 0.7
+  _heldSizeMultiplier: 0.7
   _sizeChangeDuration: 0.5
   _sizeChangeEase: 27
   _iconType: 4
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2bef7ba44855f14aade2f990c695881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemScanWave
-  _waveInterval: 3
+  _waveInterval: 2
   _waveDuration: 0.3
   _scanColor: {r: 1, g: 1, b: 1, a: 1}
   _intensity: 0.6
