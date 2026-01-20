@@ -1,11 +1,12 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UI_Tutorial : MonoBehaviour
 {
     [Header("UI Panel")]
+    [SerializeField] private Image _tutorialBGPanel;
     [SerializeField] private CanvasGroup _tutorialPanel;
     [SerializeField] private float _fadeDuration = 0.3f;
 
@@ -17,10 +18,10 @@ public class UI_Tutorial : MonoBehaviour
 
     [Header("WASD Indicators")]
     [SerializeField] private GameObject _wasdContainer;
-    [SerializeField] private Image _wKeyImage;
-    [SerializeField] private Image _aKeyImage;
-    [SerializeField] private Image _sKeyImage;
-    [SerializeField] private Image _dKeyImage;
+    [SerializeField] private TextMeshProUGUI _wKeyImage;
+    [SerializeField] private TextMeshProUGUI _aKeyImage;
+    [SerializeField] private TextMeshProUGUI _sKeyImage;
+    [SerializeField] private TextMeshProUGUI _dKeyImage;
     [SerializeField] private Color _inactiveColor = new Color(1f, 1f, 1f, 0.3f);
     [SerializeField] private Color _activeColor = new Color(1f, 1f, 1f, 1f);
 
@@ -181,6 +182,10 @@ public class UI_Tutorial : MonoBehaviour
     {
         HideAllIndicators();
         if (_instructionContainer != null) _instructionContainer.SetActive(true);
+        if (step.StepId == "ProgressInstruction")
+        {
+            _progressInstructionContainer.SetActive(true);
+        }
     }
 
     private void HideAllIndicators()
@@ -277,6 +282,7 @@ public class UI_Tutorial : MonoBehaviour
         _tutorialPanel.DOFade(1f, _fadeDuration);
         _tutorialPanel.interactable = true;
         _tutorialPanel.blocksRaycasts = true;
+        _tutorialBGPanel.DOFade(0.7f, 1f);
     }
 
     private void HidePanel()
@@ -291,5 +297,7 @@ public class UI_Tutorial : MonoBehaviour
         });
         _tutorialPanel.interactable = false;
         _tutorialPanel.blocksRaycasts = false;
+        _tutorialBGPanel.DOFade(0f, 1f);
+
     }
 }
