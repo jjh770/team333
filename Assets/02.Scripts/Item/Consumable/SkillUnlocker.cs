@@ -11,12 +11,6 @@ public class SkillUnlocker : ConsumableItemBase
             if (controller.SkillLevel < controller.MaxSkillLevel)
             {
                 controller.UpgradeSkill();
-
-                if (TryGetComponent<GoodSansam>(out var sansam))
-                {
-                    sansam.PlayEatSound();
-                }
-
                 return true;
             }
         }
