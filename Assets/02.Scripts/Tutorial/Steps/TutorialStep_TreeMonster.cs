@@ -21,7 +21,8 @@ public class TutorialStep_TreeMonster : TutorialStepBase
 
     public int CurrentCount => _currentCount;
     public int RequiredCount => _requiredCount;
-
+    
+    private const float NAVMESH_SAMPLE_RADIUS = 5f;
     public event Action OnCountChanged;
 
     protected override void OnEnter()
@@ -118,7 +119,7 @@ public class TutorialStep_TreeMonster : TutorialStepBase
 
     private Vector3 GetNavMeshPosition(Vector3 position)
     {
-        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(position, out NavMeshHit hit, NAVMESH_SAMPLE_RADIUS, NavMesh.AllAreas))
         {
             return hit.position;
         }

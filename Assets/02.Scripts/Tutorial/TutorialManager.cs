@@ -8,6 +8,7 @@ public class TutorialManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private FloraInteraction _floraInteraction;
+    [SerializeField] private PlayerStat _playerStat;
 
     [Header("Tutorial Steps")]
     [SerializeField] private List<TutorialStepBase> _steps = new List<TutorialStepBase>();
@@ -105,6 +106,7 @@ public class TutorialManager : MonoBehaviour
         _isRunning = false;
         _isCompleted = true;
         SetFloraMoveLock(false);
+        ResetStatsForTutorialEnd();
         OnTutorialSkipped?.Invoke();
     }
 
@@ -145,6 +147,7 @@ public class TutorialManager : MonoBehaviour
         _isRunning = false;
         _isCompleted = true;
         SetFloraMoveLock(false);
+        ResetStatsForTutorialEnd();
         OnTutorialCompleted?.Invoke();
     }
 
@@ -153,6 +156,19 @@ public class TutorialManager : MonoBehaviour
         if (_floraInteraction != null)
         {
             _floraInteraction.SetMoveLock(isLocked);
+        }
+    }
+
+    private void ResetStatsForTutorialEnd()
+    {
+        if (_floraInteraction != null)
+        {
+            _floraInteraction.ResetForTutorialEnd();
+        }
+
+        if (_playerStat != null)
+        {
+            _playerStat.FullHeal();
         }
     }
 }

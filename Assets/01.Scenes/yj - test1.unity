@@ -44627,6 +44627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
   _floraInteraction: {fileID: 215770150}
+  _playerStat: {fileID: 1662994551}
   _steps:
   - {fileID: 198017008}
   - {fileID: 1927865351}
@@ -62565,6 +62566,7 @@ MonoBehaviour:
   _monsterPrefab: {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
   _spawnPoint: {fileID: 1625514536}
   _spawnCount: 1
+  _playerInputHandler: {fileID: 1662994599}
 --- !u!4 &1622990524
 Transform:
   m_ObjectHideFlags: 0
@@ -64741,6 +64743,17 @@ MonoBehaviour:
   _spawnDuration: 0.5
   _spawnHeight: 2
   _spawnEase: 27
+--- !u!114 &1662994599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4122885670284437715, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+  m_PrefabInstance: {fileID: 1662994549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503626364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a59c5ff3cd1684b9d7fcd0762fef93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
 --- !u!1 &1663352273
 GameObject:
   m_ObjectHideFlags: 0
@@ -71490,6 +71503,7 @@ MonoBehaviour:
     \uC544\uC774\uD15C \uADFC\uCC98\uB85C \uAC00 \uC544\uC774\uD15C\uC744 \uBA39\uC5B4\uBCF4\uC138\uC694"
   _itemPrefab: {fileID: 3676946225234429852, guid: 6621f90ba3852f341bedcfdd297da8c5, type: 3}
   _spawnPoint: {fileID: 2044944406}
+  _playerInteraction: {fileID: 738058885}
 --- !u!1001 &1828072624
 PrefabInstance:
   m_ObjectHideFlags: 0

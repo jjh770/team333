@@ -12,10 +12,12 @@ public class TutorialStep_Attack : TutorialStepBase
     [SerializeField] private GameObject _monsterPrefab;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private int _spawnCount = 1;
-
+    
+    [Header("References")]
+    [SerializeField] private PlayerInputHandler _playerInputHandler;
+    
     private int _currentAttackCount;
     private float _lastAttackTime;
-    private PlayerInputHandler _playerInputHandler;
     private readonly List<GameObject> _spawnedMonsters = new List<GameObject>();
 
     public int CurrentAttackCount => _currentAttackCount;
@@ -28,7 +30,6 @@ public class TutorialStep_Attack : TutorialStepBase
         _currentAttackCount = 0;
         _lastAttackTime = -_attackCooldown;
 
-        _playerInputHandler = FindObjectOfType<PlayerInputHandler>();
         if (_playerInputHandler != null)
         {
             _playerInputHandler.OnAttackInput += HandleAttackInput;

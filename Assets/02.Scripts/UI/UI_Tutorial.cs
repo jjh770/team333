@@ -132,13 +132,8 @@ public class UI_Tutorial : MonoBehaviour
         _movementStep = step;
         _movementStep.OnKeyStateChanged += UpdateMovementIndicators;
 
+        HideAllIndicators();
         if (_wasdContainer != null) _wasdContainer.SetActive(true);
-        if (_attackCounterContainer != null) _attackCounterContainer.SetActive(false);
-        if (_interactContainer != null) _interactContainer.SetActive(false);
-        if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(false);
-        if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
-        if (_instructionContainer != null) _instructionContainer.SetActive(false);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
 
         UpdateMovementIndicators();
     }
@@ -148,26 +143,16 @@ public class UI_Tutorial : MonoBehaviour
         _attackStep = step;
         _attackStep.OnAttackCountChanged += UpdateAttackCounter;
 
-        if (_wasdContainer != null) _wasdContainer.SetActive(false);
+        HideAllIndicators();
         if (_attackCounterContainer != null) _attackCounterContainer.SetActive(true);
-        if (_interactContainer != null) _interactContainer.SetActive(false);
-        if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(false);
-        if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
-        if (_instructionContainer != null) _instructionContainer.SetActive(false);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
 
         UpdateAttackCounter();
     }
 
     private void SetupItemInteractStep()
     {
-        if (_wasdContainer != null) _wasdContainer.SetActive(false);
-        if (_attackCounterContainer != null) _attackCounterContainer.SetActive(false);
+        HideAllIndicators();
         if (_interactContainer != null) _interactContainer.SetActive(true);
-        if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(false);
-        if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
-        if (_instructionContainer != null) _instructionContainer.SetActive(false);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
     }
 
     private void SetupTreeMonsterStep(TutorialStep_TreeMonster step)
@@ -175,13 +160,8 @@ public class UI_Tutorial : MonoBehaviour
         _treeMonsterStep = step;
         _treeMonsterStep.OnCountChanged += UpdateTreeMonsterCount;
 
-        if (_wasdContainer != null) _wasdContainer.SetActive(false);
-        if (_attackCounterContainer != null) _attackCounterContainer.SetActive(false);
-        if (_interactContainer != null) _interactContainer.SetActive(false);
+        HideAllIndicators();
         if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(true);
-        if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
-        if (_instructionContainer != null) _instructionContainer.SetActive(false);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
 
         UpdateTreeMonsterCount();
     }
@@ -191,26 +171,16 @@ public class UI_Tutorial : MonoBehaviour
         _feedFloraStep = step;
         _feedFloraStep.OnCountChanged += UpdateFeedFloraCount;
 
-        if (_wasdContainer != null) _wasdContainer.SetActive(false);
-        if (_attackCounterContainer != null) _attackCounterContainer.SetActive(false);
-        if (_interactContainer != null) _interactContainer.SetActive(false);
-        if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(false);
+        HideAllIndicators();
         if (_feedFloraContainer != null) _feedFloraContainer.SetActive(true);
-        if (_instructionContainer != null) _instructionContainer.SetActive(false);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
 
         UpdateFeedFloraCount();
     }
 
     private void SetupInstructionStep(TutorialStep_Instruction step)
     {
-        if (_wasdContainer != null) _wasdContainer.SetActive(false);
-        if (_attackCounterContainer != null) _attackCounterContainer.SetActive(false);
-        if (_interactContainer != null) _interactContainer.SetActive(false);
-        if (_treeMonsterContainer != null) _treeMonsterContainer.SetActive(false);
-        if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
+        HideAllIndicators();
         if (_instructionContainer != null) _instructionContainer.SetActive(true);
-        if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
     }
 
     private void HideAllIndicators()
