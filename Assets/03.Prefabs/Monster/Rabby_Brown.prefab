@@ -807,6 +807,14 @@ PrefabInstance:
       propertyPath: _happyText
       value: Take me
       objectReference: {fileID: 0}
+    - target: {fileID: 1640385253972482715, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: a3c4b37b86ca2094ab248b884545112c, type: 2}
+    - target: {fileID: 3142620212990385322, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: a3c4b37b86ca2094ab248b884545112c, type: 2}
     - target: {fileID: 3791058723434626671, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_Name
       value: UI_MonsterSpeechBubble
