@@ -21,6 +21,6 @@ public class Tutorial_Arrow : MonoBehaviour
 
     private void OnDestroy()
     {
-        _arrowMoving.Kill();
+        _arrowMoving?.Kill();
     }
 }
