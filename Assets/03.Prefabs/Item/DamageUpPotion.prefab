@@ -1790,4 +1790,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e4fe502c3317a4ea465f251dbaafa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageUpItem
-  _DamageUpAmount: 5
+  _damageUpAmount: 5

@@ -65,6 +65,6 @@ public class PlayerStat : MonoBehaviour, IHealable
 
     private void PlayDamageUpEffect()
     {
-        _effectController?.PlayEffect(PlayerEffectType.SkillUp);
+        _effectController?.PlayEffect(PlayerEffectType.DamageUp);
     }
 }
