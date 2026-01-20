@@ -16,6 +16,7 @@ public class MonsterDataSO : ScriptableObject
 
     [Header("DropItem")]
     [field: SerializeField] public GameObject DropItem { get; private set; }
+    [field: SerializeField] public float DropChance { get; private set; }
 
     [Header("Prefab")]
     [field: SerializeField] public GameObject Prefab { get; private set; }

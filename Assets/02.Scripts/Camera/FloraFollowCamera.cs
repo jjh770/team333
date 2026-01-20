@@ -91,6 +91,11 @@ public class FloraFollowCamera : MonoBehaviour
             desiredPosition,
             _positionSmoothSpeed * Time.deltaTime
         );
+
+        if (CameraShake.Instance != null)
+        {
+            transform.position += CameraShake.Instance.ShakeOffset;
+        }
     }
     
     private void UpdateRotation()

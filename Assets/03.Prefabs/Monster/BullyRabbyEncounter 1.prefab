@@ -187,6 +187,30 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _sadIcon
+      value: 
+      objectReference: {fileID: -1108429344, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
+    - target: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _happyIcon
+      value: 
+      objectReference: {fileID: -1157644560, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
+    - target: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _speechBubble
+      value: 
+      objectReference: {fileID: 5781995622612688296}
+    - target: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _floatDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _speechBubbleImage
+      value: 
+      objectReference: {fileID: 5709889082092896109}
+    - target: {fileID: 7638550218324882392, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -202,12 +226,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1819035971052552403, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
   m_PrefabInstance: {fileID: 3385009623000982790}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5709889082092896109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7044862985554598507, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+  m_PrefabInstance: {fileID: 3385009623000982790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &5781995622612688296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9134494333631854766, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+  m_PrefabInstance: {fileID: 3385009623000982790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8411827753550078906 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6504649867529242300, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
   m_PrefabInstance: {fileID: 3385009623000982790}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5781995622612688296}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43deb8dc87efa1642a18740d9aac3791, type: 3}

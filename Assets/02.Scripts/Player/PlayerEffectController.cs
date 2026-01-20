@@ -1,11 +1,12 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayerEffectType
 {
     Skill,
     Heal,
-    SkillUp
+    SkillUp,
+    DamageUp
 }
 
 [System.Serializable]
@@ -64,6 +65,7 @@ public class PlayerEffectController : MonoBehaviour
     [Header("Item Effects")]
     [SerializeField] private PlayerEffectHandler _healEffect;
     [SerializeField] private PlayerEffectHandler _skillBoostEffect;
+    [SerializeField] private PlayerEffectHandler _damageUpEffect;
 
     private Dictionary<PlayerEffectType, PlayerEffectHandler> _effects;
 
@@ -73,7 +75,8 @@ public class PlayerEffectController : MonoBehaviour
         {
             [PlayerEffectType.Skill] = _skillEffect,
             [PlayerEffectType.Heal] = _healEffect,
-            [PlayerEffectType.SkillUp] = _skillBoostEffect
+            [PlayerEffectType.SkillUp] = _skillBoostEffect,
+            [PlayerEffectType.DamageUp] = _damageUpEffect
         };
     }
     private void OnEnable()
