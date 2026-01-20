@@ -567,6 +567,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterPlacedMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
+  _knockbackForce: 2
+  _knockbackDuration: 0.2
+  _knockbackStunDuration: 0.3
   _detectionRange: 10
 --- !u!114 &-5844976591375165979
 MonoBehaviour:
@@ -818,6 +821,10 @@ PrefabInstance:
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: _floatDistance
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2330930645351150873, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3791058723434626671, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_Name
