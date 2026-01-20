@@ -6,13 +6,20 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [Header("Volume Settings")]
-    [SerializeField, Range(0f, 1f)] private float _bgmVolume = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float _bgm1Volume = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float _bgm2Volume = 0.5f;
     [SerializeField, Range(0f, 1f)] private float _sfxVolume = 1f;
 
-    public float BGMVolume => _bgmVolume;
+    [Header("BGM")]
+    [SerializeField] private AudioClip _startBGM1;
+    [SerializeField] private AudioClip _startBGM2;
+
+    public float BGM1Volume => _bgm1Volume;
+    public float BGM2Volume => _bgm2Volume;
     public float SFXVolume => _sfxVolume;
 
-    private AudioClip _currentBGM;
+    private AudioSource _bgm1Source;
+    private AudioSource _bgm2Source;
 
     private void Awake()
     {
@@ -22,6 +29,26 @@ public class SoundManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        _bgm1Source = gameObject.AddComponent<AudioSource>();
+        _bgm1Source.loop = true;
+        _bgm1Source.playOnAwake = false;
+
+        _bgm2Source = gameObject.AddComponent<AudioSource>();
+        _bgm2Source.loop = true;
+        _bgm2Source.playOnAwake = false;
+    }
+
+    private void Start()
+    {
+        if (_startBGM1 != null)
+        {
+            PlayBGM1(_startBGM1);
+        }
+        if (_startBGM2 != null)
+        {
+            PlayBGM2(_startBGM2);
+        }
     }
 
     private void OnDestroy()
@@ -32,55 +59,64 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    #region BGM
+    #region BGM1
 
-    /// <summary>
-    /// BGM 재생
-    /// </summary>
-    public void PlayBGM(AudioClip clip, bool loop = true)
+    public void PlayBGM1(AudioClip clip)
     {
         if (clip == null) return;
+        if (_bgm1Source.clip == clip && _bgm1Source.isPlaying) return;
 
-        // 같은 BGM이면 재생 안함
-        if (_currentBGM == clip) return;
-
-        _currentBGM = clip;
-
-        MMSoundManagerPlayOptions options = MMSoundManagerPlayOptions.Default;
-        options.MmSoundManagerTrack = MMSoundManager.MMSoundManagerTracks.Music;
-        options.Location = transform.position;
-        options.Loop = loop;
-        options.Volume = _bgmVolume;
-
-        MMSoundManagerSoundPlayEvent.Trigger(clip, options);
+        _bgm1Source.clip = clip;
+        _bgm1Source.volume = _bgm1Volume;
+        _bgm1Source.Play();
     }
 
-    /// <summary>
-    /// BGM 정지
-    /// </summary>
-    public void StopBGM()
+    public void StopBGM1()
     {
-        _currentBGM = null;
-        MMSoundManagerTrackEvent.Trigger(
-            MMSoundManagerTrackEventTypes.StopTrack,
-            MMSoundManager.MMSoundManagerTracks.Music
-        );
+        _bgm1Source.Stop();
+        _bgm1Source.clip = null;
     }
 
-    /// <summary>
-    /// BGM 페이드 아웃 후 정지
-    /// </summary>
-    public void FadeOutBGM(float duration = 1f)
+    public void SetBGM1Volume(float volume)
     {
-        _currentBGM = null;
-        MMTweenType tween = new MMTweenType(MMTween.MMTweenCurve.EaseOutQuadratic);
-        MMSoundManagerTrackFadeEvent.Trigger(
-            MMSoundManagerTrackFadeEvent.Modes.PlayFade,
-            MMSoundManager.MMSoundManagerTracks.Music,
-            duration,
-            0f,
-            tween
-        );
+        _bgm1Volume = Mathf.Clamp01(volume);
+        _bgm1Source.volume = _bgm1Volume;
+    }
+
+    #endregion
+
+    #region BGM2
+
+    public void PlayBGM2(AudioClip clip)
+    {
+        if (clip == null) return;
+        if (_bgm2Source.clip == clip && _bgm2Source.isPlaying) return;
+
+        _bgm2Source.clip = clip;
+        _bgm2Source.volume = _bgm2Volume;
+        _bgm2Source.Play();
+    }
+
+    public void StopBGM2()
+    {
+        _bgm2Source.Stop();
+        _bgm2Source.clip = null;
+    }
+
+    public void SetBGM2Volume(float volume)
+    {
+        _bgm2Volume = Mathf.Clamp01(volume);
+        _bgm2Source.volume = _bgm2Volume;
+    }
+
+    #endregion
+
+    #region BGM Common
+
+    public void StopAllBGM()
+    {
+        StopBGM1();
+        StopBGM2();
     }
 
     #endregion
@@ -117,16 +153,6 @@ public class SoundManager : MonoBehaviour
 
     #region Volume Control
 
-    public void SetBGMVolume(float volume)
-    {
-        _bgmVolume = Mathf.Clamp01(volume);
-        MMSoundManagerTrackEvent.Trigger(
-            MMSoundManagerTrackEventTypes.SetVolumeTrack,
-            MMSoundManager.MMSoundManagerTracks.Music,
-            _bgmVolume
-        );
-    }
-
     public void SetSFXVolume(float volume)
     {
         _sfxVolume = Mathf.Clamp01(volume);
@@ -136,9 +162,11 @@ public class SoundManager : MonoBehaviour
             _sfxVolume
         );
     }
-    
+
     public void MuteAll(bool mute)
     {
+        _bgm1Source.mute = mute;
+        _bgm2Source.mute = mute;
         MMSoundManagerTrackEvent.Trigger(
             mute ? MMSoundManagerTrackEventTypes.MuteTrack : MMSoundManagerTrackEventTypes.UnmuteTrack,
             MMSoundManager.MMSoundManagerTracks.Master
