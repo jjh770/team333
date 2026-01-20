@@ -135,6 +135,7 @@ public class PlayerSkillController : MonoBehaviour
             _skillRange.ExecuteSkillHit();
             PlaySkillEffect();
             _playerSound?.PlaySkill(_skillLevel - 1);
+            CameraShake.Instance?.Shake();
         }
     }
 

@@ -63,4 +63,9 @@ public class MonsterStat : MonoBehaviour
     {
         return _data.DropItem;
     }
+
+    public float GetDropChance()
+    {
+        return _data.DropChance;
+    }
 }

@@ -7,9 +7,6 @@ public class TurnipaMonsterController : BadMonsterController
     [SerializeField] private int _splitCount = 3;
     [SerializeField] private float _splitOffset = 1f;
 
-    [Header("Item Drop")]
-    [SerializeField, Range(0f, 1f)] private float _dropChance = 0.1f;
-
     private IPoolManager _poolManager;
 
     protected override void Awake()
@@ -28,7 +25,7 @@ public class TurnipaMonsterController : BadMonsterController
 
     protected override void HandleItemDrop()
     {
-        if (Random.value <= _dropChance)
+        if (Random.value <= _stat.GetDropChance())
         {
             _itemDrop.DropItem(_stat.GetDropItem());
         }

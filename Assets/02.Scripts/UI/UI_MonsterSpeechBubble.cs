@@ -13,7 +13,7 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     [SerializeField] private Sprite _defaultIcon;
     [SerializeField] private Sprite _happyIcon;
     [SerializeField] private Sprite _sadIcon;
-    private Sprite _currrentIcon;
+    private Sprite _currentIcon;
 
     [Header("Icon Animation")]
     [SerializeField] private float _popScale = 1.08f;
@@ -66,8 +66,8 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     {
         if (_speechBubbleImage == null) return;
 
-        _currrentIcon = newIcon;
-        _speechBubbleImage.sprite = _currrentIcon;
+        _currentIcon = newIcon;
+        _speechBubbleImage.sprite = _currentIcon;
 
         PlayPopAnimation();
     }

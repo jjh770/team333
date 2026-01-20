@@ -201,6 +201,14 @@ public class SansamController : BadMonsterController
         return _agent != null && _agent.velocity.sqrMagnitude > _agentMovingVelocitySqrThreshold;
     }
 
+    protected override void HandleItemDrop()
+    {
+        if (Random.value <= _stat.GetDropChance())
+        {
+            _itemDrop.DropItem(_stat.GetDropItem());
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
