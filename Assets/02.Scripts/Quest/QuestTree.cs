@@ -26,7 +26,7 @@ public class QuestTree : MonoBehaviour, IDamageable
         if (damage.Value <= 0) return false;
         
         _health.Decrease(damage.Value);
-        MonsterEffectPool.Instance.PlayHitEffect(_center.position);
+        MonsterEffectPool.Instance.PlayQuestTreeHitEffect(_center.position);
         MonsterEffectPool.Instance.PlaySmokeEffect(_center.position);
 
         if (_health.IsEmpty)

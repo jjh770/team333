@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
   _lobbySceneName: LobbyScene
-  _gameSceneName: yj - test1
+  _gameSceneName: GameScene
   _endSceneName: EndScene
   _useLoadingScene: 1
 --- !u!4 &213694995
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fd63634ef5b7a41938d6027b404483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  _bgm1Volume: 0.3
+  _bgm1Volume: 0.5
   _bgm2Volume: 0.5
   _sfxVolume: 1
   _startBGM1: {fileID: 8300000, guid: 3a671c89063d43b4e880e7414efc781f, type: 3}

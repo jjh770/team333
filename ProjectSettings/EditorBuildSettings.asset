@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/01.Scenes/LoadingScene.unity
     guid: 6a05e209172014c4685363bbd6930659
   - enabled: 1
-    path: Assets/01.Scenes/yj.unity
-    guid: fc925b9e140c4594599d15e9e27d3783
+    path: Assets/01.Scenes/GameScene.unity
+    guid: 177364150840c5c40935ad49d940448f
   - enabled: 1
     path: Assets/01.Scenes/EndScene.unity
     guid: 830146bec319ae744bb35c45fb5f31ac

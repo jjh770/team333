@@ -10,7 +10,7 @@ public class MonsterEffectPool : MonoBehaviour
     [SerializeField] protected float _deathParticleDuration = 3f;
 
     [Header("Hit Effects")]
-    [SerializeField] protected GameObject _hitParticlePrefab;
+    [SerializeField] protected GameObject _questTreeHitParticlePrefab;
     [SerializeField] protected float _hitParticleDuration = 3f;
 
     [Header("Settings")]
@@ -42,9 +42,9 @@ public class MonsterEffectPool : MonoBehaviour
         return PlayEffectWithDuration(_deathParticlePrefab, position, Quaternion.identity, _deathParticleDuration);
     }
 
-    public GameObject PlayHitEffect(Vector3 position)
+    public GameObject PlayQuestTreeHitEffect(Vector3 position)
     {
-        return PlayEffectWithDuration(_hitParticlePrefab, position, Quaternion.identity, _hitParticleDuration);
+        return PlayEffectWithDuration(_questTreeHitParticlePrefab, position, Quaternion.identity, _hitParticleDuration);
     }
 
     private GameObject PlayEffect(GameObject prefab, Vector3 position, Quaternion rotation)

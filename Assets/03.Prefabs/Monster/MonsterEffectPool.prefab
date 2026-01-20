@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7771350587075776247}
   - component: {fileID: 3771728476696452156}
+  - component: {fileID: 1241560215352822953}
   m_Layer: 0
   m_Name: MonsterEffectPool
   m_TagString: Untagged
@@ -46,4 +47,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterEffectPool
   _deathParticlePrefab: {fileID: 6286510145479088550, guid: 053fac6996263b3419004907fb3e90b8, type: 3}
   _deathParticleDuration: 5
+  _questTreeHitParticlePrefab: {fileID: 0}
+  _hitParticleDuration: 3
   _preloadCount: 10
+--- !u!114 &1241560215352822953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532286501812208461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2879b1344a3f8446a5b6fa9ef42c909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  _defaultDuration: 0.15
+  _defaultMagnitude: 0.25

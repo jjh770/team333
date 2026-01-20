@@ -46,124 +46,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterPool
   _poolManager: {fileID: 0}
   _monsterPrefabs:
-  - {fileID: 8656837306392291822, guid: 82fadd5cb14ae5246a9665caad3f8a9a, type: 3}
-  - {fileID: 2834583176937093337, guid: 8235fd11f22582348ab759c6a6048508, type: 3}
-  _preloadPerPrefab: 30
+  - {fileID: 532693156242202316, guid: d9961b7c2c78886469fff59fbda00ffd, type: 3}
+  _preloadPerPrefab: 20
   _defaultMinSpawnCount: 1
   _defaultMaxSpawnCount: 4
   _spawnGroups:
-  - _groupName: 1
+  - _groupName: 
     _spawnPoints:
+    - {fileID: 0}
     - {fileID: 0}
     _addSpawnCount: 0
-  - _groupName: 2
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
-    _addSpawnCount: 1
-  - _groupName: 3
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
-    _addSpawnCount: 2
-  - _groupName: 4
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 3
-  - _groupName: 5
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 4
-  - _groupName: 6
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 5
-  - _groupName: 7
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 6
-  - _groupName: 8
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    _addSpawnCount: 0
+  - _groupName: 
+    _spawnPoints:
     - {fileID: 0}
-    _addSpawnCount: 7
-  - _groupName: 9
+    - {fileID: 0}
+    - {fileID: 0}
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    _addSpawnCount: 8
-  - _groupName: 10
+    _addSpawnCount: 0
+  - _groupName: 
     _spawnPoints:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    _addSpawnCount: 9
-  - _groupName: 11
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 10
-  - _groupName: 12
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 11
-  - _groupName: 13
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 12
-  - _groupName: 14
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 8
-  - _groupName: 15
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 5
-  - _groupName: 16
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 12
-  - _groupName: 17
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 10
-  - _groupName: 18
-    _spawnPoints:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _addSpawnCount: 10
+    _addSpawnCount: 0
