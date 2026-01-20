@@ -24,6 +24,10 @@ public class MonsterSoundData : ScriptableObject
     [Tooltip("펫 공격 사운드")]
     public MonsterSoundInfo PetAttackSFX { get; private set; }
 
+    [field: SerializeField]
+    [Tooltip("산삼 먹히는 사운드")]
+    public MonsterSoundInfo EatSansamSFX { get; private set; }
+
     public MonsterSoundInfo GetRandomHitSound()
     {
         if (HitSounds == null || HitSounds.Length == 0) return default;

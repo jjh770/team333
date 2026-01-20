@@ -29,3 +29,6 @@ MonoBehaviour:
   <PetAttackSFX>k__BackingField:
     Clip: {fileID: 8300000, guid: 4e450660583fed44f882ef679ff2a556, type: 3}
     StartTime: 0
+  <EatSansamSFX>k__BackingField:
+    Clip: {fileID: 8300000, guid: 17db5395dab5d7d4abdf17d9815d0e80, type: 3}
+    StartTime: 0
