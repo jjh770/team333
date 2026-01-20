@@ -10,6 +10,7 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
     private List<Vector3> _splinePoints;
     private HashSet<int> _waitPointIndex;
+    private Dictionary<int, int> _splineIndexToWaypointIndex;
     private int _currentIndex;
     private bool _isCompleted;
 
@@ -19,12 +20,21 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
     public event Action OnPathCompleted;
     public event Action<float> OnProgressChanged;
+    public event Action<int> OnWaitPointReached;
     
     private void Awake()
     {
         _currentIndex = 0;
         _isCompleted = false;
         GenerateSplinePoints();
+    }
+
+    private void Start()
+    {
+        if (ShouldWait && _splineIndexToWaypointIndex.TryGetValue(_currentIndex, out int waypointIndex))
+        {
+            OnWaitPointReached?.Invoke(waypointIndex);
+        }
     }
 
     public Vector3 GetCurrentPoint()
@@ -39,6 +49,11 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
         OnProgressChanged?.Invoke(Progress);
 
+        if (ShouldWait && _splineIndexToWaypointIndex.TryGetValue(_currentIndex, out int waypointIndex))
+        {
+            OnWaitPointReached?.Invoke(waypointIndex);
+        }
+
         if (!hasNext && !_isCompleted)
         {
             _isCompleted = true;
@@ -52,6 +67,7 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
     {
         _splinePoints = new List<Vector3>();
         _waitPointIndex = new HashSet<int>();
+        _splineIndexToWaypointIndex = new Dictionary<int, int>();
 
         if (_waypoints == null || _waypoints.Length < 2)
         {
@@ -62,7 +78,9 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
         {
             if (Array.IndexOf(_waitPointIndexes, i) >= 0)
             {
-                _waitPointIndex.Add(_splinePoints.Count);
+                int splineIndex = _splinePoints.Count;
+                _waitPointIndex.Add(splineIndex);
+                _splineIndexToWaypointIndex[splineIndex] = i;
             }
 
             Vector3 p0 = GetWaypointPosition(i - 1);
@@ -80,7 +98,9 @@ public class SplineWaypointPath : MonoBehaviour, IFloraPath
 
         if (Array.IndexOf(_waitPointIndexes, _waypoints.Length - 1) >= 0)
         {
-            _waitPointIndex.Add(_splinePoints.Count);
+            int splineIndex = _splinePoints.Count;
+            _waitPointIndex.Add(splineIndex);
+            _splineIndexToWaypointIndex[splineIndex] = _waypoints.Length - 1;
         }
 
         _splinePoints.Add(_waypoints[^1].position);

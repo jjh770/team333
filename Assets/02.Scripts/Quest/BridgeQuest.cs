@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BridgeQuest : MonoBehaviour
 {
@@ -9,9 +8,30 @@ public class BridgeQuest : MonoBehaviour
     [SerializeField] private PlankMonsterSpawner _plankMonsterSpawner;
     [SerializeField] private FloraInteraction _floraInteraction;
     [SerializeField] private FloraSound _floraSound;
-    
+
+    [Header("Quest UI")]
+    [SerializeField] private SplineWaypointPath _floraPath;
+    [SerializeField] private int _waypointIndex;
+    [SerializeField] private string _questStartText = "판자를 다리에 던져 끊어진 다리를 연결하세요.";
+
     private int _currentPlankCount = 0;
     public bool IsQuestCompleted { get; private set; }
+
+    private void OnEnable()
+    {
+        if (_floraPath != null)
+        {
+            _floraPath.OnWaitPointReached += HandleWaitPointReached;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_floraPath != null)
+        {
+            _floraPath.OnWaitPointReached -= HandleWaitPointReached;
+        }
+    }
 
     private void Start()
     {
@@ -19,13 +39,21 @@ public class BridgeQuest : MonoBehaviour
         {
             obj.SetActive(false);
         }
-        
+
         foreach (GameObject obj in _plankOutlineObjects)
         {
             obj.SetActive(false);
         }
-        
+
         _plankOutlineObjects[_currentPlankCount].SetActive(true);
+    }
+
+    private void HandleWaitPointReached(int waypointIndex)
+    {
+        if (waypointIndex == _waypointIndex)
+        {
+            QuestManager.Instance?.StartQuest(_questStartText);
+        }
     }
     
     public void AddPlank()
@@ -53,7 +81,6 @@ public class BridgeQuest : MonoBehaviour
     private void CompleteQuest()
     {
         IsQuestCompleted = true;
-        Debug.Log($"미션 완료!");
 
         _plankMonsterSpawner.StopSpawning();
         _floraInteraction.SetMoveLock(false);

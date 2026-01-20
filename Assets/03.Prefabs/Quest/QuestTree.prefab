@@ -162,6 +162,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeeQuest
   _floraInteraction: {fileID: 0}
+  _floraSound: {fileID: 0}
+  _questStartText: "\uAE38\uC744 \uAC00\uB85C \uB9C9\uB294 \uC7A5\uC560\uBB3C\uC744
+    \uACF5\uACA9\uD574 \uC5C6\uC560\uC138\uC694. "
+  _questCompleteText: "\uC7A5\uC560\uBB3C \uC81C\uAC70 \uC644\uB8CC! \uD50C\uB85C\uB77C\uC5D0\uAC8C
+    \uB9D0\uC744 \uAC78\uC5B4 \uCD9C\uBC1C\uD558\uC138\uC694."
 --- !u!114 &1361554184085608642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +185,7 @@ MonoBehaviour:
     _reganSpeed: 0
   _center: {fileID: 4939481408329475976}
   _endingSequence: {fileID: 660287962796336189, guid: 744854b7082b0a0499b6c34b8b1ccbbe, type: 3}
+  _floraSound: {fileID: 0}
 --- !u!114 &2313257500104367836
 MonoBehaviour:
   m_ObjectHideFlags: 0
