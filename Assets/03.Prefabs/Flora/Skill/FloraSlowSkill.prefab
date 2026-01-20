@@ -74,7 +74,7 @@ MonoBehaviour:
   _skillSound:
     Clip: {fileID: 8300000, guid: 715f9e0b2c872e149bf22cd842d3ae23, type: 3}
     StartTime: 0
-  _slowAmount: 1.5
+  _slowAmount: 1.8
 --- !u!1001 &177710925645358818
 PrefabInstance:
   m_ObjectHideFlags: 0
