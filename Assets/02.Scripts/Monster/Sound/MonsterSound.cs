@@ -22,6 +22,12 @@ public class MonsterSound : MonoBehaviour
         PlaySoundInfo(_soundData.PetAttackSFX);
     }
 
+    public void EatSansam()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.EatSansamSFX);
+    }
+
     private void PlaySoundInfo(MonsterSoundInfo info)
     {
         if (info.Clip == null) return;

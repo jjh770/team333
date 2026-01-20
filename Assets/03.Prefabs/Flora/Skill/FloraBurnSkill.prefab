@@ -75,7 +75,7 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 1c2567f17ff19a8409692ef28c277fcf, type: 3}
     StartTime: 0
   _damageInterval: 0.5
-  _damageAmount: 0.5
+  _damageAmount: 2
 --- !u!1001 &1202995762464298086
 PrefabInstance:
   m_ObjectHideFlags: 0

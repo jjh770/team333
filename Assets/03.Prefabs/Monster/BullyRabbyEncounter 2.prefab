@@ -214,6 +214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rabby_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 5681020648405011438, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7012563732279049193, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.01
@@ -266,6 +270,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: _sadIcon
+      value: 
+      objectReference: {fileID: -1405338342, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
+    - target: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: _happyIcon
+      value: 
+      objectReference: {fileID: -1970771728, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
+    - target: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: _speechBubble
+      value: 
+      objectReference: {fileID: 3163686605373609200}
+    - target: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: _floatDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: _speechBubbleImage
+      value: 
+      objectReference: {fileID: 3812283378829555253}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -281,12 +305,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9120834102012214922, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
   m_PrefabInstance: {fileID: 8211483627178873960}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3163686605373609200}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43deb8dc87efa1642a18740d9aac3791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_MonsterSpeechBubble
+--- !u!1 &3163686605373609200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6490426960833560728, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+  m_PrefabInstance: {fileID: 8211483627178873960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3812283378829555253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4977321268646519389, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+  m_PrefabInstance: {fileID: 8211483627178873960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &6234371962160271878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2842330599658161774, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}

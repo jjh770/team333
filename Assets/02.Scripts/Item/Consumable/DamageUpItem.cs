@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamageUpItem : ConsumableItemBase
 {
     [SerializeField] private float _damageUpAmount;
 
-    public override IconType IconType => IconType.Potion;
+    public override IconType IconType => IconType.DamageUpPotion;
 
     protected override bool OnConsume(GameObject interactor)
     {

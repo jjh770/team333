@@ -7,12 +7,13 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
 {
     [Header("SpeechBubble")]
     [SerializeField] private GameObject _speechBubble;
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private Image _speechBubbleImage;
 
-    [Header("text")]
-    [SerializeField] private string _happyText = "Take me";
-    [SerializeField] private string _sadText = "Help me";
-    private string _currrentText;
+    [Header("Icon")]
+    [SerializeField] private Sprite _defaultIcon;
+    [SerializeField] private Sprite _happyIcon;
+    [SerializeField] private Sprite _sadIcon;
+    private Sprite _currentIcon;
 
     [Header("Icon Animation")]
     [SerializeField] private float _popScale = 1.08f;
@@ -28,11 +29,11 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     private void Start()
     {
         StartFloating();
+        SetDefaultIcon();
     }
 
     private void StartFloating()
     {
-        
         RectTransform bubbleRect = _speechBubble.GetComponent<RectTransform>();
 
         _floatTween = bubbleRect.DOAnchorPosY(bubbleRect.anchoredPosition.y + _floatDistance, _floatDuration)
@@ -40,14 +41,20 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
             .SetLoops(-1, LoopType.Yoyo);
     }
 
+    public void SetDefaultIcon()
+    {
+        if (_defaultIcon == null) return;
+        SetIcon(_defaultIcon);
+    }
+
     public void SetSad()
     {
-        SetText(_sadText);
+        SetIcon(_sadIcon);
     }
 
     public void SetHappy()
     {
-        SetText(_happyText);
+        SetIcon(_happyIcon);
     }
 
     public void Hide()
@@ -55,24 +62,24 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
         _speechBubble.SetActive(false);
     }
 
-    private void SetText(string newText)
+    private void SetIcon(Sprite newIcon)
     {
-        if (_text == null) return;
+        if (_speechBubbleImage == null) return;
 
-        _currrentText = newText;
-        _text.text = _currrentText;
+        _currentIcon = newIcon;
+        _speechBubbleImage.sprite = _currentIcon;
 
         PlayPopAnimation();
     }
 
     private void PlayPopAnimation()
     {
-        if (_text == null) return;
+        if (_speechBubbleImage == null) return;
 
         _iconTween?.Kill(true);
 
-        _text.transform.localScale = Vector3.one;
-        _iconTween = _text.transform.DOScale(_popScale, _popDuration)
+        _speechBubbleImage.transform.localScale = Vector3.one;
+        _iconTween = _speechBubbleImage.transform.DOScale(_popScale, _popDuration)
             .SetLoops(2, LoopType.Yoyo);
     }
 
