@@ -51309,15 +51309,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5d8e7020923da42a0d34dadb3b2273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Tutorial
+  _tutorialBGPanel: {fileID: 0}
   _tutorialPanel: {fileID: 1224434141}
   _fadeDuration: 0.3
   _instructionText: {fileID: 1715614940}
   _skipButton: {fileID: 1707448148}
   _wasdContainer: {fileID: 363292183}
-  _wKeyImage: {fileID: 1083732893}
-  _aKeyImage: {fileID: 1972284568}
-  _sKeyImage: {fileID: 2092009777}
-  _dKeyImage: {fileID: 2094348266}
+  _wKeyImage: {fileID: 0}
+  _aKeyImage: {fileID: 0}
+  _sKeyImage: {fileID: 0}
+  _dKeyImage: {fileID: 0}
   _inactiveColor: {r: 1, g: 1, b: 1, a: 0.3}
   _activeColor: {r: 1, g: 1, b: 1, a: 1}
   _attackCounterContainer: {fileID: 959545934}
