@@ -9,7 +9,8 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     [SerializeField] private GameObject _speechBubble;
     [SerializeField] private Image _speechBubbleImage;
 
-    [Header("text")]
+    [Header("Icon")]
+    [SerializeField] private Sprite _defaultIcon;
     [SerializeField] private Sprite _happyIcon;
     [SerializeField] private Sprite _sadIcon;
     private Sprite _currrentIcon;
@@ -28,16 +29,22 @@ public class UI_MonsterSpeechBubble : MonoBehaviour
     private void Start()
     {
         StartFloating();
+        SetDefaultIcon();
     }
 
     private void StartFloating()
     {
-        
         RectTransform bubbleRect = _speechBubble.GetComponent<RectTransform>();
 
         _floatTween = bubbleRect.DOAnchorPosY(bubbleRect.anchoredPosition.y + _floatDistance, _floatDuration)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo);
+    }
+
+    public void SetDefaultIcon()
+    {
+        if (_defaultIcon == null) return;
+        SetIcon(_defaultIcon);
     }
 
     public void SetSad()

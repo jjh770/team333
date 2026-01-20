@@ -714,10 +714,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4604599660394711710}
     m_Modifications:
-    - target: {fileID: 776226913852355249, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: m_text
-      value: Eat me!
-      objectReference: {fileID: 0}
     - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -749,18 +745,6 @@ PrefabInstance:
     - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -811,48 +795,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: _text
+      propertyPath: _sadIcon
       value: 
-      objectReference: {fileID: 3836376796044147146}
+      objectReference: {fileID: 0}
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: _speechBubble
+      propertyPath: _happyIcon
       value: 
-      objectReference: {fileID: 820976538822391060}
+      objectReference: {fileID: 0}
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: _floatDistance
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2330930645351150873, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _defaultIcon
+      value: 
+      objectReference: {fileID: -1080606882, guid: 10fcf6a182ef83e428cbf6fa6d1e0e05, type: 3}
+    - target: {fileID: 3142620212990385322, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1080606882, guid: 10fcf6a182ef83e428cbf6fa6d1e0e05, type: 3}
     - target: {fileID: 3791058723434626671, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: m_Name
       value: UI_MonsterSpeechBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960238537174819055, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 128.57143
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960238537174819055, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 136.14285
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
---- !u!1 &820976538822391060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3791058723434626671, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-  m_PrefabInstance: {fileID: 4609498115941550971}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3469936301014109797 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1143785332427883806, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
   m_PrefabInstance: {fileID: 4609498115941550971}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3836376796044147146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 776226913852355249, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
-  m_PrefabInstance: {fileID: 4609498115941550971}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
