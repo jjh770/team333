@@ -30406,6 +30406,7 @@ GameObject:
   - component: {fileID: 663587258}
   - component: {fileID: 663587257}
   - component: {fileID: 663587256}
+  - component: {fileID: 663587260}
   m_Layer: 0
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -30496,6 +30497,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &663587260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663587255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!4 &667007679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 733912901165641814, guid: 849175e78ec1e934294269b8aacb767a, type: 3}
@@ -35178,6 +35193,7 @@ GameObject:
   - component: {fileID: 781828852}
   - component: {fileID: 781828851}
   - component: {fileID: 781828850}
+  - component: {fileID: 781828854}
   m_Layer: 0
   m_Name: DeathCanvas
   m_TagString: Untagged
@@ -35268,6 +35284,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &781828854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781828849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!1001 &782637929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38632,6 +38662,7 @@ GameObject:
   - component: {fileID: 866786580}
   - component: {fileID: 866786579}
   - component: {fileID: 866786578}
+  - component: {fileID: 866786582}
   m_Layer: 5
   m_Name: TutorialCanvas
   m_TagString: Untagged
@@ -38722,6 +38753,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &866786582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866786577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!114 &868257015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3665436153545646068, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
@@ -63188,6 +63233,7 @@ GameObject:
   - component: {fileID: 1522797109}
   - component: {fileID: 1522797108}
   - component: {fileID: 1522797107}
+  - component: {fileID: 1522797111}
   m_Layer: 5
   m_Name: FloraCanvas_Camera
   m_TagString: Untagged
@@ -63279,6 +63325,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1522797111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522797106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!4 &1523929312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5792032134881981426, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
@@ -87069,6 +87129,7 @@ GameObject:
   - component: {fileID: 2076996422}
   - component: {fileID: 2076996421}
   - component: {fileID: 2076996420}
+  - component: {fileID: 2076996424}
   m_Layer: 5
   m_Name: FloraCanvas_Overlay
   m_TagString: Untagged
@@ -87161,6 +87222,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2076996424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076996419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!1001 &2078512617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91070,6 +91145,7 @@ GameObject:
   - component: {fileID: 8782522185488108704}
   - component: {fileID: 6748903219618557139}
   - component: {fileID: 80150885404962284}
+  - component: {fileID: 8782522185488108705}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
@@ -91950,6 +92026,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &8782522185488108705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698611451892199203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISound
+  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
+  _volumeMultiplier: 1
 --- !u!114 &9142841090314412154
 MonoBehaviour:
   m_ObjectHideFlags: 0
