@@ -12,7 +12,7 @@ public class BridgeQuest : MonoBehaviour
     [Header("Quest UI")]
     [SerializeField] private SplineWaypointPath _floraPath;
     [SerializeField] private int _waypointIndex;
-    [SerializeField] private string _questStartText = "판자를 다리에 던져 끊어진 다리를 연결하세요.";
+    [SerializeField] private string _questStartText = "판자를 다리에 던져 끊어진 다리를 연결하세요. 판자 0/9";
 
     private int _currentPlankCount = 0;
     public bool IsQuestCompleted { get; private set; }
@@ -85,5 +85,6 @@ public class BridgeQuest : MonoBehaviour
         _plankMonsterSpawner.StopSpawning();
         _floraInteraction.SetMoveLock(false);
         _floraSound?.PlayQuestComplete();
+        QuestManager.Instance?.CompleteQuest();
     }
 }

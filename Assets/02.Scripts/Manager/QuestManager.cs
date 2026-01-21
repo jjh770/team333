@@ -22,6 +22,7 @@ public class QuestManager : MonoBehaviour
 
     public void StartQuest(string questText)
     {
+        Debug.Log("StartQuest");
         OnQuestStarted?.Invoke(questText);
     }
 

@@ -8,7 +8,7 @@ public class BeeQuest : MonoBehaviour
     [Header("Quest UI")]
     [SerializeField] private SplineWaypointPath _floraPath;
     [SerializeField] private int _waypointIndex;
-    [SerializeField] private string _questStartText = "길을 가로 막는 장애물을 공격해 없애세요. ";
+    [SerializeField] private string _questStartText = "길을 가로 막는 장애물을 공격해 없애세요. 장애물 0/1";
 
     private QuestTree _questTree;
 
@@ -51,5 +51,6 @@ public class BeeQuest : MonoBehaviour
 
         _floraSound?.PlayQuestComplete();
         _floraInteraction.SetMoveLock(false);
+        QuestManager.Instance?.CompleteQuest();
     }
 }
