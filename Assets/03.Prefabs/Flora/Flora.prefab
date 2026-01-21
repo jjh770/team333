@@ -9998,6 +9998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloraInteraction
   _woodCost: 1
   _gaugeAmount: 0.2
+  _collectEffectPrefab: {fileID: 19800004, guid: f339e8ea7c9e057488c9ded3ef8e2e4e, type: 3}
 --- !u!114 &8590952865332236622
 MonoBehaviour:
   m_ObjectHideFlags: 0

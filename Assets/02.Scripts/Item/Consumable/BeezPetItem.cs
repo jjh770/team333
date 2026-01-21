@@ -11,6 +11,15 @@ public class BeezPetItem : ConsumableItemBase
         _mainCamera = Camera.main;
     }
 
+    public static void DisableAll()
+    {
+        var items = FindObjectsByType<BeezPetItem>(FindObjectsSortMode.None);
+        foreach (var item in items)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
+
     private void LateUpdate()
     {
         EnforceCameraBounds();
