@@ -99,6 +99,12 @@ public class PlayerSound : MonoBehaviour
         PlaySoundInfo(_soundData.HearBeatSFX);
     }
 
+    public void PlayAttackWood()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.GetRandomAttackWoodSound());
+    }
+
     private void PlaySoundInfo(SoundInfo info)
     {
         if (info.Clip == null) return;
