@@ -35437,14 +35437,6 @@ PrefabInstance:
       propertyPath: _poolManager
       value: 
       objectReference: {fileID: 57080825}
-    - target: {fileID: 7397972454559303785, guid: eec94092c05f38d4c91e6fa1b4e5de58, type: 3}
-      propertyPath: _itemPrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7397972454559303785, guid: eec94092c05f38d4c91e6fa1b4e5de58, type: 3}
-      propertyPath: '_itemPrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 3676946225234429852, guid: 6621f90ba3852f341bedcfdd297da8c5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -89068,15 +89060,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1271331776628863529, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: _moveSpeed._maxValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1271331776628863529, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: _moveSpeed._minValue
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1271331776628863529, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: _moveSpeed._baseValue
-      value: 10
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2488718046737351127, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: m_Name
@@ -89090,6 +89082,10 @@ PrefabInstance:
       propertyPath: _playerPickUpThrow
       value: 
       objectReference: {fileID: 738058879}
+    - target: {fileID: 4861701462829498376, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
+      propertyPath: _collectEffectPrefab
+      value: 
+      objectReference: {fileID: 19800004, guid: f339e8ea7c9e057488c9ded3ef8e2e4e, type: 3}
     - target: {fileID: 6064844537839148960, guid: 935c7ac6271816e4789105df296fb58b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 109.82477
