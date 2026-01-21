@@ -11,6 +11,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private static readonly int Throw = Animator.StringToHash("Throw");
     private static readonly int ThrowFinish = Animator.StringToHash("ThrowFinish");
     private static readonly int Skill = Animator.StringToHash("Skill");
+    private static readonly int Clear = Animator.StringToHash("Clear");
 
     private Animator _animator;
 
@@ -38,6 +39,11 @@ public class PlayerAnimatorController : MonoBehaviour
     public void DieAnimation()
     {
         _animator.SetTrigger(Die);
+    }
+
+    public void ClearAnimation()
+    {
+        _animator.SetTrigger(Clear);
     }
 
     public void PickUpAnimation()

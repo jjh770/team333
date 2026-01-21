@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,10 @@ public class UI_SpeedGauge : MonoBehaviour
     [Header("Thresholds")]
     [SerializeField] private float _highThreshold = 0.66f;
     [SerializeField] private float _lowThreshold = 0.33f;
+    [SerializeField] private float _gaugeDuration = 0.3f;
+    [SerializeField] private Ease _gaugeEase;
+
+
 
     [Header("Icons")]
     [SerializeField] private Image _iconImage;
@@ -21,6 +26,7 @@ public class UI_SpeedGauge : MonoBehaviour
     private SpeedState? _currentState;
     private RectTransform _iconRectTransform;
     private RectTransform _sliderRectTransform;
+    private Tweener _sliderTween;
 
     private void Awake()
     {
@@ -36,15 +42,21 @@ public class UI_SpeedGauge : MonoBehaviour
     private void OnDisable()
     {
         _controller.GaugeChanged -= UpdateUI;
+        _sliderTween?.Kill();
     }
 
     private void UpdateUI(float current, float max)
     {
-        float value = max > 0f ? current / max : 0f;
-        _speedGaugeSlider.value = value;
+        float targetValue = max > 0f ? current / max : 0f;
 
-        UpdateIconPosition(value);
-        UpdateIconSprite(value);
+        _sliderTween?.Kill();
+        _sliderTween = _speedGaugeSlider.DOValue(targetValue, _gaugeDuration)
+            .SetEase(_gaugeEase)
+            .OnUpdate(() =>
+            {
+                UpdateIconPosition(_speedGaugeSlider.value);
+                UpdateIconSprite(_speedGaugeSlider.value);
+            });
     }
 
     private void UpdateIconPosition(float value)

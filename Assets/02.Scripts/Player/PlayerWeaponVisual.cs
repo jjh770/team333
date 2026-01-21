@@ -23,7 +23,7 @@ public class PlayerWeaponVisual : MonoBehaviour
 
     private void OnStateChanged(PlayerState from, PlayerState to)
     {
-        bool showWeapon = to != PlayerState.PickUp && to != PlayerState.Throw;
+        bool showWeapon = to != PlayerState.PickUp && to != PlayerState.Throw && to != PlayerState.Clear;
         _weapon.SetActive(showWeapon);
     }
 }

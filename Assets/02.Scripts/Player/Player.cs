@@ -39,11 +39,13 @@ public class Player : MonoBehaviour
     {
         _isDead = false;
         _stat.OnDeath += Die;
+        _stateManager.OnStateChanged += OnStateChanged;
     }
 
     private void OnDisable()
     {
         _stat.OnDeath -= Die;
+        _stateManager.OnStateChanged -= OnStateChanged;
     }
 
     private void Die()
@@ -55,5 +57,13 @@ public class Player : MonoBehaviour
         _animatorController.DieAnimation();
 
         OnPlayerDeath?.Invoke();
+    }
+
+    private void OnStateChanged(PlayerState from, PlayerState to)
+    {
+        if (to == PlayerState.Clear)
+        {
+            _animatorController.ClearAnimation();
+        }
     }
 }
