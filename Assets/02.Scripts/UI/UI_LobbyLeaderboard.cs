@@ -19,7 +19,14 @@ public class UI_LobbyLeaderboard : MonoBehaviour
     [SerializeField] private UISizeAnimation _sizeAnimation;
     [SerializeField] private List<UIFadeAnimation> _fadeAnimations;
 
+    [SerializeField] private GameObject _noRecord;
+
     private bool _isVisible;
+
+    private const float ClearKeyInterval = 0.5f;
+    private const int ClearKeyTargetCount = 10;
+    private int _clearKeyCount;
+    private float _lastClearKeyTime;
 
     private void Awake()
     {
@@ -45,6 +52,28 @@ public class UI_LobbyLeaderboard : MonoBehaviour
         {
             _closeButton.onClick.RemoveListener(Hide);
         }
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.R)) return;
+
+        if (Time.time - _lastClearKeyTime <= ClearKeyInterval)
+        {
+            _clearKeyCount++;
+            if (_clearKeyCount >= ClearKeyTargetCount)
+            {
+                ClearAllData();
+                UpdateLeaderboardDisplay();
+                _clearKeyCount = 0;
+            }
+        }
+        else
+        {
+            _clearKeyCount = 1;
+        }
+
+        _lastClearKeyTime = Time.time;
     }
 
     public void Show()
@@ -77,7 +106,7 @@ public class UI_LobbyLeaderboard : MonoBehaviour
 
     private void ClearAllData()
     {
-        //LeaderboardManager.ClearAll();
+        LeaderboardManager.Instance.ClearAll();
     }
 
     private void UpdateLeaderboardDisplay()
@@ -97,12 +126,20 @@ public class UI_LobbyLeaderboard : MonoBehaviour
         {
             var entry = entries[i];
             var entryObject = Instantiate(_entryPrefab, _leaderboardContainer);
-
             var entryUI = entryObject.GetComponent<UI_LeaderboardEntry>();
+
             if (entryUI != null)
             {
                 entryUI.Setup(i + 1, entry.Name, entry.Time);
             }
+        }
+        if (displayCount == 0)
+        {
+            _noRecord.SetActive(true);
+        }
+        else
+        {
+            _noRecord.SetActive(false);
         }
     }
 }
