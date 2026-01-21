@@ -7426,8 +7426,6 @@ GameObject:
   - component: {fileID: 5515977329465209403}
   - component: {fileID: 8852206829208959896}
   - component: {fileID: 7236694842429923650}
-  - component: {fileID: 7994777526567804168}
-  - component: {fileID: 7337412224866001194}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -7892,36 +7890,6 @@ MonoBehaviour:
   _healthThreshold: 0.3
   _vignetteIntensity: 0.4
   _pulseDuration: 0.8
---- !u!114 &7994777526567804168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199843730985661094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74cd680bb4155b40b61206eedc5d14f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
-  _soundData: {fileID: 11400000, guid: 885903e3dd2d40e4786faa027150a3d3, type: 2}
---- !u!114 &7337412224866001194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199843730985661094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd28f70fa299584fbbf7ceaa8a459ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerPet
-  _petPrefab: {fileID: 7341058901414291950, guid: 46c8ad858083b9d48a7e18e0579b7a4d, type: 3}
-  _monsterSound: {fileID: 0}
-  _spawnDuration: 0.5
-  _spawnHeight: 2
-  _spawnEase: 27
 --- !u!1 &8226203336115560033
 GameObject:
   m_ObjectHideFlags: 0
