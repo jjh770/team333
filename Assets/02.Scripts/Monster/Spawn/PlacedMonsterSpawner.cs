@@ -76,19 +76,18 @@ public class PlacedMonsterSpawner : MonoBehaviour
     private void SpawnMonster(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         Vector3 navMeshPosition = GetNavMeshPosition(position);
-        GameObject instance = Instantiate(prefab, navMeshPosition, rotation, transform);
+        GameObject instance = PoolManager.Instance.Get(prefab, navMeshPosition, rotation);
 
-        if (instance.TryGetComponent(out BadMonsterController controller))
+        if (instance.TryGetComponent(out BadMonsterController badController))
         {
-            controller.OnSpawn();
-            controller.OnDie += HandleMonsterDie;
+            badController.OnDie += HandleMonsterDie;
         }
     }
 
     private void HandleMonsterDie(BadMonsterController controller)
     {
         controller.OnDie -= HandleMonsterDie;
-        Destroy(controller.gameObject);
+        PoolManager.Instance.Return(controller.gameObject);
     }
 
     private Vector3 GetNavMeshPosition(Vector3 position)

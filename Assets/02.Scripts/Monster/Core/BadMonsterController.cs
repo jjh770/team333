@@ -79,6 +79,7 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
     protected void SetupTarget()
     {
+        _sensor.FindTarget();
         Transform target = _sensor.GetCurrentTarget();
         _move.SetTarget(target);
         _attack.SetTarget(target);

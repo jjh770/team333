@@ -203,7 +203,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -800,9 +800,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: _sadIcon
+      value: 
+      objectReference: {fileID: -1405338342, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
+    - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: _sadText
       value: Help me
       objectReference: {fileID: 0}
+    - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
+      propertyPath: _happyIcon
+      value: 
+      objectReference: {fileID: -1970771728, guid: 7b66c998d3b41cc4bb62842c2fe993cc, type: 3}
     - target: {fileID: 1161257413162680445, guid: eea45110cab329140bab858a8b6dca1d, type: 3}
       propertyPath: _happyText
       value: Take me

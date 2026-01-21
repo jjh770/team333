@@ -3,7 +3,10 @@ using UnityEngine;
 public class BullyRabbyEncounter : MonoBehaviour
 {
     [Header("Monsters")]
-    [SerializeField] private GameObject[] _bullyMonsters;
+    [SerializeField] private GameObject _bullyMonsterPrefab;
+    [SerializeField] private Transform[] _bullyMonsterPoints;
+
+    [Header("Rabby")]
     [SerializeField] private GameObject _rabbyMonster;
     private ItemBase _rabbyItemBase;
 
@@ -20,9 +23,9 @@ public class BullyRabbyEncounter : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        BindBullyMonsters();
+        SpawnBullyMonsters();
         LockRabby();
     }
 
@@ -31,32 +34,31 @@ public class BullyRabbyEncounter : MonoBehaviour
         UnbindBullyMonsters();
     }
 
-    private void BindBullyMonsters()
+    private void SpawnBullyMonsters()
     {
-        if (_bullyMonsters == null || _bullyMonsters.Length == 0)
+        if (_bullyMonsterPrefab == null || _bullyMonsterPoints == null || _bullyMonsterPoints.Length == 0)
         {
             _bullyControllers = System.Array.Empty<BadMonsterController>();
             _aliveCount = 0;
             return;
         }
 
-        _bullyControllers = new BadMonsterController[_bullyMonsters.Length];
+        _bullyControllers = new BadMonsterController[_bullyMonsterPoints.Length];
         _aliveCount = 0;
 
-        for (int i = 0; i < _bullyMonsters.Length; i++)
+        for (int i = 0; i < _bullyMonsterPoints.Length; i++)
         {
-            var go = _bullyMonsters[i];
-            if (go == null) continue;
+            var point = _bullyMonsterPoints[i];
+            if (point == null) continue;
 
-            var bullyController = go.GetComponent<BadMonsterController>();
-            if (bullyController == null) continue;
+            var instance = PoolManager.Instance.Get(_bullyMonsterPrefab, point.position, point.rotation);
+            var controller = instance.GetComponent<BadMonsterController>();
 
-            _bullyControllers[i] = bullyController;
+            if (controller == null) continue;
 
-            if (!bullyController.IsDead)
-                _aliveCount++;
-
-            bullyController.OnDie += HandleBullyDie;
+            _bullyControllers[i] = controller;
+            _aliveCount++;
+            controller.OnDie += HandleBullyDie;
         }
     }
 
@@ -74,6 +76,7 @@ public class BullyRabbyEncounter : MonoBehaviour
     private void HandleBullyDie(BadMonsterController deadOne)
     {
         deadOne.OnDie -= HandleBullyDie;
+        PoolManager.Instance.Return(deadOne.gameObject);
 
         _aliveCount--;
         if (_aliveCount <= 0)
