@@ -58,13 +58,14 @@ public class UI_Tutorial : MonoBehaviour
     private TutorialStep_Attack _attackStep;
     private TutorialStep_TreeMonster _treeMonsterStep;
     private TutorialStep_FeedFlora _feedFloraStep;
-
     private void Start()
     {
         TutorialManager.OnStepStarted += HandleStepStarted;
         TutorialManager.OnStepCompleted += HandleStepCompleted;
         TutorialManager.OnTutorialCompleted += HandleTutorialEnded;
         TutorialManager.OnTutorialSkipped += HandleTutorialEnded;
+
+        GameStateManager.OnGameStateChanged += HandleStateChanged;
 
         _skipButton.onClick.AddListener(OnSkipClicked);
 
@@ -78,9 +79,23 @@ public class UI_Tutorial : MonoBehaviour
         TutorialManager.OnTutorialCompleted -= HandleTutorialEnded;
         TutorialManager.OnTutorialSkipped -= HandleTutorialEnded;
 
+        GameStateManager.OnGameStateChanged -= HandleStateChanged;
+
         _skipButton.onClick.RemoveListener(OnSkipClicked);
 
         UnsubscribeFromSteps();
+    }
+
+    private void HandleStateChanged(GameState from, GameState to)
+    {
+        if (to == GameState.Paused)
+        {
+            _tutorialPanel.gameObject.SetActive(false);
+        }
+        if (to == GameState.Playing)
+        {
+            _tutorialPanel.gameObject.SetActive(true);
+        }
     }
 
     private void HandleStepStarted(ITutorialStep step)

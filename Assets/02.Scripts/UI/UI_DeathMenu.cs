@@ -88,7 +88,13 @@ public class UI_DeathMenu : MonoBehaviour
             StopRopeAnimation();
             _backgroundFade.AnimateToHidden();
             _ropeAnimation.AnimateToHidden(() => StopRopeAnimation());
-            _delayedPanelAnimation.AnimateToHidden(() => _deathPanel.SetActive(false));
+            _delayedPanelAnimation.AnimateToHidden(() =>
+            {
+                if (!GameStateManager.Instance.IsDead)
+                {
+                    _deathPanel.SetActive(false);
+                }
+            });
         }
     }
 

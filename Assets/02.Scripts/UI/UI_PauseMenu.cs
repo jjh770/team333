@@ -76,7 +76,13 @@ public class UI_PauseMenu : MonoBehaviour
         else
         {
             _backgroundFade.AnimateToHidden();
-            _delayedPanelAnimation.AnimateToHidden(() => _pausePanel.SetActive(false));
+            _delayedPanelAnimation.AnimateToHidden(() =>
+            {
+                if (!GameStateManager.Instance.IsPaused)
+                {
+                    _pausePanel.SetActive(false);
+                }
+            });
         }
     }
 }

@@ -19,6 +19,8 @@ public class UI_LobbyLeaderboard : MonoBehaviour
     [SerializeField] private UISizeAnimation _sizeAnimation;
     [SerializeField] private List<UIFadeAnimation> _fadeAnimations;
 
+    private bool _isVisible;
+
     private void Awake()
     {
         _sizeAnimation.SetToHidden();
@@ -47,6 +49,7 @@ public class UI_LobbyLeaderboard : MonoBehaviour
 
     public void Show()
     {
+        _isVisible = true;
         _leaderboardPanel.SetActive(true);
         UpdateLeaderboardDisplay();
         _sizeAnimation.AnimateToVisible();
@@ -58,11 +61,23 @@ public class UI_LobbyLeaderboard : MonoBehaviour
 
     public void Hide()
     {
+        _isVisible = false;
         foreach (UIFadeAnimation anim in _fadeAnimations)
         {
             anim.AnimateToHidden();
         }
-        _sizeAnimation.AnimateToHidden(() => _leaderboardPanel.SetActive(false));
+        _sizeAnimation.AnimateToHidden(() =>
+        {
+            if (!_isVisible)
+            {
+                _leaderboardPanel.SetActive(false);
+            }
+        });
+    }
+
+    private void ClearAllData()
+    {
+        LeaderboardManager.ClearAll();
     }
 
     private void UpdateLeaderboardDisplay()

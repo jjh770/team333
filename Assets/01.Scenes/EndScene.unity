@@ -10270,7 +10270,7 @@ MonoBehaviour:
   _buttonPanel: {fileID: 1688824384}
   _retryButton: {fileID: 1237202301}
   _mainMenuButton: {fileID: 1497528366}
-  _gameSceneName: yj
+  _gameSceneName: GameScene
   _mainMenuSceneName: LobbyScene
   _maxDisplayEntries: 5
   _animator: {fileID: 2999736403440922791}
