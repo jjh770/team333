@@ -26,12 +26,12 @@ public class PlayerStateManager : MonoBehaviour
     public event Func<PlayerState, PlayerState, bool> OnValidateStateChange;
     public bool IsDead => _currentState == PlayerState.Die;
     public bool IsClear => _currentState == PlayerState.Clear;
-    public bool CanMove => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking || _currentState == PlayerState.PickUp);
-    public bool CanCarry => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.PickUp);
-    public bool CanThrow => !IsDead && _currentState == PlayerState.PickUp;
-    public bool CanAttack => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
-    public bool CanDash => !IsDead && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
-    public bool CanSkill => !IsDead && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
+    public bool CanMove => !IsDead && !IsClear && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking || _currentState == PlayerState.PickUp);
+    public bool CanCarry => !IsDead && !IsClear && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.PickUp);
+    public bool CanThrow => !IsDead && !IsClear && _currentState == PlayerState.PickUp;
+    public bool CanAttack => !IsDead && !IsClear && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
+    public bool CanDash => !IsDead && !IsClear && (_currentState == PlayerState.Moving || _currentState == PlayerState.Attacking);
+    public bool CanSkill => !IsDead && !IsClear && (_currentState == PlayerState.Idle || _currentState == PlayerState.Moving);
     public bool IsHolding => _currentState == PlayerState.PickUp || _currentState == PlayerState.Throw;
 
     private void Start()
