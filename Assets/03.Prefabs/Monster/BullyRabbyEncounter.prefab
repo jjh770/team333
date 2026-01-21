@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7372486423143041673, guid: e97ad18414708494297cda9578c40d4f, type: 3}
+      propertyPath: _scanShader
+      value: 
+      objectReference: {fileID: 4800000, guid: adab014b02e7cf84aaa43bfdb843de20, type: 3}
     - target: {fileID: 7523213909001927449, guid: e97ad18414708494297cda9578c40d4f, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

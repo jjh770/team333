@@ -177,6 +177,7 @@ MonoBehaviour:
   _scanSoftness: 0.1
   _scanStart: -1.5
   _scanEnd: 1.5
+  _scanShader: {fileID: 4800000, guid: adab014b02e7cf84aaa43bfdb843de20, type: 3}
 --- !u!114 &5095060092335013627
 MonoBehaviour:
   m_ObjectHideFlags: 0
