@@ -25,6 +25,10 @@ public class UI_Tutorial : MonoBehaviour
     [SerializeField] private Color _inactiveColor = new Color(1f, 1f, 1f, 0.3f);
     [SerializeField] private Color _activeColor = new Color(1f, 1f, 1f, 1f);
 
+    [Header("Dash Indicator")]
+    [SerializeField] private GameObject _dashContainer;
+    [SerializeField] private Image _dashImage;
+
     [Header("Attack Counter")]
     [SerializeField] private GameObject _attackCounterContainer;
     [SerializeField] private TextMeshProUGUI _attackCounterText;
@@ -109,6 +113,10 @@ public class UI_Tutorial : MonoBehaviour
         {
             SetupInstructionStep(instructionStep);
         }
+        else if (step is TutorialStep_Dash)
+        {
+            SetupDashStep();
+        }
         else
         {
             HideAllIndicators();
@@ -188,6 +196,12 @@ public class UI_Tutorial : MonoBehaviour
         }
     }
 
+    private void SetupDashStep()
+    {
+        HideAllIndicators();
+        if (_dashContainer != null) _dashContainer.SetActive(true);
+    }
+
     private void HideAllIndicators()
     {
         if (_wasdContainer != null) _wasdContainer.SetActive(false);
@@ -197,6 +211,7 @@ public class UI_Tutorial : MonoBehaviour
         if (_feedFloraContainer != null) _feedFloraContainer.SetActive(false);
         if (_instructionContainer != null) _instructionContainer.SetActive(false);
         if (_progressInstructionContainer != null) _progressInstructionContainer.SetActive(false);
+        if (_dashContainer != null) _dashContainer.SetActive(false);
     }
 
     private void UnsubscribeFromSteps()
