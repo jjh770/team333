@@ -1,3 +1,5 @@
+using GameUI.Animations;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +16,19 @@ public class UI_LobbyLeaderboard : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button _closeButton;
 
+    [SerializeField] private UIScaleAnimation _scaleAnimation;
+    [SerializeField] private UISizeAnimation _sizeAnimation;
+    [SerializeField] private List<UIFadeAnimation> _fadeAnimations;
+
     private void Awake()
     {
-        if (_leaderboardPanel != null)
+        //_scaleAnimation.SetToHidden();
+        _sizeAnimation.SetToHidden();
+        foreach (UIFadeAnimation anim in _fadeAnimations)
         {
-            _leaderboardPanel.SetActive(false);
+            anim.SetToHidden();
         }
+        _leaderboardPanel.SetActive(false);
     }
 
     private void Start()
@@ -40,13 +49,24 @@ public class UI_LobbyLeaderboard : MonoBehaviour
 
     public void Show()
     {
-        UpdateLeaderboardDisplay();
         _leaderboardPanel.SetActive(true);
+        UpdateLeaderboardDisplay();
+        //_scaleAnimation.AnimateToVisible();
+        _sizeAnimation.AnimateToVisible();
+        foreach (UIFadeAnimation anim in _fadeAnimations)
+        {
+            anim.AnimateToVisible();
+        }
     }
 
     public void Hide()
     {
-        _leaderboardPanel.SetActive(false);
+        foreach (UIFadeAnimation anim in _fadeAnimations)
+        {
+            anim.AnimateToHidden();
+        }
+        //_scaleAnimation.AnimateToHidden(() => _leaderboardPanel.SetActive(false));
+        _sizeAnimation.AnimateToHidden(() => _leaderboardPanel.SetActive(false));
     }
 
     private void UpdateLeaderboardDisplay()
