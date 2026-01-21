@@ -32,21 +32,21 @@ public class ItemFactory : MonoBehaviour
 
     private void PreloadAllItems()
     {
-        if (PoolManager.Instance == null) return;
+        if (_poolManager == null) return;
 
         foreach (var item in _itemPrefabs)
         {
             if (item != null)
-                PoolManager.Instance.Preload(item, _preloadCount);
+                _poolManager.Preload(item, _preloadCount);
         }
     }
 
     public GameObject Spawn(GameObject itemPrefab, Vector3 position, Quaternion rotation)
     {
         if (itemPrefab == null) return null;
-        if (PoolManager.Instance == null) return null;
+        if (_poolManager == null) return null;
 
-        GameObject item = PoolManager.Instance.Get(itemPrefab, position, rotation);
+        GameObject item = _poolManager.Get(itemPrefab, position, rotation);
 
         if (item != null)
         {
@@ -58,23 +58,22 @@ public class ItemFactory : MonoBehaviour
 
     public void ReturnItem(GameObject effectObj)
     {
-        if (PoolManager.Instance != null && effectObj != null)
+        if (_poolManager != null && effectObj != null)
         {
             _activeItems.Remove(effectObj);
-            PoolManager.Instance.Return(effectObj);
+            _poolManager.Return(effectObj);
         }
     }
 
     public void ReturnAllActiveItems()
     {
-        if (PoolManager.Instance == null) return;
+        if (_poolManager == null) return;
 
-        for (int i = _activeItems.Count - 1; i >= 0; i--)
+        foreach (var item in _activeItems)
         {
-            var item = _activeItems[i];
             if (item != null && item.activeInHierarchy)
             {
-                PoolManager.Instance.Return(item);
+                _poolManager.Return(item);
             }
         }
         _activeItems.Clear();
