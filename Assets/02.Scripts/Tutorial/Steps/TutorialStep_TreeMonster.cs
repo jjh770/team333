@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +9,7 @@ public class TutorialStep_TreeMonster : TutorialStepBase
     [Header("Monster Settings")]
     [SerializeField] private GameObject _monsterPrefab;
     [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private float _respawnDelay = 3f;
 
     [Header("Clear Condition")]
     [SerializeField] private int _requiredCount = 2;
@@ -18,6 +20,7 @@ public class TutorialStep_TreeMonster : TutorialStepBase
 
     private readonly List<GameObject> _spawnedMonsters = new List<GameObject>();
     private int _currentCount;
+    private Coroutine _respawnCoroutine;
 
     public int CurrentCount => _currentCount;
     public int RequiredCount => _requiredCount;
@@ -40,6 +43,12 @@ public class TutorialStep_TreeMonster : TutorialStepBase
 
     protected override void OnExit()
     {
+        if (_respawnCoroutine != null)
+        {
+            StopCoroutine(_respawnCoroutine);
+            _respawnCoroutine = null;
+        }
+
         if (_floraInventory != null)
         {
             _floraInventory.OnWoodChanged -= HandleWoodChanged;
@@ -70,8 +79,14 @@ public class TutorialStep_TreeMonster : TutorialStepBase
 
         if (_currentCount < _requiredCount && _spawnedMonsters.Count == 0)
         {
-            SpawnMonsters();
+            _respawnCoroutine = StartCoroutine(SpawnMonstersAfterDelay(_respawnDelay));
         }
+    }
+
+    private IEnumerator SpawnMonstersAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SpawnMonsters();
     }
 
     private void SpawnMonsters()

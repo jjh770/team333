@@ -77,7 +77,7 @@ public class UI_LobbyLeaderboard : MonoBehaviour
 
     private void ClearAllData()
     {
-        LeaderboardManager.ClearAll();
+        //LeaderboardManager.ClearAll();
     }
 
     private void UpdateLeaderboardDisplay()
