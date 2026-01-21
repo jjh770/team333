@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _yOffset: 0.5
+  _yOffset: 0.54
 --- !u!114 &2585294670401649527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,55 +474,55 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.169
+      value: -0.151
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.675
+      value: 0.672
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1776396
+      value: 0.155
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95118505
+      value: 0.8625769
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2535414
+      value: 0.41737047
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0019909712
+      value: -0.22326839
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.17595409
+      value: 0.17864542
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 28.884
+      value: 53.111
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 5.599
+      value: -23.156
       objectReference: {fileID: 0}
     - target: {fileID: 2590547357796695062, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 22.404
+      value: 11.709
       objectReference: {fileID: 0}
     - target: {fileID: 2934281748361258668, guid: 1c2e95a739443d145b0d9471ac952e4b, type: 3}
       propertyPath: m_Name
@@ -629,6 +629,10 @@ PrefabInstance:
     - target: {fileID: 5498259223504156599, guid: 174e184974e83994c80b94880513c04b, type: 3}
       propertyPath: m_Name
       value: UI_HealthBarCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961206969952555292, guid: 174e184974e83994c80b94880513c04b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
