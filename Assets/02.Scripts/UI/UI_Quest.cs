@@ -7,10 +7,13 @@ public class UI_Quest : MonoBehaviour
     [SerializeField] private GameObject _questPanel;
     [SerializeField] private TextMeshProUGUI _questText;
 
-    private void Start()
+    private void Awake()
     {
         if (_questPanel != null) _questPanel.SetActive(false);
+    }
 
+    private void Start()
+    {
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.OnQuestStarted += ShowQuest;
@@ -29,7 +32,6 @@ public class UI_Quest : MonoBehaviour
 
     private void ShowQuest(string text)
     {
-        Debug.Log("ShowQuest");
         if (_questText != null) _questText.text = text;
         if (_questPanel != null) _questPanel.SetActive(true);
     }
