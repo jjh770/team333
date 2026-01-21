@@ -62,3 +62,10 @@ MonoBehaviour:
   <HearBeatSFX>k__BackingField:
     Clip: {fileID: 8300000, guid: eb770818852485344822c8025ae1b685, type: 3}
     StartTime: 0
+  <AttackWoodSFX>k__BackingField:
+  - Clip: {fileID: 8300000, guid: 26c0ca4102e00954496056bb5492cf6d, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 7b80a9b4f9a91df4ab5241517844d63f, type: 3}
+    StartTime: 0
+  - Clip: {fileID: 8300000, guid: 85c071b3ea453074e9b564cc896e5cda, type: 3}
+    StartTime: 0

@@ -48,6 +48,7 @@ MonoBehaviour:
   _itemPrefabs:
   - {fileID: 190021702421149833, guid: 4ca9a96d42adfc34aa0528e9309193ba, type: 3}
   - {fileID: 3321702756485340213, guid: f9409cd9a01bc714bae9928a7a1d3ed9, type: 3}
-  - {fileID: 6348749723967662573, guid: bf452d8dd24cfd741a6d0e4dec1c74d2, type: 3}
+  - {fileID: 3676946225234429852, guid: 6621f90ba3852f341bedcfdd297da8c5, type: 3}
+  - {fileID: 8692904586044111212, guid: c9a1ee4fb3022e84c9c690fd202213ee, type: 3}
   _itemPrefabsDuration: 20
   _preloadCount: 20

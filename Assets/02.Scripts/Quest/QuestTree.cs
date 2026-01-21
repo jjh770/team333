@@ -7,6 +7,7 @@ public class QuestTree : MonoBehaviour, IDamageable
     [SerializeField] private Transform _center;
     [SerializeField] private GameObject _endingSequence;
     [SerializeField] private FloraSound _floraSound;
+    [SerializeField] private PlayerSound _playerSound;
 
     public event Action OnTreeDestroyed;
 
@@ -28,6 +29,7 @@ public class QuestTree : MonoBehaviour, IDamageable
         _health.Decrease(damage.Value);
         MonsterEffectPool.Instance.PlayQuestTreeHitEffect(_center.position);
         MonsterEffectPool.Instance.PlaySmokeEffect(_center.position);
+        _playerSound.PlayAttackWood();
 
         if (_health.IsEmpty)
         {

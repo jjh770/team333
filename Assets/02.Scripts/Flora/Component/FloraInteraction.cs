@@ -8,6 +8,9 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     [SerializeField] private int _woodCost = 1;
     [SerializeField] private float _gaugeAmount = 0.2f;
 
+    [Header("Item Collect Effect")]
+    [SerializeField] private ParticleSystem _collectEffectPrefab;
+
     private FloraInventory _inventory;
     private FloraSpeedGaugeController _gaugeController;
     private FloraMovement _movement;
@@ -54,10 +57,17 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         _floraPath = GetComponent<IFloraPath>();
     }
 
-    public void AddWood(int woodAmount)
+    public void AddWood(int woodAmount, Vector3 itemPosition)
     {
         _inventory.AddWood(woodAmount);
         _floraSound?.PlayGetItem();
+        PlayCollectEffect(itemPosition);
+    }
+
+    private void PlayCollectEffect(Vector3 position)
+    {
+        if (_collectEffectPrefab == null) return;
+        Instantiate(_collectEffectPrefab, position, Quaternion.identity);
     }
 
     public bool TryFeedWood()
@@ -77,10 +87,11 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void AddBoard(int boardAmount)
+    public void AddBoard(int boardAmount, Vector3 itemPosition)
     {
         _inventory.AddBoard(boardAmount);
         _floraSound?.PlayGetItem();
+        PlayCollectEffect(itemPosition);
     }
 
     public bool TryResume()

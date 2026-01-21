@@ -25,7 +25,7 @@ public class Wood : ItemBase, IAttractableByFlora
         if (!other.gameObject.CompareTag(FloraTag)) return;
         if (!other.gameObject.TryGetComponent<FloraInteraction>(out var interaction)) return;
 
-        interaction.AddWood(_addWoodAmount);
+        interaction.AddWood(_addWoodAmount, transform.position);
         _itemFactory.ReturnItem(this.gameObject);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class PlacedMonsterSpawner : BaseMonsterSpawner
+public class PlacedMonsterSpawner : MonoBehaviour
 {
     [Header("Bad Monster")]
     [SerializeField] private GameObject _badMonster;
@@ -35,11 +36,7 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
 
         foreach (var point in spawnPoints)
         {
-            GameObject instance = SpawnMonster(_badMonster, point.position, point.rotation);
-            if (instance != null)
-            {
-                instance.transform.SetParent(this.transform);
-            }
+            SpawnMonster(_badMonster, point.position, point.rotation);
         }
     }
 
@@ -53,11 +50,7 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
 
         foreach (var point in spawnPoints)
         {
-            GameObject instance = SpawnMonster(_playerSkillMonster, point.position, point.rotation);
-            if (instance != null)
-            {
-                instance.transform.SetParent(this.transform);
-            }
+            SpawnMonster(_playerSkillMonster, point.position, point.rotation);
         }
     }
 
@@ -76,12 +69,35 @@ public class PlacedMonsterSpawner : BaseMonsterSpawner
             if (monster == null) continue;
 
             var point = spawnPoints[i];
-            GameObject instance = SpawnMonster(monster, point.position, point.rotation);
-            if (instance != null)
-            {
-                instance.transform.SetParent(this.transform);
-            }
+            SpawnMonster(monster, point.position, point.rotation);
         }
+    }
+
+    private void SpawnMonster(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        Vector3 navMeshPosition = GetNavMeshPosition(position);
+        GameObject instance = Instantiate(prefab, navMeshPosition, rotation, transform);
+
+        if (instance.TryGetComponent(out BadMonsterController controller))
+        {
+            controller.OnSpawn();
+            controller.OnDie += HandleMonsterDie;
+        }
+    }
+
+    private void HandleMonsterDie(BadMonsterController controller)
+    {
+        controller.OnDie -= HandleMonsterDie;
+        Destroy(controller.gameObject);
+    }
+
+    private Vector3 GetNavMeshPosition(Vector3 position)
+    {
+        if (NavMesh.SamplePosition(position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return position;
     }
 
     private List<Transform> PickUniquePoints(Transform[] points, int count)

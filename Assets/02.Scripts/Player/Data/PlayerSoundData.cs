@@ -56,6 +56,10 @@ public class PlayerSoundData : ScriptableObject
     [Tooltip("하트비트 사운드")]
     public SoundInfo HearBeatSFX { get; private set; }
 
+    [field: SerializeField]
+    [Tooltip("통나무 공격 사운드")]
+    public SoundInfo[] AttackWoodSFX { get; private set; }
+
     public SoundInfo GetAttackSound(int comboIndex)
     {
         if (AttackSounds == null || AttackSounds.Length == 0) return default;
@@ -66,6 +70,12 @@ public class PlayerSoundData : ScriptableObject
     {
         if (HitSounds == null || HitSounds.Length == 0) return default;
         return HitSounds[Random.Range(0, HitSounds.Length)];
+    }
+
+    public SoundInfo GetRandomAttackWoodSound()
+    {
+        if (AttackWoodSFX == null || AttackWoodSFX.Length == 0) return default;
+        return AttackWoodSFX[Random.Range(0, AttackWoodSFX.Length)];
     }
 
     public SoundInfo GetRandomFootstepSound()
