@@ -17,6 +17,9 @@ public class ItemScanWave : MonoBehaviour
     [SerializeField] private float _scanStart = -1.5f;
     [SerializeField] private float _scanEnd = 1.5f;
 
+    [Header("Shader")]
+    [SerializeField] private Shader _scanShader;
+
     private Renderer _renderer;
     private Material _scanMaterial;
     private ItemBase _item;
@@ -28,8 +31,6 @@ public class ItemScanWave : MonoBehaviour
     private static readonly int ScanWidthId = Shader.PropertyToID("_ScanWidth");
     private static readonly int ScanSoftnessId = Shader.PropertyToID("_ScanSoftness");
     private static readonly int IntensityId = Shader.PropertyToID("_Intensity");
-
-    private static Shader _scanShader;
 
     private void Awake()
     {

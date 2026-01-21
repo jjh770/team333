@@ -203,6 +203,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7789266098118176089, guid: 3ab09d80438919c419d4508cf80b1479, type: 3}
+      propertyPath: _scanShader
+      value: 
+      objectReference: {fileID: 4800000, guid: adab014b02e7cf84aaa43bfdb843de20, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

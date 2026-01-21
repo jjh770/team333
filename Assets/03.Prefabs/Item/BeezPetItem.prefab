@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b751ec78a801a5944a06938320d98d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeezPetItem
+  _viewportMargin: 0.05
 --- !u!136 &-1672737191932288221
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -676,6 +677,7 @@ MonoBehaviour:
   _scanSoftness: 0.1
   _scanStart: -1.5
   _scanEnd: 1.5
+  _scanShader: {fileID: 4800000, guid: adab014b02e7cf84aaa43bfdb843de20, type: 3}
 --- !u!114 &-8978354849504552747
 MonoBehaviour:
   m_ObjectHideFlags: 0
