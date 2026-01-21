@@ -16,13 +16,11 @@ public class UI_LobbyLeaderboard : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button _closeButton;
 
-    [SerializeField] private UIScaleAnimation _scaleAnimation;
     [SerializeField] private UISizeAnimation _sizeAnimation;
     [SerializeField] private List<UIFadeAnimation> _fadeAnimations;
 
     private void Awake()
     {
-        //_scaleAnimation.SetToHidden();
         _sizeAnimation.SetToHidden();
         foreach (UIFadeAnimation anim in _fadeAnimations)
         {
@@ -51,7 +49,6 @@ public class UI_LobbyLeaderboard : MonoBehaviour
     {
         _leaderboardPanel.SetActive(true);
         UpdateLeaderboardDisplay();
-        //_scaleAnimation.AnimateToVisible();
         _sizeAnimation.AnimateToVisible();
         foreach (UIFadeAnimation anim in _fadeAnimations)
         {
@@ -65,7 +62,6 @@ public class UI_LobbyLeaderboard : MonoBehaviour
         {
             anim.AnimateToHidden();
         }
-        //_scaleAnimation.AnimateToHidden(() => _leaderboardPanel.SetActive(false));
         _sizeAnimation.AnimateToHidden(() => _leaderboardPanel.SetActive(false));
     }
 
