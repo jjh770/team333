@@ -28,6 +28,7 @@ public class PlayerPet : MonoBehaviour, IPetOwnership
     {
         _currentCount++;
         _monsterSound?.PetAppear();
+        BeezPetItem.DisableAll();
 
         // 플레이어 뒤쪽에 스폰
         Vector3 spawnPosition = transform.position - transform.forward * 1.5f;
