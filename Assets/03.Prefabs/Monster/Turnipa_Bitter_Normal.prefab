@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
-  _knockbackForce: 2
+  _knockbackForce: 1.4
   _knockbackDuration: 0.2
   _knockbackStunDuration: 0.3
   _updateInterval: 0.2
@@ -392,9 +392,8 @@ MonoBehaviour:
   _deathAnimationDuration: 0.19
   _monsterSound: {fileID: 4178061326575622916, guid: 8edd0766b0973f94f8d611e2342ba844, type: 3}
   _splitMonsterPrefab: {fileID: 2834583176937093337, guid: 0c416505520cb664d933846270a7cf7e, type: 3}
-  _splitCount: 3
+  _splitCount: 2
   _splitOffset: 0.5
-  _dropChance: 0.05
 --- !u!1 &5072105948003659630
 GameObject:
   m_ObjectHideFlags: 0
