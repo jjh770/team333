@@ -8,9 +8,6 @@ public class UI_LobbyMenu : MonoBehaviour
     [SerializeField] private Button _leaderboardButton;
     [SerializeField] private Button _quitButton;
 
-    [Header("Leaderboard")]
-    [SerializeField] private UI_LobbyLeaderboard _lobbyLeaderboard;
-
     private void Start()
     {
         _startButton.onClick.AddListener(OnStartClicked);
@@ -32,10 +29,8 @@ public class UI_LobbyMenu : MonoBehaviour
 
     private void OnLeaderboardClicked()
     {
-        if (_lobbyLeaderboard != null)
-        {
-            _lobbyLeaderboard.Show();
-        }
+        // TODO: 리더보드 패널 구현 예정
+        Debug.Log("Leaderboard - Coming Soon");
     }
 
     private void OnQuitClicked()

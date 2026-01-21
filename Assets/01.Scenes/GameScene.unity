@@ -35185,7 +35185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
   _floraInteraction: {fileID: 215770150}
   _cameraController: {fileID: 2032723201}
-  _player: {fileID: 1662994552}
+  _player: {fileID: 0}
 --- !u!4 &790425791
 Transform:
   m_ObjectHideFlags: 0
@@ -48232,7 +48232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -350, y: 150}
+  m_AnchoredPosition: {x: -90, y: 90}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1132005227
@@ -68194,17 +68194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3d05a0cdeb37409689c6d889d574a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
---- !u!114 &1662994552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8064167792102601414, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
-  m_PrefabInstance: {fileID: 1662994549}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503626364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c87abdccc9d337469e3441e90bbfa5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
 --- !u!114 &1662994573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85563,7 +85552,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 191}
-  m_SizeDelta: {x: 1030, y: 150}
+  m_SizeDelta: {x: 1010, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058010824
 MonoBehaviour:
