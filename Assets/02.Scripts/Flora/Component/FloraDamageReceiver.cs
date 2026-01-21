@@ -10,6 +10,7 @@ public class FloraDamageReceiver : MonoBehaviour, IDamageable
     [SerializeField] private float _flashDuration = 0.3f;
 
     private FloraSpeedGaugeController _speedGaugeController;
+    private FloraSound _floraSound;
     private Material _material;
     private Tweener _flashTween;
     private const float DamageToGaugeRatio = 100f;
@@ -19,6 +20,7 @@ public class FloraDamageReceiver : MonoBehaviour, IDamageable
     private void Awake()
     {
         _speedGaugeController = GetComponent<FloraSpeedGaugeController>();
+        _floraSound = GetComponent<FloraSound>();
 
         if (_renderer != null)
         {
@@ -43,6 +45,7 @@ public class FloraDamageReceiver : MonoBehaviour, IDamageable
 
         _speedGaugeController.DrainGauge(damage.Value / DamageToGaugeRatio);
         FlashWhite();
+        _floraSound?.PlayHit();
         return true;
     }
 
