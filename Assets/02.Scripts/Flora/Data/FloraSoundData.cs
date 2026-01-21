@@ -23,9 +23,17 @@ public class FloraSoundData : ScriptableObject
     [Tooltip("퀘스트 완료 사운드")]
     public SoundInfo QuestCompleteSound { get; private set; }
 
-    public SoundInfo GetRandomInteractionSound()
+    [field: SerializeField]
+    [Tooltip("피격 사운드")]
+    public SoundInfo[] HitSounds { get; private set; }
+
+    public SoundInfo GetRandomInteractionSound() => GetRandomSound(InteractionSounds);
+
+    public SoundInfo GetRandomHitSound() => GetRandomSound(HitSounds);
+
+    private SoundInfo GetRandomSound(SoundInfo[] sounds)
     {
-        if (InteractionSounds == null || InteractionSounds.Length == 0) return default;
-        return InteractionSounds[Random.Range(0, InteractionSounds.Length)];
+        if (sounds == null || sounds.Length == 0) return default;
+        return sounds[Random.Range(0, sounds.Length)];
     }
 }

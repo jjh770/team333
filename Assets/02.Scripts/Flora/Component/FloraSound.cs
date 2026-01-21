@@ -34,6 +34,12 @@ public class FloraSound : MonoBehaviour
         PlaySoundInfo(_soundData.QuestCompleteSound);
     }
 
+    public void PlayHit()
+    {
+        if (_soundData == null) return;
+        PlaySoundInfo(_soundData.GetRandomHitSound());
+    }
+
     private void PlaySoundInfo(SoundInfo info)
     {
         if (info.Clip == null) return;
