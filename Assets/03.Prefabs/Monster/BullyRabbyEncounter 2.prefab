@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6559122902610352749, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7012563732279049193, guid: c8663339918fb6d4f804ea676c4a5f48, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.01
