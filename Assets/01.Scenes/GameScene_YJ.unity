@@ -15404,6 +15404,7 @@ MonoBehaviour:
   _waypointIndex: 0
   _questStartText: "\uD310\uC790\uB97C \uB2E4\uB9AC\uC5D0 \uB358\uC838 \uB04A\uC5B4\uC9C4
     \uB2E4\uB9AC\uB97C \uC5F0\uACB0\uD558\uC138\uC694."
+  _hintStartText: "\uC5EC\uAE30 \uB098\uBB34\uB294 \uC0DD\uAE34\uAC8C \uB2E4\uB974\uB124?"
 --- !u!65 &354122879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28816,6 +28817,8 @@ MonoBehaviour:
   _dKeyImage: {fileID: 1752712529}
   _inactiveColor: {r: 1, g: 1, b: 1, a: 1}
   _activeColor: {r: 0, g: 0, b: 0, a: 1}
+  _dashContainer: {fileID: 0}
+  _dashImage: {fileID: 0}
   _attackCounterContainer: {fileID: 1328831366}
   _attackCounterText: {fileID: 259549503}
   _interactContainer: {fileID: 729258880}
@@ -33668,6 +33671,63 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!1001 &754982030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 230860933391095005, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_Name
+      value: BullyRabbyEncounter 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 106.50924
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000002079933
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.561386
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961958177543672994, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6888c833dfeb9304d9862b4ffe6c12df, type: 3}
 --- !u!1001 &756002393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55387,6 +55447,8 @@ MonoBehaviour:
   _speedGaugeSlider: {fileID: 1271696315}
   _highThreshold: 0.66
   _lowThreshold: 0.33
+  _gaugeDuration: 0.3
+  _gaugeEase: 0
   _iconImage: {fileID: 1219229695}
   _iconLow: {fileID: 1837716300, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
   _iconMid: {fileID: -2040936587, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
@@ -78720,6 +78782,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI_Inventory
   _woodCount: {fileID: 1284327924}
   _floraInventory: {fileID: 215770151}
+  _animationTarget: {fileID: 0}
+  _punchScale: 0.2
+  _duration: 0.3
 --- !u!1001 &1908629008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91367,3 +91432,4 @@ SceneRoots:
   - {fileID: 959165409}
   - {fileID: 1266057491}
   - {fileID: 651424702}
+  - {fileID: 754982030}

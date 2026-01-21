@@ -23,6 +23,12 @@ public abstract class ItemBase : MonoBehaviour, IPickable
     {
         if (_isLocked == locked) return;
         _isLocked = locked;
+
+        if (_rigidbody != null)
+        {
+            _rigidbody.isKinematic = locked;
+        }
+
         OnLockChanged?.Invoke(locked);
     }
 
