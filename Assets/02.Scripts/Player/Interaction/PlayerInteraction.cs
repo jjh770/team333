@@ -166,7 +166,13 @@ public class PlayerInteraction : MonoBehaviour
             // 유니티의 == null 연산자가 파괴된 객체를 true로 판정해줍니다.
             if (i is UnityEngine.Object obj)
             {
-                return obj == null;
+                if (obj == null) return true;
+
+                // 비활성화된 오브젝트도 제거 (풀링된 오브젝트 대응)
+                if (i.Transform != null && !i.Transform.gameObject.activeInHierarchy)
+                {
+                    return true;
+                }
             }
 
             // 2. 만약 유니티 오브젝트가 아닌 일반 C# 클래스라면 단순 null 체크
