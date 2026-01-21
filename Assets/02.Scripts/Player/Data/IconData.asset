@@ -16,7 +16,7 @@ MonoBehaviour:
   - Type: 0
     Icon: {fileID: 0}
   - Type: 1
-    Icon: {fileID: 1509814128, guid: 845abc6a5693a6140b6cbdeacfaf7a87, type: 3}
+    Icon: {fileID: 629327103, guid: ed65e4cc631e8eb4db7e2e048c3c75ef, type: 3}
   - Type: 2
     Icon: {fileID: -2122631175, guid: 845abc6a5693a6140b6cbdeacfaf7a87, type: 3}
   - Type: 3

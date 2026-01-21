@@ -55320,6 +55320,8 @@ MonoBehaviour:
   _speedGaugeSlider: {fileID: 1271696315}
   _highThreshold: 0.66
   _lowThreshold: 0.33
+  _gaugeDuration: 0.3
+  _gaugeEase: 27
   _iconImage: {fileID: 1219229695}
   _iconLow: {fileID: 1837716300, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
   _iconMid: {fileID: -2040936587, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
@@ -74466,7 +74468,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1509814128, guid: 845abc6a5693a6140b6cbdeacfaf7a87, type: 3}
+  m_Sprite: {fileID: 629327103, guid: ed65e4cc631e8eb4db7e2e048c3c75ef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

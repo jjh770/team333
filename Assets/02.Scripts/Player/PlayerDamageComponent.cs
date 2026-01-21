@@ -40,7 +40,7 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
 
     public bool TryTakeDamage(Damage damage)
     {
-        if (_stateManager.IsState(PlayerState.Die))
+        if (_stateManager.IsState(PlayerState.Die) || _stateManager.IsState(PlayerState.Clear))
             return false;
 
         // 무적 상태면 데미지 무시
