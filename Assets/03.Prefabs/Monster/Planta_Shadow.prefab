@@ -490,7 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraceMoveComponent
   _velocityThreshold: 0.1
   _rotationSpeed: 5
-  _knockbackForce: 2
+  _knockbackForce: 1.5
   _knockbackDuration: 0.2
   _knockbackStunDuration: 0.3
   _updateInterval: 0.2
