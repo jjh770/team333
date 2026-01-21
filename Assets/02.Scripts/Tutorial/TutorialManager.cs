@@ -107,6 +107,7 @@ public class TutorialManager : MonoBehaviour
         _isCompleted = true;
         SetFloraMoveLock(false);
         ResetStatsForTutorialEnd();
+        ReturnAllItems();
         OnTutorialSkipped?.Invoke();
     }
 
@@ -148,6 +149,7 @@ public class TutorialManager : MonoBehaviour
         _isCompleted = true;
         SetFloraMoveLock(false);
         ResetStatsForTutorialEnd();
+        ReturnAllItems();
         OnTutorialCompleted?.Invoke();
     }
 
@@ -169,6 +171,14 @@ public class TutorialManager : MonoBehaviour
         if (_playerStat != null)
         {
             _playerStat.FullHeal();
+        }
+    }
+
+    private void ReturnAllItems()
+    {
+        if (ItemFactory.Instance != null)
+        {
+            ItemFactory.Instance.ReturnAllActiveItems();
         }
     }
 }
