@@ -80,6 +80,7 @@ public class PlacedMonsterSpawner : MonoBehaviour
 
         if (instance.TryGetComponent(out BadMonsterController controller))
         {
+            controller.OnSpawn();
             controller.OnDie += HandleMonsterDie;
         }
     }
