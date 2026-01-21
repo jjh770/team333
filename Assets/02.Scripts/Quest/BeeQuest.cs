@@ -8,7 +8,8 @@ public class BeeQuest : MonoBehaviour
     [Header("Quest UI")]
     [SerializeField] private SplineWaypointPath _floraPath;
     [SerializeField] private int _waypointIndex;
-    [SerializeField] private string _questStartText = "길을 가로 막는 장애물을 공격해 없애세요.";
+    [SerializeField] private string _questStartText = "길을 가로 막는 장애물을\n공격해 없애세요.";
+    [SerializeField] private string _questStartHint = "벌 중에 특이한 벌이 있네?";
 
     private QuestTree _questTree;
 
@@ -41,7 +42,7 @@ public class BeeQuest : MonoBehaviour
     {
         if (waypointIndex == _waypointIndex)
         {
-            QuestManager.Instance?.StartQuest(_questStartText);
+            QuestManager.Instance?.StartQuest(_questStartText, _questStartHint);
         }
     }
 
