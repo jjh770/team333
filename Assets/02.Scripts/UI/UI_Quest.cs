@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using GameUI.Animations;
+using TMPro;
 using UnityEngine;
 
 public class UI_Quest : MonoBehaviour
@@ -6,10 +7,13 @@ public class UI_Quest : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject _questPanel;
     [SerializeField] private TextMeshProUGUI _questText;
+    [SerializeField] private TextMeshProUGUI _hintText;
+    [Header("위치 애니메이션")]
+    [SerializeField] private UIElementAnimation _positionAnimation;
 
     private void Awake()
     {
-        if (_questPanel != null) _questPanel.SetActive(false);
+        _positionAnimation.SetToHidden();
     }
 
     private void Start()
@@ -30,14 +34,15 @@ public class UI_Quest : MonoBehaviour
         }
     }
 
-    private void ShowQuest(string text)
+    private void ShowQuest(string quest, string hint)
     {
-        if (_questText != null) _questText.text = text;
-        if (_questPanel != null) _questPanel.SetActive(true);
+        if (_questText != null) _questText.text = quest;
+        if (_hintText != null) _hintText.text = hint;
+        _positionAnimation.AnimateToVisible();
     }
 
     private void HideQuest()
     {
-        if (_questPanel != null) _questPanel.SetActive(false);
+        _positionAnimation.AnimateToHidden();
     }
 }

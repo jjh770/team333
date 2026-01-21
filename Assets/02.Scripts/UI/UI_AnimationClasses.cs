@@ -38,6 +38,14 @@ namespace GameUI.Animations
                 element.DOAnchorPos(hiddenPosition, duration).SetEase(ease).SetUpdate(true);
             }
         }
+
+        public void AnimateToHidden(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOAnchorPos(hiddenPosition, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
+            }
+        }
     }
 
     [System.Serializable]
@@ -134,6 +142,124 @@ namespace GameUI.Animations
             if (element != null)
             {
                 element.DOAnchorPos(hiddenPosition, duration).SetDelay(delay).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class UIScaleAnimation
+    {
+        public RectTransform element;
+        public Vector3 hiddenScale = Vector3.zero;
+        public Vector3 visibleScale = Vector3.one;
+        [Tooltip("애니메이션 지속 시간")]
+        public float duration = 0.3f;
+        public Ease ease = Ease.OutBack;
+
+        public void SetToHidden()
+        {
+            if (element != null)
+            {
+                element.localScale = hiddenScale;
+            }
+        }
+
+        public void SetToVisible()
+        {
+            if (element != null)
+            {
+                element.localScale = visibleScale;
+            }
+        }
+
+        public void AnimateToVisible()
+        {
+            if (element != null)
+            {
+                element.DOScale(visibleScale, duration).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToVisible(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOScale(visibleScale, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
+            }
+        }
+
+        public void AnimateToHidden()
+        {
+            if (element != null)
+            {
+                element.DOScale(hiddenScale, duration).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToHidden(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOScale(hiddenScale, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class UISizeAnimation
+    {
+        public RectTransform element;
+        public Vector2 hiddenSize;
+        public Vector2 visibleSize;
+        [Tooltip("애니메이션 지속 시간")]
+        public float duration = 0.3f;
+        public Ease ease = Ease.OutQuad;
+
+        public void SetToHidden()
+        {
+            if (element != null)
+            {
+                element.sizeDelta = hiddenSize;
+            }
+        }
+
+        public void SetToVisible()
+        {
+            if (element != null)
+            {
+                element.sizeDelta = visibleSize;
+            }
+        }
+
+        public void AnimateToVisible()
+        {
+            if (element != null)
+            {
+                element.DOSizeDelta(visibleSize, duration).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToVisible(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOSizeDelta(visibleSize, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
+            }
+        }
+
+        public void AnimateToHidden()
+        {
+            if (element != null)
+            {
+                element.DOSizeDelta(hiddenSize, duration).SetEase(ease).SetUpdate(true);
+            }
+        }
+
+        public void AnimateToHidden(Action onComplete)
+        {
+            if (element != null)
+            {
+                element.DOSizeDelta(hiddenSize, duration).SetEase(ease).SetUpdate(true).OnComplete(() => onComplete?.Invoke());
             }
         }
     }

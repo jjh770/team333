@@ -12,7 +12,8 @@ public class BridgeQuest : MonoBehaviour
     [Header("Quest UI")]
     [SerializeField] private SplineWaypointPath _floraPath;
     [SerializeField] private int _waypointIndex;
-    [SerializeField] private string _questStartText = "판자를 다리에 던져 끊어진 다리를 연결하세요.";
+    [SerializeField] private string _questStartText = "판자를 다리에 던져 끊어진 \n다리를 연결하세요.";
+    [SerializeField] private string _hintStartText = "여기 나무는 생긴게 다르네?";
 
     private int _currentPlankCount = 0;
     public bool IsQuestCompleted { get; private set; }
@@ -58,10 +59,10 @@ public class BridgeQuest : MonoBehaviour
 
     private void UpdateQuestUI()
     {
-        string questText = $"{_questStartText} 판자 {_currentPlankCount}/{_neededPlankCount}";
-        QuestManager.Instance?.StartQuest(questText);
+        string questText = $"{_questStartText}\n판자 {_currentPlankCount}/{_neededPlankCount}";
+        QuestManager.Instance?.StartQuest(questText, _hintStartText);
     }
-    
+
     public void AddPlank()
     {
         if (IsQuestCompleted) return;

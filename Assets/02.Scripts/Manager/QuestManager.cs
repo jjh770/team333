@@ -5,7 +5,7 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
-    public event Action<string> OnQuestStarted;
+    public event Action<string, string> OnQuestStarted;
     public event Action OnQuestCompleted;
 
     private void Awake()
@@ -20,9 +20,9 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void StartQuest(string questText)
+    public void StartQuest(string questText, string hintText)
     {
-        OnQuestStarted?.Invoke(questText);
+        OnQuestStarted?.Invoke(questText, hintText);
     }
 
     public void CompleteQuest()
