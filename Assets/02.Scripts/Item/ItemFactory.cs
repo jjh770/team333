@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemFactory : MonoBehaviour
@@ -9,10 +9,11 @@ public class ItemFactory : MonoBehaviour
 
     [Header("items")]
     [SerializeField] private GameObject[] _itemPrefabs;
-    [SerializeField] protected float _itemPrefabsDuration = 20;
 
     [Header("Settings")]
     [SerializeField] private int _preloadCount = 20;
+
+    private readonly List<GameObject> _activeItems = new();
 
     private void Awake()
     {
@@ -47,25 +48,35 @@ public class ItemFactory : MonoBehaviour
 
         GameObject item = PoolManager.Instance.Get(itemPrefab, position, rotation);
 
-        if (item != null && _itemPrefabsDuration > 0)
+        if (item != null)
         {
-            StartCoroutine(ReturnAfterDelay(item, _itemPrefabsDuration));
+            _activeItems.Add(item);
         }
 
         return item;
-    }
-
-    private IEnumerator ReturnAfterDelay(GameObject effectObj, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        ReturnItem(effectObj);
     }
 
     public void ReturnItem(GameObject effectObj)
     {
         if (PoolManager.Instance != null && effectObj != null)
         {
+            _activeItems.Remove(effectObj);
             PoolManager.Instance.Return(effectObj);
         }
+    }
+
+    public void ReturnAllActiveItems()
+    {
+        if (PoolManager.Instance == null) return;
+
+        for (int i = _activeItems.Count - 1; i >= 0; i--)
+        {
+            var item = _activeItems[i];
+            if (item != null && item.activeInHierarchy)
+            {
+                PoolManager.Instance.Return(item);
+            }
+        }
+        _activeItems.Clear();
     }
 }
