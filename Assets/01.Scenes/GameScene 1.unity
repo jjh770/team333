@@ -12009,14 +12009,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1891721679, guid: adb4cd3df4f4c154eb06d13aae315e18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 985455e758c5ae043b3b81df8904fd5e, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12039,12 +12039,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 0
+    m_Left: -55
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: -35
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -34909,7 +34909,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 77.5, y: 77.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &800645612
 MonoBehaviour:
@@ -34931,7 +34931,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e50399bc0fb177e49a2f95cef83a1c6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 48f406b272dcd9546a9524577e2cb7a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -49411,7 +49411,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1891721679, guid: adb4cd3df4f4c154eb06d13aae315e18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 985455e758c5ae043b3b81df8904fd5e, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -54232,6 +54232,8 @@ MonoBehaviour:
   _speedGaugeSlider: {fileID: 1271696315}
   _highThreshold: 0.66
   _lowThreshold: 0.33
+  _gaugeDuration: 0.3
+  _gaugeEase: 0
   _iconImage: {fileID: 1219229695}
   _iconLow: {fileID: 1837716300, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
   _iconMid: {fileID: -2040936587, guid: fb1ed96e9e47e614ea44267a56845df0, type: 3}
