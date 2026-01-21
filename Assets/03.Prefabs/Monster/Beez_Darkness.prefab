@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 7789694426040448421}
   - component: {fileID: -4426105785761420350}
   - component: {fileID: -1958163404555417837}
+  - component: {fileID: 4094187851041837107}
   m_Layer: 9
   m_Name: Beez_Darkness
   m_TagString: Untagged
@@ -465,6 +466,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4094187851041837107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358125506040026342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b376ce6e7984547aab349a5675d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DamageFloating
+  _stat: {fileID: 1628793066611934501}
+  _offset: {x: 0, y: 2, z: 0}
 --- !u!1 &5663166039479195108
 GameObject:
   m_ObjectHideFlags: 0
