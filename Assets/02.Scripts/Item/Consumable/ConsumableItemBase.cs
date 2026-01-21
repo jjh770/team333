@@ -20,6 +20,11 @@ public abstract class ConsumableItemBase : MonoBehaviour, IInteractable
     {
         if (OnConsume(interactor))
         {
+            if (interactor.TryGetComponent(out PlayerSound playerSound))
+            {
+                playerSound.PlayItemConsume();
+            }
+
             if (TryGetComponent<IConsumeEffect>(out var effect))
             {
                 effect.OnConsumed();
