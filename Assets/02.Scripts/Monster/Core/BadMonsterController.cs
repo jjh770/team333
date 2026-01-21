@@ -59,10 +59,10 @@ public class BadMonsterController : BaseMonsterController, IDamageable
 
     private void HandleGameStateChanged(GameState oldState, GameState newState)
     {
-        // 게임이 끝날 때 한 방에 죽이기
         if (newState == GameState.Outro)
         {
-            Kill();
+            MonsterEffectPool.Instance?.PlaySmokeEffect(transform.position);
+            gameObject.SetActive(false);
         }
     }
 
