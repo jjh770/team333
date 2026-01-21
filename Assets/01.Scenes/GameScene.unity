@@ -68408,6 +68408,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db3d05a0cdeb37409689c6d889d574a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStat
+--- !u!114 &1662994552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8852206829208959896, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+  m_PrefabInstance: {fileID: 1662994549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503626364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74cd680bb4155b40b61206eedc5d14f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
 --- !u!114 &1662994573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78217,6 +78228,14 @@ PrefabInstance:
       propertyPath: _floraSound
       value: 
       objectReference: {fileID: 2095465960}
+    - target: {fileID: 1361554184085608642, guid: 37889ce05810bec4394296ec05bfacdf, type: 3}
+      propertyPath: _playerSound
+      value: 
+      objectReference: {fileID: 1662994552}
+    - target: {fileID: 4930703651701451635, guid: 37889ce05810bec4394296ec05bfacdf, type: 3}
+      propertyPath: _floraPath
+      value: 
+      objectReference: {fileID: 2095465959}
     - target: {fileID: 4930703651701451635, guid: 37889ce05810bec4394296ec05bfacdf, type: 3}
       propertyPath: _floraSound
       value: 
