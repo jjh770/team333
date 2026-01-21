@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 5441403141938456032}
   - component: {fileID: 4080296060181816833}
   - component: {fileID: 3116323574720759781}
+  - component: {fileID: 4961087127648068892}
   m_Layer: 9
   m_Name: Devil_Tree_Nightmare
   m_TagString: Untagged
@@ -656,6 +657,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
   _monsterSound: {fileID: 4178061326575622916, guid: 8edd0766b0973f94f8d611e2342ba844, type: 3}
+--- !u!114 &4961087127648068892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060493489403216405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b376ce6e7984547aab349a5675d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DamageFloating
+  _stat: {fileID: 1780633793686190866}
+  _offset: {x: 0, y: 2, z: 0}
 --- !u!1 &7191071975125149397
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4237579833431501330}
   - component: {fileID: 3686397370653533704}
   - component: {fileID: -4226026620041622667}
+  - component: {fileID: 4979215812910612568}
   m_Layer: 9
   m_Name: Bully_Tree
   m_TagString: Untagged
@@ -208,6 +209,20 @@ MonoBehaviour:
   _knockbackDuration: 0.2
   _knockbackStunDuration: 0.3
   _detectionRange: 10
+--- !u!114 &4979215812910612568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450748814917048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b376ce6e7984547aab349a5675d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DamageFloating
+  _stat: {fileID: 3837921944087222539}
+  _offset: {x: 0, y: 2, z: 0}
 --- !u!1 &3761199340428576987
 GameObject:
   m_ObjectHideFlags: 0

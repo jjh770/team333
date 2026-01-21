@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 2794415891174157171}
   - component: {fileID: 5334694915051871641}
   - component: {fileID: 7087864781188510689}
+  - component: {fileID: 7079024384496816400}
   m_Layer: 9
   m_Name: Planta_Shadow
   m_TagString: Untagged
@@ -624,6 +625,20 @@ MonoBehaviour:
   _fleeSpeedMultiplier: 2
   _avoidDistance: 3
   _detectionInterval: 0.2
+--- !u!114 &7079024384496816400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656837306392291822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b376ce6e7984547aab349a5675d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DamageFloating
+  _stat: {fileID: 4762377517291527843}
+  _offset: {x: 0, y: 2, z: 0}
 --- !u!1 &8788060930047226639
 GameObject:
   m_ObjectHideFlags: 0

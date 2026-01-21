@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 6332275347961121796}
   - component: {fileID: 7429925657092110577}
   - component: {fileID: 5300435438270260366}
+  - component: {fileID: 6307009667239362694}
   m_Layer: 9
   m_Name: Devil_Tree_Wither
   m_TagString: Untagged
@@ -454,6 +455,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BadMonsterController
   _deathAnimationDuration: 0.19
   _monsterSound: {fileID: 4178061326575622916, guid: 8edd0766b0973f94f8d611e2342ba844, type: 3}
+--- !u!114 &6307009667239362694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986010498025588172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b376ce6e7984547aab349a5675d614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_DamageFloating
+  _stat: {fileID: 8237467816518253206}
+  _offset: {x: 0, y: 2, z: 0}
 --- !u!1 &9097755878706329246
 GameObject:
   m_ObjectHideFlags: 0

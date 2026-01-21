@@ -37932,6 +37932,7 @@ MonoBehaviour:
   _spawnPoints:
   - {fileID: 127044935}
   - {fileID: 1794760800}
+  _respawnDelay: 3
   _requiredCount: 2
   _poolManager: {fileID: 57080825}
   _floraInventory: {fileID: 215770151}
@@ -54293,8 +54294,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.85
-      value: 1
+      time: 0.8188721
+      value: 0.84022903
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -92021,6 +92022,7 @@ SceneRoots:
   - {fileID: 663587259}
   - {fileID: 781828853}
   - {fileID: 162276844}
+  - {fileID: 1266057491}
   - {fileID: 72553250}
   - {fileID: 6667338798674275833}
   - {fileID: 1521881436}
@@ -92045,5 +92047,4 @@ SceneRoots:
   - {fileID: 207288957}
   - {fileID: 726817088}
   - {fileID: 959165409}
-  - {fileID: 1266057491}
   - {fileID: 651424702}
