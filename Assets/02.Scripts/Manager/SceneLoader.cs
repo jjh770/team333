@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,12 +75,14 @@ public class SceneLoader : MonoBehaviour
     private void LoadSceneByName(string sceneName)
     {
         Time.timeScale = 1f;
+        DOTween.KillAll();
         SceneManager.LoadScene(sceneName);
     }
 
     private void LoadSceneWithLoading(string sceneName)
     {
         Time.timeScale = 1f;
+        DOTween.KillAll();
         LoadingSceneController.LoadScene(sceneName);
     }
 

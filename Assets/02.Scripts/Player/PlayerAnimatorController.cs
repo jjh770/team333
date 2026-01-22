@@ -68,14 +68,18 @@ public class PlayerAnimatorController : MonoBehaviour
 
     public float GetCurrentAnimationDuration()
     {
-        if (_animator == null)
-            return 0.5f;
+        if (_animator == null) return 0.5f;
 
-        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        // 현재 전이 중이라면 다음 상태의 정보를 가져오도록 시도
+        AnimatorStateInfo stateInfo = _animator.IsInTransition(0) 
+            ? _animator.GetNextAnimatorStateInfo(0) 
+            : _animator.GetCurrentAnimatorStateInfo(0);
 
         float clipLength = stateInfo.length;
         float animatorSpeed = _animator.speed;
-
-        return clipLength / animatorSpeed;
+        
+        Debug.Log(clipLength / animatorSpeed);
+        
+        return clipLength > 0 ? (clipLength / animatorSpeed) : 0.5f;
     }
 }

@@ -30,6 +30,7 @@ public class FloraMoveState : IFloraState
 
         if (!_movement.HasNextDestination())
         {
+            _movement.AnimationController?.PlayClear();
             _movement.ChangeState(_movement.IdleState);
             return;
         }

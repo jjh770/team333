@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
   <MonsterName>k__BackingField: TurnipaBitter
   <MaxHealth>k__BackingField: 40
-  <AttackDamage>k__BackingField: 2
+  <AttackDamage>k__BackingField: 3
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
   <MoveSpeed>k__BackingField: 3.5
   <DropItem>k__BackingField: {fileID: 0}
+  <DropChance>k__BackingField: 0
   <Prefab>k__BackingField: {fileID: 2834583176937093337, guid: 0c0072479b567d840a1ab6cf7c2fcc88, type: 3}

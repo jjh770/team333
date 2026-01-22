@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterConfig
   <MonsterName>k__BackingField: TurnipaBitter
   <MaxHealth>k__BackingField: 60
-  <AttackDamage>k__BackingField: 4
+  <AttackDamage>k__BackingField: 5
   <AttackCooltime>k__BackingField: 1.5
   <AttackDistance>k__BackingField: 2.5
   <AttackDuration>k__BackingField: 0.14
