@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using GameUI.Animations;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ public class UI_Quest : MonoBehaviour
             QuestManager.Instance.OnQuestStarted += ShowQuest;
             QuestManager.Instance.OnQuestCompleted += HideQuest;
         }
+        StartCoroutine(UpdateTransparencyRoutine());
     }
 
     private void OnDisable()
@@ -50,9 +52,14 @@ public class UI_Quest : MonoBehaviour
         _fadeTween?.Kill();
     }
 
-    private void Update()
+    private IEnumerator UpdateTransparencyRoutine()
     {
-        UpdateTransparency();
+        var delay = new WaitForSeconds(0.1f);
+        while (true)
+        {
+            UpdateTransparency();
+            yield return delay;
+        }
     }
 
     private void UpdateTransparency()
