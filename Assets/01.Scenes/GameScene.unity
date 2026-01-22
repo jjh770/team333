@@ -30438,7 +30438,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1072310763
   m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &663587259
@@ -35222,7 +35222,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1072310763
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &781828853
@@ -63138,7 +63138,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1072310763
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1522797110
@@ -68575,6 +68575,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1116270567966505069, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2032723197}
+    - target: {fileID: 1116270567966505069, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1949567223
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116270567966505069, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116270567966505069, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2018099275216416109, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: _projectilePool
       value: 
@@ -91829,7 +91845,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1072310763
   m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &8782522185488108705

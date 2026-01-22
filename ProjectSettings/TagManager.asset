@@ -7,6 +7,7 @@ TagManager:
   - Flora
   - QuestBridge
   - Ground
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -41,11 +42,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: UI
-    uniqueID: 130902285
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI_Icon
+    uniqueID: 1949567223
+    locked: 0
+  - name: UI
+    uniqueID: 3222656533
     locked: 0
   m_RenderingLayers:
   - Default
