@@ -50,11 +50,15 @@ public class UI_EndSceneAnimator : MonoBehaviour
     [SerializeField] private bool _playOnStart = true;
     [SerializeField] private float _globalDelay = 0f;
 
+    [Header("Sound")]
+    [SerializeField] private UI_EndSceneSound _sound;
+
     private Sequence _masterSequence;
 
     public const string InputPanelName = "InputPanel";
     public const string LeaderboardPanelName = "LeaderboardPanel";
     public const string ButtonPanelName = "ButtonPanel";
+    public const string WoodImageName = "LeaderboardWoodImage";
 
     private void Awake()
     {
@@ -163,7 +167,29 @@ public class UI_EndSceneAnimator : MonoBehaviour
                 break;
         }
 
+        PlayPanelSound(panel.Name, panel.Delay);
         panel.CurrentTween = seq;
+    }
+
+    private void PlayPanelSound(string panelName, float delay)
+    {
+        if (_sound == null) return;
+
+        DOVirtual.DelayedCall(delay, () =>
+        {
+            switch (panelName)
+            {
+                case WoodImageName:
+                    _sound.PlayWoodDrop();
+                    break;
+                case InputPanelName:
+                    _sound.PlayInputPanelShow();
+                    break;
+                case LeaderboardPanelName:
+                    _sound.PlayLeaderboardPanelShow();
+                    break;
+            }
+        });
     }
 
     private void SetupDropFade(PanelAnimation panel, Sequence seq)

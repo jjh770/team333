@@ -40,6 +40,9 @@ public class UI_EndScene : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private UI_EndSceneAnimator _animator;
 
+    [Header("Sound")]
+    [SerializeField] private UI_EndSceneSound _sound;
+
     [Header("Counting Animation")]
     [SerializeField] private float _timeCountDelay = 0.3f;
     [SerializeField] private float _timeCountDuration = 1.5f;
@@ -127,6 +130,8 @@ public class UI_EndScene : MonoBehaviour
     private void OnSubmitClicked()
     {
         if (_hasSubmitted) return;
+
+        _sound?.PlayStamp();
 
         string playerName = _nameInputField != null ? _nameInputField.text.Trim() : "";
 
