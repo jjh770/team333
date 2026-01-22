@@ -13,7 +13,8 @@ public class TutorialStep_Dash : TutorialStepBase
     {
         if (Input.GetKeyDown(_continueKey))
         {
-            Complete();
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                Complete();
         }
     }
 }

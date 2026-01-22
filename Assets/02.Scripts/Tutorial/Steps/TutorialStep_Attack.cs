@@ -61,7 +61,8 @@ public class TutorialStep_Attack : TutorialStepBase
         if (Time.time - _lastAttackTime < _attackCooldown) return;
 
         _lastAttackTime = Time.time;
-        _currentAttackCount++;
+        if(_currentAttackCount < _requiredAttackCount)
+            _currentAttackCount++;
         OnAttackCountChanged?.Invoke();
 
         if (_currentAttackCount >= _requiredAttackCount)

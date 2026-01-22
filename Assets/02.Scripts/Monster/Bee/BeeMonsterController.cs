@@ -91,7 +91,10 @@ public class BeeMonsterController : BadMonsterController
 
         if (_petOwner != null && _petOwner.HasPet() == false)
         {
-            _itemDrop.DropItem(_stat.Data.DropItem);
+            if (Random.value < _stat.Data.DropChance)
+            {
+                _itemDrop.DropItem(_stat.Data.DropItem);
+            }
         }
 
         ApplyState(MonsterState.Die);

@@ -23,14 +23,6 @@ public class TraceMonsterSpawner : BaseMonsterSpawner, IMonsterSpawner
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SpawnGroup(1);
-        }
-    }
-
     public void SpawnGroup(int groupIndex)
     {
         if (groupIndex < 1 || groupIndex > _spawnGroups.Length) return;
