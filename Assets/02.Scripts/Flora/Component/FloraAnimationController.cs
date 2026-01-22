@@ -59,4 +59,9 @@ public class FloraAnimationController : MonoBehaviour
     {
         _animator.SetTrigger("Skill");
     }
+
+    public void PlayClear()
+    {
+        _animator.SetTrigger("Clear");
+    }
 }

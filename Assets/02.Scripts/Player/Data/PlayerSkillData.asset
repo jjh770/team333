@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f687199187597546b1ef76fdd24f0af, type: 3}
   m_Name: PlayerSkillData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSkillData
-  <SkillDamage>k__BackingField: 50
+  <SkillDamage>k__BackingField: 30
   <SkillRange>k__BackingField: 3
+  <Cooldown>k__BackingField: 3
+  <MaxSkillLevel>k__BackingField: 3
   <SkillMaxDistance>k__BackingField: 5
   <SkillJumpHeight>k__BackingField: 3
   <SkillMoveEase>k__BackingField: 34
@@ -22,3 +24,9 @@ MonoBehaviour:
   <ProjectileWidth>k__BackingField: 3
   <ProjectileHeight>k__BackingField: 10
   <ProjectileDepth>k__BackingField: 0.5
+  <SingleProjectileAngles>k__BackingField:
+  - 0
+  <TripleProjectileAngles>k__BackingField:
+  - -45
+  - 0
+  - 45
