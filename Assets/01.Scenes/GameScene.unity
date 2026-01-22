@@ -68835,6 +68835,10 @@ PrefabInstance:
       propertyPath: _projectilePool
       value: 
       objectReference: {fileID: 529757717}
+    - target: {fileID: 2060806066316369074, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: b7eb23bf160168240985ec65328f1e8d, type: 2}
     - target: {fileID: 2060944119743222468, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -68901,7 +68905,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2764946671208770225, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2764946671208770225, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795286001524376072, guid: 9f8bcfc9f0177964db74debcd70f5a8d, type: 3}
       propertyPath: m_Layer
