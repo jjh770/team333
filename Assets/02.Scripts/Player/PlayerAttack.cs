@@ -132,7 +132,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void StartAttackMovement(int comboIndex)
     {
-        if (!_enableAttackMovement) return;
+        if (!_enableAttackMovement)
+        {
+            return;
+        }
 
         if (comboIndex < 0 || comboIndex >= _attackData.AttackMoveDistance.Length ||
             comboIndex >= _attackData.AttackMoveEase.Length)

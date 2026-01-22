@@ -45,6 +45,7 @@ public class TweenMovement : MonoBehaviour
             previousValue = currentValue;
         })
         .SetEase(ease)
+        .SetLink(gameObject)
         .OnComplete(() => onComplete?.Invoke())
         .OnKill(() => _currentTween = null);
     }
@@ -81,6 +82,7 @@ public class TweenMovement : MonoBehaviour
             prevVertical = currentVertical;
         })
         .SetEase(ease)
+        .SetLink(gameObject)
         .OnKill(() => _currentTween = null);
     }
 
