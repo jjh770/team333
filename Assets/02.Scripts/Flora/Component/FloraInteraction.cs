@@ -40,13 +40,11 @@ public class FloraInteraction : MonoBehaviour, IInteractable
         {
             if (CanMove)
             {
-                _lastIconType = IconType.TalkToMoveFlora;
-                return IconType.TalkToMoveFlora;
+                return _lastIconType = IconType.TalkToMoveFlora;
             }
             if (CanSpeedUp)
             {
-                _lastIconType = IconType.TalkToSpeedUpFlora;
-                return IconType.TalkToSpeedUpFlora;
+                return _lastIconType = IconType.TalkToSpeedUpFlora;
             }
             return _lastIconType;
         }

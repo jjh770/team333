@@ -105,7 +105,8 @@ public class UI_InteractableIcon : MonoBehaviour
     {
         if (_currentInteractable == interactable)
         {
-            _currentInteractableIconType = IconType.None; // 강제로 아이콘 갱신하도록 리셋
+            // 상호작용 후 아이콘 상태가 변경될 수 있으므로, 강제로 갱신을 트리거합니다.
+            _currentInteractableIconType = IconType.None;
             UpdateInteractableIcon();
         }
     }
