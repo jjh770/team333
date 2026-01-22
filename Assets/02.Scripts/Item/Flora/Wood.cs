@@ -44,7 +44,6 @@ public class Wood : ItemBase, IAttractableByFlora
 
     private void StopSpin()
     {
-        Debug.Log("Stop");
         _spinTween?.Kill();
         _spinTween = null;
     }
