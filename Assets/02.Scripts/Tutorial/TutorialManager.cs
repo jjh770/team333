@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,14 @@ public class TutorialManager : MonoBehaviour
     [Header("Tutorial Steps")]
     [SerializeField] private List<TutorialStepBase> _steps = new List<TutorialStepBase>();
 
+    [Header("Transition")]
+    [SerializeField] private float _stepTransitionDelay = 0.5f;
+
+    [Header("SFX")] 
+    public SoundInfo ClearSFX;
+
     private int _currentStepIndex = -1;
+    private Coroutine _transitionCoroutine;
     private bool _isRunning;
     private bool _isCompleted;
 
@@ -97,6 +105,12 @@ public class TutorialManager : MonoBehaviour
 
         Debug.Log("Tutorial Skipped");
 
+        if (_transitionCoroutine != null)
+        {
+            StopCoroutine(_transitionCoroutine);
+            _transitionCoroutine = null;
+        }
+
         if (CurrentStep != null)
         {
             CurrentStep.OnCompleted -= HandleStepCompleted;
@@ -139,6 +153,20 @@ public class TutorialManager : MonoBehaviour
     private void HandleStepCompleted()
     {
         Debug.Log($"Tutorial Step Completed: {CurrentStep?.StepId}");
+
+        if (_transitionCoroutine != null)
+        {
+            StopCoroutine(_transitionCoroutine);
+        }
+
+        PlayClearSFX();
+        _transitionCoroutine = StartCoroutine(DelayedAdvanceToNextStep());
+    }
+
+    private IEnumerator DelayedAdvanceToNextStep()
+    {
+        yield return new WaitForSeconds(_stepTransitionDelay);
+        _transitionCoroutine = null;
         AdvanceToNextStep();
     }
 
@@ -180,5 +208,11 @@ public class TutorialManager : MonoBehaviour
         {
             ItemFactory.Instance.ReturnAllActiveItems();
         }
+    }
+    
+    private void PlayClearSFX()
+    {
+        if (ClearSFX.Clip == null) return;
+        SoundManager.Instance.PlaySFX(ClearSFX.Clip, ClearSFX.StartTime, 1f);
     }
 }

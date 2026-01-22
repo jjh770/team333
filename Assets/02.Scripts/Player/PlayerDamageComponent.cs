@@ -29,15 +29,6 @@ public class PlayerDamageComponent : MonoBehaviour, IDamageable
         _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Damage damage = new Damage(30f, null, false);
-            TryTakeDamage(damage);
-        }
-    }
-
     public bool TryTakeDamage(Damage damage)
     {
         if (_stateManager.IsState(PlayerState.Die) || _stateManager.IsState(PlayerState.Clear))
