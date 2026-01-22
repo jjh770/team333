@@ -128,36 +128,6 @@ public class PlayerInteraction : MonoBehaviour
         return bestMatch;
     }
 
-    ///// <summary>
-    ///// 특정 타입 중에서 가장 가까운 상호작용 가능한 오브젝트 반환
-    ///// </summary>
-    //private IInteractable GetClosestOfType(InteractionType type)
-    //{
-    //    IInteractable closest = null;
-    //    float closestDistanceSqr = float.MaxValue;
-
-    //    Vector3 playerPos = transform.position;
-
-    //    foreach (var interactable in _nearbyInteractables)
-    //    {
-    //        if (interactable == null || interactable.Type != type)
-    //            continue;
-
-    //        if (!interactable.CanInteract)
-    //            continue;
-
-    //        float distanceSqr = (interactable.Transform.position - playerPos).sqrMagnitude;
-
-    //        if (distanceSqr < closestDistanceSqr)
-    //        {
-    //            closestDistanceSqr = distanceSqr;
-    //            closest = interactable;
-    //        }
-    //    }
-
-    //    return closest;
-    //}
-
     private void CleanupNull()
     {
         _nearbyInteractables.RemoveAll(i =>
@@ -211,40 +181,4 @@ public class PlayerInteraction : MonoBehaviour
             _nearbyInteractables.Remove(interactable);
         }
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (_nearbyInteractables == null) return;
-
-        foreach (var interactable in _nearbyInteractables)
-        {
-            if (interactable?.Transform == null) continue;
-
-            // 현재 선택된 것은 녹색, 나머지는 타입별 색상
-            if (interactable == _closestInteractable)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(interactable.Transform.position, 0.7f);
-            }
-            else
-            {
-                Gizmos.color = GetColorByType(interactable.Type);
-                Gizmos.DrawWireSphere(interactable.Transform.position, 0.5f);
-            }
-        }
-    }
-
-    private Color GetColorByType(InteractionType type)
-    {
-        return type switch
-        {
-            InteractionType.TalkToMove => Color.cyan,
-            InteractionType.TalkToSpeedUp => Color.green,
-            InteractionType.PickUp => Color.blue,
-            InteractionType.Use => Color.yellow,
-            _ => Color.gray
-        };
-    }
-#endif
 }

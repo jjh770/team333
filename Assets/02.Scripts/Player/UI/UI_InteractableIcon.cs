@@ -49,6 +49,7 @@ public class UI_InteractableIcon : MonoBehaviour
     private void Start()
     {
         _playerInteraction.OnInteractableChanged += HandleInteractableChanged;
+        _playerInteraction.OnInteract += HandleInteract;
         _playerPickUpThrow.OnPickedUpItem += HandlePickedUpItem;
         _playerPickUpThrow.OnThrownItem += HandleThrownItem;
         _mainCamera = Camera.main;
@@ -65,6 +66,7 @@ public class UI_InteractableIcon : MonoBehaviour
     private void OnDestroy()
     {
         _playerInteraction.OnInteractableChanged -= HandleInteractableChanged;
+        _playerInteraction.OnInteract -= HandleInteract;
         _playerPickUpThrow.OnPickedUpItem -= HandlePickedUpItem;
         _playerPickUpThrow.OnThrownItem -= HandleThrownItem;
 
@@ -97,6 +99,15 @@ public class UI_InteractableIcon : MonoBehaviour
     {
         _currentInteractable = interactable;
         UpdateInteractableIcon();
+    }
+
+    private void HandleInteract(IInteractable interactable)
+    {
+        if (_currentInteractable == interactable)
+        {
+            _currentInteractableIconType = IconType.None; // 강제로 아이콘 갱신하도록 리셋
+            UpdateInteractableIcon();
+        }
     }
 
     private void HandlePickedUpItem(IPickable pickable)
