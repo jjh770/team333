@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wood
   _addWoodAmount: 1
+  _spinSpeed: 360
 --- !u!114 &2077333477970464218
 MonoBehaviour:
   m_ObjectHideFlags: 0

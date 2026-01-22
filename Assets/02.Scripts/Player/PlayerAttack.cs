@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     private bool _canAttack = true;
     [SerializeField] private int _comboIndex = 0;
     private float _lastAttackTime;
+    private const float AttackTimeout = 1f;
     private void Awake()
     {
         _animatorController = GetComponent<PlayerAnimatorController>();
@@ -72,6 +73,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         CheckComboTimeout();
+        CheckAttackStateTimeout();
     }
 
     private void CheckComboTimeout()
@@ -80,6 +82,17 @@ public class PlayerAttack : MonoBehaviour
         {
             ResetCombo();
         }
+    }
+
+    private void CheckAttackStateTimeout()
+    {
+        if (!_stateManager.IsState(PlayerState.Attacking)) return;
+        if (Time.time - _lastAttackTime < AttackTimeout) return;
+
+        _attackRange?.StopAttack();
+        _canAttack = true;
+        FinishAttack();
+        ResetCombo();
     }
 
     private void HandleAttackInput()

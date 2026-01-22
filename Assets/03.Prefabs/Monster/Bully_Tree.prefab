@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80e664d3dcaefb4db3cf9e1e28ffe40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterItemDropComponent
-  _yOffset: 0.5
+  _yOffset: 0.54
 --- !u!114 &5064948403858445294
 MonoBehaviour:
   m_ObjectHideFlags: 0
