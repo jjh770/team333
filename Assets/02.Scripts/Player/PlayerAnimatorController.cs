@@ -78,8 +78,6 @@ public class PlayerAnimatorController : MonoBehaviour
         float clipLength = stateInfo.length;
         float animatorSpeed = _animator.speed;
         
-        Debug.Log(clipLength / animatorSpeed);
-        
         return clipLength > 0 ? (clipLength / animatorSpeed) : 0.5f;
     }
 }
