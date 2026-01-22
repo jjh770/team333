@@ -24,6 +24,7 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     private bool CanMove => _movement != null && _movement.IsWaiting && !_isMoveLocked;
     private bool CanSpeedUp => _inventory != null && _inventory.WoodCount >= _woodCost && !_gaugeController.IsFull;
 
+    private IconType _lastIconType;
     public InteractionType Type
     {
         get
@@ -37,9 +38,15 @@ public class FloraInteraction : MonoBehaviour, IInteractable
     {
         get
         {
-            if (CanMove) return IconType.TalkToMoveFlora;
-            if (CanSpeedUp) return IconType.TalkToSpeedUpFlora;
-            return IconType.TalkToMoveFlora;
+            if (CanMove)
+            {
+                return _lastIconType = IconType.TalkToMoveFlora;
+            }
+            if (CanSpeedUp)
+            {
+                return _lastIconType = IconType.TalkToSpeedUpFlora;
+            }
+            return _lastIconType;
         }
     }
 
