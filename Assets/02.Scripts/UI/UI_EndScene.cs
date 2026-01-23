@@ -92,6 +92,11 @@ public class UI_EndScene : MonoBehaviour
 
     private void SetupUI()
     {
+        if (_nameInputField != null)
+        {
+            _nameInputField.characterLimit = 6;
+        }
+
         if (_clearTimeText != null)
         {
             NumberCountingAnimator.CountToTimeWithDelay(
