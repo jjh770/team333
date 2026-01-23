@@ -5345,7 +5345,6 @@ GameObject:
   - component: {fileID: 175204894}
   - component: {fileID: 175204893}
   - component: {fileID: 175204892}
-  - component: {fileID: 175204896}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5443,22 +5442,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &175204896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175204891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d64f257c6cfd4499bd76af30c8b437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UISound
-  _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _buttonClickSoundVolume: 1
-  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
-  _mouseHoverSoundVolume: 0.1
 --- !u!1 &181058997
 GameObject:
   m_ObjectHideFlags: 0
@@ -10377,6 +10360,15 @@ MonoBehaviour:
   _stampSFX:
     Clip: {fileID: 8300000, guid: 30ec0bf308b388845a398892d6348fac, type: 3}
     StartTime: 0.55
+  _buttonHoverSFX:
+    Clip: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+    StartTime: 0.1
+  _rankCountingSFX:
+    Clip: {fileID: 8300000, guid: 90d2021dcd2c3f441bc24625a52fa67a, type: 3}
+    StartTime: 0
+  _firstRankParticleSFX:
+    Clip: {fileID: 8300000, guid: 7b457e77ba837ae43a0a22a6925f11ab, type: 3}
+    StartTime: 0
   _volumeMultiplier: 1
 --- !u!1 &262562471
 GameObject:
@@ -33389,7 +33381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
   _buttonClickSoundVolume: 1
-  _mouseHoverSound: {fileID: 0}
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
   _mouseHoverSoundVolume: 0.1
 --- !u!1 &1721946879
 GameObject:
