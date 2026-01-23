@@ -8,7 +8,8 @@ public class UI_EndSceneSound : MonoBehaviour
     [SerializeField] private SoundInfo _leaderboardPanelShowSFX;
     [SerializeField] private SoundInfo _stampSFX;
     [SerializeField] private SoundInfo _buttonHoverSFX;
-
+    [SerializeField] private float _buttonHoverSFXVolume = 0.1f;
+        
     [Header("Rank Sounds")]
     [SerializeField] private SoundInfo _rankCountingSFX;
     [SerializeField] private SoundInfo _firstRankParticleSFX;
@@ -38,7 +39,7 @@ public class UI_EndSceneSound : MonoBehaviour
 
     public void PlayButtonHover()
     {
-        PlaySound(_buttonHoverSFX);
+        PlaySound(_buttonHoverSFX, _buttonHoverSFXVolume);
     }
 
     public void PlayRankCounting()
@@ -51,9 +52,9 @@ public class UI_EndSceneSound : MonoBehaviour
         PlaySound(_firstRankParticleSFX);
     }
 
-    private void PlaySound(SoundInfo info)
+    private void PlaySound(SoundInfo info, float? volume = null)
     {
         if (info.Clip == null) return;
-        SoundManager.Instance?.PlaySFX(info.Clip, info.StartTime, _volumeMultiplier);
+        SoundManager.Instance?.PlaySFX(info.Clip, info.StartTime, volume ?? _volumeMultiplier);
     }
 }

@@ -10363,6 +10363,7 @@ MonoBehaviour:
   _buttonHoverSFX:
     Clip: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
     StartTime: 0.1
+  _buttonHoverSFXVolume: 0.1
   _rankCountingSFX:
     Clip: {fileID: 8300000, guid: 90d2021dcd2c3f441bc24625a52fa67a, type: 3}
     StartTime: 0
@@ -10799,7 +10800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
   _lobbySceneName: LobbyScene
-  _gameSceneName: yj
+  _gameSceneName: GameScene
   _endSceneName: EndScene
   _useLoadingScene: 1
 --- !u!224 &430706740
