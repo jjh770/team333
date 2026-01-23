@@ -300,8 +300,6 @@ public class UI_EndScene : MonoBehaviour
 
     private void NumberTextAnimation()
     {
-        _sound?.PlayRankCounting();
-
         NumberCountingAnimator.CountToWithDelay(
             _rankText,
             _rank,
@@ -313,7 +311,8 @@ public class UI_EndScene : MonoBehaviour
                 {
                     FirstRanking(true);
                 }
-            });
+            },
+            onValueChanged: _ => _sound?.PlayRankCounting());
     }
 
     private void OnRetryClicked()

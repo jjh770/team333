@@ -26,19 +26,27 @@ public static class NumberCountingAnimator
         int startValue = 0,
         Ease ease = Ease.OutQuad,
         string format = null,
-        Action onComplete = null)
+        Action onComplete = null,
+        Action<int> onValueChanged = null)
     {
         if (text == null) return null;
 
         int currentValue = startValue;
+        int lastValue = startValue;
         text.text = FormatNumber(currentValue, format);
+        onValueChanged?.Invoke(currentValue);
 
         return DOTween.To(
             () => currentValue,
             x =>
             {
                 currentValue = x;
-                text.text = FormatNumber(currentValue, format);
+                if (currentValue != lastValue)
+                {
+                    lastValue = currentValue;
+                    text.text = FormatNumber(currentValue, format);
+                    onValueChanged?.Invoke(currentValue);
+                }
             },
             targetValue,
             duration)
@@ -87,15 +95,14 @@ public static class NumberCountingAnimator
         int startValue = 0,
         Ease ease = Ease.OutQuad,
         string format = null,
-        Action onComplete = null)
+        Action onComplete = null,
+        Action<int> onValueChanged = null)
     {
         if (text == null) return null;
 
-        text.text = FormatNumber(startValue, format);
-
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.AppendCallback(() => CountTo(text, targetValue, duration, startValue, ease, format, onComplete));
+        seq.AppendCallback(() => CountTo(text, targetValue, duration, startValue, ease, format, onComplete, onValueChanged));
 
         return seq;
     }
