@@ -8,6 +8,7 @@ public class TutorialStep_FeedFlora : TutorialStepBase
 
     [Header("References")]
     [SerializeField] private FloraSpeedGaugeController _floraGaugeController;
+    [SerializeField] private FloraInventory _floraInventory;
 
     private int _currentCount;
 
@@ -19,6 +20,12 @@ public class TutorialStep_FeedFlora : TutorialStepBase
     protected override void OnEnter()
     {
         _currentCount = 0;
+
+        if (_floraInventory != null && _floraInventory.WoodCount < _requiredCount)
+        {
+            int needed = _requiredCount - (int)_floraInventory.WoodCount;
+            _floraInventory.AddWood(needed);
+        }
 
         if (_floraGaugeController != null)
         {

@@ -89851,6 +89851,7 @@ MonoBehaviour:
     \uCD5C\uB300\uD55C \uB192\uAC8C \uC720\uC9C0\uD558\uB294 \uAC8C \uD3EC\uC778\uD2B8!"
   _requiredCount: 2
   _floraGaugeController: {fileID: 215770153}
+  _floraInventory: {fileID: 215770151}
 --- !u!4 &2116299575
 Transform:
   m_ObjectHideFlags: 0
