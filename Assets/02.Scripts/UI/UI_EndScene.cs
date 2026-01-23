@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -114,17 +115,34 @@ public class UI_EndScene : MonoBehaviour
         if (_submitButton != null)
         {
             _submitButton.onClick.AddListener(OnSubmitClicked);
+            AddHoverSound(_submitButton.gameObject);
         }
 
         if (_retryButton != null)
         {
             _retryButton.onClick.AddListener(OnRetryClicked);
+            AddHoverSound(_retryButton.gameObject);
         }
 
         if (_mainMenuButton != null)
         {
             _mainMenuButton.onClick.AddListener(OnMainMenuClicked);
+            AddHoverSound(_mainMenuButton.gameObject);
         }
+    }
+
+    private void AddHoverSound(GameObject buttonObject)
+    {
+        EventTrigger trigger = buttonObject.GetComponent<EventTrigger>();
+        if (trigger == null)
+        {
+            trigger = buttonObject.AddComponent<EventTrigger>();
+        }
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
+        entry.callback.AddListener(_ => _sound?.PlayButtonHover());
+        trigger.triggers.Add(entry);
     }
 
     private void OnSubmitClicked()
@@ -282,6 +300,8 @@ public class UI_EndScene : MonoBehaviour
 
     private void NumberTextAnimation()
     {
+        _sound?.PlayRankCounting();
+
         NumberCountingAnimator.CountToWithDelay(
             _rankText,
             _rank,
@@ -318,6 +338,7 @@ public class UI_EndScene : MonoBehaviour
         {
             _rankParticle.Stop();
             _rankShowParticle.Play();
+            _sound?.PlayFirstRankParticle();
         }
         else
         {
