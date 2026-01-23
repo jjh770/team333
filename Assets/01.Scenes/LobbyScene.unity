@@ -1665,7 +1665,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!1 &912776585
 GameObject:
   m_ObjectHideFlags: 0

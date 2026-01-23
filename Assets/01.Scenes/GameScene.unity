@@ -30755,7 +30755,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!4 &667007679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 733912901165641814, guid: 849175e78ec1e934294269b8aacb767a, type: 3}
@@ -35539,7 +35541,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!1001 &782637929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39008,7 +39012,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!114 &868257015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3665436153545646068, guid: 8030c2fd30cd4d8459aaf4b64bd5d585, type: 3}
@@ -63547,7 +63553,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!4 &1523929312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5792032134881981426, guid: a34f30cd2b157174badbc202ec986d0b, type: 3}
@@ -88477,7 +88485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!1001 &2078512617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93309,7 +93319,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISound
   _buttonClickSound: {fileID: 8300000, guid: 33cebbf5baf567a4f995740d369b4806, type: 3}
-  _volumeMultiplier: 1
+  _buttonClickSoundVolume: 1
+  _mouseHoverSound: {fileID: 8300000, guid: 30e07a3335fd08b41bc065c5fc4d9c8c, type: 3}
+  _mouseHoverSoundVolume: 0.1
 --- !u!114 &9142841090314412154
 MonoBehaviour:
   m_ObjectHideFlags: 0
