@@ -17,8 +17,9 @@ public class TutorialManager : MonoBehaviour
     [Header("Transition")]
     [SerializeField] private float _stepTransitionDelay = 0.5f;
 
-    [Header("SFX")] 
+    [Header("SFX")]
     public SoundInfo ClearSFX;
+    [SerializeField] private float _clearSFXVolume = 0.5f;
 
     private int _currentStepIndex = -1;
     private Coroutine _transitionCoroutine;
@@ -213,6 +214,6 @@ public class TutorialManager : MonoBehaviour
     private void PlayClearSFX()
     {
         if (ClearSFX.Clip == null) return;
-        SoundManager.Instance.PlaySFX(ClearSFX.Clip, ClearSFX.StartTime, 1f);
+        SoundManager.Instance.PlaySFX(ClearSFX.Clip, ClearSFX.StartTime, _clearSFXVolume);
     }
 }

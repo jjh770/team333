@@ -89788,6 +89788,7 @@ MonoBehaviour:
   ClearSFX:
     Clip: {fileID: 8300000, guid: 86a134a5875b1c24d972c267e3fa7145, type: 3}
     StartTime: 0
+  _clearSFXVolume: 0.4
 --- !u!4 &2115236126
 Transform:
   m_ObjectHideFlags: 0

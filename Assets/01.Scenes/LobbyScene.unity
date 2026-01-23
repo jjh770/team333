@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   _bgm1Volume: 0.5
-  _bgm2Volume: 0.5
+  _bgm2Volume: 0.8
   _sfxVolume: 1
   _startBGM1: {fileID: 8300000, guid: 3a671c89063d43b4e880e7414efc781f, type: 3}
   _startBGM2: {fileID: 8300000, guid: 0cddbf7f0bd33b44dbb7607fe1cbedf1, type: 3}
