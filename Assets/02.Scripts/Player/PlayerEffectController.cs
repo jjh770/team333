@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public enum PlayerEffectType
 {
@@ -7,6 +8,12 @@ public enum PlayerEffectType
     Heal,
     SkillUp,
     DamageUp
+}
+
+public enum SlashEffectMode
+{
+    VFXGraph,
+    ParticleSystem
 }
 
 [System.Serializable]
@@ -54,10 +61,61 @@ public class PlayerEffectHandler
     }
 }
 
+[System.Serializable]
+public class VFXGraphEffectHandler
+{
+    public GameObject EffectObject;
+
+    private VisualEffect _visualEffect;
+    private bool _isCached;
+
+    public void Play()
+    {
+        if (EffectObject == null) return;
+
+        EffectObject.SetActive(true);
+        CacheVisualEffect();
+
+        if (_visualEffect != null)
+        {
+            _visualEffect.Stop();
+            _visualEffect.Play();
+        }
+    }
+
+    public void Stop()
+    {
+        if (EffectObject == null) return;
+
+        CacheVisualEffect();
+
+        if (_visualEffect != null)
+        {
+            _visualEffect.Stop();
+        }
+
+        EffectObject.SetActive(false);
+    }
+
+    private void CacheVisualEffect()
+    {
+        if (_isCached) return;
+
+        _visualEffect = EffectObject.GetComponent<VisualEffect>();
+        _isCached = true;
+    }
+}
+
 public class PlayerEffectController : MonoBehaviour
 {
-    [Header("Attack Effects")]
-    [SerializeField] private List<PlayerEffectHandler> _slashEffects;
+    [Header("Slash Effect Mode")]
+    [SerializeField] private SlashEffectMode _slashEffectMode = SlashEffectMode.VFXGraph;
+
+    [Header("Attack Effects - VFX Graph")]
+    [SerializeField] private List<VFXGraphEffectHandler> _slashEffectsVFX;
+
+    [Header("Attack Effects - Particle System")]
+    [SerializeField] private List<PlayerEffectHandler> _slashEffectsParticle;
 
     [Header("Skill Effects")]
     [SerializeField] private PlayerEffectHandler _skillEffect;
@@ -120,15 +178,31 @@ public class PlayerEffectController : MonoBehaviour
     public void PlaySlash(int comboIndex)
     {
         StopAllSlashes();
-        if (comboIndex >= 0 && comboIndex < _slashEffects.Count)
+
+        if (_slashEffectMode == SlashEffectMode.VFXGraph)
         {
-            _slashEffects[comboIndex]?.Play();
+            if (comboIndex >= 0 && comboIndex < _slashEffectsVFX.Count)
+            {
+                _slashEffectsVFX[comboIndex]?.Play();
+            }
+        }
+        else
+        {
+            if (comboIndex >= 0 && comboIndex < _slashEffectsParticle.Count)
+            {
+                _slashEffectsParticle[comboIndex]?.Play();
+            }
         }
     }
 
     public void StopAllSlashes()
     {
-        foreach (var effect in _slashEffects)
+        foreach (var effect in _slashEffectsVFX)
+        {
+            effect?.Stop();
+        }
+
+        foreach (var effect in _slashEffectsParticle)
         {
             effect?.Stop();
         }
